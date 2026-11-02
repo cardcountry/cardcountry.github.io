@@ -24,6 +24,16 @@
   let language='zh-cn',cardLimit=48,cardView='image',filteredCards=[],activeArchetype=null,activeDeckIndex=0,activeDeckTab='list';
   try{const saved=localStorage.getItem('metalab-riftbound-language');if(translations[saved])language=saved}catch(error){}
   const escapeHtml=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+  const RUNE_CHIP_STYLES={rainbow:'linear-gradient(135deg,#d84a4a,#e0b23c,#3f9d63,#3d8bd6,#8a63d2)',fury:'#c23a3a',mind:'#8a63d2',body:'#3f9d63',order:'#c99a3c',calm:'#3d8bd6',chaos:'#c96a3a'};
+  const RUNE_CHIP_LABELS={rainbow:'任',fury:'怒',mind:'智',body:'体',order:'序',calm:'静',chaos:'乱'};
+  function renderCardText(value){
+    if(!value)return '';
+    return escapeHtml(value).replace(/:rb_(rune_(rainbow|fury|mind|body|order|calm|chaos)|energy_(\d+)|exhaust):/g,(match,group,runeKey,energyCount)=>{
+      if(match===':rb_exhaust:')return '<span class="rune-chip exhaust" title="横置">⟳</span>';
+      if(energyCount!==undefined)return `<span class="rune-chip energy" title="能量 ${energyCount}">${energyCount}</span>`;
+      return `<span class="rune-chip rune" style="background:${RUNE_CHIP_STYLES[runeKey]}" title="${runeKey} rune">${RUNE_CHIP_LABELS[runeKey]||runeKey}</span>`;
+    });
+  }
   const normalize=value=>String(value??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\u3040-\u30ff\u3400-\u9fff]+/g,' ');
   const traditionalize=value=>String(value??'').replace(/[张组传奇领域战场选择发张图检索显现优劣势观测据与为这类开动应对进实从国会]/g,char=>({张:'張',组:'組',传:'傳',奇:'奇',领:'領',域:'域',战:'戰',场:'場',选:'選',择:'擇',发:'發',图:'圖',检:'檢',索:'索',显:'顯',现:'現',优:'優',劣:'劣',势:'勢',观:'觀',测:'測',据:'據',与:'與',为:'為',这:'這',类:'類',开:'開',动:'動',应:'應',对:'對',进:'進',实:'實',从:'從',国:'國',会:'會'}[char]||char));
   const tokens=value=>normalize(value).split(' ').filter(Boolean);
@@ -152,7 +162,7 @@
     if(reset)cardLimit=48;filteredCards=VERIFIED_CARDS.map((card,index)=>({card,index,score:cardScore(card)})).filter(item=>item.score>0).sort((a,b)=>b.score-a.score||a.index-b.index).map(item=>item.card);const visible=filteredCards.slice(0,cardLimit);
     $('#cardResultCount').textContent=`${filteredCards.length.toLocaleString()} / ${VERIFIED_CARDS.length.toLocaleString()} VERIFIED PRINTS`;
     $('#cardGrid').classList.toggle('name-view',cardView==='name');
-    $('#cardGrid').innerHTML=visible.map(card=>{const local=localizedCard(card);return`<button class="card-item" data-card-id="${card.id}"><img src="${local.displayImage}" alt="${escapeHtml(local.displayName)}" loading="lazy"><b>${escapeHtml(local.displayName)}</b><small>${escapeHtml(card.code)} · ${escapeHtml(card.set[0])} · ${escapeHtml(card.type)}</small><span class="name-effect">${escapeHtml(local.displayText||'—')}</span></button>`}).join('')||'<p class="no-data">NO MATCHING CARDS</p>';
+    $('#cardGrid').innerHTML=visible.map(card=>{const local=localizedCard(card);return`<button class="card-item" data-card-id="${card.id}"><img src="${local.displayImage}" alt="${escapeHtml(local.displayName)}" loading="lazy"><b>${escapeHtml(local.displayName)}</b><small>${escapeHtml(card.code)} · ${escapeHtml(card.set[0])} · ${escapeHtml(card.type)}</small><span class="name-effect">${renderCardText(local.displayText)||'—'}</span></button>`}).join('')||'<p class="no-data">NO MATCHING CARDS</p>';
     $('#loadMoreCards').hidden=cardLimit>=filteredCards.length;
     $$('#cardGrid [data-card-id]').forEach(button=>button.addEventListener('click',()=>openCard(button.dataset.cardId)));
     if(activeCardId&&$('#cardModal').classList.contains('open'))renderCardModal(activeCardId);
@@ -162,7 +172,7 @@
     $('#cardModalImage').src=local.displayImage;$('#cardModalImage').alt=local.displayName;$('#cardModalCode').textContent=`${card.code} · ${card.set[1]}`;$('#cardModalName').textContent=local.displayName;
     $('#cardModalBadges').innerHTML=[card.type,...card.super,card.rarity,...card.domains,...card.tags.slice(0,4)].filter(Boolean).map(value=>`<span>${escapeHtml(value)}</span>`).join('');
     const nums=[card.energy!=null&&`ENERGY ${card.energy}`,card.might!=null&&`MIGHT ${card.might}`,card.power!=null&&`POWER ${card.power}`].filter(Boolean);$('#cardModalNumbers').innerHTML=nums.map(value=>`<span>${escapeHtml(value)}</span>`).join('');
-    $('#cardModalEffect').textContent=local.displayText||'—';
+    $('#cardModalEffect').innerHTML=renderCardText(local.displayText)||'—';
   }
   function openCard(id){renderCardModal(id);openModal('cardModal')}
   function sourceTier(source){
