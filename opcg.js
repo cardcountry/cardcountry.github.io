@@ -62,7 +62,8 @@
       const delta=typeof deck.priorShare==='number'?deck.share-deck.priorShare:null;
       const deltaText=delta===null?'NEW':`${delta>0?'+':''}${delta.toFixed(1)}%`;
       const deltaClass=delta===null?'neutral':delta<0?'down':'';
-      return `<button class="usage-cell" data-open-deck="${esc(deck.leader)}"><strong>${esc(deck.name)}</strong><small>${esc(deck.leader)} · ${deck.share.toFixed(1)}%</small><div class="usage-bars"><i class="current" style="height:${Math.max(4,deck.share/max*58)}px" title="${deck.share}%"></i><i class="previous" style="height:${Math.max(3,(deck.priorShare||0)/max*58)}px" title="${deck.priorShare??'N/A'}"></i></div><span class="usage-delta ${deltaClass}">${deltaText}</span></button>`}).join('');
+      const leaderArt=cardImage(cardMap.get(deck.leader)||{code:deck.leader});
+      return `<button class="usage-cell" data-open-deck="${esc(deck.leader)}">${leaderArt?`<img class="usage-art" src="${esc(leaderArt)}" alt="${esc(deck.leader)}" loading="lazy">`:''}<strong>${esc(deck.name)}</strong><small>${esc(deck.leader)} · ${deck.share.toFixed(1)}%</small><div class="usage-bars"><i class="current" style="height:${Math.max(4,deck.share/max*58)}px" title="${deck.share}%"></i><i class="previous" style="height:${Math.max(3,(deck.priorShare||0)/max*58)}px" title="${deck.priorShare??'N/A'}"></i></div><span class="usage-delta ${deltaClass}">${deltaText}</span></button>`}).join('');
   }
   function renderForecast(){
     const labels=uiLang==='ja'?{title:'今後のメタ予測',text:'使用率変化、制限後の上位転換、Xの大会シグナルに基づく観測モデル。勝率の保証ではありません。',sample:'公開サンプルのみ'}:uiLang==='en'?{title:'FORWARD META MODEL',text:'A field model based on usage shifts, post-ban conversion and X event signals—not a win-rate guarantee.',sample:'PUBLIC SAMPLE ONLY'}:uiLang==='zh'?{title:'未來主流預測',text:'根據使用率變化、禁限後上位轉換與 X 店賽信號推算；這是環境觀察，不是勝率保證。',sample:'僅限公開樣本'}:{title:'未来主流预测',text:'根据使用率变化、禁限后上位转换与 X 店赛信号推算；这是环境观察，不是胜率保证。',sample:'仅限公开样本'};

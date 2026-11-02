@@ -90,7 +90,7 @@
 
   function renderUsage(){
     const max=Math.max(1,...deckGroups.flatMap(deck=>[deck.share,deck.priorShare]));
-    $('#usageChart').innerHTML=deckGroups.map(deck=>{const delta=deck.share-deck.priorShare;return `<button class="usage-cell" data-deck-name="${esc(deck.name)}"><strong>${esc(colorLabel(deck.name))}</strong><small>${deck.recent} / ${D.tournaments.slice(0,5).flatMap(event=>event.lists).length} · ${deck.prior} / ${D.tournaments.slice(5).flatMap(event=>event.lists).length}</small><div class="usage-bars"><i class="current" style="height:${Math.max(3,deck.share/max*60)}px"></i><i class="previous" style="height:${Math.max(3,deck.priorShare/max*60)}px"></i></div><span class="${delta<0?'down':''}">${delta>0?'+':''}${delta.toFixed(1)}pt</span></button>`}).join('');
+    $('#usageChart').innerHTML=deckGroups.map(deck=>{const delta=deck.share-deck.priorShare;const heroArt=cardImage(deckHero(deck));return `<button class="usage-cell" data-deck-name="${esc(deck.name)}">${heroArt?`<img class="usage-hero" src="${esc(heroArt)}" alt="${esc(colorLabel(deck.name))}" loading="lazy">`:''}<strong>${esc(colorLabel(deck.name))}</strong><small>${deck.recent} / ${D.tournaments.slice(0,5).flatMap(event=>event.lists).length} · ${deck.prior} / ${D.tournaments.slice(5).flatMap(event=>event.lists).length}</small><div class="usage-bars"><i class="current" style="height:${Math.max(3,deck.share/max*60)}px"></i><i class="previous" style="height:${Math.max(3,deck.priorShare/max*60)}px"></i></div><span class="${delta<0?'down':''}">${delta>0?'+':''}${delta.toFixed(1)}pt</span></button>`}).join('');
   }
   function renderDecks(){
     const query=deckQuery.trim().toLowerCase();const shown=deckGroups.filter(deck=>!query||deckHaystack(deck).includes(query));

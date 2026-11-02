@@ -195,6 +195,8 @@ button{cursor:pointer}
 .usage-chart{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:7px;margin-top:20px}
 .usage-cell{position:relative;min-height:155px;padding:13px;border:1px solid #283541;background:#13202b;text-align:left;overflow:hidden}
 .usage-cell:hover{border-color:var(--blue)}
+.usage-cell .usage-hero{position:absolute;top:10px;right:10px;width:44px;height:61px;object-fit:cover;border-radius:6px;border:1px solid #38505f;background:#0d1926}
+.usage-cell strong,.usage-cell small{padding-right:52px}
 .usage-cell strong{display:block;min-height:40px;font:800 19px/1.05 var(--display)}
 .usage-cell small{color:#7f909e;font-size:9px}
 .usage-bars{height:64px;display:flex;align-items:end;gap:5px}

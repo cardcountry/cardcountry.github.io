@@ -82,7 +82,7 @@
   }
   function renderUsage(){
     const maxShare=Math.max(...DATA.archetypes.map(item=>item.share),1);
-    $('#usageChart').innerHTML=DATA.archetypes.map(item=>`<button class="usage-row" data-archetype="${item.key}"><strong>${escapeHtml(item.legend)}</strong><span class="usage-bars"><i class="share-bar" style="width:${Math.max(4,item.share/maxShare*100)}%"></i><i class="win-bar" style="width:${item.win}%"></i></span><b>${item.share}%</b><small>${item.win}% WIN</small><span class="trend ${item.trend}">${item.trend==='surge'?'SURGE':item.trend==='up'?'UP':'WATCH'}</span></button>`).join('');
+    $('#usageChart').innerHTML=DATA.archetypes.map(item=>{const art=archetypeImage(item);return `<button class="usage-row" data-archetype="${item.key}">${art?`<img class="usage-art" src="${escapeHtml(art)}" alt="${escapeHtml(item.legend)}" loading="lazy">`:''}<strong>${escapeHtml(item.legend)}</strong><span class="usage-bars"><i class="share-bar" style="width:${Math.max(4,item.share/maxShare*100)}%"></i><i class="win-bar" style="width:${item.win}%"></i></span><b>${item.share}%</b><small>${item.win}% WIN</small><span class="trend ${item.trend}">${item.trend==='surge'?'SURGE':item.trend==='up'?'UP':'WATCH'}</span></button>`}).join('');
     $$('#usageChart [data-archetype]').forEach(button=>button.addEventListener('click',()=>openDeck(button.dataset.archetype)));
   }
   function matchingArchetypes(){
