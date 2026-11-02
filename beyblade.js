@@ -92,6 +92,7 @@
     'Glory Valkyrie','Bullet Griffon','Hells Nether','HellsNether','Valor Bison','Cutter Shinobi','Rampart Aegis','Seize Jaguar'
   ].map(normal));
   const isIntegratedBlade=name=>INTEGRATED_BLADE_NAMES.has(normal(name));
+  const isLocklessBit=part=>part&&!part.type&&part.shape==='Multi-mode'&&Number(part.weight)>10;
   const isIntegratedCombo=combo=>combo?.system==='uxi'||(!combo?.ratchet&&combo?.bit&&isIntegratedBlade(combo?.blade));
   VERIFIED_BLADE_OVERRIDES.filter(part=>!part.composite).forEach(part=>{
     if(!componentParts.blades.some(item=>normal(item.name)===normal(part.name)))componentParts.blades.push(part);
@@ -170,7 +171,7 @@
       let metrics='';
       if(['blades','lockChips','mainBlades','assistBlades','metalBlades','overBlades'].includes(partTab))metrics=metric(t('weight'),part.weight,'g')+metric(t('spin'),part.spin)+(partTab==='blades'&&isIntegratedBlade(part.name)?metric(builderText('system'),builderText('integratedLock')):metric(t('contacts'),part.contacts))+metric(t('code'),part.code||(partTab==='blades'?'BX / UX':'CX'));
       if(partTab==='ratchets')metrics=metric(t('weight'),part.weight,'g')+metric(t('contacts'),part.contacts)+metric(t('height'),part.height)+metric(language==='en'?'TYPE':language==='ja'?'タイプ':'类型',labelType(part.type));
-      if(partTab==='bits')metrics=metric(t('weight'),part.weight,'g')+metric(t('shape'),part.shape)+metric(t('gear'),part.gear)+metric(t('height'),part.height);
+      if(partTab==='bits')metrics=metric(t('weight'),part.weight,'g')+metric(t('shape'),part.shape)+(isLocklessBit(part)?metric(language==='en'?'LOCK':language==='ja'?'ロック':'固锁',language==='en'?'NONE':language==='ja'?'なし':'无'):metric(t('gear'),part.gear))+metric(t('height'),part.height);
       return `<article class="part-card ${typeClass(part.type)}"><div class="part-image">${part.image?`<img loading="lazy" src="${esc(part.image)}" alt="${esc(part.name)}">`:''}</div><span>${esc(part.code||partTab.slice(0,-1).toUpperCase())} · ${esc(labelType(part.type))}${partTab==='blades'&&isIntegratedBlade(part.name)?` · ${esc(builderText('integratedLock'))}`:''}</span><h3 title="${esc(part.name)}">${esc(part.name)}</h3><div class="part-metrics">${metrics}</div></article>`
     }).join('')||empty();
     $('#partCount').textContent=number(filtered.length);$('#loadMoreParts').hidden=shown.length>=filtered.length;
