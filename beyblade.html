@@ -6,6 +6,7 @@
   <meta name="description" content="BEYBLADE X 赛事配置、主流环境、零件数值与 3on3 组装分析工具。">
   <title>META LAB — BEYBLADE X Arena Lab</title>
   <link rel="stylesheet" href="beyblade.css?v=9">
+  <link rel="stylesheet" href="site-data-quality.css?v=1">
 </head>
 <body>
   <div class="race-strip" aria-hidden="true"><span>BEYBLADE X · WBO TOURNAMENT DATA · 3ON3 DECK LAB · X-DASH TELEMETRY</span><span>BEYBLADE X · WBO TOURNAMENT DATA · 3ON3 DECK LAB · X-DASH TELEMETRY</span></div>
@@ -14,7 +15,7 @@
     <nav id="nav"><a href="#meta" data-i18n="navMeta">主流配置</a><a href="#configs" data-i18n="navConfigs">赛事配置</a><a href="#parts" data-i18n="navParts">零件数值</a><a href="#builder" data-i18n="navBuilder">组装分析</a></nav>
     <div class="header-tools"><label class="auto-toggle"><input id="autoUpdate" type="checkbox" checked><i></i><span data-i18n="autoUpdate">自动更新</span></label><select id="uiLang" aria-label="Interface language"><option value="zh-cn">简体中文</option><option value="zh">繁體中文</option><option value="ja">日本語</option><option value="en">English</option></select><button id="menuBtn">MENU</button></div>
   </header>
-  <div class="game-switcher"><span>SELECT SYSTEM</span><a href="ptcg.html">PTCG</a><a href="gcg.html">GCG</a><a class="active" href="beyblade.html">BEYBLADE X <i>LIVE</i></a><a href="opcg.html">OPCG <i>LIVE</i></a><a class="disabled" href="#">UNION ARENA</a><a class="disabled" href="#">RIFTBOUND</a><a href="marvel.html">MARVEL RUSH <i>LIVE</i></a></div>
+  <div class="game-switcher"><span>SELECT SYSTEM</span><a href="ptcg.html">PTCG</a><a href="gcg.html">GCG</a><a class="active" href="beyblade.html">BEYBLADE X <i>LIVE</i></a><a href="opcg.html">OPCG <i>LIVE</i></a><a class="disabled" href="#">UNION ARENA</a><a href="riftbound.html">RIFTBOUND <i>LIVE</i></a><a href="marvel.html">MARVEL RUSH <i>LIVE</i></a></div>
   <section class="hero" id="top"><div class="hero-copy"><p class="eyebrow">COMPETITIVE ROTATION INTELLIGENCE · WBO DATA</p><h1>BUILD.<br><em>LAUNCH.</em><br>READ THE META.</h1><p data-i18n="heroText">集中查看 BEYBLADE X 赛事上位配置、零件实测数值，并在 3on3 组装台即时计算整颗陀螺的数据与套组合法性。</p><div class="hero-actions"><a href="#builder" data-i18n="startBuild">开始组装</a><a href="#configs" data-i18n="browseConfigs">查看赛事配置</a></div><div class="sync-line"><i></i><span id="syncStatus">SNAPSHOT · 2026-W42</span></div></div><div class="hero-machine"><div class="arena-ring ring-a"></div><div class="arena-ring ring-b"></div><img id="heroBlade" src="bey-assets/blades-shark-scale.webp" alt="Shark Scale Beyblade X blade"><div class="rpm-badge"><span>TOP BLADE</span><b>SHARK SCALE</b><small>296 PLACEMENTS</small></div></div></section>
   <section class="hero-stats"><article><b id="statCombos">71</b><span data-i18n="metaCombos">主流配置</span></article><article><b id="statTracked">226</b><span data-i18n="trackedCombos">追踪配置</span></article><article><b id="statEvents">186</b><span data-i18n="events">WBO 赛事</span></article><article><b id="statParts">1,935</b><span data-i18n="observations">赛事零件记录</span></article></section>
   <main>
@@ -28,6 +29,7 @@
   <div class="modal" id="comboModal" role="dialog" aria-modal="true"><div class="modal-shell"><button class="modal-close" id="closeModal">×</button><div class="modal-hero"><img id="modalImage" alt="" hidden><div><span id="modalTier"></span><h2 id="modalTitle"></h2><p id="modalType"></p></div></div><div class="modal-body"><div class="modal-stats" id="modalStats"></div><div class="modal-copy" id="modalCopy"></div><div class="modal-records" id="modalRecords"></div></div></div></div>
   <div class="toast" id="toast"></div>
   <script src="beyblade-data.js?v=2"></script>
-  <script src="beyblade.js?v=11"></script>
+  <script src="site-data-quality.js?v=1"></script>
+  <script src="beyblade.js?v=12"></script>
 </body>
 </html>

@@ -18,6 +18,7 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.portal-ring{animation:none!important}}
 .live-game-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.opcg-card{color:#d7aa48;background:linear-gradient(145deg,#172832,#10151a 58%)}.opcg-card .live-dot{background:#d7aa48}.opcg-card-art img{right:4px;top:-6px;width:118px;transform:rotate(7deg)}.opcg-card:hover .opcg-card-art img{transform:rotate(13deg) scale(1.04)}.tag-d{left:5%;bottom:24%}
 .marvel-card{color:#f24452;background:linear-gradient(145deg,#26161b,#10151a 58%)}.marvel-card .live-dot{background:#f24452}.marvel-card-art img{right:10px;top:-7px;width:115px;border-radius:7px;transform:rotate(8deg)}.marvel-card:hover .marvel-card-art img{transform:rotate(14deg) scale(1.04)}
+.riftbound-card{color:#54e2c2;background:linear-gradient(145deg,#14272b,#10151a 58%)}.riftbound-card .live-dot{background:#54e2c2}.riftbound-card-art img{right:9px;top:-8px;width:115px;border-radius:7px;transform:rotate(7deg)}.riftbound-card:hover .riftbound-card-art img{transform:rotate(13deg) scale(1.04)}.tag-e{right:2%;top:38%;border-color:rgba(84,226,194,.5);color:#54e2c2}
 @media(max-width:1050px){.live-game-grid{grid-template-columns:1fr}}
 @media(max-width:720px){.tag-d{left:2%;bottom:20%}}
 /* Prevent the fixed transition layer and compact header controls from widening phones. */
