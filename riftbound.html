@@ -16,7 +16,7 @@
     <nav id="siteNav"><a href="#rules" data-i18n="navRules">基础规则</a><a href="#meta" data-i18n="navMeta">环境卡组</a><a href="#cards" data-i18n="navCards">卡牌检索</a><a href="#sources" data-i18n="navSources">资料来源</a></nav>
     <div class="header-tools"><label class="auto-toggle"><input id="autoUpdate" type="checkbox" checked><i></i><span data-i18n="autoUpdate">自动检查更新</span></label><select id="uiLang" aria-label="Interface language"><option value="zh-cn">简体中文</option><option value="zh">繁體中文</option><option value="ja">日本語</option><option value="en">English</option></select><button id="menuBtn" aria-label="Menu">MENU</button></div>
   </header>
-  <div class="game-switcher" aria-label="Select system"><span>SELECT SYSTEM</span><a href="ptcg.html">PTCG</a><a href="gcg.html">GCG</a><a href="beyblade.html">BEYBLADE X</a><a href="opcg.html">OPCG</a><a class="disabled" href="#">UNION ARENA</a><button class="active">RIFTBOUND <i>LIVE</i></button><a href="marvel.html">MARVEL RUSH</a></div>
+  <div class="game-switcher" aria-label="Select system"><span>SELECT SYSTEM</span><a href="ptcg.html">PTCG</a><a href="gcg.html">GCG</a><a href="beyblade.html">BEYBLADE X</a><a href="opcg.html">OPCG</a><a href="unionarena.html">UNION ARENA</a><button class="active">RIFTBOUND <i>LIVE</i></button><a href="marvel.html">MARVEL RUSH</a></div>
   <section class="hero" id="home">
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-copy"><p class="eyebrow">COMPETITIVE NAVIGATION · RADIANCE CONSTRUCTED</p><h1>CONTROL<br><em>THE RIFT.</em></h1><p data-i18n="heroText">从官方规则、Radiance 环境、同型多份完整赛事卡表到 1,408 张官方实体卡图，集中在一个竞技桌面。</p><div class="hero-actions"><a href="#meta" data-i18n="heroMeta">查看当前环境</a><a href="#cards" data-i18n="heroCards">检索完整图鉴</a></div><div class="hero-stats"><span><b>1,408</b><small data-i18n="statCards">官方卡牌印刷</small></span><span><b>12</b><small data-i18n="statLists">核实完整卡表</small></span><span><b>7,932</b><small data-i18n="statMatches">环境对局样本</small></span></div><div class="cover-byline"><img src="cardcountry-logo.webp" alt="Card Country logo"><span>PRESENTED BY <b>CARD COUNTRY KC</b></span></div></div>
@@ -72,7 +72,8 @@
   <div class="modal" id="cardModal" role="dialog" aria-modal="true" aria-labelledby="cardModalName"><div class="modal-shell card-shell"><button class="modal-close" data-close="cardModal">×</button><div class="card-modal-art"><img id="cardModalImage" alt=""></div><div class="card-modal-copy"><span id="cardModalCode"></span><h2 id="cardModalName"></h2><div id="cardModalBadges" class="card-badges"></div><div class="card-numbers" id="cardModalNumbers"></div><div class="effect-panel"><h3 data-i18n="effectTitle">官方卡牌效果</h3><p id="cardModalEffect"></p></div><p class="official-note" data-i18n="effectNote">卡文与卡图来自 Riftbound 官方实体卡牌图库；赛事裁定请以最新核心规则、勘误与禁限公告为准。</p></div></div></div>
   <div class="toast" id="toast" role="status"></div>
   <script src="riftbound-data.js?v=2"></script>
-  <script src="site-data-quality.js?v=3"></script>
+  <script src="site-data-quality.js?v=4"></script>
   <script src="riftbound.js?v=5"></script>
 </body>
 </html>
+

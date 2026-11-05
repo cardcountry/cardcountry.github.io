@@ -62,10 +62,12 @@
 
   function auditBeyblade(){
     const data=window.BEYX_DATA||{all:[],rare:[],blades:[],ratchets:[],bits:[],sources:[],summary:{}},parts=[...(data.blades||[]),...(data.ratchets||[]),...(data.bits||[])];let quarantined=0;
-    quarantined+=data.all.filter(combo=>!combo.blade||!combo.ratchet||!combo.bit||!combo.cat).length;
-    quarantined+=parts.filter(part=>!part.name||!part.type).length;
+    const integrated=new Set(['Glory Valkyrie','Bullet Griffon','Hells Nether','Valor Bison','Cutter Shinobi','Rampart Aegis','Seize Jaguar'].map(normalize));
+    quarantined+=data.all.filter(combo=>!combo.blade||!combo.bit||(!combo.ratchet&&!integrated.has(normalize(combo.blade)))||!combo.cat).length;
+    quarantined+=parts.filter(part=>!part.name||!part.image).length;
     quarantined+=(data.sources||[]).filter(source=>!https(source.url)).length;
-    return{game:'beyblade',label:'BEYBLADE X',records:parts.length,lists:data.all.length,sources:data.sources?.length||0,quarantined,checked:data.summary?.week||latestDate(data.rare.map(item=>item.date)),notes:['WBO placements','Measured weights marked as reference','BX/UX/CX structures separated']};
+    const visibleParts=Number(document.querySelector('#partCount')?.textContent.replace(/,/g,''))||parts.length;
+    return{game:'beyblade',label:'BEYBLADE X',records:visibleParts,lists:data.all.length,sources:data.sources?.length||0,quarantined,checked:data.summary?.end||latestDate(data.rare.map(item=>item.date)),notes:['WBO placements','Measured weights marked as reference','BX/UX/CX structures separated']};
   }
 
   function auditRiftbound(){
@@ -92,3 +94,4 @@
 
   document.addEventListener('DOMContentLoaded',()=>{const game=detectGame();if(!game)return;const result=audit(game);window.META_LAB_DATA_AUDIT=result;renderAudit(result)});
 })();
+

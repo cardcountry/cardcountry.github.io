@@ -123,7 +123,7 @@
     $('#statEvents').textContent=number(summary.events);$('#statParts').textContent=number(summary.parts);
     $('#configCount').textContent=number(state.all.length);$('#partCount').textContent=number(Object.values(componentParts).reduce((sum,items)=>sum+items.length,0));
     $('#metaRange').textContent=`WBO · ${summary.week||'SNAPSHOT'} · ${summary.start||'—'} → ${summary.end||'—'}`;
-    $('#syncStatus').textContent=`${autoEnabled?'LIVE CHECK':'SNAPSHOT'} · ${summary.week||'LOCAL'}`;
+    $('#syncStatus').textContent=`${autoEnabled?'LIVE CHECK':'SNAPSHOT'} · ${summary.week||'LOCAL'} · ${summary.end||'—'}`;
   }
   let usageTab='blades';
   function renderUsage(){
@@ -425,3 +425,4 @@
   document.addEventListener('error',event=>{if(event.target.tagName==='IMG')event.target.classList.add('image-error')},true);
   setLanguage(language);setAuto(autoEnabled,false);
 })();
+

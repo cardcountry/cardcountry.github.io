@@ -70,7 +70,7 @@
         <button class="shop-btn" id="deskBtn">ASK SUPPORT</button><button class="menu-btn" id="menuBtn" aria-label="開啟選單">☰</button>
       </div>
     </div>
-    <div class="game-rail"><div class="wrap game-switcher" id="gameSwitcher"><span class="game-switch-label">SELECT TCG</span><button class="active" data-game="ptcg">PTCG <span>LIVE</span></button><button data-game="opcg">OPCG <span>LIVE</span></button><button data-game="gcg">GCG <span>LIVE</span></button><button data-game="union">UNION ARENA <span>READY</span></button><button data-game="riftbound">RIFTBOUND <span>LIVE</span></button><button data-game="marvelrush">MARVEL RUSH <span>LIVE</span></button></div></div>
+    <div class="game-rail"><div class="wrap game-switcher" id="gameSwitcher"><span class="game-switch-label">SELECT TCG</span><button class="active" data-game="ptcg">PTCG <span>LIVE</span></button><button data-game="opcg">OPCG <span>LIVE</span></button><button data-game="gcg">GCG <span>LIVE</span></button><button data-game="union">UNION ARENA <span>LIVE</span></button><button data-game="riftbound">RIFTBOUND <span>LIVE</span></button><button data-game="marvelrush">MARVEL RUSH <span>LIVE</span></button></div></div>
   </header>
   <section class="future-game hidden" id="futureGame"><div class="wrap"><div class="future-shell"><div class="future-kicker">MULTI-TCG DATA MODULE · CATEGORY READY</div><h1 id="futureGameName">OPCG</h1><p id="futureGameText">类别入口与资料结构已建立。日后可直接加入规则、环境卡组、赛事卡表与完整卡牌图鉴，不需要重做网站导航。</p><div class="future-modules"><div class="future-module"><span>01 / RULES</span><b>基础规则</b></div><div class="future-module"><span>02 / META</span><b>环境卡组</b></div><div class="future-module"><span>03 / DECKS</span><b>赛事卡表</b></div><div class="future-module"><span>04 / CARDS</span><b>卡牌图鉴</b></div></div><button class="btn primary" id="returnPtcg">返回 PTCG</button></div></div></section>
   <main id="home">
@@ -124,7 +124,7 @@
       <div class="community-panel"><div class="community-head"><div><span class="section-index">TAIWAN / JAPAN EVENT REFERENCE</span><h3>金球战车 · 最新上位卡表与战绩</h3></div><p>CITY LEAGUE 2027 S1 · 大阪 · 2026.10.28<br>64 PLAYERS · STANDARD · VERIFIED WITH PLAYERS CLUB</p></div><div class="community-grid" id="communityDeckGrid"></div><div class="community-source-note">点击卡片可查看完整卡表、卡图效果与赛场对局分析；资料参考 GS ball Tank Team（金球战车），卡表与名次由 Pokémon Card Players Club 公开结果交叉核对。</div></div>
       <div class="rogue-panel"><div class="rogue-head"><div><span class="section-index">ROGUE / OFF-META · STANDARD ONLY</span><h3>非主流卡组库</h3></div><p>POKEMONCARD.IO · STANDARD FORMAT<br>EXPANDED DECKS EXCLUDED</p></div><div class="rogue-grid" id="rogueDeckGrid"></div></div>
       <div class="meta-trend"><div class="trend-head"><div><span class="section-index">META PULSE / EVENT COMPARISON</span><h3>排名与使用率矩形比较</h3></div><p>REGIONAL PUEBLA · 2026.10.24<br>→ REGIONAL GDAŃSK · 2026.10.31</p></div><div class="trend-layout"><div class="slope-panel"><svg id="rankSlopeChart" viewBox="0 0 700 500" role="img" aria-label="卡组使用率矩形比较图"></svg></div><div class="usage-table" id="usageTrendTable"></div></div><div class="trend-source">SOURCE · LIMITLESS TCG TOURNAMENT STATISTICS · 灰色矩形代表 Puebla，彩色矩形代表 Gdańsk；百分比为公开赛事卡组使用率。</div></div>
-      <div class="integrity" data-i18n="integrity">資料完整性：只收錄實體 Pokémon TCG Standard 資料。81 份主流賽事卡表與 35 份非主流卡表均通過格式及 60 張數量檢查。</div>
+      <div class="integrity" data-i18n="integrity">資料完整性：只收錄實體 Pokémon TCG Standard 資料。111 份完整賽事卡表及 4 份近期賽事牌組均通過來源與 60 張數量檢查。</div>
     </div></section>
     <section class="section" id="cards"><div class="wrap">
       <div class="section-head"><div><span class="section-index">03 / ENCYCLOPEDIA</span><h2 data-i18n="cardsTitle">实体卡牌全图鉴</h2></div><p class="section-note" data-i18n="cardsNote">完整实体 TCG 数据库<br>英文・日本語・繁體中文独立检索</p></div>
@@ -150,7 +150,7 @@
   <div class="toast" id="toast">功能已就緒</div>
   <script src="decks-data.js?v=14"></script>
   <script src="sources-data.js?v=13"></script>
-  <script src="app-v22.js?v=40"></script>
+  <script src="app-v22.js?v=42"></script>
   <script>
     (()=>{
       const correctedRules={
@@ -168,3 +168,4 @@
   </script>
 </body>
 </html>
+
