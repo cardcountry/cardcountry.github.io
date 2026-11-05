@@ -75,10 +75,10 @@
   function audit(game){return({ptcg:auditPtcg,gcg:auditGcg,opcg:auditOpcg,marvel:auditMarvel,beyblade:auditBeyblade,riftbound:auditRiftbound}[game]||(()=>({game,label:game.toUpperCase(),records:0,lists:0,sources:0,quarantined:0,checked:'—',notes:[]})))()}
   const copyFor=()=>{
     const lang=document.documentElement.lang.toLowerCase();
-    if(lang.startsWith('ja'))return{title:'データ品質',records:'検証済み記録',lists:'完全リスト／構成',sources:'承認ソース',quarantine:'隔離',checked:'最終確認',run:'再チェック',pass:'必須チェック合格'};
-    if(lang.startsWith('en'))return{title:'DATA QUALITY',records:'VERIFIED RECORDS',lists:'FULL LISTS / COMBOS',sources:'APPROVED SOURCES',quarantine:'QUARANTINED',checked:'LAST CHECK',run:'RUN CHECKS',pass:'HARD CHECKS PASSED'};
-    if(lang.includes('hant'))return{title:'資料品質',records:'核實記錄',lists:'完整牌組／配置',sources:'核准來源',quarantine:'隔離異常',checked:'最後檢查',run:'重新檢查',pass:'硬性檢查通過'};
-    return{title:'资料质量',records:'核实记录',lists:'完整卡表／配置',sources:'核准来源',quarantine:'隔离异常',checked:'最后检查',run:'重新检查',pass:'硬性检查通过'};
+    if(lang.startsWith('ja'))return{title:'データ品質',records:'検証済み記録',lists:'完全リスト／構成',sources:'承認ソース',quarantine:'隔離',checked:'データ／同期日',run:'再チェック',pass:'必須チェック合格'};
+    if(lang.startsWith('en'))return{title:'DATA QUALITY',records:'VERIFIED RECORDS',lists:'FULL LISTS / COMBOS',sources:'APPROVED SOURCES',quarantine:'QUARANTINED',checked:'DATA / SYNC DATE',run:'RUN CHECKS',pass:'HARD CHECKS PASSED'};
+    if(lang.includes('hant'))return{title:'資料品質',records:'核實記錄',lists:'完整牌組／配置',sources:'核准來源',quarantine:'隔離異常',checked:'資料／同步日期',run:'重新檢查',pass:'硬性檢查通過'};
+    return{title:'资料质量',records:'核实记录',lists:'完整卡表／配置',sources:'核准来源',quarantine:'隔离异常',checked:'资料／同步日期',run:'重新检查',pass:'硬性检查通过'};
   };
 
   function renderAudit(result){
