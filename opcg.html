@@ -7,7 +7,7 @@
   <title>META LAB — ONE PIECE CARD GAME</title>
   <link rel="preconnect" href="https://en.onepiece-cardgame.com">
   <link rel="preconnect" href="https://www.onepiece-cardgame.com">
-  <link rel="stylesheet" href="opcg.css?v=11">
+  <link rel="stylesheet" href="opcg.css?v=13">
   <link rel="stylesheet" href="site-data-quality.css?v=2">
 </head>
 <body>
@@ -48,7 +48,7 @@
     </section>
     <section class="section card-section" id="cards">
       <div class="section-head"><div><span>03 / CARD ATLAS</span><h2 data-i18n="cardsTitle">OPCG 完整卡牌图鉴</h2></div><p><b id="cardTotal">2,850</b> UNIQUE CARDS · OP01—OP17 / EB / ST / PRB / PROMO</p></div>
-      <div class="card-toolbar"><div class="card-search"><span>⌕</span><input id="cardSearch" type="search" data-i18n-placeholder="cardSearchPlaceholder" placeholder="输入卡名、卡号、效果或特征…"></div><select id="setFilter" aria-label="Set filter"><option value="">ALL SETS</option></select><select id="colorFilter" aria-label="Color filter"><option value="">ALL COLORS</option><option>Red</option><option>Green</option><option>Blue</option><option>Purple</option><option>Black</option><option>Yellow</option></select><select id="typeFilter" aria-label="Card type filter"><option value="">ALL TYPES</option><option>Leader</option><option>Character</option><option>Event</option><option>Stage</option><option>Don!!</option></select><select id="costFilter" aria-label="Cost filter"><option value="">ALL COSTS</option><option value="0">COST 0</option><option value="1">COST 1</option><option value="2">COST 2</option><option value="3">COST 3</option><option value="4">COST 4</option><option value="5">COST 5</option><option value="6">COST 6</option><option value="7">COST 7</option><option value="8">COST 8</option><option value="9">COST 9</option><option value="10+">COST 10+</option></select><button id="clearCardFilters" data-i18n="clearFilters">清除筛选</button></div>
+      <div class="card-toolbar"><div class="card-search-row"><div class="card-search"><span>⌕</span><input id="cardSearch" type="search" autocomplete="off" spellcheck="false" aria-label="Search card name, number or text" data-i18n-placeholder="cardSearchPlaceholder" placeholder="输入卡名、卡号、效果或特征…"></div><button class="card-clear-button" id="clearCardFilters" data-i18n="clearFilters">清除筛选</button></div><details class="card-extra-filters"><summary data-i18n="moreFilters">更多筛选</summary><div class="card-filter-options"><select id="setFilter" aria-label="Set filter"><option value="">ALL SETS</option></select><select id="colorFilter" aria-label="Color filter"><option value="">ALL COLORS</option><option>Red</option><option>Green</option><option>Blue</option><option>Purple</option><option>Black</option><option>Yellow</option></select><select id="typeFilter" aria-label="Card type filter"><option value="">ALL TYPES</option><option>Leader</option><option>Character</option><option>Event</option><option>Stage</option><option>Don!!</option></select><select id="costFilter" aria-label="Cost filter"><option value="">ALL COSTS</option><option value="0">COST 0</option><option value="1">COST 1</option><option value="2">COST 2</option><option value="3">COST 3</option><option value="4">COST 4</option><option value="5">COST 5</option><option value="6">COST 6</option><option value="7">COST 7</option><option value="8">COST 8</option><option value="9">COST 9</option><option value="10+">COST 10+</option></select></div></details></div>
       <div class="language-image-note"><span data-i18n="imageLangNote">日文界面使用官方日文卡图与日文效果；简中、繁中与英文界面使用官方英文实体卡图。中文界面保留官方英文卡文，避免非官方翻译影响裁定。</span><b>AUTO CATALOG CHECK · 2026.10.30</b></div>
       <div class="card-results-head"><span id="cardResultCount"></span><div class="view-toggle"><button class="active" data-view="image" data-i18n="imageView">卡图</button><button data-view="name" data-i18n="nameView">卡名</button></div></div>
       <div class="card-grid" id="cardGrid"></div><button class="load-more" id="loadMoreCards" data-i18n="loadMore">载入更多卡牌</button>
@@ -66,6 +66,6 @@
   <div class="toast" id="toast" role="status"></div>
   <script src="opcg-data.js?v=2"></script>
   <script src="site-data-quality.js?v=3"></script>
-  <script src="opcg.js?v=7"></script>
+  <script src="opcg.js?v=8"></script>
 </body>
 </html>

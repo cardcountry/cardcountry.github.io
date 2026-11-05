@@ -6,7 +6,7 @@
   <meta name="description" content="Riftbound rules, Radiance metagame, verified tournament decklists, matchup analysis and complete official card gallery.">
   <title>META LAB — RIFTBOUND</title>
   <link rel="preconnect" href="https://cmsassets.rgpub.io">
-  <link rel="stylesheet" href="riftbound.css?v=4">
+  <link rel="stylesheet" href="riftbound.css?v=6">
   <link rel="stylesheet" href="site-data-quality.css?v=2">
 </head>
 <body>
@@ -55,7 +55,7 @@
     </section>
     <section class="section card-section" id="cards">
       <div class="section-head"><div><span>03 / CARD ATLAS</span><h2 data-i18n="cardsTitle">Riftbound 官方全卡图鉴</h2></div><p><b id="cardTotal">1,408</b> PRINTS · OGN / SFD / UNL / VEN / RAD / OGS</p></div>
-      <div class="card-toolbar"><div class="card-search"><span>⌕</span><input id="cardSearch" type="search" data-i18n-placeholder="cardSearchPlaceholder" placeholder="输入卡名、编号、效果或标签…"></div><select id="setFilter" aria-label="Set filter"><option value="">ALL SETS</option></select><select id="domainFilter" aria-label="Domain filter"><option value="">ALL DOMAINS</option><option>Calm</option><option>Chaos</option><option>Fury</option><option>Mind</option><option>Body</option><option>Order</option><option>Colorless</option></select><select id="typeFilter" aria-label="Type filter"><option value="">ALL TYPES</option><option>Unit</option><option>Spell</option><option>Gear</option><option>Battlefield</option><option>Legend</option><option>Rune</option></select><select id="rarityFilter" aria-label="Rarity filter"><option value="">ALL RARITIES</option><option>Common</option><option>Uncommon</option><option>Rare</option><option>Epic</option><option>Showcase</option></select><button id="clearCardFilters" data-i18n="clearFilters">清除筛选</button></div>
+      <div class="card-toolbar"><div class="card-search-row"><div class="card-search"><span>⌕</span><input id="cardSearch" type="search" autocomplete="off" spellcheck="false" aria-label="Search card name, number or text" data-i18n-placeholder="cardSearchPlaceholder" placeholder="输入卡名、编号、效果或标签…"></div><button class="card-clear-button" id="clearCardFilters" data-i18n="clearFilters">清除筛选</button></div><details class="card-extra-filters"><summary data-i18n="moreFilters">更多筛选</summary><div class="card-filter-options"><select id="setFilter" aria-label="Set filter"><option value="">ALL SETS</option></select><select id="domainFilter" aria-label="Domain filter"><option value="">ALL DOMAINS</option><option>Calm</option><option>Chaos</option><option>Fury</option><option>Mind</option><option>Body</option><option>Order</option><option>Colorless</option></select><select id="typeFilter" aria-label="Type filter"><option value="">ALL TYPES</option><option>Unit</option><option>Spell</option><option>Gear</option><option>Battlefield</option><option>Legend</option><option>Rune</option></select><select id="rarityFilter" aria-label="Rarity filter"><option value="">ALL RARITIES</option><option>Common</option><option>Uncommon</option><option>Rare</option><option>Epic</option><option>Showcase</option></select></div></details></div>
       <div class="smart-search-note" id="cardSearchHelp">智能检索支持简繁中文、英文、日文、卡号、效果、标签及轻微拼写差异。</div>
       <div class="language-note"><span data-i18n="imageLangNote">简体与繁体界面优先使用官方对应语言卡图及卡文；日文界面使用官方日文卡文，但部分系列仍只提供英文实体卡图。</span><b>AUTO CATALOG SNAPSHOT · 2026.10.31</b></div>
       <div class="card-results-head"><span id="cardResultCount"></span><div class="view-toggle"><button class="active" data-view="image" data-i18n="imageView">卡图</button><button data-view="name" data-i18n="nameView">卡名</button></div></div>
@@ -73,6 +73,6 @@
   <div class="toast" id="toast" role="status"></div>
   <script src="riftbound-data.js?v=2"></script>
   <script src="site-data-quality.js?v=3"></script>
-  <script src="riftbound.js?v=4"></script>
+  <script src="riftbound.js?v=5"></script>
 </body>
 </html>
