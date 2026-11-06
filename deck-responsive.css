@@ -1,0 +1,18 @@
+/* Shared mobile deck dialog corrections. Loaded after each game's styles. */
+.deck-shell>.modal-close{position:absolute;float:none}
+.deck-modal-head>div,.deck-detail-head>div{min-width:0;overflow-wrap:anywhere}
+.deck-cards>*{min-width:0}
+@media(max-width:760px){
+  .deck-shell .deck-modal-head{padding:20px 52px 20px 16px;gap:14px}
+  .deck-shell .deck-modal-head img{flex:none;width:80px;height:auto;max-height:125px;object-fit:contain}
+  .deck-detail-head{flex-direction:column;align-items:stretch}
+  .deck-view-toggle{width:100%;flex:none}
+  .deck-view-toggle button{flex:1;min-height:42px;white-space:nowrap}
+  .deck-modal-body{min-width:0;padding:14px}
+  .deck-guide-panel{padding:12px}
+  .deck-shell .deck-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .deck-name-list{min-width:0;table-layout:fixed}
+  .deck-name-list td{overflow-wrap:anywhere;padding:8px}
+  .composition-head{flex-wrap:wrap;gap:4px}
+}
+

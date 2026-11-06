@@ -18,6 +18,12 @@
     en:{label:'DATA CONFIDENCE',checking:'RUNNING INTEGRITY CHECKS',healthy:'ALL HARD CHECKS PASSED',cards:'OFFICIAL CARDS PASS',decks:'COMPLETE LISTS PASS',sources:'TRUSTED SOURCES',quarantine:'QUARANTINED',run:'RUN CHECKS',search:'Smart search covers Chinese, English, Japanese, card codes, rules text, tags and minor typos.',result:'ARCHETYPES',lists:'VERIFIED LISTS'},
     ja:{label:'データ信頼度',checking:'データ整合性を確認中',healthy:'必須チェックはすべて合格',cards:'公式カード合格',decks:'完全リスト合格',sources:'信頼ソース',quarantine:'隔離データ',run:'再チェック',search:'中国語・英語・日本語・カード番号・効果・タグ・軽微な入力ミスに対応します。',result:'アーキタイプ',lists:'検証済みリスト'}
   };
+  const compositionLocales={
+    'zh-cn':{title:'构筑组成',note:'40 张主牌组',action:'行动',reaction:'反应',unit:'单位',champion:'冠军单位'},
+    zh:{title:'構築組成',note:'40 張主牌組',action:'行動',reaction:'反應',unit:'單位',champion:'冠軍單位'},
+    en:{title:'DECK COMPOSITION',note:'40-CARD MAIN DECK',action:'ACTION',reaction:'REACTION',unit:'UNIT',champion:'CHAMPION UNIT'},
+    ja:{title:'デッキ構成',note:'メインデッキ40枚',action:'アクション',reaction:'リアクション',unit:'ユニット',champion:'チャンピオンユニット'}
+  };
   const archetypeAliases={
     riven:['锐雯','銳雯','リヴェン','放逐之刃','broken blade'],kennen:['凯南','凱南','ケネン','狂暴之心'],kaisa:['卡莎','カイサ','虚空之女','虛空之女','daughter void'],rengar:['雷恩加尔','雷恩加爾','レンガー','傲之追猎者','獅子狗'],akali:['阿卡丽','阿卡麗','アカリ','离群之刺'],vex:['薇古丝','薇古絲','ヴェックス','愁云使者'],irelia:['艾瑞莉娅','艾瑞莉婭','イレリア','刀锋舞者'],azir:['阿兹尔','阿茲爾','アジール','沙漠皇帝'],body:['体魄','體魄','ボディ'],fury:['狂怒','フューリー'],calm:['平静','平靜','カーム'],chaos:['混沌','カオス'],mind:['心灵','心靈','マインド'],order:['秩序','オーダー']
   };
@@ -122,6 +128,26 @@
     $('#deckListPicker').innerHTML=lists.map((deck,index)=>`<button class="${index===activeDeckIndex?'active':''}" data-list-index="${index}"><b>${escapeHtml(deck.placement)} · ${escapeHtml(deck.player)}</b><span>${escapeHtml(deck.event)}</span><small>${deck.date} · ${deck.players} PLAYERS</small></button>`).join('')||'<p class="no-data">NO COMPLETE LIST CAPTURED</p>';
     $$('#deckListPicker [data-list-index]').forEach(button=>button.addEventListener('click',()=>{activeDeckIndex=Number(button.dataset.listIndex);activeDeckTab='list';renderDeckModal()}));
   }
+  function deckComposition(deck){
+    const result={action:0,reaction:0,unit:0,champion:0};
+    for(const entry of deck?.entries||[]){
+      const count=Number(entry.count||0);
+      if(entry.group==='champion'||entry.group==='unit'){
+        const card=cardByName(entry.name),isChampion=entry.group==='champion'||(card?.type==='Unit'&&(card.super||[]).some(value=>String(value).toLowerCase()==='champion'));
+        result[isChampion?'champion':'unit']+=count;continue
+      }
+      if(entry.group!=='spell')continue;
+      const card=cardByName(entry.name);
+      if(card?.type==='Spell'&&/\[Reaction\]/i.test(card.text||''))result.reaction+=count;
+      else result.action+=count;
+    }
+    return result;
+  }
+  function renderDeckComposition(deck){
+    const stats=deckComposition(deck),copy=compositionLocales[language]||compositionLocales.en;
+    const items=[['action',copy.action],['reaction',copy.reaction],['unit',copy.unit],['champion',copy.champion]];
+    return`<section class="deck-composition" aria-label="${escapeHtml(copy.title)}"><div class="composition-head"><b>${escapeHtml(copy.title)}</b><span>${escapeHtml(copy.note)}</span></div><div class="composition-grid">${items.map(([key,label])=>`<article class="composition-${key}"><b>${stats[key]}</b><span>${escapeHtml(label)}</span></article>`).join('')}</div></section>`;
+  }
   function renderDeckList(deck){
     if(!deck)return'<div class="no-data">NO COMPLETE LIST CAPTURED</div>';
     const groups=[...new Set(deck.entries.map(entry=>entry.group))];
@@ -129,7 +155,7 @@
       const card=cardByName(entry.name),local=card?localizedCard(card):null;
       return`<button class="deck-card-item" data-card-id="${card?.id||''}"><div class="qty-badge" data-qty="${entry.count}">${local?.displayImage?`<img src="${local.displayImage}" alt="${escapeHtml(local.displayName)}" loading="lazy">`:'<span class="no-art">NO ART</span>'}</div><b>${escapeHtml(local?.displayName||entry.name)}</b><small>${escapeHtml(card?.code||entry.group)}</small></button>`;
     }).join('')).join('');
-    return`<div class="deck-detail-head"><div><h3>${escapeHtml(deck.placement)} · ${escapeHtml(deck.player)}</h3><p>${escapeHtml(deck.event)} · ${deck.date} · ${deck.players} PLAYERS · ${deck.total} TOTAL CARDS</p></div></div><div class="deck-cards">${cards}</div>`;
+    return`<div class="deck-detail-head"><div><h3>${escapeHtml(deck.placement)} · ${escapeHtml(deck.player)}</h3><p>${escapeHtml(deck.event)} · ${deck.date} · ${deck.players} PLAYERS · ${deck.total} TOTAL CARDS</p></div></div>${renderDeckComposition(deck)}<div class="deck-cards">${cards}</div>`;
   }
   function renderDeckTab(lists){
     const deck=lists[activeDeckIndex],item=activeArchetype;
@@ -217,3 +243,4 @@
   const auto=$('#autoUpdate');try{auto.checked=localStorage.getItem('metalab-auto-update')!=='off'}catch(error){}auto.addEventListener('change',()=>{try{localStorage.setItem('metalab-auto-update',auto.checked?'on':'off')}catch(error){}if(auto.checked)checkUpdate()});
   populateControls();renderUsage();renderDecks();renderMatchup();renderEvents();renderSources();renderQuality();setLanguage(language);if(auto.checked)checkUpdate();
 })();
+
