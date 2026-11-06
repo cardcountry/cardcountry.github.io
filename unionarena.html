@@ -7,9 +7,14 @@
   <meta name="theme-color" content="#101116">
   <title>META LAB — UNION ARENA</title>
   <link rel="preconnect" href="https://www.unionarena-tcg.com">
-  <link rel="stylesheet" href="unionarena.css?v=1">
+  <link rel="stylesheet" href="unionarena.css?v=20261107">
   <script src="unionarena-data.js?v=1" defer></script>
   <script src="unionarena.js?v=1" defer></script>
+  <script src="unionarena-recipes.js?v=20261107" defer></script>
+  <script src="unionarena-catalog.js?v=20261107" defer></script>
+  <script src="unionarena-library.js?v=20261107" defer></script>
+  <link rel="stylesheet" href="usage-ranking.css?v=20261107">
+  <script src="usage-ranking.js?v=20261107" defer></script>
 </head>
 <body>
   <div class="topline" aria-hidden="true"><span>UNION ARENA · ONE RULE SET · DECKS BUILT AROUND ONE SERIES</span><span>UNION ARENA · ONE RULE SET · DECKS BUILT AROUND ONE SERIES</span></div>
@@ -23,7 +28,7 @@
   <main>
     <section class="hero wrap" id="home">
       <div class="hero-copy"><p class="eyebrow">ONE RULE SET · MANY SERIES</p><h1>UNION<br><em>ARENA.</em></h1><p data-i18n="heroText">用一套共通规则，体验不同作品的角色与世界。这里整理构筑要点、官方卡牌搜索和赛事上位卡组入口。</p><div class="hero-actions"><a class="primary" href="#catalog" data-i18n="searchCards">搜索官方卡牌</a><a href="#decks" data-i18n="viewDecks">查看上位卡组</a></div><div class="hero-byline"><span>META LAB · CARD COUNTRY KC</span><b><span data-i18n="officialChecked">官方目录核对</span> · 2026.11.05</b></div></div>
-      <div class="hero-orbit" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit-core"><small>TCG SYSTEM</small><b>UA</b><span>DECK / 50</span></div><i class="node node-one">01</i><i class="node node-two">02</i><i class="node node-three">03</i></div>
+      <div class="hero-orbit"><div class="orbit orbit-a" aria-hidden="true"></div><div class="orbit orbit-b" aria-hidden="true"></div><div class="ua-hero-cards" aria-label="Featured UNION ARENA cards"><a class="ua-hero-card card-ichigo" href="https://www.unionarena-tcg.com/na/cardlist/?search=true&amp;series=591208" target="_blank" rel="noopener"><img src="https://www.unionarena-tcg.com/na/images/cardlist/card/UEX08BT_BLC-4-025.png?v3" alt="Ichigo Kurosaki UNION ARENA card"><span><b>ICHIGO KUROSAKI</b><small>UEX08BT/BLC-4-025</small></span></a><a class="ua-hero-card card-rukia" href="https://www.unionarena-tcg.com/na/cardlist/?search=true&amp;series=591208" target="_blank" rel="noopener"><img src="https://www.unionarena-tcg.com/na/images/cardlist/card/UEX08BT_BLC-4-039.png?v3" alt="Rukia Kuchiki UNION ARENA card"><span><b>RUKIA KUCHIKI</b><small>UEX08BT/BLC-4-039</small></span></a><a class="ua-hero-card card-aizen" href="https://www.unionarena-tcg.com/na/cardlist/?search=true&amp;series=591208" target="_blank" rel="noopener"><img src="https://www.unionarena-tcg.com/na/images/cardlist/card/UEX08BT_BLC-4-060.png?v3" alt="Sosuke Aizen UNION ARENA card"><span><b>SOSUKE AIZEN</b><small>UEX08BT/BLC-4-060</small></span></a></div></div>
       <div class="hero-stats"><article><b>50</b><span data-i18n="statDeck">主牌组张数</span></article><article><b>4</b><span data-i18n="statCopy">同卡号上限</span></article><article><b>3</b><span data-i18n="statAp">另备 AP 卡</span></article><article><b id="titleCount">26</b><span data-i18n="statTitles">官方目录标题</span></article></div>
     </section>
 
@@ -53,14 +58,24 @@
     </section>
 
     <section class="section wrap" id="decks">
-      <div class="section-head"><div><span>03 / EVENT BUILDS</span><h2 data-i18n="decksTitle">查看已公开的赛事卡组</h2></div><p data-i18n="decksIntro">官方维护标题推荐卡组与赛事上位卡组。打开原始卡组页，确认地区、赛事日期和所用卡池。</p></div>
-      <div class="deck-links"><a href="https://www.unionarena-tcg.com/na/decks/top-placing/" target="_blank" rel="noopener"><span>01 / TOURNAMENT</span><b data-i18n="topDecks">赛事上位卡组</b><small data-i18n="topDecksText">按作品标题与赛事筛选官方公开成绩</small><i>↗</i></a><a href="https://www.unionarena-tcg.com/na/decks/titles/" target="_blank" rel="noopener"><span>02 / TITLE BUILDS</span><b data-i18n="recommendedDecks">按标题查看推荐卡组</b><small data-i18n="recommendedDecksText">查看官方整理的各标题示例牌组</small><i>↗</i></a><a href="https://www.unionarena-tcg.com/na/titles/" target="_blank" rel="noopener"><span>03 / SERIES</span><b data-i18n="allTitlesLink">所有参赛作品标题</b><small data-i18n="allTitlesText">对照当前发行标题和各系列资料</small><i>↗</i></a></div>
-      <p class="rule-note" data-i18n="deckNote">本页不复制官方卡图或完整卡文；卡组与卡牌细节由官方页面呈现。</p>
+      <div class="section-head"><div><span>03 / VERIFIED EVENT BUILDS</span><h2 data-i18n="decksTitle">站内查看完整赛事卡组</h2></div><p data-i18n="decksIntro">已核对的官方 50 张卡表会在站内显示，并自动列出能源角色与 SPECIAL、COLOR、FINAL 触发数量。</p></div>
+      <div class="event-deck-grid" id="eventDeckGrid" aria-live="polite"></div>
+      <p class="event-deck-note"><b data-i18n="compositionMethod">统计方式</b><span data-i18n="compositionMethodText">能源角色按 Card Type = Character 且 Energy Generation 大于 0 的张数统计；触发数量按官方 Trigger Effect Type 统计。</span></p>
+      <div class="deck-links deck-source-links"><a href="https://www.unionarena-tcg.com/na/decks/top-placing/" target="_blank" rel="noopener"><span>01 / TOURNAMENT</span><b data-i18n="topDecks">赛事上位卡组</b><small data-i18n="topDecksText">按作品标题与赛事筛选官方公开成绩</small><i>↗</i></a><a href="https://www.unionarena-tcg.com/na/decks/titles/" target="_blank" rel="noopener"><span>02 / TITLE BUILDS</span><b data-i18n="recommendedDecks">按标题查看推荐卡组</b><small data-i18n="recommendedDecksText">查看官方整理的各标题示例牌组</small><i>↗</i></a><a href="https://www.unionarena-tcg.com/na/titles/" target="_blank" rel="noopener"><span>03 / SERIES</span><b data-i18n="allTitlesLink">所有参赛作品标题</b><small data-i18n="allTitlesText">对照当前发行标题和各系列资料</small><i>↗</i></a></div>
+      <p class="rule-note" data-i18n="deckNote">卡表与构成统计取自 Bandai 官方上位卡组页及 BANDAI TCG+ 完整配方；保留原始来源链接。</p>
     </section>
 
-    <section class="section sources-section" id="sources"><div class="wrap"><div class="section-head"><div><span>04 / REFERENCES</span><h2 data-i18n="sourcesTitle">规则与数据来源</h2></div><p data-i18n="sourcesIntro">按官方资料整理，并保留到原始页面的直达链接。</p></div><div class="source-grid"><a href="https://www.unionarena-tcg.com/na/rules/" target="_blank" rel="noopener"><b data-i18n="rulesSource">规则、赛事细则与禁限卡</b><span>UNION ARENA · RULES ↗</span></a><a href="https://www.unionarena-tcg.com/na/beginners/" target="_blank" rel="noopener"><b data-i18n="beginnerSource">新手指南与构筑要求</b><span>UNION ARENA · BEGINNERS ↗</span></a><a href="https://www.unionarena-tcg.com/na/cardlist/?search=true" target="_blank" rel="noopener"><b data-i18n="cardSource">官方卡牌图鉴</b><span>UNION ARENA · CARD LIST ↗</span></a><a href="https://www.unionarena-tcg.com/na/decks/top-placing/" target="_blank" rel="noopener"><b data-i18n="deckSource">官方赛事上位卡组</b><span>UNION ARENA · DECK LIST ↗</span></a></div><p class="copyright-note" data-i18n="copyrightNote">Union Arena、相关作品名称与卡牌资料归其各自权利人所有。本站提供规则摘要与搜索导航，不转载官方卡图、卡文或完整目录数据。</p></div></section>
+    <section class="section sources-section" id="sources"><div class="wrap"><div class="section-head"><div><span>04 / REFERENCES</span><h2 data-i18n="sourcesTitle">规则与数据来源</h2></div><p data-i18n="sourcesIntro">按官方资料整理，并保留到原始页面的直达链接。</p></div><div class="source-grid"><a href="https://www.unionarena-tcg.com/na/rules/" target="_blank" rel="noopener"><b data-i18n="rulesSource">规则、赛事细则与禁限卡</b><span>UNION ARENA · RULES ↗</span></a><a href="https://www.unionarena-tcg.com/na/beginners/" target="_blank" rel="noopener"><b data-i18n="beginnerSource">新手指南与构筑要求</b><span>UNION ARENA · BEGINNERS ↗</span></a><a href="https://www.unionarena-tcg.com/na/cardlist/?search=true" target="_blank" rel="noopener"><b data-i18n="cardSource">官方卡牌图鉴</b><span>UNION ARENA · CARD LIST ↗</span></a><a href="https://www.unionarena-tcg.com/na/decks/top-placing/" target="_blank" rel="noopener"><b data-i18n="deckSource">官方赛事上位卡组</b><span>UNION ARENA · DECK LIST ↗</span></a></div><p class="copyright-note" data-i18n="copyrightNote">Union Arena、相关作品名称与卡牌资料归其各自权利人所有。代表卡图直接引用官方目录并链接回来源；完整卡文与目录仍以 Bandai 官方页面为准。</p></div></section>
   </main>
+  <div class="ua-modal hidden" id="uaDeckModal" role="dialog" aria-modal="true" aria-labelledby="uaDeckName">
+    <div class="ua-modal-card">
+      <button class="ua-modal-close" id="uaDeckClose" type="button" aria-label="Close">×</button>
+      <div class="ua-modal-head"><img id="uaDeckImage" alt=""><div><span id="uaDeckMeta"></span><h2 id="uaDeckName"></h2><p id="uaDeckEvent"></p></div></div>
+      <div class="ua-composition" id="uaDeckComposition"></div>
+      <div class="ua-modal-toolbar"><b data-i18n="completeList">完整 50 张卡表</b><span id="uaDeckStatus" aria-live="polite"></span><a id="uaDeckSource" href="#" target="_blank" rel="noopener" data-i18n="openRecipe">BANDAI TCG+ 原始卡表 ↗</a></div>
+      <div class="ua-card-list" id="uaCardList"></div>
+    </div>
+  </div>
   <footer><a class="brand" href="index.html"><b>META LAB</b><span>CARD COUNTRY KC</span></a><span>UNION ARENA · CARD FINDER & EVENT LINKS</span><a href="#home" data-i18n="backTop">回到顶部 ↑</a></footer>
 </body>
 </html>
-
