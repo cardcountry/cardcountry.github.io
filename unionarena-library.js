@@ -1,32 +1,44 @@
 (()=>{
-  'use strict';
-  const data=window.UNION_ARENA_DATA, recipes=window.UNION_ARENA_RECIPES||[];
-  const catalog=window.UNION_ARENA_CATALOG;
-  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
-  const image=(src,name)=>{const n=el('img');n.src=src;n.alt=name;n.loading='lazy';return n;};
-  const stats=c=>{const box=el('div',null,'event-composition');[['energyCharacter','能量角色'],['special','SPECIAL'],['colour','COLOR'],['final','FINAL']].forEach(([key,label])=>{const n=el('span');n.append(el('b',String(c[key])),el('small',label));box.append(n);});return box;};
-  const tile=(card,copies)=>{const n=el('article',null,'ua-list-card');n.append(image(card.image,card.name),el('b',card.name),el('span',card.number));if(copies)n.append(el('strong','×'+copies));return n;};
-  const modal=document.querySelector('#uaDeckModal');let opener;
-  function close(){modal.classList.add('hidden');document.body.style.overflow='';opener?.focus();}
-  document.querySelector('#uaDeckClose').onclick=close;
-  modal.addEventListener('click',e=>{if(e.target===modal)close();});
-  modal.addEventListener('keydown',e=>{if(e.key==='Escape')close();if(e.key==='Tab'){const a=[...modal.querySelectorAll('button,a[href]')];if(e.shiftKey&&document.activeElement===a[0]){e.preventDefault();a.at(-1).focus();}else if(!e.shiftKey&&document.activeElement===a.at(-1)){e.preventDefault();a[0].focus();}}});
-  for(const deck of data.eventDecks||[]){
-    const recipe=recipes.find(r=>r.deckCode===deck.deckCode);if(!recipe||recipe.composition.total!==50)continue;
-    const button=el('button',null,'event-deck-card');button.type='button';
-    const copy=el('div',null,'event-deck-copy');copy.append(el('span',deck.place+' · '+deck.colour),el('h3',deck.series),el('p',deck.event+' · 公开 '+deck.revealed),stats(recipe.composition));button.append(image(deck.thumbnail,deck.series),copy);
-    button.onclick=()=>{opener=button;document.querySelector('#uaDeckName').textContent=deck.series;document.querySelector('#uaDeckMeta').textContent=deck.place+' · '+deck.colour;document.querySelector('#uaDeckEvent').textContent=deck.event+' · 公开 '+deck.revealed+' · 核验 2026-11-06';const img=document.querySelector('#uaDeckImage');img.src=deck.thumbnail;img.alt=deck.series;document.querySelector('#uaDeckSource').href=deck.recipe;document.querySelector('#uaDeckComposition').replaceChildren(...stats(recipe.composition).children);document.querySelector('#uaDeckStatus').textContent='50 / 50 · 不含 AP';document.querySelector('#uaCardList').replaceChildren(...recipe.cards.map(c=>tile(c,c.copies)));modal.classList.remove('hidden');document.body.style.overflow='hidden';document.querySelector('#uaDeckClose').focus();};
-    document.querySelector('#eventDeckGrid').append(button);
-  }
-  if(!catalog)return;
-  const panel=el('div',null,'ua-local-library');const heading=el('h2','站内卡牌图鉴');
-  panel.append(heading,el('p',`${catalog.cards.length.toLocaleString()} 张已公开卡图（含异画） · ${catalog.coverage?.length||1} 个作品目录 · 英文北美版 · 核验 ${catalog.checked}。不包含官方尚未公布图片的条目；不代表日文及亚洲版完整卡池。`));
-  const input=el('input');input.type='search';input.placeholder='搜索卡名 / 卡号，例如 Ichigo、BLC-4-025';input.setAttribute('aria-label','搜索站内 UA 卡牌');
-  const count=el('p');count.setAttribute('aria-live','polite');const grid=el('div',null,'ua-catalog-grid');
-  const filters=el('div',null,'usage-controls');const series=el('select'),set=el('select');series.setAttribute('aria-label','作品');set.setAttribute('aria-label','系列');
-  function options(select,values,label){select.replaceChildren();const all=el('option',label);all.value='';select.append(all);values.forEach(v=>{const o=el('option',v);o.value=v;select.append(o);});}
-  options(series,[...new Set(catalog.cards.map(c=>c.series))],'全部作品');options(set,[...new Set(catalog.cards.map(c=>c.set))],'全部系列');filters.append(series,set);
-  let page=1;const more=el('button','加载更多','search-submit');more.type='button';
-  function render(){const q=input.value.trim().toLowerCase();const cards=catalog.cards.filter(c=>(c.number+' '+c.name).toLowerCase().includes(q)&&(!series.value||c.series===series.value)&&(!set.value||c.set===set.value));count.textContent=`${cards.length} 张卡牌 · 已显示 ${Math.min(cards.length,page*60)} 张`;grid.replaceChildren(...cards.slice(0,page*60).map(c=>{const a=el('a');a.href=c.source;a.target='_blank';a.rel='noopener';a.append(tile(c));return a;}));more.hidden=page*60>=cards.length;if(!cards.length)grid.append(el('p','没有匹配卡牌，请尝试卡号或英文卡名。'));}
-  input.addEventListener('input',()=>{page=1;render();});series.addEventListener('change',()=>{options(set,[...new Set(catalog.cards.filter(c=>!series.value||c.series===series.value).map(c=>c.set))],'全部系列');page=1;render();});set.addEventListener('change',()=>{page=1;render();});more.onclick=()=>{page++;render();};panel.append(input,filters,count,grid,more);document.querySelector('#catalog .wrap').prepend(panel);render();
+ 'use strict';
+ const data=window.UNION_ARENA_DATA,recipes=window.UNION_ARENA_RECIPES||[],en=window.UNION_ARENA_CATALOG,jpRaw=window.UNION_ARENA_CATALOG_JP;
+ const jp=jpRaw?{...jpRaw,cards:jpRaw.cards.map(c=>({number:c[0],name:c[1],image:'https://www.unionarena-tcg.com'+c[2],series:jpRaw.titles[c[3]],set:c[4],colors:c[5],types:c[6],rarities:c[7],source:'https://www.unionarena-tcg.com/jp/cardlist/detail_iframe.php?card_no='+encodeURIComponent(c[0])}))}:null;
+ const catalogs={jp,na:en};
+ const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
+ const image=(src,name)=>{const n=el('img');n.src=src;n.alt=name;n.loading='lazy';return n;};
+ const button=(text,fn,cls='search-submit')=>{const n=el('button',text,cls);n.type='button';n.onclick=fn;return n;};
+ const labels={'赤':'红 · Red','Red':'红 · Red','青':'蓝 · Blue','Blue':'蓝 · Blue','黄':'黄 · Yellow','Yellow':'黄 · Yellow','緑':'绿 · Green','Green':'绿 · Green','紫':'紫 · Purple','Purple':'紫 · Purple','キャラクター':'角色 · Character','Character':'角色 · Character','フィールド':'场所 · Site','Site':'场所 · Site','イベント':'事件 · Event','Event':'事件 · Event','アクションポイント':'AP','Action Point':'AP'};
+ const select=(name)=>{const n=el('select');n.setAttribute('aria-label',name);return n;};
+ const options=(select,values,label)=>{select.replaceChildren();const all=el('option',label);all.value='';select.append(all);values.forEach(v=>{const o=el('option',labels[v]||v);o.value=v;select.append(o);});};
+ const stats=c=>{const box=el('div',null,'event-composition');[['energyCharacter','能量角色'],['special','SPECIAL'],['colour','COLOR'],['final','FINAL']].forEach(([key,label])=>{const n=el('span');n.append(el('b',String(c[key])),el('small',label));box.append(n);});return box;};
+ const tile=(card,copies)=>{const n=el('article',null,'ua-list-card');n.append(image(card.image,card.name||card.number),el('b',card.name||'官方未标注卡名'),el('span',card.number));if(copies)n.append(el('strong','×'+copies));return n;};
+ const modal=document.querySelector('#uaDeckModal');let opener;
+ function close(){modal.classList.add('hidden');document.body.style.overflow='';opener?.focus();}
+ document.querySelector('#uaDeckClose').onclick=close;modal.addEventListener('click',e=>{if(e.target===modal)close();});
+ modal.addEventListener('keydown',e=>{if(e.key==='Escape')close();if(e.key==='Tab'){const a=[...modal.querySelectorAll('button,a[href]')];if(e.shiftKey&&document.activeElement===a[0]){e.preventDefault();a.at(-1).focus();}else if(!e.shiftKey&&document.activeElement===a.at(-1)){e.preventDefault();a[0].focus();}}});
+ function openDeck(deck,recipe,source){opener=source;document.querySelector('#uaDeckName').textContent=deck.series;document.querySelector('#uaDeckMeta').textContent=(deck.region==='Japan'?'日本':'英文北美')+' · '+deck.place+' · '+deck.colour;document.querySelector('#uaDeckEvent').textContent=deck.event+' · 公开 '+deck.revealed+' · 核验 '+(deck.checked||'2026-11-06');const img=document.querySelector('#uaDeckImage');img.src=deck.thumbnail;img.alt=deck.series;document.querySelector('#uaDeckSource').href=deck.recipe;document.querySelector('#uaDeckComposition').replaceChildren(...stats(recipe.composition).children);document.querySelector('#uaDeckStatus').textContent='50 / 50 · 不含 AP';document.querySelector('#uaCardList').replaceChildren(...recipe.cards.map(c=>tile(c,c.copies)));modal.classList.remove('hidden');document.body.style.overflow='hidden';document.querySelector('#uaDeckClose').focus();}
+ const decks=(data.eventDecks||[]).filter(d=>recipes.some(r=>r.deckCode===d.deckCode&&r.composition.total===50)).sort((a,b)=>b.revealed.localeCompare(a.revealed));
+ const deckControls=el('div',null,'usage-controls'),deckRegion=select('卡组地区'),deckSeries=select('卡组作品'),deckSearch=el('input');deckSearch.type='search';deckSearch.placeholder='搜索作品、赛事或名次';deckSearch.setAttribute('aria-label','搜索 UA 卡组');
+ options(deckRegion,['Japan','English (U.S./Canada)'],'全部地区');deckRegion.options[1].textContent='日本';deckRegion.options[2].textContent='英文北美';if(decks.some(d=>d.region==='Japan'))deckRegion.value='Japan';
+ const deckCount=el('p',null,'ua-library-status'),deckGrid=document.querySelector('#eventDeckGrid');let deckPage=1;
+ const deckMore=button('更多赛事卡组',()=>{deckPage++;renderDecks();});
+ function regionOf(d){return d.region||'English (U.S./Canada)';}
+ function refreshDeckSeries(){options(deckSeries,[...new Set(decks.filter(d=>!deckRegion.value||regionOf(d)===deckRegion.value).map(d=>d.series))],'全部作品');}
+ function renderDecks(){const q=deckSearch.value.trim().toLowerCase(),found=decks.filter(d=>(!deckRegion.value||regionOf(d)===deckRegion.value)&&(!deckSeries.value||d.series===deckSeries.value)&&[d.series,d.event,d.place,d.colour].join(' ').toLowerCase().includes(q));deckCount.textContent=`${found.length} 份已核验完整卡表 · 3on3 名次为队伍成绩 · 日期为官方公开日期`;deckGrid.replaceChildren(...found.slice(0,deckPage*12).map(d=>{const r=recipes.find(r=>r.deckCode===d.deckCode),b=button('',()=>openDeck(d,r,b),'event-deck-card'),copy=el('div',null,'event-deck-copy');copy.append(el('span',d.place+' · '+d.colour),el('h3',d.series),el('p',d.event+' · 公开 '+d.revealed),stats(r.composition));b.append(image(d.thumbnail,d.series),copy);return b;}));deckMore.hidden=deckPage*12>=found.length;if(!found.length)deckGrid.append(el('p','没有符合条件的已核验卡表。'));}
+ deckControls.append(deckRegion,deckSeries,deckSearch);deckGrid.before(deckControls,deckCount);deckGrid.after(deckMore);refreshDeckSeries();deckRegion.onchange=()=>{deckPage=1;refreshDeckSeries();renderDecks();};deckSeries.onchange=deckSearch.oninput=()=>{deckPage=1;renderDecks();};renderDecks();
+ if(!en&&!jp)return;
+ const cardDialog=el('dialog',null,'ua-card-dialog'),dialogClose=button('关闭 ×',()=>cardDialog.close(),'ua-card-dialog-close'),dialogContent=el('div');cardDialog.append(dialogClose,dialogContent);document.body.append(cardDialog);cardDialog.addEventListener('click',e=>{if(e.target===cardDialog)cardDialog.close();});
+ function openCard(card){const text=el('div');text.append(el('small',card.number),el('h2',card.name),el('p',card.series+' · '+card.set));for(const [key,title] of [['colors','颜色'],['types','类型'],['rarities','稀有度']])text.append(el('p',title+'：'+((card[key]||[]).map(v=>labels[v]||v).join(' / ')||'官方未标注')));const a=el('a','查看官方卡牌原页 ↗');a.href=card.source;a.target='_blank';a.rel='noopener';text.append(a);dialogContent.replaceChildren(image(card.image,card.name),text);cardDialog.showModal();}
+ const panel=el('div',null,'ua-local-library');panel.append(el('h2','站内卡牌图鉴'));const intro=el('p');panel.append(intro);const keyword=el('input');keyword.type='search';keyword.placeholder='输入卡名 / 卡号，例如 ニコ、BLC-4-025';keyword.setAttribute('aria-label','搜索站内 UA 卡牌');
+ const controls=el('div',null,'usage-controls'),region=select('卡牌地区'),series=select('作品'),set=select('系列'),color=select('颜色'),type=select('类型'),rarity=select('稀有度');
+ for(const [value,name] of [['jp','日文版 · 日本'],['na','英文版 · 北美']])if(catalogs[value]){const o=el('option',name);o.value=value;region.append(o);}
+ controls.append(region,series);const advanced=el('details',null,'ua-advanced');advanced.append(el('summary','更多筛选：系列、颜色、类型、稀有度'));const advancedControls=el('div',null,'usage-controls');advancedControls.append(set,color,type,rarity);advanced.append(advancedControls);
+ const count=el('p',null,'ua-library-status');count.setAttribute('aria-live','polite');const grid=el('div',null,'ua-catalog-grid');let page=1;
+ const more=button('加载更多卡牌',()=>{page++;renderCards();});let active;
+ function resetProducts(){options(set,[...new Set(active.cards.filter(c=>!series.value||c.series===series.value).map(c=>c.set))],'全部系列');}
+ function setCatalog(){active=catalogs[region.value];intro.textContent=`${active.cards.length.toLocaleString()} 个已公开卡图条目（含异画） · ${active.coverage.length} 个作品目录 · ${region.value==='jp'?'日本日文版':'英文北美版'} · 核验 ${active.checked}。仅展示已公布卡图；地区卡池分别检索。`;options(series,[...new Set(active.cards.map(c=>c.series))],'全部作品');resetProducts();for(const [node,key,label] of [[color,'colors','全部颜色'],[type,'types','全部类型'],[rarity,'rarities','全部稀有度']])options(node,[...new Set(active.cards.flatMap(c=>c[key]||[]))],label);page=1;renderCards();}
+ function renderCards(){const q=keyword.value.trim().toLowerCase(),cards=active.cards.filter(c=>(c.number+' '+c.name).toLowerCase().includes(q)&&(!series.value||c.series===series.value)&&(!set.value||c.set===set.value)&&(!color.value||c.colors?.includes(color.value))&&(!type.value||c.types?.includes(type.value))&&(!rarity.value||c.rarities?.includes(rarity.value)));count.textContent=`${cards.length.toLocaleString()} 张卡牌 · 已显示 ${Math.min(cards.length,page*60)} 张`;grid.replaceChildren(...cards.slice(0,page*60).map(c=>{const b=button('',()=>openCard(c),'ua-catalog-card');b.setAttribute('aria-label',c.name+' · '+c.number);b.append(tile(c));return b;}));more.hidden=page*60>=cards.length;if(!cards.length)grid.append(el('p','没有匹配卡牌，请尝试该地区的卡名或卡号。'));}
+ region.onchange=setCatalog;series.onchange=()=>{page=1;resetProducts();renderCards();};[set,color,type,rarity].forEach(n=>n.onchange=()=>{page=1;renderCards();});keyword.oninput=()=>{page=1;renderCards();};panel.append(keyword,controls,advanced,count,grid,more);document.querySelector('#catalog .wrap').prepend(panel);setCatalog();
+ const titleCount=document.querySelector('#titleCount');if(titleCount)titleCount.textContent=String(jp?.coverage.length||en.coverage.length);
+ const byline=document.querySelector('.hero-byline b');if(byline)byline.textContent='资料核验 · 2026.11.07';
+ const sourceGrid=document.querySelector('.source-grid');for(const [title,url] of [['日本官方卡牌图鉴','https://www.unionarena-tcg.com/jp/cardlist/'],['日本官方赛事卡组','https://www.unionarena-tcg.com/jp/decks/top-placing/'],['日本规则与禁限卡','https://www.unionarena-tcg.com/jp/rules/']]){const a=el('a');a.href=url;a.target='_blank';a.rel='noopener';a.append(el('b',title),el('span','UNION ARENA · JAPAN ↗'));sourceGrid?.append(a);}
 })();

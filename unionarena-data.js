@@ -1,6 +1,6 @@
 window.UNION_ARENA_DATA={
   officialUpdated:'2026.10.30',
-  checked:'2026.11.06',
+  checked:'2026.11.07',
   eventDecksUpdated:'2026.09.18',
   officialApiBase:'https://api.bandai-tcg-plus.com',
   deckCompositionSchema:{energyCharacter:'Energy-producing Character',special:'Special Trigger',colour:'Color Trigger',final:'Final Trigger'},

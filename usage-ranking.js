@@ -2,13 +2,13 @@
  'use strict';
  const rows=[];let label='',note='每份已收录卡表计一次；上位及公开卡表样本有收录偏差，不代表全体参赛者使用率。',fixedRange='';
  const add=(name,id,date,format,source,weight=1)=>{if(name&&id)rows.push({name:String(name).replace(/\s+/g,' ').trim(),id:String(id),date:String(date||'').replaceAll('.','-'),format:format||'未注明赛制',source,weight});};
- if(window.UNION_ARENA_DATA){label='UNION ARENA';for(const d of window.UNION_ARENA_DATA.eventDecks||[])add(d.colour+' · '+d.series,d.event+'|'+d.place,d.revealed,'英文北美 · 公开日期',d.source);note+=' UA 日期采用官方卡表公开日期。';}
+ if(window.UNION_ARENA_DATA){label='UNION ARENA';for(const d of window.UNION_ARENA_DATA.eventDecks||[])add(d.colour+' · '+d.series,d.id||d.event+'|'+d.place,d.revealed,(d.region==='Japan'?'日本':'英文北美')+' · '+(d.event.includes('3on3')?'3on3':'1on1'),d.source);note+=' UA 日期采用官方卡表公开日期；3on3 每份成员卡表计一次，名次为队伍成绩。';}
  else if(window.OPCG_DATA){label='OPCG';const cards=new Map((window.OPCG_CARDS||[]).map(c=>[c.code,c]));for(const [format,decks] of Object.entries(window.OPCG_DATA.meta))for(const d of decks)for(const l of d.lists||[])add((cards.get(d.leader)?.name||d.name)+' · '+d.leader,l.id||l.sourceUrl,l.date,l.format||format,l.sourceUrl);}
  else if(window.GCG_DATA){label='GCG';for(const e of window.GCG_DATA.tournaments)for(const [i,d] of e.results.entries())add(d.archetype||d.primary,e.id+'|'+(d.player||i),e.date,e.format,d.sourceUrl||e.sourceUrl);}
  else if(window.RIFTBOUND_DATA){label='RIFTBOUND';for(const d of window.RIFTBOUND_DECKS||[])add(d.legend,d.id,d.date,'Constructed',d.source);}
  else if(window.MARVEL_DATA){label='MARVEL HERO RUSH';for(const e of window.MARVEL_DATA.tournaments)for(const [i,d] of e.lists.entries())add(d.archetype,e.id+'|'+(d.player||i),e.date,'已收录赛事',/^https?:/.test(e.source)?e.source:window.MARVEL_DATA.sources?.[0]?.url);}
  else if(window.BEYX_DATA){label='BEYBLADE X';const d=window.BEYX_DATA;fixedRange=d.summary.start+' — '+d.summary.end;for(const c of d.all)add([c.blade,c.ratchet,c.bit,c.assist].filter(Boolean).join(' / '),[c.blade,c.ratchet,c.bit,c.assist].join('|'),d.summary.end,'配置',d.sources[0].url,Number(c.app));note='按来源记录的配置出现次数统计，同一赛事可有多次配置记录；不是玩家使用率。';}
- else if(typeof decklists!=='undefined'){label='PTCG';for(const d of decklists)for(const l of d.lists||[])add(d.name,l.listId||l.listUrl,l.date,l.format||'Standard',l.listUrl||l.sourceUrl);}
+ else if(typeof decklists!=='undefined'){label='PTCG';for(const d of decklists)for(const l of d.lists||[])add(d.name,l.listId||l.listUrl,l.date,(l.region==='Japan'?'日本 · ':'国际 · ')+(l.format||'Standard'),l.listUrl||l.sourceUrl);}
  if(!label)return;
  const unique=[...new Map(rows.map(r=>[r.id,r])).values()].filter(r=>Number.isFinite(r.weight)&&r.weight>0);
  const node=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;};
