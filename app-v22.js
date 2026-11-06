@@ -364,7 +364,7 @@ const mainMatchupLocales={
       return decklists.filter(deck=>deck.key===forced||text.includes(deck.name.toLowerCase())||(deck.key==='zoroark'&&text.includes('zoroark'))||(deck.key==='festival'&&text.includes('festival')));
     }
     const isStandard=item=>(item?.format||'Standard').toLowerCase()==='standard';
-    const standardDeckLists=deck=>(deck?.lists||[]).filter(isStandard);
+    const standardDeckLists=deck=>(deck?.lists||[]).filter(isStandard).slice().sort((a,b)=>String(b.date).replaceAll('.','-').localeCompare(String(a.date).replaceAll('.','-')));
     const standardSourceRecipes=item=>(sourceDeckRecipes[item?.name]||[]).filter(isStandard);
     const isPhysicalTcgdexImage=url=>String(url||'').startsWith('https://assets.tcgdex.net/')&&!/\/tcgp\//i.test(String(url));
     let currentSourceIndex=null,currentSourceRecipeIndex=0,sourceViewMode='image';const recipeImageCache=new Map(),recipeImagePending=new Map();
@@ -390,6 +390,7 @@ const mainMatchupLocales={
       const lists=related.flatMap(deck=>standardDeckLists(deck).map(list=>({deck,list})));
       $('#sourceListCount').textContent=recipes.length?`${recipes.length} VERIFIED LISTS`:lists.length?`${lists.length} VERIFIED LISTS`:'SOURCE SUMMARY';
       $('#sourceViewToggle').classList.add('hidden');
+      $('#sourceComposition').classList.add('hidden');
       $('#sourceDeckChoices').classList.toggle('hidden',!recipes.length&&!lists.length);
       $('#sourceDeckEmpty').classList.toggle('hidden',!!recipes.length||!!lists.length);
       $('#sourceDeckEmpty').innerHTML=item.registry?(uiLang==='en'?'This trusted source is now part of the data registry. A specific list appears only after its event result, Standard legality and full 60 cards are verified.':uiLang==='ja'?'信頼済みデータソースとして登録しました。大会結果、スタンダード適合、60枚の内容を確認したリストだけを表示します。':uiLang==='zh'?'此可靠資料源已加入登錄。只有完成賽事結果、Standard 合法性與完整 60 張核對的牌組才會顯示。':'此可靠资料源已加入登记。只有完成赛事结果、Standard 合法性与完整 60 张核对的卡表才会显示。'):uiLang==='en'?'No verified complete 60-card list is available for this archetype yet. Meta share, player count and win rate remain available; aggregate statistics are not treated as a decklist.':uiLang==='ja'?'このタイプには、検証済みの完全な60枚リストがまだありません。使用率・人数・勝率のみ表示し、集計ページをデッキリストとして扱いません。':uiLang==='zh'?'此類型暫時沒有已核實的完整 60 張清單。環境佔比、玩家數與勝率已保留；不會把統計頁誤當成單一牌組。':'此类型暂时没有已核实的完整 60 张清单。环境占比、玩家数与胜率已经保留在站内；待取得具体赛事卡表后再加入，避免把统计页误当成单一卡表。';
@@ -404,6 +405,7 @@ const mainMatchupLocales={
       const item=externalDeckSources[currentSourceIndex],recipes=standardSourceRecipes(item),recipe=recipes[currentSourceRecipeIndex];if(!recipe)return;
       $('#sourceViewToggle').classList.remove('hidden');$$('#sourceViewToggle button').forEach(b=>b.classList.toggle('active',b.dataset.view===sourceViewMode));
       $('#sourceListCount').textContent=`${recipe.total} / 60 CARDS`;
+      renderDeckComposition({categories:[{name:'',cards:recipe.cards}]},'sourceComposition');
       const back=`<button class="back-to-choices source-back">${uiLang==='en'?`← Back to ${recipes.length} lists`:uiLang==='ja'?`← 同タイプ${recipes.length}件へ戻る`:uiLang==='zh'?`← 返回 ${recipes.length} 份同類型牌組`:`← 返回 ${recipes.length} 份同类型卡表`}</button>`;
       const names=`<div class="recipe-grid">${recipe.cards.map(card=>`<div class="recipe-card"><b>${card.qty}</b><span>${card.name}<small>${card.code}</small></span></div>`).join('')}</div>`;
       const images=`<div class="deck-image-grid">${recipe.cards.map(card=>{const official=String(card.image||'').startsWith('https://www.pokemon-card.com/assets/images/card_images/large/');return `<div class="deck-image-card"><button type="button" class="deck-effect-trigger" data-effect-name="${encodeURIComponent(card.name)}" data-effect-code="${encodeURIComponent(card.code||'')}" aria-label="查看 ${card.name} 卡片效果"><img ${official?`src="${card.image}" class="official-card-image"`:`data-card-name="${encodeURIComponent(card.name)}" data-card-code="${encodeURIComponent(card.code||'')}"`} alt="${card.name} physical TCG card" loading="lazy"></button><b>${card.qty}</b><span>${card.name}</span><small>${card.code||''}</small></div>`}).join('')}</div>`;
@@ -441,16 +443,16 @@ const mainMatchupLocales={
     function searchDecklists(query){
       const q=query.trim().toLowerCase(),results=[],external=[],community=[],xMatches=[];
       if(!q){$('#deckSearchResults').classList.add('hidden');$('#metaDeckGrid').classList.remove('hidden');return}
-      decklists.forEach(deck=>standardDeckLists(deck).forEach(list=>{const cardNames=list.categories.flatMap(c=>c.cards.map(card=>card.name)).join(' ');const hay=`${deck.name} ${list.player} ${list.variant} ${list.event} ${cardNames}`.toLowerCase();if(hay.includes(q))results.push({deck,list})}));
+      decklists.forEach(deck=>standardDeckLists(deck).forEach(list=>{const cardNames=list.categories.flatMap(c=>c.cards.map(card=>card.name)).join(' ');const hay=`${deck.name} ${list.player} ${list.variant} ${list.event} ${list.region||''} ${list.language||''} ${cardNames}`.toLowerCase();if(hay.includes(q))results.push({deck,list})}));
       externalDeckSources.filter(isStandard).forEach(item=>{if(`${item.name} ${item.aliases} ${item.meta}`.toLowerCase().includes(q))external.push(item)});
       communityEvents.forEach(event=>event.lists.forEach(list=>{const cardNames=list.cards.map(card=>card.name).join(' '),hay=`${list.name} ${list.jpName} ${list.player} ${list.place} ${event.name} ${cardNames}`.toLowerCase();if(hay.includes(q))community.push({event,list})}));
       Object.entries(xDeckSources).forEach(([key,source])=>{const hay=`${source.deckName} ${source.handle} ${source.players.join(' ')} regional puebla twitter x`.toLowerCase();if(hay.includes(q))xMatches.push({key,source})});
       $('#metaDeckGrid').classList.add('hidden');$('#deckSearchResults').classList.remove('hidden');
       const total=results.length+external.length+community.length+xMatches.length;
-      const summary=`<div class="result-summary">STANDARD ONLY · FOUND ${total} RESULTS · LIMITLESS ${results.length} · X ${xMatches.length} · VERIFIED ASIA ${community.length} · IMPORTED ${external.length}${total>64?' · SHOWING FIRST 64':''}</div>`;
+      const summary=`<div class="result-summary">STANDARD ONLY · FOUND ${total} RESULTS · DECKLISTS ${results.length} · X ${xMatches.length} · VERIFIED ASIA ${community.length} · IMPORTED ${external.length}${total>64?' · SHOWING FIRST 64':''}</div>`;
       const xRows=xMatches.map(({key,source})=>`<button class="search-result-deck x-search-result" data-x-key="${key}"><span class="result-badge">X</span><span class="result-main"><b><i class="result-source x">X / ${source.handle.toUpperCase()}</i>${source.deckName} · PUEBLA TOP LISTS</b><small>STANDARD · ${source.players.join(' · ')}<br>LIMITLESS + X CROSS-CHECK · ${uiLang==='en'?'IN-APP DECKLIST':uiLang==='ja'?'サイト内デッキリスト':uiLang==='zh'?'站內牌組':'站内卡表'}</small></span><span class="result-arrow">→</span></button>`).join('');
       const eventRows=community.map(({event,list:raw})=>{const list=localizedCommunity(raw);return `<button class="search-result-deck community-search-result" data-community-key="${list.key}"><span class="result-badge community-result-badge">${list.place}</span><span class="result-main"><b><i class="result-source pokeca">GS BALL / PLAYERS CLUB</i>${list.name} · ${list.player}</b><small>STANDARD · ${uiLang==='en'?list.name:raw.jpName} · ${pageText().eventName}<br>${event.date} · ${event.players} PLAYERS · ${list.points}</small></span><span class="result-arrow">▶</span></button>`}).join('');
-      const tournamentRows=results.slice(0,30).map(({deck,list})=>`<button class="search-result-deck" data-deck="${deck.key}" data-list="${list.listId}"><span class="result-badge">${list.place}</span><span class="result-main"><b><i class="result-source limitless">LIMITLESS</i>${deck.name} · ${list.player}</b><small>STANDARD · ${list.variant||deck.name} · ${list.event}<br>${list.date} · ${list.players} PLAYERS</small></span><span class="result-arrow">→</span></button>`).join('');
+      const tournamentRows=results.slice(0,30).map(({deck,list})=>`<button class="search-result-deck" data-deck="${deck.key}" data-list="${list.listId}"><span class="result-badge">${list.place}</span><span class="result-main"><b><i class="result-source limitless">${list.region==='Japan'?'JAPAN':'LIMITLESS'}</i>${deck.name} · ${list.player}</b><small>STANDARD · ${list.variant||deck.name} · ${list.event}<br>${list.date} · ${list.players} PLAYERS</small></span><span class="result-arrow">→</span></button>`).join('');
       const externalRows=external.slice(0,30).map(item=>`<button class="search-result-deck external-result" data-source-index="${externalDeckSources.indexOf(item)}"><span class="result-badge">${item.source==='PokecaBook'?'JP':'WEB'}</span><span class="result-main"><b><i class="result-source ${item.source==='PokecaBook'?'pokeca':'pcio'}">${item.source.toUpperCase()}</i>${localizedSourceName(item)}</b><small>STANDARD · ${localizedMeta(item.meta)}<br>${item.badge} · ${uiLang==='en'?'IN-APP CONTENT':uiLang==='ja'?'サイト内コンテンツ':uiLang==='zh'?'站內內容':'站内内容'}</small></span><span class="result-arrow">→</span></button>`).join('');
       const empty=uiLang==='en'?'No matching Standard decklist. Try an archetype, player, card, X handle or Japanese deck name.':uiLang==='ja'?'一致するスタンダードのデッキリストがありません。デッキ名、選手名、カード名、Xアカウント、日本語名で検索してください。':uiLang==='zh'?'找不到相關 Standard 牌組。請嘗試牌組名、選手名、單卡名稱、X 選手名或日文牌組名。':'找不到相关 Standard 卡表。请尝试卡组名、选手名、单卡名称、X 选手名或日文卡组名。';
       $('#deckSearchResults').innerHTML=total?summary+xRows+eventRows+tournamentRows+externalRows:`<div class="result-empty">${empty}</div>`;
@@ -507,6 +509,10 @@ const mainMatchupLocales={
     function closeModal(){$('#cardModal').classList.remove('open','card-over-deck');document.body.style.overflow=$('#deckModal').classList.contains('open')||$('#sourceModal').classList.contains('open')?'hidden':''}
     let deckViewMode='name',currentDeckView=null;
     function physicalCardImage(card){const set=String(card.set||'').toUpperCase(),raw=String(card.no||'').toUpperCase(),no=/^\d+$/.test(raw)?raw.padStart(3,'0'):raw;return `https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpci/${set}/${set}_${no}_R_EN_SM.png`}
+    function renderDeckComposition(list,target='deckComposition'){
+      const entries=(list?.categories||[]).flatMap(group=>(group.cards||[]).map(card=>({...card,deckCategory:card.category||group.name,code:card.code||`${card.set||''}-${card.no||''}`})));
+      window.PTCGComposition?.render(entries,target);
+    }
     function renderDeckListCards(){
       if(!currentDeckView)return;const {list}=currentDeckView;
       $$('#deckViewToggle button').forEach(b=>b.classList.toggle('active',b.dataset.view===deckViewMode));
@@ -564,8 +570,8 @@ const mainMatchupLocales={
     function startAutoVideoSync(){syncAutoVideos();setInterval(()=>{Object.keys(autoVideoChecks).forEach(key=>delete autoVideoChecks[key]);syncAutoVideos()},10*60*1000)}
     function communityRepresentative(list){const preferred={oliva:'オリーヴァex',zoroark:'Nのゾロアークex',rocket_honchkrow:'ロケット団のドンカラス',blaziken_dragapult:'バシャーモex'}[list.key],cards=list.cards||[];return cards.find(card=>card.name===preferred)||cards.find(card=>card.category==='ポケモン')}
     function renderCommunityDecks(){
-      const event=communityEvents[0];if(!event)return;
-      const t=pageText();$('#communityDeckGrid').innerHTML=event.lists.map(raw=>{const list=localizedCommunity(raw),card=communityRepresentative(raw),subtitle=uiLang==='en'?list.name:raw.jpName;return `<button class="community-deck" data-community-key="${list.key}">${card?`<img class="community-card-art" src="${card.image}" alt="${list.name} physical Pokémon TCG card" loading="lazy">`:''}<span class="community-place">${list.place} · ${list.points}</span><h4>${list.name}</h4><span class="jp-name">${subtitle}</span><span class="community-analysis-tag">${t.communityTag}</span><div class="community-result"><span>${list.player}</span><b>OPEN →</b></div></button>`}).join('');
+      const grid=$('#communityDeckGrid');if(!grid)return;const event=communityEvents[0];if(!event)return;
+      const t=pageText();grid.innerHTML=event.lists.map(raw=>{const list=localizedCommunity(raw),card=communityRepresentative(raw),subtitle=uiLang==='en'?list.name:raw.jpName;return `<button class="community-deck" data-community-key="${list.key}">${card?`<img class="community-card-art" src="${card.image}" alt="${list.name} physical Pokémon TCG card" loading="lazy">`:''}<span class="community-place">${list.place} · ${list.points}</span><h4>${list.name}</h4><span class="jp-name">${subtitle}</span><span class="community-analysis-tag">${t.communityTag}</span><div class="community-result"><span>${list.player}</span><b>OPEN →</b></div></button>`}).join('');
       $$('#communityDeckGrid [data-community-key]').forEach(button=>button.addEventListener('click',()=>openCommunityDeck(button.dataset.communityKey)));
     }
     function openCommunityDeck(key){
@@ -575,6 +581,7 @@ const mainMatchupLocales={
       const list={listId:`community-${key}`,player:source.player,event:t.eventName,date:event.date,players:String(event.players),place:source.place,variant:uiLang==='en'?source.name:source.jpName,categories};
       const deck={key,name:source.name,share:'VERIFIED RESULT',image:communityRepresentative(rawSource)?.image||''};
       currentDeckView={deck,list};deckViewMode='image';
+      renderDeckComposition(list);
       $('#deckModalImage').src=deck.image;$('#deckModalImage').alt=`${source.name} physical Pokémon TCG card`;$('#deckModalName').textContent=source.name;$('#deckModalPlayer').textContent=`${source.player} · ${source.points} · ${uiLang==='en'?source.name:source.jpName}`;
       $('#deckModalDate').textContent=event.date;$('#deckModalPlayers').textContent=event.players;$('#deckModalPlace').textContent=source.place;$('.event-summary').classList.remove('hidden');$('#deckChoiceView').classList.add('hidden');$('#deckDetailView').classList.remove('hidden');$('#backToChoices').classList.add('hidden');
       $('#deckEventStrip').innerHTML=`<div class="event-name"><b>${t.eventName}</b><small>STANDARD · ${t.venue}</small></div><div class="event-chip"><span>DATE</span><b>${event.date}</b></div><div class="event-chip"><span>PLAYERS</span><b>${event.players}</b></div><div class="event-chip"><span>RESULT</span><b>${source.place} · ${source.points}</b></div><span class="source-link">${t.embedded}</span>`;
@@ -584,7 +591,7 @@ const mainMatchupLocales={
     function openDeck(key){
       const deck=decklists.find(d=>d.key===key);if(!deck)return;const lists=standardDeckLists(deck);
       $('#deckModalImage').src=deck.image;$('#deckModalImage').alt=`${deck.name} physical Pokémon TCG card`;
-      $('#deckModalName').textContent=deck.name;$('#deckModalPlayer').textContent=`${lists.length} STANDARD EVENT DECKLISTS · ${deck.share} META SHARE`;
+      $('#deckModalName').textContent=deck.name;$('#deckModalPlayer').textContent=`${lists.length} STANDARD EVENT DECKLISTS`;
       $('.event-summary').classList.add('hidden');$('#deckChoiceView').classList.remove('hidden');$('#deckDetailView').classList.add('hidden');$('#backToChoices').classList.remove('hidden');$('#matchVideos').classList.add('hidden');$('#deckGuide').classList.add('hidden');$('#deckMatchup').classList.add('hidden');
       $('#deckChoiceCount').textContent=`${lists.length} STANDARD DECKLISTS`;
       const xSource=xDeckSources[key];
@@ -596,14 +603,17 @@ const mainMatchupLocales={
       const deck=decklists.find(d=>d.key===key),list=standardDeckLists(deck).find(l=>l.listId===listId);if(!list)return;
       const xSource=xDeckSources[key],xChecked=xSource?.listIds.includes(listId);
       currentDeckView={deck,list};deckViewMode='image';
+      renderDeckComposition(list);
       $('#deckChoiceView').classList.add('hidden');$('#deckDetailView').classList.remove('hidden');$('.event-summary').classList.remove('hidden');
-      $('#deckModalPlayer').textContent=`${list.player} · ${deck.share} META SHARE`;$('#deckModalDate').textContent=list.date;$('#deckModalPlayers').textContent=list.players;$('#deckModalPlace').textContent=list.place;
+      $('#deckModalPlayer').textContent=`${list.player}${list.region?' · '+list.region:''} · VERIFIED EVENT LIST`;$('#deckModalDate').textContent=list.date;$('#deckModalPlayers').textContent=list.players;$('#deckModalPlace').textContent=list.place;
       const t=pageText();$('#deckEventStrip').innerHTML=`<div class="event-name"><b>${list.event}</b><small>STANDARD · ${list.variant||deck.name}</small></div><div class="event-chip"><span>DATE</span><b>${list.date}</b></div><div class="event-chip"><span>PLAYERS</span><b>${list.players}</b></div><div class="event-chip"><span>RESULT</span><b>${list.place} · ${list.player}</b></div><span class="source-link">${xChecked?'LIMITLESS + X CROSS-CHECKED':t.embedded}</span>`;
       renderDeckListCards();
       renderDeckGuide(key);
       renderDeckMatchups(key);
       renderMatchVideos(key);
       $('.deck-source-note').textContent=uiLang==='en'?(xChecked?`FORMAT · STANDARD ONLY · LIMITLESS + X / ${xSource.handle.toUpperCase()} CROSS-CHECK · Decklist and player result are stored in-app; Expanded is excluded.`:'FORMAT · STANDARD ONLY · SOURCE · LIMITLESS TCG · Expanded decklists are excluded.'):uiLang==='ja'?(xChecked?`スタンダードのみ · LIMITLESS + X / ${xSource.handle.toUpperCase()} 照合済み · デッキと戦績を収録、エクストラ除外。`:'スタンダードのみ · LIMITLESS TCG · エクストラのデッキは除外。'):uiLang==='zh'?(xChecked?`FORMAT · STANDARD ONLY · LIMITLESS + X / ${xSource.handle.toUpperCase()} 交叉核對 · 牌組與選手戰績已內置，Expanded 已排除。`:'FORMAT · STANDARD ONLY · SOURCE · LIMITLESS TCG · Expanded 牌組已排除。'):xChecked?`FORMAT · STANDARD ONLY · LIMITLESS + X / ${xSource.handle.toUpperCase()} CROSS-CHECK · 卡表与选手战绩已内置，Expanded 已排除。`:'FORMAT · STANDARD ONLY · SOURCE · LIMITLESS TCG · Expanded 卡表已排除。';
+      if(list.sourceLabel)$('.deck-source-note').textContent=`FORMAT · STANDARD ONLY · SOURCE · ${list.sourceLabel} · VERIFIED COMPLETE 60-CARD DECKLIST${list.visualVerified?' · VISUAL / OFFICIAL RECIPE CHECKED':''}`;
+      const sourceUrl=list.sourceUrl||list.listUrl;if(/^https:\/\//.test(sourceUrl||'')){const link=document.createElement('a');link.href=sourceUrl;link.target='_blank';link.rel='noopener';link.textContent=' · 原始卡表 ↗';$('.deck-source-note').append(link);}
       $('#deckDetailView').dataset.deck=key;
     }
     function closeDeckModal(){$('#deckModal').classList.remove('open');document.body.style.overflow=''}
@@ -627,9 +637,8 @@ const mainMatchupLocales={
     $$('#deckViewToggle button').forEach(button=>button.addEventListener('click',()=>{deckViewMode=button.dataset.view;renderDeckListCards()}));
     $$('#sourceViewToggle button').forEach(button=>button.addEventListener('click',()=>{sourceViewMode=button.dataset.view;renderSourceRecipe()}));
     $$('#gameSwitcher button').forEach(button=>button.addEventListener('click',()=>{if(button.dataset.game==='union')window.location.href='unionarena.html';else if(button.dataset.game==='gcg')window.location.href='gcg.html';else setGame(button.dataset.game)}));$('#returnPtcg').addEventListener('click',()=>setGame('ptcg'));$('.brand').addEventListener('click',()=>setGame('ptcg'));
-    $$('.meta-tools .pill').forEach(p=>p.addEventListener('click',()=>{$$('.meta-tools .pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');toast(p.textContent==='GLOBAL'?'顯示 Limitless 全球實體賽事快照':'此區域資料將於正式同步服務啟用後更新')}));
+    $$('.meta-tools .pill').forEach(p=>p.addEventListener('click',()=>{$$('.meta-tools .pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');const query=p.textContent.trim()==='JAPAN'?'Japan':p.textContent.trim()==='ONLINE'?'__NO_VERIFIED_ONLINE_EVENT__':'';$('#deckSearch').value=query;searchDecklists(query);}));
     $('#deckSearch').addEventListener('input',e=>searchDecklists(e.target.value));$('#clearDeckSearch').addEventListener('click',()=>{$('#deckSearch').value='';searchDecklists('');$('#deckSearch').focus()});$$('.finder-examples button').forEach(b=>b.addEventListener('click',()=>{$('#deckSearch').value=b.dataset.query;searchDecklists(b.dataset.query)}));
     $('#deskBtn').addEventListener('click',()=>toast('店員支援模組已預留，可串接 LINE / Discord'));
     renderArenaLab();
     setLanguage($('#uiLang').value);
-
