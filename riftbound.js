@@ -56,6 +56,7 @@
     return tokens(haystack).some(word=>Math.abs(word.length-needle.length)<=allowance&&distance(needle,word)<=allowance);
   }
   function smartScore(query,weightedFields){
+    if(window.MetaSearch)return window.MetaSearch.score(query,weightedFields);
     const needles=tokens(query);if(!needles.length)return 1;let score=0;
     for(const needle of needles){let best=0;for(const [value,weight] of weightedFields){const field=normalize(value);if(!field)continue;if(field===needle)best=Math.max(best,weight*5);else if(field.startsWith(needle))best=Math.max(best,weight*3);else if(field.includes(needle))best=Math.max(best,weight*2);else if(tokenMatches(needle,field))best=Math.max(best,weight)}if(!best)return 0;score+=best}
     return score;
@@ -243,4 +244,3 @@
   const auto=$('#autoUpdate');try{auto.checked=localStorage.getItem('metalab-auto-update')!=='off'}catch(error){}auto.addEventListener('change',()=>{try{localStorage.setItem('metalab-auto-update',auto.checked?'on':'off')}catch(error){}if(auto.checked)checkUpdate()});
   populateControls();renderUsage();renderDecks();renderMatchup();renderEvents();renderSources();renderQuality();setLanguage(language);if(auto.checked)checkUpdate();
 })();
-

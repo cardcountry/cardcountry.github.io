@@ -56,7 +56,7 @@
   function closeModal(id){$('#'+id)?.classList.remove('open');if(!$('.modal.open'))document.body.style.overflow=''}
   function deckHaystack(deck){const listText=(deck.lists||[]).flatMap(list=>[list.player,list.event,list.host,list.country,...list.cards.flatMap(card=>[card.code,card.name])]).join(' ');return `${deck.name} ${deck.leader} ${deck.color} ${listText}`.toLowerCase()}
   function localizedGuide(deck){return deck.guide?.[uiLang]||deck.guide?.en||''}
-  function formatLabel(){return currentFormat==='EB05JP'?'JAPAN · EB05':currentFormat==='OP17'?'OP17.5 HISTORICAL SAMPLE':'OP16 ARCHIVE'}
+  function formatLabel(){if(deckQuery.trim())return 'ALL VERSIONS · 跨语言搜索';return currentFormat==='EB05JP'?'JAPAN · EB05':currentFormat==='OP17'?'OP17.5 HISTORICAL SAMPLE':'OP16 ARCHIVE'}
   function renderChart(decks){
     const chart=$('#usageChart');const comparable=decks.filter(deck=>typeof deck.share==='number');const max=Math.max(1,...comparable.flatMap(deck=>[deck.share,deck.priorShare||0]));
     chart.innerHTML=comparable.map(deck=>{
@@ -87,8 +87,9 @@
     const leader=cardMap.get(deck.leader)||{code:deck.leader};const image=cardImage(leader);
     const label=uiLang==='ja'?'リスト':uiLang==='en'?'LISTS':uiLang==='zh'?'牌組':'卡表';return `<button class="rogue-card" data-open-deck="${esc(deck.leader)}"><span class="rogue-card-art"><img class="rogue-art-bg" src="${esc(image)}" alt="" aria-hidden="true"><img class="rogue-art-card" src="${esc(image)}" alt="${esc(deck.name)}" loading="lazy"></span><div class="rogue-card-copy"><b>${esc(deck.name)}</b><small>${esc(deck.leader)} · ${deck.lists.length} ${label}</small></div></button>`;
   }
+  function searchableDecks(){if(!deckQuery.trim())return D.meta[currentFormat]||[];const pool=new Map();for(const deck of Object.values(D.meta).flat()){if(!deck.lists?.length)continue;let group=pool.get(deck.leader);if(!group){group={...deck,share:null,priorShare:null,winrate:null,rank:null,lists:[]};pool.set(deck.leader,group)}const seen=new Set(group.lists.map(l=>l.id||l.sourceUrl));for(const list of deck.lists)if(!seen.has(list.id||list.sourceUrl)){group.lists.push(list);seen.add(list.id||list.sourceUrl)}group.lists.sort((a,b)=>String(b.date).localeCompare(String(a.date)));}return [...pool.values()];}
   function renderMeta(){
-    const all=D.meta[currentFormat]||[];const query=deckQuery.trim().toLowerCase();const decks=all.filter(deck=>deck.lists?.length&&(!query||deckHaystack(deck).includes(query)));
+    const all=searchableDecks();const query=deckQuery.trim().toLowerCase();const decks=all.filter(deck=>deck.lists?.length&&(!query||(window.MetaSearch?window.MetaSearch.matches(query,[deckHaystack(deck)]):deckHaystack(deck).includes(query))));
     const main=decks.filter(deck=>!deck.rogue),rogue=decks.filter(deck=>deck.rogue);
     renderChart(all);renderForecast();
     $('#deckGrid').innerHTML=main.length?main.map(deckCard).join(''):`<p class="no-data">${uiLang==='en'?'No matching mainstream decklists.':'没有符合条件的主流卡表。'}</p>`;
@@ -99,15 +100,15 @@
     else title.textContent=currentFormat==='EB05JP'?'日本 EB05 · 已收录赛事卡表':'OP17.5 · 历史样本';
     $('#metaStamp').textContent=currentFormat==='EB05JP'?`${D.eb05jp?.lists||0} VERIFIED LISTS · ${D.eb05jp?.from||'—'} — ${D.eb05jp?.to||'—'} · JP`:currentFormat==='OP17'?'HISTORICAL SNAPSHOT · COMPLETE LISTS THROUGH 2026-11-03':'LIMITLESS OFFLINE EVENTS · JUNE—JULY 2026';
     $('[data-i18n="chartNote"]').textContent=currentFormat==='EB05JP'?'日本已收录卡表的份数占比，并非全体参赛者使用率；同一比赛多位选手分别计数。缺少可比历史基线，不显示涨跌结论。':t('chartNote');
-    $('#forecastGrid').parentElement.hidden=currentFormat==='EB05JP';
+    $('#forecastGrid').parentElement.hidden=currentFormat==='EB05JP'||!!query;if(query){title.textContent='跨语言卡组搜索 · 所有版本';$('#metaStamp').textContent='ALL LANGUAGES · ALL INDEXED FORMATS · 来源与版本见卡表详情';}
     $$('.format-tabs button').forEach(button=>button.classList.toggle('active',button.dataset.format===currentFormat));
   }
-  function findDeck(leader){return (D.meta[currentFormat]||[]).find(deck=>deck.leader===leader)||Object.values(D.meta).flat().find(deck=>deck.leader===leader)}
+  function findDeck(leader){return searchableDecks().find(deck=>deck.leader===leader)||Object.values(D.meta).flat().find(deck=>deck.leader===leader)}
   function openDeck(leader){const deck=findDeck(leader);if(!deck||!deck.lists?.length){showToast(uiLang==='ja'?'このデッキタイプの検証済み完全リストは未収録です。':uiLang==='en'?'No verified full list is stored for this archetype.':'这个牌型暂时没有已核实的完整卡表。');return}currentDeck=deck;currentList=deck.lists[0];currentDeckTab='list';deckView='image';renderDeckModal(true)}
   function renderDeckModal(open=true){
     if(!currentDeck)return;const leader=cardMap.get(currentDeck.leader)||{code:currentDeck.leader};const image=cardImage(leader);
     $('#deckModalImage').src=image||'';$('#deckModalImage').alt=currentDeck.name;
-    $('#deckModalRank').textContent=`${formatLabel()} · ${currentDeck.leader} · ${currentDeck.color}`;
+    $('#deckModalRank').textContent=`${currentList?.format||formatLabel()} · ${currentDeck.leader} · ${currentDeck.color}`;
     $('#deckModalTitle').textContent=currentDeck.name;
     const listWord=uiLang==='ja'?'検証済みリスト':uiLang==='en'?'verified lists':uiLang==='zh'?'份核實牌組':'份核实卡表';
     $('#deckModalSummary').textContent=typeof currentDeck.share==='number'?(uiLang==='ja'?`使用率 ${currentDeck.share.toFixed(1)}% · 勝率 ${currentDeck.winrate??'—'}% · ${currentDeck.lists.length}${listWord}`:uiLang==='en'?`${currentDeck.share.toFixed(1)}% usage · ${currentDeck.winrate??'—'}% win rate · ${currentDeck.lists.length} ${listWord}`:`使用率 ${currentDeck.share.toFixed(1)}% · 胜率 ${currentDeck.winrate??'—'}% · ${currentDeck.lists.length} ${listWord}`):`${currentDeck.lists.length} ${listWord}`;

@@ -443,10 +443,10 @@ const mainMatchupLocales={
     function searchDecklists(query){
       const q=query.trim().toLowerCase(),results=[],external=[],community=[],xMatches=[];
       if(!q){$('#deckSearchResults').classList.add('hidden');$('#metaDeckGrid').classList.remove('hidden');return}
-      decklists.forEach(deck=>standardDeckLists(deck).forEach(list=>{const cardNames=list.categories.flatMap(c=>c.cards.map(card=>card.name)).join(' ');const hay=`${deck.name} ${list.player} ${list.variant} ${list.event} ${list.region||''} ${list.language||''} ${cardNames}`.toLowerCase();if(hay.includes(q))results.push({deck,list})}));
-      externalDeckSources.filter(isStandard).forEach(item=>{if(`${item.name} ${item.aliases} ${item.meta}`.toLowerCase().includes(q))external.push(item)});
-      communityEvents.forEach(event=>event.lists.forEach(list=>{const cardNames=list.cards.map(card=>card.name).join(' '),hay=`${list.name} ${list.jpName} ${list.player} ${list.place} ${event.name} ${cardNames}`.toLowerCase();if(hay.includes(q))community.push({event,list})}));
-      Object.entries(xDeckSources).forEach(([key,source])=>{const hay=`${source.deckName} ${source.handle} ${source.players.join(' ')} regional puebla twitter x`.toLowerCase();if(hay.includes(q))xMatches.push({key,source})});
+      decklists.forEach(deck=>standardDeckLists(deck).forEach(list=>{const cardNames=list.categories.flatMap(c=>c.cards.map(card=>card.name)).join(' ');const hay=`${deck.name} ${list.player} ${list.variant} ${list.event} ${list.region||''} ${list.language||''} ${cardNames}`.toLowerCase();if(window.MetaSearch?window.MetaSearch.matches(q,[hay]):hay.includes(q))results.push({deck,list})}));
+      externalDeckSources.filter(isStandard).forEach(item=>{if(window.MetaSearch?window.MetaSearch.matches(q,[item.name,item.aliases,item.meta]):`${item.name} ${item.aliases} ${item.meta}`.toLowerCase().includes(q))external.push(item)});
+      communityEvents.forEach(event=>event.lists.forEach(list=>{const cardNames=list.cards.map(card=>card.name).join(' '),hay=`${list.name} ${list.jpName} ${list.player} ${list.place} ${event.name} ${cardNames}`.toLowerCase();if(window.MetaSearch?window.MetaSearch.matches(q,[hay]):hay.includes(q))community.push({event,list})}));
+      Object.entries(xDeckSources).forEach(([key,source])=>{const hay=`${source.deckName} ${source.handle} ${source.players.join(' ')} regional puebla twitter x`.toLowerCase();if(window.MetaSearch?window.MetaSearch.matches(q,[hay]):hay.includes(q))xMatches.push({key,source})});
       $('#metaDeckGrid').classList.add('hidden');$('#deckSearchResults').classList.remove('hidden');
       const total=results.length+external.length+community.length+xMatches.length;
       const summary=`<div class="result-summary">STANDARD ONLY · FOUND ${total} RESULTS · DECKLISTS ${results.length} · X ${xMatches.length} · VERIFIED ASIA ${community.length} · IMPORTED ${external.length}${total>64?' · SHOWING FIRST 64':''}</div>`;

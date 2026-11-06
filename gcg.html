@@ -12,9 +12,11 @@
   <link rel="stylesheet" href="deck-responsive.css?v=20261106">
   <style>@keyframes siteEnter{from{opacity:0}to{opacity:1}}body{animation:siteEnter .25s ease}</style>
 <link rel="stylesheet" href="usage-ranking.css?v=20261107">
-<script src="usage-ranking.js?v=2026110702" defer></script>
+<script src="usage-ranking.js?v=2026110705" defer></script>
 <link rel="stylesheet" href="media-library.css?v=20261107">
 <script src="media-library.js?v=20261107" defer></script>
+  <link rel="stylesheet" href="comfort.css?v=2026110705">
+  <script src="comfort-ui.js?v=2026110705" defer></script>
 </head>
 <body>
   <div class="signal-bar" aria-hidden="true"><span>GUNDAM CARD GAME · GD05 COMPETITIVE DATA · 1,113 UNIQUE CARDS · PHYSICAL TCG</span><span>GUNDAM CARD GAME · GD05 COMPETITIVE DATA · 1,113 UNIQUE CARDS · PHYSICAL TCG</span></div>
@@ -45,8 +47,8 @@
     </section>
 
     <section class="section meta-section" id="meta">
-      <div class="section-head"><div><span>02 / COMPETE</span><h2 data-i18n="metaTitle">当前 GD05 赛事环境</h2></div><p id="metaStamp">REGIONAL TOP CUT · 2026.08—10</p></div>
-      <div class="meta-toolbar"><div class="format-tabs"><button class="active" data-format="GD05">GD05 CURRENT</button><button data-format="GD04">GD04 ARCHIVE</button><button data-format="GD03">GD03 ARCHIVE</button></div><div class="sync-status"><i></i><span data-i18n="syncText">赛事资料已同步</span></div></div>
+      <div class="section-head"><div><span>02 / COMPETE</span><h2 data-i18n="metaTitle">赛事卡表 · 全版本</h2></div><p id="metaStamp">JAPAN + INTERNATIONAL · VERIFIED COMPLETE LISTS</p></div>
+      <div class="meta-toolbar"><div class="format-tabs"><label>发行环境<select id="deckFormat" aria-label="卡表发行环境"><option value="ALL">全部环境 · 所有版本</option></select></label><label>地区<select id="deckRegion" aria-label="赛事地区"><option value="">全部地区</option><option value="Japan">日本</option><option value="International">国际赛事</option></select></label></div><div class="sync-status"><i></i><span data-i18n="syncText">赛事资料已同步</span></div></div>
       <div class="deck-finder"><label for="deckSearch" data-i18n="deckSearchLabel">搜索卡组、卡名、选手或赛事</label><div><input id="deckSearch" type="search" data-i18n-placeholder="deckSearchPlaceholder" placeholder="例如 Strike Freedom / Barbatos / Brisbane…"><button id="clearDeckSearch" aria-label="Clear">×</button></div><small id="deckResultNote"></small></div>
       <div class="meta-chart-panel"><div class="chart-head"><div><span>USAGE SIGNAL</span><h3 data-i18n="chartTitle">上位使用率与近期变化</h3></div><div class="chart-legend"><i class="now"></i><span data-i18n="recent">最近 7 场</span><i class="prior"></i><span data-i18n="prior">此前 7 场</span></div></div><div id="usageChart" class="usage-chart"></div></div>
       <div class="deck-grid" id="deckGrid"></div>
@@ -57,11 +59,12 @@
     <section class="section card-section" id="cards">
       <div class="section-head"><div><span>03 / DATABASE</span><h2 data-i18n="cardsTitle">GCG 完整卡牌图鉴</h2></div><p><b id="cardTotal">1,113</b> UNIQUE CARDS · GD01—GD06 / ST / EB</p></div>
       <div class="card-toolbar"><div class="card-search-row"><div class="card-search"><span>⌕</span><input id="cardSearch" type="search" autocomplete="off" spellcheck="false" aria-label="Search card name, number or text" data-i18n-placeholder="cardSearchPlaceholder" placeholder="输入卡名、卡号、效果或系列…"></div><button class="clear-card-filters card-clear-button" id="clearCardFilters" data-i18n="clearFilters">清除筛选</button></div><details class="card-extra-filters"><summary data-i18n="moreFilters">更多筛选</summary><div class="card-filter-options"><select id="setFilter" aria-label="Set filter"><option value="">ALL SETS</option></select><select id="colorFilter" aria-label="Color filter"><option value="">ALL COLORS</option><option>Blue</option><option>Green</option><option>Red</option><option>White</option><option>Purple</option></select><select id="typeFilter" aria-label="Card type filter"><option value="">ALL TYPES</option><option>Unit</option><option>Pilot</option><option>Command</option><option>Base</option></select><select id="rarityFilter" aria-label="Rarity filter"><option value="">ALL RARITIES</option><option>C</option><option>U</option><option>R</option><option>LR</option></select><select id="levelFilter" aria-label="Level filter"><option value="">ALL LEVELS</option><option value="0">LV 0</option><option value="1">LV 1</option><option value="2">LV 2</option><option value="3">LV 3</option><option value="4">LV 4</option><option value="5">LV 5</option><option value="6">LV 6</option><option value="7">LV 7</option><option value="8+">LV 8+</option></select></div></details></div>
-      <div class="language-image-note"><span data-i18n="imageLangNote">日文界面显示日文官方卡图；中文与英文界面显示英文官方卡图。卡片效果以官方英文卡文为准。</span><b>AUTO DATA CHECK · 2026.10.30</b></div>
+      <div class="language-image-note"><span data-i18n="imageLangNote">日文界面显示日文官方卡图；中文与英文界面显示英文官方卡图。卡片效果以官方英文卡文为准。</span><label>卡图<select id="artEdition" aria-label="图鉴卡图版本"><option value="en">英文卡图</option><option value="jp">已核验日文卡图</option></select></label><b>CHECKED · 2026.11.07</b></div>
       <div class="card-results-head"><span id="cardResultCount"></span><div class="view-toggle"><button class="active" data-view="image" data-i18n="imageView">卡图</button><button data-view="name" data-i18n="nameView">卡名</button></div></div>
       <div class="card-grid" id="cardGrid"></div><button class="load-more" id="loadMoreCards" data-i18n="loadMore">载入更多卡牌</button>
     </section>
 
+    <section class="section official-decks-section" id="official-decks"><div class="section-head"><div><span>OFFICIAL DECK RECIPES</span><h2>官方配方 · 多语言资料</h2></div><p>同一配方合并语言入口；保留实际卡图版本</p></div><div class="official-controls"><input type="search" id="officialSearch" aria-label="搜索全部语言官方配方" placeholder="中文 / English / 日本語卡名、卡号均可搜索"><select id="officialLocale" aria-label="官方配方资料语言"><option value="">全部语言资料</option></select></div><p id="officialCount" aria-live="polite"></p><div class="official-recipe-grid" id="officialGrid"></div><button class="load-more" id="officialMore">加载更多官方配方</button></section>
     <section class="section sources-section" id="sources">
       <div class="section-head"><div><span>04 / SOURCES</span><h2 data-i18n="sourcesTitle">筛选后的资料来源</h2></div><p>OFFICIAL + VERIFIED COMPETITIVE DATA</p></div>
       <div class="source-grid" id="sourceGrid"></div>
@@ -74,7 +77,7 @@
   <div class="modal" id="deckModal" role="dialog" aria-modal="true" aria-labelledby="deckModalTitle"><div class="modal-shell deck-shell"><button class="modal-close" data-close="deckModal">×</button><div class="deck-modal-head"><img id="deckModalImage" alt=""><div><span id="deckModalRank"></span><h2 id="deckModalTitle"></h2><p id="deckModalSummary"></p></div></div><div class="deck-modal-body"><div class="deck-list-picker" id="deckListPicker"></div><div id="deckDetail"></div></div></div></div>
   <div class="modal" id="cardModal" role="dialog" aria-modal="true" aria-labelledby="cardModalName"><div class="modal-shell card-shell"><button class="modal-close" data-close="cardModal">×</button><div class="card-modal-art"><img id="cardModalImage" alt=""></div><div class="card-modal-copy"><span id="cardModalCode"></span><h2 id="cardModalName"></h2><div id="cardModalBadges" class="card-badges"></div><div class="effect-panel"><h3 data-i18n="effectTitle">官方卡片效果</h3><p id="cardModalEffect"></p><h4>BURST</h4><p id="cardModalBurst"></p></div><p class="official-note" data-i18n="effectNote">效果文字来自公开卡牌资料 API；比赛裁定请以官方 FAQ 与最新综合规则为准。</p></div></div></div>
   <div class="toast" id="toast"></div>
-  <script src="gcg-data.js?v=5"></script><script src="gcg-x-data.js?v=4"></script><script src="gcg-visual-data.js?v=1"></script><script src="site-data-quality.js?v=4"></script><script src="gcg.js?v=11"></script>
+  <script src="gcg-data.js?v=5"></script><script src="gcg-x-data.js?v=4"></script><script src="gcg-visual-data.js?v=1"></script><script src="gcg-jp-recent.js?v=2026110705"></script><script src="gcg-official-decks.js?v=2026110705"></script><script src="site-data-quality.js?v=4"></script><script src="multilingual-search.js?v=2026110705"></script>
+  <script src="gcg.js?v=2026110705"></script>
 </body>
 </html>
-

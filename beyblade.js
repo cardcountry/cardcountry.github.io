@@ -139,10 +139,10 @@
   }
   let configLimit=18;
   function filteredConfigs(){
-    const query=normal($('#configSearch').value),tier=$('#tierFilter').value,type=$('#typeFilter').value;
+    const query=$('#configSearch').value.trim(),tier=$('#tierFilter').value,type=$('#typeFilter').value;
     return state.all.filter(combo=>{
-      const haystack=normal([combo.blade,combo.assist,combo.ratchet,combo.bit,combo.cat].join(' '));
-      return (!query||haystack.includes(query))&&(!tier||combo.tier===tier)&&(!type||String(combo.cat||'').includes(type));
+      const fields=[combo.blade,combo.assist,combo.ratchet,combo.bit,combo.cat],haystack=normal(fields.join(' '));
+      return (!query||(window.MetaSearch?window.MetaSearch.matches(query,fields):haystack.includes(normal(query))))&&(!tier||combo.tier===tier)&&(!type||String(combo.cat||'').includes(type));
     });
   }
   function renderConfigs(){
@@ -161,8 +161,8 @@
   let partTab='blades',partLimit=20;
   function currentParts(){return componentParts[partTab]||[]}
   function filteredParts(){
-    const query=normal($('#partSearch').value),type=$('#partType').value;
-    return currentParts().filter(part=>(!query||normal([part.name,part.code,part.type,part.shape].join(' ')).includes(query))&&(!type||part.type===type));
+    const query=$('#partSearch').value.trim(),type=$('#partType').value;
+    return currentParts().filter(part=>(!query||(window.MetaSearch?window.MetaSearch.matches(query,[part.name,part.code,part.type,part.shape]):normal([part.name,part.code,part.type,part.shape].join(' ')).includes(normal(query))))&&(!type||part.type===type));
   }
   function metric(label,value,unit=''){return `<div><small>${esc(label)}</small><b>${value!==null&&value!==undefined&&value!==''?`${esc(value)}${unit}`:'—'}</b></div>`}
   function renderParts(){
@@ -425,4 +425,3 @@
   document.addEventListener('error',event=>{if(event.target.tagName==='IMG')event.target.classList.add('image-error')},true);
   setLanguage(language);setAuto(autoEnabled,false);
 })();
-
