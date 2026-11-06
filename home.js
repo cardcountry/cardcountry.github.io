@@ -38,12 +38,12 @@
   $('#homeMenu').addEventListener('click',()=>$('#homeNav').classList.toggle('open'));
   $$('#homeNav a').forEach(link=>link.addEventListener('click',()=>$('#homeNav').classList.remove('open')));
   const assetMap={
-    'ptcg.html':['decks-data.js?v=14','sources-data.js?v=13','site-data-quality.css?v=2','site-data-quality.js?v=4','app.js?v=49'],
-    'gcg.html':['gcg.css?v=2026110705','comfort.css?v=2026110705','site-data-quality.css?v=2','gcg-data.js?v=5','gcg-x-data.js?v=4','gcg-visual-data.js?v=1','gcg-jp-recent.js?v=2026110705','gcg-official-decks.js?v=2026110705','site-data-quality.js?v=4','multilingual-search.js?v=2026110705','gcg.js?v=2026110705'],
-    'beyblade.html':['beyblade.css?v=9','site-data-quality.css?v=2','beyblade-data.js?v=3','site-data-quality.js?v=4','beyblade.js?v=14'],
-    'opcg.html':['opcg.css?v=13','site-data-quality.css?v=2','opcg-data.js?v=3','opcg-recent-data.js?v=1','site-data-quality.js?v=4','opcg.js?v=9'],
-    'marvel.html':['marvel.css?v=4','site-data-quality.css?v=2','marvel-data.js?v=1','site-data-quality.js?v=4','marvel.js?v=5'],
-    'riftbound.html':['riftbound.css?v=6','site-data-quality.css?v=2','riftbound-data.js?v=2','site-data-quality.js?v=4','riftbound.js?v=5'],
+    'ptcg.html':['decks-data.js?v=14','sources-data.js?v=13','site-data-quality.css?v=2','site-data-quality.js?v=2026110706','app.js?v=49'],
+    'gcg.html':['gcg.css?v=2026110706','comfort.css?v=2026110706','site-data-quality.css?v=2','gcg-data.js?v=5','gcg-x-data.js?v=4','gcg-visual-data.js?v=1','gcg-jp-recent.js?v=2026110706','gcg-official-decks.js?v=2026110706','site-data-quality.js?v=2026110706','multilingual-search.js?v=2026110706','gcg.js?v=2026110706'],
+    'beyblade.html':['beyblade.css?v=9','site-data-quality.css?v=2','beyblade-data.js?v=3','site-data-quality.js?v=2026110706','beyblade.js?v=14'],
+    'opcg.html':['opcg.css?v=13','site-data-quality.css?v=2','opcg-data.js?v=3','opcg-recent-data.js?v=1','site-data-quality.js?v=2026110706','opcg.js?v=9'],
+    'marvel.html':['marvel.css?v=4','site-data-quality.css?v=2','marvel-data.js?v=1','site-data-quality.js?v=2026110706','marvel.js?v=5'],
+    'riftbound.html':['riftbound.css?v=6','site-data-quality.css?v=2','riftbound-data.js?v=2','site-data-quality.js?v=2026110706','riftbound.js?v=5'],
     'unionarena.html':['unionarena.css?v=1','unionarena-data.js?v=1','unionarena.js?v=1']
   };
   const warmed=new Set();

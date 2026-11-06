@@ -12,11 +12,11 @@
   <link rel="stylesheet" href="deck-responsive.css?v=20261106">
   <style>@keyframes siteEnter{from{opacity:0}to{opacity:1}}body{animation:siteEnter .25s ease}</style>
 <link rel="stylesheet" href="usage-ranking.css?v=20261107">
-<script src="usage-ranking.js?v=2026110705" defer></script>
+<script src="usage-ranking.js?v=2026110706" defer></script>
 <link rel="stylesheet" href="media-library.css?v=20261107">
 <script src="media-library.js?v=20261107" defer></script>
-  <link rel="stylesheet" href="comfort.css?v=2026110705">
-  <script src="comfort-ui.js?v=2026110705" defer></script>
+  <link rel="stylesheet" href="comfort.css?v=2026110706">
+  <script src="comfort-ui.js?v=2026110706" defer></script>
 </head>
 <body>
   <div class="signal-bar" aria-hidden="true"><span>GUNDAM CARD GAME · GD05 COMPETITIVE DATA · 1,113 UNIQUE CARDS · PHYSICAL TCG</span><span>GUNDAM CARD GAME · GD05 COMPETITIVE DATA · 1,113 UNIQUE CARDS · PHYSICAL TCG</span></div>
@@ -32,7 +32,7 @@
   <main>
     <section class="hero" id="home">
       <div class="hero-copy"><p class="eyebrow">TACTICAL CARD INTELLIGENCE · GUNDAM CARD GAME</p><h1>READ THE<br><em>BATTLEFIELD.</em></h1><p data-i18n="heroText">从规则、区域赛环境到完整卡牌效果。为实体 GUNDAM CARD GAME 玩家整理的站内竞技资料库。</p><div class="hero-actions"><a href="#meta" data-i18n="heroMeta">查看当前环境</a><a href="#cards" data-i18n="heroCards">检索完整图鉴</a></div><div class="hero-stats"><span><b id="statCards">1,113</b><small data-i18n="statCards">独立卡牌</small></span><span><b id="statEvents">90</b><small data-i18n="statEvents">收录赛事</small></span><span><b id="statLists">—</b><small data-i18n="statLists">赛事卡表</small></span></div><div class="cover-byline"><img src="cardcountry-logo.webp" alt="Card Country logo"><span>PRESENTED BY <b>CARD COUNTRY KC</b></span></div></div>
-      <div class="hero-visual"><div class="mecha-ring"></div><img id="heroCard" src="https://img.egmanevents.com/gundam/GD05-002-r1785220123736.webp" alt="Strike Freedom Gundam card"><div class="target-label"><span>CURRENT SIGNAL</span><b>GD05 / REGIONALS</b><small>UPDATED 2026.10.30</small></div></div>
+      <div class="hero-visual"><div class="mecha-ring"></div><img id="heroCard" src="https://img.egmanevents.com/gundam/GD05-002-r1785220123736.webp" alt="Strike Freedom Gundam card"><div class="target-label"><span>CURRENT SIGNAL</span><b>GD06 / PUBLIC LISTS</b><small>LISTS THROUGH 2026.11.06</small></div></div>
     </section>
 
 <section class="section rules-section" id="rules">
@@ -53,6 +53,7 @@
       <div class="meta-chart-panel"><div class="chart-head"><div><span>USAGE SIGNAL</span><h3 data-i18n="chartTitle">上位使用率与近期变化</h3></div><div class="chart-legend"><i class="now"></i><span data-i18n="recent">最近 7 场</span><i class="prior"></i><span data-i18n="prior">此前 7 场</span></div></div><div id="usageChart" class="usage-chart"></div></div>
       <div class="deck-grid" id="deckGrid"></div>
       <div class="rogue-block"><div class="subhead"><span>ROGUE SIGNALS</span><h3 data-i18n="rogueTitle">非主流与新兴卡组</h3><p data-i18n="rogueText">保留所有有公开上位记录的类型，不只显示主流卡组。</p></div><div class="rogue-grid" id="rogueGrid"></div></div>
+      <button class="load-more" id="deckGroupsMore">显示更多已收录牌型</button>
       <div class="x-data-block"><div class="subhead"><span>X / TWITTER DATA</span><h3 data-i18n="xTitle">X 卡组与赛事战绩</h3><p data-i18n="xText">只保留能够与站内完整卡表交叉核对的 X 赛事记录。</p></div><div class="x-signal-grid" id="xSignalGrid"></div></div>
     </section>
 
@@ -77,7 +78,7 @@
   <div class="modal" id="deckModal" role="dialog" aria-modal="true" aria-labelledby="deckModalTitle"><div class="modal-shell deck-shell"><button class="modal-close" data-close="deckModal">×</button><div class="deck-modal-head"><img id="deckModalImage" alt=""><div><span id="deckModalRank"></span><h2 id="deckModalTitle"></h2><p id="deckModalSummary"></p></div></div><div class="deck-modal-body"><div class="deck-list-picker" id="deckListPicker"></div><div id="deckDetail"></div></div></div></div>
   <div class="modal" id="cardModal" role="dialog" aria-modal="true" aria-labelledby="cardModalName"><div class="modal-shell card-shell"><button class="modal-close" data-close="cardModal">×</button><div class="card-modal-art"><img id="cardModalImage" alt=""></div><div class="card-modal-copy"><span id="cardModalCode"></span><h2 id="cardModalName"></h2><div id="cardModalBadges" class="card-badges"></div><div class="effect-panel"><h3 data-i18n="effectTitle">官方卡片效果</h3><p id="cardModalEffect"></p><h4>BURST</h4><p id="cardModalBurst"></p></div><p class="official-note" data-i18n="effectNote">效果文字来自公开卡牌资料 API；比赛裁定请以官方 FAQ 与最新综合规则为准。</p></div></div></div>
   <div class="toast" id="toast"></div>
-  <script src="gcg-data.js?v=5"></script><script src="gcg-x-data.js?v=4"></script><script src="gcg-visual-data.js?v=1"></script><script src="gcg-jp-recent.js?v=2026110705"></script><script src="gcg-official-decks.js?v=2026110705"></script><script src="site-data-quality.js?v=4"></script><script src="multilingual-search.js?v=2026110705"></script>
-  <script src="gcg.js?v=2026110705"></script>
+  <script src="gcg-data.js?v=5"></script><script src="gcg-x-data.js?v=4"></script><script src="gcg-visual-data.js?v=1"></script><script src="gcg-jp-recent.js?v=2026110706"></script><script src="gcg-official-decks.js?v=2026110706"></script><script src="site-data-quality.js?v=2026110706"></script><script src="multilingual-search.js?v=2026110706"></script>
+  <script src="gcg.js?v=2026110706"></script>
 </body>
 </html>

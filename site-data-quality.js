@@ -43,7 +43,7 @@
     const data=window.GCG_DATA||{cards:[],tournaments:[],meta:{sources:[]}},results=data.tournaments.flatMap(event=>event.results||[]);let quarantined=uniqueFailures(data.cards,'code');
     quarantined+=data.cards.filter(card=>!card.name||!card.image||!card.category).length;
     quarantined+=results.filter(result=>sumCards(result.main)!==50||!result.player||!result.primary).length;
-    return{game:'gcg',label:'GCG',records:data.cards.length,lists:results.length,sources:data.meta?.sources?.length||0,quarantined,checked:data.synced||latestDate(data.tournaments.map(item=>item.date)),notes:['Official card records','50-card list validation','X discovery is cross-checked']};
+    return{game:'gcg',label:'GCG',records:data.cards.length,lists:results.length,sources:data.meta?.sources?.length||0,quarantined,checked:data.checked||data.synced||latestDate(data.tournaments.map(item=>item.date)),notes:['Official card records','50-card list validation','X discovery is cross-checked']};
   }
 
   function auditOpcg(){
@@ -89,9 +89,9 @@
     const panel=document.createElement('aside');panel.className='site-data-audit';panel.id='siteDataAudit';
     const draw=()=>{const copy=copyFor(),grade=result.quarantined===0?'A+':result.quarantined<=2?'A':'REVIEW';panel.innerHTML=`<div class="sda-grade"><span>${copy.title} · ${result.label}</span><b>${grade}</b><small>${result.quarantined===0?copy.pass:`${result.quarantined} ${copy.quarantine}`}</small></div><div class="sda-metrics"><span><b>${Number(result.records).toLocaleString()}</b><small>${copy.records}</small></span><span><b>${Number(result.lists).toLocaleString()}</b><small>${copy.lists}</small></span><span><b>${Number(result.sources).toLocaleString()}</b><small>${copy.sources}</small></span><span><b>${result.quarantined}</b><small>${copy.quarantine}</small></span></div><div class="sda-action"><span>${copy.checked}<b>${result.checked}</b></span><button type="button">${copy.run}</button></div>`;panel.querySelector('button').addEventListener('click',()=>{panel.classList.add('checking');setTimeout(()=>{const next=audit(result.game);Object.assign(result,next);draw();panel.classList.remove('checking')},380)})};
     target.insertAdjacentElement('afterend',panel);draw();
+    document.addEventListener('metalab:data-updated',()=>{Object.assign(result,audit(result.game));draw()});
     const lang=document.querySelector('#uiLang,#langSelect');if(lang)lang.addEventListener('change',()=>setTimeout(draw,0));
   }
 
   document.addEventListener('DOMContentLoaded',()=>{const game=detectGame();if(!game)return;const result=audit(game);window.META_LAB_DATA_AUDIT=result;renderAudit(result)});
 })();
-
