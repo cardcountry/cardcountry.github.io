@@ -22,7 +22,7 @@
  ['Kshatriya','クシャトリヤ','刹帝利','剎帝利'],['Aile Strike','エールストライク','翔翼型攻击','翔翼型攻擊','空战型强袭','空戰型強襲'],['Justice Gundam','ジャスティスガンダム','正义高达','正義鋼彈'],
  ['Turn X','ターンX','逆X'],['Turn A','ターンエー','∀ガンダム','倒A'],['Zaku','ザク','扎古','萨克','薩克'],['Char','シャア','夏亚','夏亞'],['Zeong','ジオング','吉翁号','吉翁號'],
  ['BLEACH','死神','境界'],['Jujutsu Kaisen','呪術廻戦','咒术回战','咒術迴戰'],['Demon Slayer','鬼滅の刃','鬼灭之刃','鬼滅之刃'],['HUNTER×HUNTER','ハンターハンター','全职猎人','全職獵人'],
- ['Code Geass','コードギアス','反逆的鲁鲁修','反逆的魯魯修','叛逆的鲁路修'],['Rozé','奪還のロゼ','夺还的罗赛','奪還的羅賽'],['Evangelion','ヱヴァンゲリヲン新劇場版','エヴァンゲリオン','福音战士','福音戰士','新世纪福音战士','新世紀福音戰士'],
+ ['Code Geass','コードギアス','反逆的鲁鲁修','反逆的魯魯修','叛逆的鲁路修'],['Rozé','奪還のロゼ','夺还的罗赛','奪還的羅賽'],['Evangelion','ヱヴァンゲリヲン新劇場版','ヱヴァンゲリヲン','エヴァンゲリオン','福音战士','福音戰士','新世纪福音战士','新世紀福音戰士'],
  ['Solo Leveling','俺だけレベルアップな件','我独自升级','我獨自升級'],['Shangri-La Frontier','シャングリラフロンティア','香格里拉边境','香格里拉邊境'],['Shiny Colors','アイドルマスターシャイニーカラーズ','偶像大师闪耀色彩','偶像大師閃耀色彩'],
  ['Mushoku Tensei','無職転生','无职转生','無職轉生'],['Arknights','アークナイツ','明日方舟'],['Kamen Rider','仮面ライダー','假面骑士','假面騎士'],['Sakamoto Days','サカモトデイズ','坂本日常'],
  ['Attack on Titan','進撃の巨人','进击的巨人','進擊的巨人'],['One Punch Man','ワンパンマン','一拳超人'],['Chainsaw Man','チェンソーマン','电锯人','鏈鋸人'],['D.Gray-man','ディーグレイマン','驱魔少年','驅魔少年'],
@@ -30,7 +30,7 @@
  ['Fiora','フィオラ','菲奥娜','菲歐拉'],['Viktor','ビクター','维克托','維克特'],['Ezreal','エズリアル','伊泽瑞尔','伊澤瑞爾'],['Ornn','オーン','奥恩','鄂爾'],['Azir','アジール','阿兹尔','阿祈爾'],
  ['Teemo','ティーモ','提莫'],['Annie','アニー','安妮'],['Lux','ラックス','拉克丝','拉克絲'],['Garen','ガレン','盖伦','蓋倫'],['Lee Sin','リーシン','李青','盲僧'],['Master Yi','マスターイー','易大师','易大師'],
  ['Jinx','ジンクス','金克丝','吉茵珂絲'],['Draven','ドレイヴン','德莱文','達瑞文'],['Leona','レオナ','蕾欧娜','雷歐娜'],['Miss Fortune','ミスフォーチュン','厄运小姐','好運姐'],
- ['Spider-Man','スパイダーマン','蜘蛛侠','蜘蛛俠'],['Iron Man','アイアンマン','钢铁侠','鋼鐵人'],['Captain America','キャプテンアメリカ','美国队长','美國隊長'],['Hulk','ハルク','绿巨人','綠巨人','浩克'],['Thor','ソー','雷神','索尔','索爾'],
+ ['Spider-Man','スパイダーマン','蜘蛛侠','蜘蛛俠','蜘蛛人'],['Iron Man','アイアンマン','钢铁侠','鋼鐵人'],['Captain America','キャプテンアメリカ','美国队长','美國隊長'],['Hulk','ハルク','绿巨人','綠巨人','浩克'],['Thor','ソー','雷神','索尔','索爾'],
  ['Aero Pegasus','エアロペガサス','空力天马','空力天馬'],['Wizard Rod','ウィザードロッド','魔导杖','魔導杖'],['Dran Buster','ドランバスター','龙破坏','龍破壞'],['Dran Sword','ドランソード','龙剑','龍劍'],
  ['Phoenix Wing','フェニックスウイング','凤凰羽','鳳凰羽'],['Silver Wolf','シルバーウルフ','银狼','銀狼'],['Cobalt Dragoon','コバルトドラグーン','钴蓝苍龙','鈷藍蒼龍'],['Shark Scale','シャークスケイル','鲨鱼天秤','鯊魚天秤']
  ]);
@@ -38,6 +38,6 @@
  if(window.OPCG_CARDS)register(window.OPCG_CARDS.map(c=>[c.code,c.name,c.name_ja]));
  function variants(value){const needle=normalize(value);if(cache.has(needle))return cache.get(needle);const found=new Set([needle]),relevant=groups.filter(aliases=>aliases.some(a=>needle.includes(a)));for(const aliases of relevant){for(const candidate of [...found])for(const a of aliases.filter(a=>candidate.includes(a)))for(const b of aliases){found.add(candidate.replaceAll(a,b));if(found.size>=160)break;}if(found.size>=160)break;}const values=[...found].filter(Boolean);if(cache.size>80)cache.clear();cache.set(needle,values);return values;}
  function values(fields){return fields.flatMap(v=>Array.isArray(v)?typeof v[1]==='number'?values([v[0]]):values(v):v&&typeof v==='object'?values(Object.values(v)):[v]).filter(v=>v!=null);}
- function matches(query,fields){if(!String(query).trim())return true;const hay=normalize(values(fields).join(' ')),qs=variants(query);if(qs.some(q=>hay.includes(q)))return true;const words=String(query).trim().split(/\s+/);return words.length>1&&words.every(word=>variants(word).some(q=>hay.includes(q)));}
+ function matches(query,fields){if(!String(query).trim())return true;const hay=normalize(values(fields).join(' ')),qs=variants(query);if(qs.some(q=>hay.includes(q)))return true;if(groups.some(aliases=>aliases.includes(normalize(query))))return false;const words=String(query).trim().split(/\s+/);return words.length>1&&words.every(word=>variants(word).some(q=>hay.includes(q)));}
  window.MetaSearch={...base,normalize:base.normalize||normalize,matches,score:(query,fields)=>matches(query,fields)?1:0,registerAliases:register,queryVariants:variants,languagePolicy:'Search content across languages; interface language never filters deck results.'};
 })();
