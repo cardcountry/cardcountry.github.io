@@ -10,11 +10,13 @@
   <link rel="stylesheet" href="opcg.css?v=14">
   <link rel="stylesheet" href="site-data-quality.css?v=2">
   <link rel="stylesheet" href="deck-responsive.css?v=20261106">
-<link rel="stylesheet" href="usage-ranking.css?v=20261107">
-<script src="usage-ranking.js?v=20261107" defer></script>
+  <link rel="stylesheet" href="usage-ranking.css?v=20261107">
+  <script src="usage-ranking.js?v=20261107" defer></script>
+  <link rel="stylesheet" href="media-library.css?v=20261107">
+  <script src="media-library.js?v=20261107" defer></script>
 </head>
 <body>
-  <div class="tide-strip" aria-hidden="true"><span>GRAND LINE DATA · OP17.5 POST-RESTRICTION · 2,850 UNIQUE CARDS · PHYSICAL CARD GAME</span><span>GRAND LINE DATA · OP17.5 POST-RESTRICTION · 2,850 UNIQUE CARDS · PHYSICAL CARD GAME</span></div>
+  <div class="tide-strip" aria-hidden="true"><span>GRAND LINE DATA · JAPAN EB05 / REGIONAL ARCHIVES · 2,850 UNIQUE CARDS · PHYSICAL CARD GAME</span><span>GRAND LINE DATA · JAPAN EB05 / REGIONAL ARCHIVES · 2,850 UNIQUE CARDS · PHYSICAL CARD GAME</span></div>
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="META LAB home"><b>META LAB</b><span>OPCG GRAND LINE DESK</span></a>
     <nav id="siteNav"><a href="#rules" data-i18n="navRules">基础规则</a><a href="#meta" data-i18n="navMeta">环境卡组</a><a href="#cards" data-i18n="navCards">卡牌检索</a><a href="#sources" data-i18n="navSources">资料来源</a></nav>
@@ -23,7 +25,7 @@
   <div class="game-switcher" aria-label="Select system"><span>SELECT SYSTEM</span><a href="ptcg.html">PTCG</a><a href="gcg.html">GCG</a><a href="beyblade.html">BEYBLADE X</a><button class="active">OPCG <i>LIVE</i></button><a href="unionarena.html">UNION ARENA</a><a href="riftbound.html">RIFTBOUND <i>LIVE</i></a><a href="marvel.html">MARVEL RUSH <i>LIVE</i></a></div>
   <section class="hero" id="home">
     <div class="hero-copy"><p class="eyebrow">COMPETITIVE NAVIGATION · ONE PIECE CARD GAME</p><h1>CHART THE<br><em>NEW WORLD.</em></h1><p data-i18n="heroText">从官方规则、OP17 禁限后环境到完整卡表和 2,850 张实体卡牌资料，集中在一个航海桌面。</p><div class="hero-actions"><a href="#meta" data-i18n="heroMeta">查看 OP17 环境</a><a href="#cards" data-i18n="heroCards">检索完整图鉴</a></div><div class="hero-stats"><span><b id="statCards">2,850</b><small data-i18n="statCards">独立卡牌</small></span><span><b id="statLists">89</b><small data-i18n="statLists">OP17 卡表</small></span><span><b>4</b><small data-i18n="statLang">界面语言</small></span></div><div class="cover-byline"><img src="cardcountry-logo.webp" alt="Card Country logo"><span>PRESENTED BY <b>CARD COUNTRY KC</b></span></div></div>
-    <div class="hero-visual"><div class="compass-ring" aria-hidden="true"></div><img class="hero-card hero-card-back" src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/ST30/ST30-001_EN.webp" alt="Luffy and Ace leader card"><img class="hero-card hero-card-front" src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP17/OP17-039_EN.webp" alt="Rocks D Xebec leader card"><div class="hero-stamp"><span>CURRENT WATERS</span><b>OP17.5 / POST-BAN</b><small>DATA CHECK · 2026.11.05</small></div></div>
+    <div class="hero-visual"><div class="compass-ring" aria-hidden="true"></div><img class="hero-card hero-card-back" src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/ST30/ST30-001_EN.webp" alt="Luffy and Ace leader card"><img class="hero-card hero-card-front" src="https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP17/OP17-039_EN.webp" alt="Rocks D Xebec leader card"><div class="hero-stamp"><span>CURRENT WATERS</span><b>JAPAN / EB05</b><small>DATA CHECK · 2026.11.07</small></div></div>
   </section>
   <main>
     <section class="section rules-section" id="rules">
@@ -39,7 +41,7 @@
     <section class="section meta-section" id="meta">
       <div class="section-head"><div><span>02 / COMPETE</span><h2 data-i18n="metaTitle">当前 OP17.5 禁限后环境</h2></div><p id="metaStamp">13 EVENTS · 396 DECKS · 765 NON-MIRROR GAMES</p></div>
       <div class="restriction-alert"><b>BANNED · 2026.10.12</b><span data-i18n="banNotice">OP14-020 Dracule Mihawk 已禁止投入牌组；OP16 数据保留为历史归档，不与 OP17.5 混合统计。</span></div>
-      <div class="meta-toolbar"><div class="format-tabs"><button class="active" data-format="OP17">OP17.5 CURRENT</button><button data-format="OP16">OP16 ARCHIVE</button></div><div class="sync-status"><i></i><span id="syncText" data-i18n="syncText">已载入 2026-11-05 核实快照</span></div></div>
+      <div class="meta-toolbar"><div class="format-tabs"><button class="active" data-format="EB05JP">日本 EB05</button><button data-format="OP17">OP17.5 历史样本</button><button data-format="OP16">OP16 ARCHIVE</button></div><div class="sync-status"><i></i><span id="syncText" data-i18n="syncText">资料核验 · 2026-11-07</span></div></div>
       <div class="deck-finder"><label for="deckSearch" data-i18n="deckSearchLabel">搜索卡组、领袖、选手或赛事</label><div><input id="deckSearch" type="search" data-i18n-placeholder="deckSearchPlaceholder" placeholder="例如 Rocks / Luffy & Ace / Rosinante…"><button id="clearDeckSearch" aria-label="Clear">×</button></div><small id="deckResultNote"></small></div>
       <div class="meta-chart-panel"><div class="chart-head"><div><span>USAGE SHIFT</span><h3 data-i18n="chartTitle">使用率矩形对比</h3><p data-i18n="chartNote">当前禁限后样本与 10 月 12 日禁限前追踪值；没有可比基线的牌型显示 NEW。</p></div><div class="chart-legend"><i class="now"></i><span data-i18n="currentShare">当前使用率</span><i class="prior"></i><span data-i18n="priorShare">禁限前使用率</span></div></div><div id="usageChart" class="usage-chart"></div></div>
       <div class="subhead deck-head"><span>VERIFIED DECKLISTS</span><h3 data-i18n="mainDecksTitle">主流与高使用率卡组</h3><p data-i18n="mainDecksText">点击任一卡组后，同类型的所有已收录卡表会一次列出，再选择要查看的赛事版本。</p></div>
@@ -69,7 +71,7 @@
   <div class="toast" id="toast" role="status"></div>
   <script src="opcg-data.js?v=3"></script><script src="opcg-recent-data.js?v=1"></script><script src="opcg-photo-data.js?v=1"></script>
   <script src="site-data-quality.js?v=4"></script>
-  <script src="opcg.js?v=10"></script>
+  <script src="opcg-eb05-jp.js?v=20261107"></script>
+  <script src="opcg.js?v=20261107"></script>
 </body>
 </html>
-
