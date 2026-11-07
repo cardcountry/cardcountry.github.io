@@ -10,7 +10,7 @@
  else if(window.RIFTBOUND_DATA){label='RIFTBOUND';for(const d of window.RIFTBOUND_DECKS||[])add(d.legend,d.id,d.date,'Constructed',d.source);}
  else if(window.MARVEL_DATA){label='MARVEL HERO RUSH';for(const e of window.MARVEL_DATA.tournaments)for(const [i,d] of e.lists.entries())add(d.archetype,e.id+'|'+(d.player||i),e.date,'已收录赛事',/^https?:/.test(e.source)?e.source:window.MARVEL_DATA.sources?.[0]?.url);}
  else if(window.BEYX_DATA){label='BEYBLADE X';const d=window.BEYX_DATA;fixedRange=d.summary.start+' — '+d.summary.end;for(const c of d.all)add([c.blade,c.ratchet,c.bit,c.assist].filter(Boolean).join(' / '),[c.blade,c.ratchet,c.bit,c.assist].join('|'),d.summary.end,'配置',d.sources[0].url,Number(c.app));note='按来源记录的配置出现次数统计，同一赛事可有多次配置记录；不是玩家使用率。';}
- else if(typeof decklists!=='undefined'){label='PTCG';for(const d of decklists)for(const l of d.lists||[])add(d.name,l.listId||l.listUrl,l.date,(l.region==='Japan'?'日本 · ':'国际 · ')+(l.format||'Standard'),l.listUrl||l.sourceUrl,1,l.region==='Japan'?'日文 · 日本':l.language||'国际赛事 · 卡牌语言未注明');}
+ else if(typeof decklists!=='undefined'){label='PTCG';for(const d of decklists)for(const l of d.lists||[])if(l.competitive!==false)add(d.name,l.listId||l.listUrl,l.date,(l.region==='Japan'?'日本 · ':'国际 · ')+(l.format||'Standard'),l.listUrl||l.sourceUrl,1,l.region==='Japan'?'日文 · 日本':l.language||'国际赛事 · 卡牌语言未注明');}
  if(!label)return;
  const unique=[...new Map(rows.map(r=>[r.id,r])).values()].filter(r=>Number.isFinite(r.weight)&&r.weight>0);
  const node=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;};

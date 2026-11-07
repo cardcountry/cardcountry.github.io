@@ -27,7 +27,7 @@
   function readLexical(name){try{return(0,eval)(name)}catch(error){return undefined}}
   const sumCards=cards=>(cards||[]).reduce((sum,item)=>sum+Number(Array.isArray(item)?item[1]:item.qty||item.count||0),0);
   const uniqueFailures=(items,key)=>{const seen=new Set();let failures=0;for(const item of items){const value=typeof key==='function'?key(item):item?.[key];if(!value||seen.has(value))failures++;else seen.add(value)}return failures};
-  const latestDate=values=>values.filter(Boolean).map(value=>String(value).replaceAll('.','-')).sort().at(-1)||'—';
+  const latestDate=values=>values.filter(Boolean).map(value=>String(value).replaceAll('.','-')).filter(value=>/^\d{4}-\d{2}-\d{2}/.test(value)).sort().at(-1)||'—';
   const https=value=>{try{return new URL(value).protocol==='https:'}catch(error){return false}};
 
   function auditPtcg(){

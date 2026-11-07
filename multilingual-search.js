@@ -4,6 +4,7 @@
  const normalize=value=>String(value??'').normalize('NFKC').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\p{L}\p{N}]/gu,'');
  function register(rows){for(const row of rows){const values=[...new Set(row.filter(v=>typeof v==='string'&&v.trim()).map(normalize))].filter(v=>v.length>1);if(values.length>1)groups.push(values);}cache.clear();}
  register([
+ ['Traditional Chinese','繁中','繁體中文','繁体中文','Taiwan','台灣','台湾'],['Mega Charizard X','メガリザードンX','超級噴火龍X','超级喷火龙X'],['Team Rocket Mewtwo','ロケット団のミュウツー','火箭隊的超夢','火箭队的超梦'],['Mewtwo','ミュウツー','超夢','超梦'],
  ['Japan','Japanese','日本','日文','日本語'],['English','英文','英语','英語'],['Chinese','中文','中国','中國'],
  ['Red Blue','红蓝','紅藍','赤青'],['Red Green','红绿','紅綠','赤緑'],['Red White','红白','紅白','赤白'],['Red Purple','红紫','紅紫','赤紫'],['Red Black','红黑','紅黑','赤黒'],['Blue Green','蓝绿','藍綠','青緑'],['Blue White','蓝白','藍白','青白'],['Blue Purple','蓝紫','藍紫','青紫'],['Green Purple','绿紫','綠紫','緑紫'],['Green White','绿白','綠白','緑白'],['Purple Yellow','紫黄','紫黃'],['Black Yellow','黑黄','黑黃'],
  ['Dragapult','ドラパルト','多龙巴鲁托','多龍巴魯托','多龙','多龍'],['Dusknoir','ヨノワール','黑夜魔灵','黑夜魔靈'],['Dusclops','サマヨール','彷徨夜灵','彷徨夜靈'],
