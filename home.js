@@ -18,6 +18,10 @@
   Object.assign(translations.zh,{gcgText:'查看日本 GD06 與國際各環境完整牌組、多語言官方配方、等級構成與卡牌圖鑑。',opcgText:'查看日本 EB05 完整賽事牌組與樣本排名，並可查閱國際歷史牌組和官方圖鑑。',unionText:'檢索日文與英文卡牌圖鑑，依作品、系列、顏色、類型與稀有度篩選，並查看完整賽事牌組與構成統計。',enterUnion:'進入 UNION ARENA 資料庫'});
   Object.assign(translations.ja,{gcgText:'日本GD06・海外各環境の完全デッキ、多言語の公式レシピとカード図鑑を確認。',opcgText:'日本EB05の完全な大会デッキと収録サンプル順位、海外の過去リストと公式図鑑を確認。',unionText:'日本語・英語カードを作品、セット、色、種類、レアリティで検索。完全な大会デッキと構成統計も確認。',enterUnion:'UNION ARENA データベースへ'});
   Object.assign(translations.en,{gcgText:'Browse Japanese GD06 and international event lists, multilingual official recipes and card composition.',opcgText:'Browse Japanese EB05 event lists and sample rankings, with international archives and the official catalog.',unionText:'Search Japanese and English cards by series, set, color, type and rarity, then inspect complete event decks and composition.',enterUnion:'ENTER UNION ARENA DATABASE'});
+  Object.assign(translations['zh-cn'],{navLatest:'最新资讯',navGames:'资料库',heroIntro:'汇集各站公开的新卡、新品、规则与赛事卡表，让你在一个地方跟上资讯。',readLatest:'查看最新资讯',chooseGame:'进入分类资料库 ↗',latestTitle:'各站资讯，一处跟进',latestIntro:'按资料本身的日期整理，保留出处；日本、中文及其他地区综合收录。',verifiedData:'保留原文来源',aboutTitle:'把分散的公开资料汇集起来',aboutText:'META LAB 由 Card Country KC 制作，汇集官方、赛事数据库与发布者的公开资料。新消息、完整卡表、图鉴与相关视频相互关联，保留出处、地区和日期，方便追踪与比较。',marvelText:'查看官方规则、已收录赛事与完整卡表，并检索多语言官方卡牌图鉴。',riftboundText:'查看官方规则、Radiance 卡表、已收录对局样本与 1,408 张官方卡牌印刷图鉴。'});
+  Object.assign(translations.zh,{navLatest:'最新資訊',navGames:'資料庫',heroIntro:'匯集各站公開的新卡、新品、規則與賽事牌組，讓你在一處跟上資訊。',readLatest:'查看最新資訊',chooseGame:'進入分類資料庫 ↗',latestTitle:'各站資訊，一處跟進',latestIntro:'依資料本身的日期整理並保留出處，綜合收錄日本、中文與其他地區。',verifiedData:'保留原文來源',aboutTitle:'把分散的公開資料匯集起來',aboutText:'META LAB 由 Card Country KC 製作，匯集官方、賽事資料庫與發布者的公開資料。新消息、完整牌組、圖鑑與相關影片相互關聯，保留出處、地區與日期，方便追蹤與比較。',marvelText:'查看官方規則、已收錄賽事與完整牌組，並檢索多語言官方卡牌圖鑑。',riftboundText:'查看官方規則、Radiance 牌組、已收錄對局樣本與 1,408 張官方卡牌印刷圖鑑。'});
+  Object.assign(translations.ja,{navLatest:'最新情報',navGames:'データベース',heroIntro:'各サイトで公開された新カード、商品、ルール、大会デッキを一か所でチェック。',readLatest:'最新情報を見る',chooseGame:'タイトル別データへ ↗',latestTitle:'公開情報を、ひとつの場所へ',latestIntro:'情報自体の日付と出典を表示。日本・中国語圏・海外の情報を収録します。',verifiedData:'元の出典を表示',aboutTitle:'各地の公開情報をまとめて確認',aboutText:'Card Country KC が運営する META LAB は、公式・大会データベース・投稿者の公開情報を集約。ニュース、デッキ、カード、関連動画を結び、出典・地域・日付を表示します。',marvelText:'公式ルール、収録済みの大会・完全デッキと多言語公式カード図鑑を確認。',riftboundText:'公式ルール、Radiance デッキ、収録済み対戦サンプルと公式カード1,408種を確認。'});
+  Object.assign(translations.en,{navLatest:'LATEST',navGames:'DATABASES',heroIntro:'Follow public card reveals, products, rules and event decklists from multiple sources in one place.',readLatest:'READ LATEST',chooseGame:'EXPLORE DATABASES ↗',latestTitle:'PUBLIC UPDATES, ONE PLACE',latestIntro:'Browse Japanese, Chinese and international sources with original dates and links.',verifiedData:'ORIGINAL SOURCES',aboutTitle:'BRINGING PUBLIC DATA TOGETHER',aboutText:'Made by Card Country KC, META LAB collects public information from official sites, event databases and creators. News, full lists, catalogs and related videos connect through their sources, regions and dates.',marvelText:'Official rules, collected events and full lists, and a multilingual official card catalog.',riftboundText:'Official rules, Radiance lists, collected matchup samples and 1,408 official card prints.'});
   const $=selector=>document.querySelector(selector),$$=selector=>[...document.querySelectorAll(selector)];
   let language='zh-cn';
   try{const saved=localStorage.getItem('metalab-home-language');if(translations[saved])language=saved}catch(error){}
@@ -27,18 +31,13 @@
     document.documentElement.lang=language==='zh'?'zh-Hant':language==='zh-cn'?'zh-Hans':language;
     $$('[data-i18n]').forEach(element=>{const value=translations[language][element.dataset.i18n];if(value)element.textContent=value});
     try{localStorage.setItem('metalab-home-language',language)}catch(error){}
+    window.dispatchEvent(new CustomEvent('metalab:home-language',{detail:{language}}));
   }
-  const AUTO_KEY='metalab-auto-update';
-  const homeAuto=$('#homeAutoUpdate');
-  function readAutoUpdate(){try{return localStorage.getItem(AUTO_KEY)!=='off'}catch(error){return true}}
-  function setAutoUpdate(enabled,persist=true){homeAuto.checked=enabled;if(persist){try{localStorage.setItem(AUTO_KEY,enabled?'on':'off')}catch(error){}}}
-  homeAuto.addEventListener('change',event=>setAutoUpdate(event.target.checked));
-  setAutoUpdate(readAutoUpdate(),false);
   $('#homeLang').addEventListener('change',event=>setLanguage(event.target.value));
   $('#homeMenu').addEventListener('click',()=>$('#homeNav').classList.toggle('open'));
   $$('#homeNav a').forEach(link=>link.addEventListener('click',()=>$('#homeNav').classList.remove('open')));
   const assetMap={
-    'ptcg.html':['decks-data.js?v=14','sources-data.js?v=13','site-data-quality.css?v=2','site-data-quality.js?v=2026110710','matchup-evidence.js?v=2026110712','media-video-data.js?v=2026110712','media-deck-videos.js?v=2026110712','app.js?v=2026110712'],
+    'ptcg.html':['decks-data.js?v=14','sources-data.js?v=13','site-data-quality.css?v=2','site-data-quality.js?v=2026110710','matchup-evidence.js?v=2026110712','media-video-data.js?v=2026110712','media-deck-videos.js?v=2026110712','ptcg-language-links.js?v=2026110801','app.js?v=2026110801'],
     'gcg.html':['gcg.css?v=2026110708','comfort.css?v=2026110712','site-data-quality.css?v=2','gcg-data.js?v=5','gcg-x-data.js?v=4','gcg-visual-data.js?v=1','gcg-jp-recent.js?v=2026110706','gcg-official-decks.js?v=2026110706','site-data-quality.js?v=2026110710','multilingual-search.js?v=2026110710','gcg.js?v=2026110712'],
     'beyblade.html':['beyblade.css?v=9','site-data-quality.css?v=2','beyblade-data.js?v=3','site-data-quality.js?v=2026110710','beyblade.js?v=2026110712'],
     'opcg.html':['opcg.css?v=13','site-data-quality.css?v=2','opcg-data.js?v=3','opcg-recent-data.js?v=1','site-data-quality.js?v=2026110710','opcg.js?v=2026110712'],
@@ -59,8 +58,7 @@
       event.preventDefault();prefetchPage(href);$('#wipeLabel').textContent=card.dataset.destination||'META LAB';$('#pageWipe').classList.add('active');$('#pageWipe').setAttribute('aria-hidden','false');document.body.classList.add('is-leaving');setTimeout(()=>{window.location.href=href},330);
     });
   });
-  const idle=window.requestIdleCallback||((callback)=>setTimeout(callback,900));
-  idle(()=>{const connection=navigator.connection;if(!connection?.saveData&&!/2g/.test(connection?.effectiveType||'')){prefetchPage('ptcg.html');prefetchPage('gcg.html');prefetchPage('beyblade.html');prefetchPage('opcg.html');prefetchPage('marvel.html');prefetchPage('riftbound.html');prefetchPage('unionarena.html')}});
+  // Keep the aggregation page light. Catalog assets warm on intent above.
   window.addEventListener('pageshow',event=>{if(event.persisted){$('#pageWipe').classList.remove('active');$('#pageWipe').setAttribute('aria-hidden','true');document.body.classList.remove('is-leaving')}});
   setLanguage(language);
 })();

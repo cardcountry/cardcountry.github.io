@@ -480,23 +480,24 @@ const mainMatchupLocales={
       $('.remote-card img').forEach(img=>{img.addEventListener('load',()=>img.closest('.card-art').classList.remove('image-missing'));img.addEventListener('error',()=>{if(!img.dataset.retry&&/\/low\.webp$/.test(img.src)){img.dataset.retry='high';img.src=img.src.replace(/\/low\.webp$/,'/high.webp');return}img.closest('.card-art').classList.add('image-missing')});});
       $$('.remote-card').forEach(el=>el.addEventListener('click',()=>openRemoteCard(el.dataset.remoteId)));
     }
-    function displayRemoteCard(card,lang=dexLang,overDeck=false){
+    function displayRemoteCard(card,lang=dexLang,overDeck=false,art=null){
       ++cardLanguageRequest;++cardDetailRequest;
-      currentCard={remote:true,lang,id:card.id,name:card.name,detail:card,overDeck,dexIds:card.dexId||[]};effectLang=lang==='zh-tw'?'zh':lang;
+      const imageDetail=art?.detail||card,imageLang=art?.lang||lang;
+      currentCard={remote:true,lang,id:card.id,name:card.name,detail:card,imageDetail,imageLang,overDeck,dexIds:card.dexId||[]};effectLang=lang==='zh-tw'?'zh':lang;
       const simplify=uiLang==='zh-cn'&&lang==='zh-tw',shown=value=>simplify?toSimplified(value):value;
-      $('#modalImage').src=isPhysicalTcgdexImage(card.image)?card.image+'/high.webp':card.physicalOfficial&&/^https:\/\/(www\.pokemon-card\.com\/assets\/images\/card_images\/large\/|asia\.pokemon-card\.com\/tw\/card-img\/)/.test(card.image)?card.image:'';$('#modalImage').alt=`${shown(card.name)} physical Pokémon TCG card`;$('#modalCode').textContent=`${(card.code||card.id).toUpperCase()} · ${shown(card.set?.name||'UNKNOWN SET')} · ${lang.toUpperCase()} · PHYSICAL TCG`;$('#modalName').textContent=shown(card.name);$('#modalSub').textContent=[shown(card.category),card.hp?`HP ${card.hp}`:'',shown(card.stage),shown(card.rarity),card.regulationMark?`REG ${card.regulationMark}`:''].filter(Boolean).join(' · ');
+      $('#modalImage').src=art?.url||cardDetailImage(imageDetail);$('#modalImage').alt=`${imageDetail.name||shown(card.name)} · ${imageLang.toUpperCase()} physical Pokémon TCG card`;const imageLabel=uiLang==='en'?'IMAGE':uiLang==='ja'?'画像':'卡圖',textLabel=uiLang==='en'?'TEXT':uiLang==='ja'?'本文':'原文';$('#modalCode').textContent=`${(imageDetail.code||imageDetail.id).toUpperCase()} · ${imageLabel} ${imageLang.toUpperCase()} · ${textLabel} ${lang.toUpperCase()} (${(card.code||card.id).toUpperCase()})`;$('#modalCode').dataset.imageLang=imageLang;$('#modalCode').dataset.textLang=lang;$('#modalName').textContent=shown(card.name);$('#modalSub').textContent=[shown(card.category),card.hp?`HP ${card.hp}`:'',shown(card.stage),shown(card.rarity),card.regulationMark?`REG ${card.regulationMark}`:''].filter(Boolean).join(' · ');
       const parts=[];(card.abilities||[]).forEach(a=>parts.push(`【${a.name}】\n${a.effect||''}`));(card.attacks||[]).forEach(a=>parts.push(`【${a.name}】${a.damage?'  '+a.damage:''}\n${a.effect||'—'}`));if(card.effect)parts.push(`【EFFECT】\n${card.effect}`);$('#effectTitle').textContent=uiLang==='en'?(card.category==='Pokemon'?'ABILITIES & ATTACKS':'CARD EFFECT'):uiLang==='ja'?(card.category==='Pokemon'?'特性・ワザ':'カード効果'):card.category==='Pokemon'?'特性・招式':'卡牌效果';const emptyText=uiLang==='en'?'No effect text is available for this print.':uiLang==='ja'?'この収録版の効果テキストは未収録です。':uiLang==='zh'?'此版本暫無效果文字記錄。':'此版本暂无效果文字记录。';$('#effectText').textContent=shown(parts.join('\n\n')||emptyText);$$('.effect-langs button').forEach(b=>b.classList.toggle('active',b.dataset.lang===effectLang));$('#cardModal').classList.toggle('card-over-deck',overDeck);$('#cardModal').classList.add('open');document.body.style.overflow='hidden';
       setCardLanguageStatus();
       if(/^https:\/\//.test(card.sourceUrl||'')){const link=document.createElement('a');link.href=card.sourceUrl;link.target='_blank';link.rel='noopener';link.textContent=uiLang==='en'?'Card source ↗':uiLang==='ja'?'カード原文 ↗':'卡片原文 ↗';$('#effectText').append('\n\n',link)}
     }
     const effectToDexLang=lang=>lang==='zh'?'zh-tw':lang;
     const uiToEffectLang=lang=>lang==='zh'||lang==='zh-cn'?'zh':lang;
-    function cardLanguageMessage(kind){const messages={loading:{en:'Checking this card’s verified language print…',ja:'同じカードの確認済み言語版を読み込み中…',zh:'正在讀取已核驗的同卡語言版本…','zh-cn':'正在读取已核验的同卡语言版本…'},missing:{en:'No verified matching image and text for this language yet. The original card is retained.',ja:'この言語の同一カード画像・本文は未確認です。元のカードを表示しています。',zh:'暫無已核驗的同卡目標語言卡圖與原文，保留目前版本。','zh-cn':'暂无已核验的同卡目标语言卡图与原文，保留当前版本。'},ready:{en:'Verified equivalent card. The collector number or artwork may differ.',ja:'確認済みの同一効果カードです。収録番号・イラストが異なる場合があります。',zh:'已核驗為同卡效果的語言版本；收錄編號或插畫可能不同。','zh-cn':'已核验为同卡效果的语言版本；收录编号或插画可能不同。'}};return messages[kind][uiLang]||messages[kind].en}
+    function cardLanguageMessage(kind){const messages={loading:{en:'Loading verified original card text…',ja:'確認済みカード原文を読み込み中…',zh:'正在讀取已核驗的卡片原文…','zh-cn':'正在读取已核验的卡片原文…'},missing:{en:'No verified original text in this language yet. The current card is retained.',ja:'この言語の同一カード原文は未確認です。現在のカードを表示しています。',zh:'暫無已核驗的同卡目標語言原文，保留目前內容。','zh-cn':'暂无已核验的同卡目标语言原文，保留当前内容。'},ready:{en:'Verified same-card text reference. The original card image is retained; image and text languages are labelled above.',ja:'同一効果カードの確認済み原文です。元の画像を保持し、画像・本文の言語を上に表示しています。',zh:'已核驗同卡效果原文；保留原卡圖，卡圖及原文語言已分別標明。','zh-cn':'已核验同卡效果原文；保留原卡图，卡图及原文语言已分别标明。'}};return messages[kind][uiLang]||messages[kind].en}
     function setCardLanguageStatus(kind=''){
       let status=$('#cardLanguageStatus');if(!status){status=document.createElement('p');status.id='cardLanguageStatus';status.className='card-language-status';status.setAttribute('role','status');status.style.cssText='margin:.6rem 0 0;font-size:.8rem;line-height:1.5;color:var(--muted,#a9bbc1)';$('#modalSub')?.after(status)}
       status.textContent=kind?cardLanguageMessage(kind):'';
     }
-    function cardDetailImage(card){return isPhysicalTcgdexImage(card?.image)?card.image+'/high.webp':card?.physicalOfficial&&/^https:\/\/(www\.pokemon-card\.com\/assets\/images\/card_images\/large\/|asia\.pokemon-card\.com\/tw\/card-img\/)/.test(card.image)?card.image:''}
+    function cardDetailImage(card){return isPhysicalTcgdexImage(card?.image)?card.image+'/high.webp':card?.physicalOfficial&&/^https:\/\/(www\.pokemon-card\.com\/assets\/images\/card_images\/large\/|asia\.pokemon-card\.com\/tw\/card-img\/)/.test(card.image)?card.image:card?.verifiedReference&&/^https:\/\/limitlesstcg\.nyc3\.cdn\.digitaloceanspaces\.com\/tpci\//.test(card.image)?card.image:''}
     function verifiedCardLanguageRecord(source){
       const lang=source?.remote?source.lang:'en',detail=source?.detail||source;if(!detail)return null;
       return (window.PTCG_LANGUAGE_LINKS?.records||[]).find(record=>record.verified===true&&record.sources?.length>=2&&(
@@ -505,13 +506,13 @@ const mainMatchupLocales={
       ))||null;
     }
     function hasCardEffectText(card){const attacks=card?.attacks||[],abilities=card?.abilities||[];return !!(String(card?.effect||'').trim()||(attacks.length+abilities.length>0&&attacks.every(a=>a.name&&(a.effect||a.damage!==undefined))&&abilities.every(a=>a.name&&a.effect)))}
-    function preloadCardLanguageImage(url){return new Promise((resolve,reject)=>{const image=new Image(),timer=setTimeout(()=>{image.onload=image.onerror=null;reject(Error('IMAGE TIMEOUT'))},15000);image.onload=()=>{clearTimeout(timer);image.naturalWidth>0?resolve():reject(Error('EMPTY IMAGE'))};image.onerror=()=>{clearTimeout(timer);reject(Error('IMAGE UNAVAILABLE'))};image.src=url})}
+    function verifiedCardLanguagePrint(source,target){const record=verifiedCardLanguageRecord(source);return (source.imageLang===target&&(record?.prints?.[target]||[]).find(card=>card.id===source.imageDetail?.id))||record?.prints?.[target]?.[0]||null}
     async function switchRemoteCardLanguage(targetLang){
       const target=effectToDexLang(targetLang),source=currentCard,request=++cardLanguageRequest;if(!source?.remote)return;
       const active=()=>request===cardLanguageRequest&&currentCard===source&&$('#cardModal').classList.contains('open');
       if(source.lang===target){setCardLanguageStatus();return}
       setCardLanguageStatus('loading');
-      try{const record=verifiedCardLanguageRecord(source),print=record?.prints?.[target]?.[0],url=cardDetailImage(print);if(!print||!url||!hasCardEffectText(print))throw Error('NO VERIFIED LANGUAGE PRINT');await preloadCardLanguageImage(url);if(!active())return;displayRemoteCard(print,target,source.overDeck);setCardLanguageStatus('ready')}
+      try{const print=verifiedCardLanguagePrint(source,target);if(!print||!hasCardEffectText(print))throw Error('NO VERIFIED LANGUAGE TEXT');const art={detail:source.imageDetail||source.detail,lang:source.imageLang||source.lang,url:$('#modalImage').src};await Promise.resolve();if(!active())return;displayRemoteCard(print,target,source.overDeck,art);setCardLanguageStatus('ready')}
       catch(error){if(active()){setCardLanguageStatus('missing');toast(cardLanguageMessage('missing'))}}
     }
     async function openRemoteCard(id){
@@ -522,9 +523,9 @@ const mainMatchupLocales={
     async function openDeckCardEffect(name,code='',sourceImage=''){
       const request=++cardDetailRequest;++cardLanguageRequest;
       const normalize=v=>String(v||'').normalize('NFKC').replace(/\s/g,'').replace(/\(ACESPEC\)/gi,''),rows=window.PTCG_OFFICIAL_DETAILS?.cards||[],matches=rows.filter(c=>normalize(c.name)===normalize(name)),hasCode=code&&code!=='-',official=(sourceImage&&rows.find(c=>c.image===sourceImage))||(hasCode&&matches.find(c=>normalize(c.code)===normalize(code)||normalize(c.sourceCode)===normalize(code)));
-      if(official){displayRemoteCard(official,official.language||'ja',true);return}
+      if(official){displayRemoteCard(official,official.language||'ja',true);if(uiLang==='en'&&currentCard.lang!=='en')await switchRemoteCardLanguage('en');return}
       const known=(window.PTCG_LANGUAGE_LINKS?.records||[]).filter(record=>record.verified).flatMap(record=>Object.entries(record.prints||{}).flatMap(([lang,prints])=>prints.map(card=>({card,lang,record})))) .find(({card,lang,record})=>sourceImage&&(card.image===sourceImage||(record.imageAliases?.[lang]||[]).includes(sourceImage)));
-      if(known){displayRemoteCard(known.card,known.lang,true);return}
+      if(known){const art={detail:{id:'DECK-'+known.lang+'-'+code,code:code||known.card.code,name,image:sourceImage},lang:known.lang,url:sourceImage};displayRemoteCard(known.card,known.lang,true,art);if(uiLang==='en'&&currentCard.lang!=='en')await switchRemoteCardLanguage('en');return}
       const lang=sourceImage.includes('asia.pokemon-card.com/tw/')?'zh-tw':/[\u3040-\u30ff\u3400-\u9fff]/.test(name)?'ja':'en',normalizedCode=String(code).replace(/\s+/g,'-'),setCode=normalizedCode.split('-')[0].toLowerCase(),number=(normalizedCode.match(/(?:^|[- ])0*(\d+)(?:\/\d+)?$/)||[])[1]||'';
       toast(`正在读取 ${name} 的卡片效果…`);
       try{
@@ -550,7 +551,7 @@ const mainMatchupLocales={
       const card=currentCard,target=effectToDexLang(targetLang),request=++cardLanguageRequest;if(!card||card.remote)return;const active=()=>request===cardLanguageRequest&&currentCard===card&&$('#cardModal').classList.contains('open');
       if(target==='en'){effectLang='en';updateEffect();setCardLanguageStatus();return}
       setCardLanguageStatus('loading');
-      try{const print=verifiedCardLanguageRecord(card)?.prints?.[target]?.[0],url=cardDetailImage(print);if(!print||!url||!hasCardEffectText(print))throw Error('NO VERIFIED LANGUAGE PRINT');await preloadCardLanguageImage(url);if(!active())return;displayRemoteCard(print,target,false);setCardLanguageStatus('ready')}
+      try{const print=verifiedCardLanguagePrint(card,target);if(!print||!hasCardEffectText(print))throw Error('NO VERIFIED LANGUAGE TEXT');const art={detail:card,lang:'en',url:$('#modalImage').src};await Promise.resolve();if(!active())return;displayRemoteCard(print,target,false,art);setCardLanguageStatus('ready')}
       catch(error){if(active()){setCardLanguageStatus('missing');toast(cardLanguageMessage('missing'))}}
     }
     function closeModal(){++cardLanguageRequest;++cardDetailRequest;$('#cardModal').classList.remove('open','card-over-deck');document.body.style.overflow=$('#deckModal').classList.contains('open')||$('#sourceModal').classList.contains('open')?'hidden':''}
