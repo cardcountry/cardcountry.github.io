@@ -75,9 +75,8 @@
   }
   const AUDIT=auditData(),VERIFIED_CARDS=AUDIT.validCards,VERIFIED_DECKS=AUDIT.validDecks,VERIFIED_EVENTS=AUDIT.validEvents,VERIFIED_VIDEOS=AUDIT.validVideos,VERIFIED_SOURCES=AUDIT.validSources;
   function localizedCard(card){
-    const local=card.l?.[language];
-    if(!local)return{...card,displayName:[card.name,card.subtitle].filter(Boolean).join(', '),displayImage:card.image,displayText:card.text,displayImageLanguage:'en',displayTextLanguage:'en'};
-    return{...card,displayName:[local[0]||card.name,local[1]||''].filter(Boolean).join(', '),displayImage:local[2]||card.image,displayText:local[3]||card.text,displayImageLanguage:local[2]&&local[2]!==card.image?language:'en',displayTextLanguage:local[3]?language:'en'};
+    const local=card.l?.[language],hasText=value=>typeof value==='string'&&value.trim().length>0,textSources=[[language,local?.[3]],['en',card.text],...Object.entries(card.l||{}).map(([locale,values])=>[locale,values[3]])],text=textSources.find(([,value])=>hasText(value));
+    return{...card,displayName:local?[local[0]||card.name,local[1]||''].filter(Boolean).join(', '):[card.name,card.subtitle].filter(Boolean).join(', '),displayImage:local?.[2]||card.image,displayText:text?.[1]||card.text,displayImageLanguage:local?.[2]&&local[2]!==card.image?language:'en',displayTextLanguage:text?.[0]||'en'};
   }
   function cardById(id){return VERIFIED_CARDS.find(card=>card.id===id)}
   function cardByName(name){const target=normalize(name),parts=String(name).split(',').map(value=>value.trim());return VERIFIED_CARDS.find(card=>normalize([card.name,card.subtitle].filter(Boolean).join(', '))===target)||VERIFIED_CARDS.find(card=>normalize(card.name)===target)||(parts.length>1?VERIFIED_CARDS.find(card=>card.type==='Legend'&&normalize(card.name)===normalize(parts.slice(1).join(','))&&card.tags.some(tag=>normalize(tag)===normalize(parts[0]))):null)||null}
@@ -195,7 +194,7 @@
   function renderCardModal(id){
     const card=cardById(id);if(!card)return;const local=localizedCard(card);activeCardId=id;
     $('#cardModalImage').src=local.displayImage;delete $('#cardModalImage').dataset.sameCardRetry;$('#cardModalImage').style.opacity='';$('#cardModalImage').alt=local.displayName;$('#cardModalCode').textContent=`${card.code} · ${card.set[1]} · ART ${local.displayImageLanguage.toUpperCase()} · TEXT ${local.displayTextLanguage.toUpperCase()}`;$('#cardModalName').textContent=local.displayName;
-    $('#cardModalBadges').innerHTML=[card.type,...card.super,card.rarity,...card.domains,...card.tags.slice(0,4)].filter(Boolean).map(value=>`<span>${escapeHtml(value)}</span>`).join('');
+    $('#cardModalBadges').innerHTML=[card.type,...card.super,card.rarity,...card.domains,...(card.tags||[]).slice(0,4)].filter(Boolean).map(value=>`<span>${escapeHtml(value)}</span>`).join('');
     const nums=[card.energy!=null&&`ENERGY ${card.energy}`,card.might!=null&&`MIGHT ${card.might}`,card.power!=null&&`POWER ${card.power}`].filter(Boolean);$('#cardModalNumbers').innerHTML=nums.map(value=>`<span>${escapeHtml(value)}</span>`).join('');
     $('#cardModalEffect').innerHTML=renderCardText(local.displayText)||'—';
   }

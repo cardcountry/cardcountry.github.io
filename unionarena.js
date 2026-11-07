@@ -19,6 +19,10 @@
   Object.assign(copy.zh,{copyTitle:'通常同卡號四張',statCopy:'通常同卡號上限'});
   Object.assign(copy.ja,{copyTitle:'同番号は原則4枚',statCopy:'通常の同番号上限'});
   Object.assign(copy.en,{copyTitle:'Normally four per card number',statCopy:'NORMAL COPY LIMIT'});
+  Object.assign(copy['zh-cn'],{deckNote:'卡表与构成取自官方赛事页及 BANDAI TCG+。现有配方涉及的 150 种单卡有日文原文，其中 76 种已核验英文对应，可保留原图独立切换卡文；其他卡文继续补充。详情保留原始出处。'});
+  Object.assign(copy.zh,{deckNote:'牌組與構成取自官方賽事頁及 BANDAI TCG+。現有配方涉及的 150 種單卡有日文原文，其中 76 種已核驗英文對應，可保留原圖獨立切換卡文；其他卡文持續補充。詳情保留原始出處。'});
+  Object.assign(copy.ja,{deckNote:'公式大会ページと BANDAI TCG+ のデッキを収録。レシピ内150種の日本語原文、うち76種の確認済み英語原文を掲載。元画像を保持して本文を切り替えられます。未収録本文は順次追加します。'});
+  Object.assign(copy.en,{deckNote:'Decks and composition come from official events and BANDAI TCG+. Japanese text covers 150 recipe cards; 76 also have verified English text. Text switches independently of the clicked artwork, with original source links. Other catalog text remains pending.'});
   const langSelect=document.querySelector('#uiLang'),nav=document.querySelector('#siteNav');
   let lang='zh-cn';
   try{const saved=localStorage.getItem('metalab-union-language');if(copy[saved])lang=saved}catch(error){}

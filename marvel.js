@@ -5,7 +5,7 @@
   const $$=selector=>[...document.querySelectorAll(selector)];
   const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
   const AUTO_KEY='metalab-auto-update';
-  let uiLang='zh-cn',deckQuery='',cardQuery='',cardPage=1,cardView='image',deckView='image';
+  let cardRequestEpoch=0,uiLang='zh-cn',deckQuery='',cardQuery='',cardPage=1,cardView='image',deckView='image';
   let currentDeck=null,currentList=null,currentDeckTab='list',currentCard=null,toastTimer=null;
 
   // TRANSLATIONS
@@ -39,10 +39,11 @@
     return String(value).split(' / ').map(part=>map[part]?.[uiLang]||part).join(' / ');
   };
   const langKey=()=>uiLang==='ja'?'en':uiLang;
-  const cardLocale=card=>[langKey(),'en','zh-cn','zh'].find(locale=>card?.names?.[locale]&&(card?.images?.[locale]||card?.large?.[locale]||card?.fallback?.[locale])&&Object.hasOwn(card.effects||{},locale))||'en';
+  const cardLocale=card=>[langKey(),'en','zh-cn','zh'].find(locale=>card?.names?.[locale]&&(card?.images?.[locale]||card?.large?.[locale]||card?.fallback?.[locale]))||'en';
   const cardName=card=>card?.names?.[cardLocale(card)]||card?.names?.en||card?.code||'—';
-  const cardEffect=card=>card?.effects?.[cardLocale(card)]||'—';
-  const cardTrait=card=>card?.traits?.[cardLocale(card)]||'—';
+  const cardTextLocale=(card,field='effects')=>[langKey(),cardLocale(card),'en','zh-cn','zh'].find(locale=>typeof card?.[field]?.[locale]==='string'&&card[field][locale].trim())||cardLocale(card);
+  const cardEffect=card=>card?.effects?.[cardTextLocale(card)]||'—';
+  const cardTrait=card=>card?.traits?.[cardTextLocale(card,'traits')]||'—';
   const cardImage=(card,large=false)=>{const locale=cardLocale(card),key=card?.fallback?.[locale];if(key&&cachedImageKeys.has(key))return `marvel-cards/${encodeURIComponent(key)}.webp`;return card?.[large?'large':'images']?.[locale]||card?.images?.[locale]||''};
   const displayDate=value=>String(value||'—').replace(/-/g,'.');
   const deckHero=deck=>cardMap.get(heroCards[deck.name])||cardMap.get(deck.lists[0]?.cards[0]?.[0]);
@@ -50,7 +51,7 @@
   const attendance=event=>event.players?`${event.players} ${uiLang==='en'?'players':'人'}`:(uiLang==='ja'?'参加人数未公開':uiLang==='en'?'attendance not published':uiLang==='zh'?'參賽人數未公開':'参赛人数未公开');
   const showToast=message=>{const toast=$('#toast');toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2800)};
   const openModal=id=>{$('#'+id).classList.add('open');document.body.style.overflow='hidden'};
-  const closeModal=id=>{$('#'+id)?.classList.remove('open');if(!$('.modal.open'))document.body.style.overflow=''};
+  const closeModal=id=>{if(id==='cardModal'){cardRequestEpoch++;currentCard=null}$('#'+id)?.classList.remove('open');if(!$('.modal.open'))document.body.style.overflow=''};
 
   function setLanguage(value){
     uiLang=copy[value]?value:'zh-cn';document.documentElement.lang=uiLang==='zh-cn'?'zh-Hans':uiLang==='zh'?'zh-Hant':uiLang;
@@ -58,7 +59,7 @@
     $$('[data-i18n]').forEach(node=>{const value=t(node.dataset.i18n);if(value)node.textContent=value});
     $$('[data-i18n-placeholder]').forEach(node=>node.placeholder=t(node.dataset.i18nPlaceholder));
     renderAll();
-    const imageNote=$('[data-i18n="imageLangNote"]');if(imageNote)imageNote.textContent=uiLang==='en'?'Art and rules text use one verified language bundle. If the requested edition is unavailable, another published edition is labelled. Japanese UI does not imply a Japanese physical print.':uiLang==='ja'?'画像とカード文は同じ確認済み言語版です。未収録の場合は別の公開版を明示します。日本語UIは日本語の実物版を意味しません。':uiLang==='zh'?'卡圖與卡文採用同一已核驗語言版本；所選版本未收錄時明確標示另一已公開版本。日文介面不代表有日文實體印刷。':'卡图与卡文采用同一已核验语言版本；所选版本未收录时明确标示另一已公开版本。日文界面不代表存在日文实体印刷。';
+    const imageNote=$('[data-i18n="imageLangNote"]');if(imageNote)imageNote.textContent=uiLang==='en'?'Art and available verified text are resolved independently for this exact print identity. A missing image does not hide existing card text; each language is labelled. Japanese UI does not imply a Japanese physical print.':uiLang==='ja'?'同じカード印刷IDの画像と確認済みカード文を独立して表示し、それぞれの言語を明示します。画像の不足で既存の文章は隠れません。':uiLang==='zh'?'同一印刷 ID 的卡圖與已有可靠原文分別解析，缺圖不會隱藏文字，圖像與文字語言均明確標示；日文介面不代表有日文實體印刷。':'同一印刷 ID 的卡图与已有可靠原文分别解析，缺图不会隐藏文字，图片与文字语言均明确标示；日文界面不代表存在日文实体印刷。';
     if(currentDeck)renderDeckModal(false);
     if(currentCard)openCard(currentCard.id||currentCard.code,false);
   }
@@ -173,7 +174,7 @@
     });
   }
   function freshImageUrl(value){try{const expires=Number(new URL(value,location.href).searchParams.get('e'));return !expires||expires*1000>Date.now()}catch(error){return false}}
-  async function imageError(event){const img=event.currentTarget,card=cards.find(item=>item.id===img.dataset.cardId)||cardMap.get(img.dataset.cardCode||img.closest?.('[data-card-code]')?.dataset.cardCode);if(!card){img.style.opacity='.18';return}const locale=cardLocale(card),before=img.src;let remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&!img.dataset.fallback&&remote!==before){img.dataset.fallback='1';img.src=remote;return}if(!img.dataset.signatureRefreshed){img.dataset.signatureRefreshed='1';let pending=imageRefreshes.get(locale);if(!pending){pending=fetchOfficialLanguage(apiLanguage[locale]).then(payload=>{mergeOfficial(payload,apiLanguage[locale]);return true}).catch(()=>false).finally(()=>imageRefreshes.delete(locale));imageRefreshes.set(locale,pending)}await pending;if(img.src!==before)return;remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&remote!==img.src&&cardLocale(card)===locale){img.src=remote;img.style.opacity='';return}}img.style.opacity='.18';img.alt=card.code+' · image unavailable';}
+  async function imageError(event){const img=event.currentTarget,card=img.dataset.cardId?cards.find(item=>item.id===img.dataset.cardId):cardMap.get(img.dataset.cardCode||img.closest?.('[data-card-code]')?.dataset.cardCode);if(!card){img.style.opacity='.18';return}const locale=cardLocale(card),before=img.src,cardId=img.dataset.cardId||card.id,modalRequest=img.id==='cardModalImage'?cardRequestEpoch:null;let remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&!img.dataset.fallback&&remote!==before){img.dataset.fallback='1';img.src=remote;return}if(!img.dataset.signatureRefreshed){img.dataset.signatureRefreshed='1';let pending=imageRefreshes.get(locale);if(!pending){pending=fetchOfficialLanguage(apiLanguage[locale]).then(payload=>{mergeOfficial(payload,apiLanguage[locale]);return true}).catch(()=>false).finally(()=>imageRefreshes.delete(locale));imageRefreshes.set(locale,pending)}await pending;if(img.src!==before||img.isConnected===false||img.dataset.cardId&&img.dataset.cardId!==cardId||modalRequest!==null&&(modalRequest!==cardRequestEpoch||currentCard?.id!==cardId||!$('#cardModal').classList.contains('open')))return;remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&remote!==img.src&&cardLocale(card)===locale){img.src=remote;img.style.opacity='';return}}img.style.opacity='.18';img.alt=card.code+' · image unavailable';}
   function renderCards(){
     const results=filteredCards(),shown=results.slice(0,cardPage*56),grid=$('#cardGrid');grid.classList.toggle('name-view',cardView==='name');
     grid.innerHTML=shown.map(card=>`<button class="card-item" data-card-id="${esc(card.id)}"><img src="${esc(cardImage(card))}" data-card-id="${esc(card.id)}" alt="${esc(cardName(card))}" loading="lazy"><b>${esc(cardName(card))}</b><small>${esc(card.code)} · ${esc(card.color)} · LV ${esc(card.level)} · ${esc(card.rarity)}</small><span class="name-effect">${esc(cardEffect(card))}</span></button>`).join('');
@@ -182,9 +183,9 @@
     $('#loadMoreCards').hidden=shown.length>=results.length;$$('.view-toggle button').forEach(button=>button.classList.toggle('active',button.dataset.view===cardView));
   }
   function openCard(reference,open=true){
-    const card=cards.find(item=>item.id===reference)||cardMap.get(reference);if(!card){showToast(uiLang==='en'?'Card data not found.':'没有找到这张卡的资料。');return}currentCard=card;
-    $('#cardModalImage').src=cardImage(card,true)||cardImage(card);$('#cardModalImage').dataset.cardId=card.id;delete $('#cardModalImage').dataset.fallback;$('#cardModalImage').style.opacity='';$('#cardModalImage').alt=cardName(card);$('#cardModalImage').onerror=imageError;
-    $('#cardModalCode').textContent=`${card.code} · ${card.series} · ${card.rarity} · ART/TEXT ${cardLocale(card).toUpperCase()}`;$('#cardModalName').textContent=cardName(card);
+    const card=cards.find(item=>item.id===reference)||cardMap.get(reference);if(!card){showToast(uiLang==='en'?'Card data not found.':'没有找到这张卡的资料。');return}currentCard=card;cardRequestEpoch++;
+    $('#cardModalImage').src=cardImage(card,true)||cardImage(card);$('#cardModalImage').dataset.cardId=card.id;delete $('#cardModalImage').dataset.fallback;delete $('#cardModalImage').dataset.signatureRefreshed;$('#cardModalImage').style.opacity='';$('#cardModalImage').alt=cardName(card);$('#cardModalImage').onerror=imageError;
+    $('#cardModalCode').textContent=`${card.code} · ${card.series} · ${card.rarity} · ART ${cardLocale(card).toUpperCase()} · TEXT ${cardTextLocale(card).toUpperCase()} · TRAITS ${cardTextLocale(card,'traits').toUpperCase()}`;$('#cardModalName').textContent=cardName(card);
     const badges=[card.color,`LV ${card.level}`,card.power&&`POWER ${card.power}`,card.range&&`R ${card.range}`,card.type].filter(Boolean);$('#cardModalBadges').innerHTML=badges.map(value=>`<span>${esc(value)}</span>`).join('');
     $('#cardModalEffect').textContent=cardEffect(card);$('#cardModalTrait').textContent=cardTrait(card);if(open)openModal('cardModal');
   }
@@ -224,10 +225,10 @@
     const key=dataLanguage[language],used=new Set(),buckets=new Map();
     cards.forEach(card=>{const bucket=`${card.code}|${card.rarity}`;(buckets.get(bucket)||buckets.set(bucket,[]).get(bucket)).push(card)});
     payload.list.forEach(raw=>{
-      const bucket=`${raw.card_no}|${raw.rarity}`,keyId=raw.image?.key;let card=(buckets.get(bucket)||[]).find(item=>!used.has(item)&&item.fallback?.[key]===keyId)||cards.find(item=>!used.has(item)&&item.id===`live-${language}-${raw.id}`);
-      if(!card){card={id:`live-${language}-${raw.id}`,code:raw.card_no,series:raw.product_series,rarity:raw.rarity,level:Number(raw.level)||0,range:Number(raw.attack_range)||0,power:Number(raw.power)||0,color:raw.attribute,type:raw.card_type,names:{},effects:{},traits:{},images:{},large:{},fallback:{}};cards.push(card);(buckets.get(bucket)||buckets.set(bucket,[]).get(bucket)).push(card)}
+      const bucket=`${raw.card_no}|${raw.rarity}`,keyId=raw.image?.key;let card=(buckets.get(bucket)||[]).find(item=>!used.has(item)&&keyId&&item.fallback?.[key]===keyId)||cards.find(item=>!used.has(item)&&raw.id!=null&&item.id===`live-${language}-${raw.id}`);
+      if(!card){if(!raw.card_no||raw.id==null)return;card={id:`live-${language}-${raw.id}`,code:raw.card_no,series:raw.product_series,rarity:raw.rarity,level:Number(raw.level)||0,range:Number(raw.attack_range)||0,power:Number(raw.power)||0,color:raw.attribute,type:raw.card_type,names:{},effects:{},traits:{},images:{},large:{},fallback:{}};cards.push(card);(buckets.get(bucket)||buckets.set(bucket,[]).get(bucket)).push(card)}
       used.add(card);card.series=raw.product_series||card.series;card.level=Number(raw.level)||card.level;card.range=Number(raw.attack_range)||card.range;card.power=Number(raw.power)||card.power;card.color=raw.attribute||card.color;card.type=raw.card_type||card.type;
-      card.names[key]=raw.name;card.effects[key]=raw.effect;card.traits[key]=raw.feature;card.images[key]=raw.image?.variants?.small?.url||raw.image?.url||card.images[key];card.large[key]=raw.image?.variants?.medium?.url||raw.image?.variants?.large?.url||raw.image?.url||card.large[key];card.fallback[key]=raw.image?.key||card.fallback[key];
+      if(typeof raw.name==='string'&&raw.name.trim())card.names[key]=raw.name;if(typeof raw.effect==='string'&&raw.effect.trim())card.effects[key]=raw.effect;if(typeof raw.feature==='string'&&raw.feature.trim())card.traits[key]=raw.feature;card.images[key]=raw.image?.variants?.small?.url||raw.image?.url||card.images[key];card.large[key]=raw.image?.variants?.medium?.url||raw.image?.variants?.large?.url||raw.image?.url||card.large[key];card.fallback[key]=raw.image?.key||card.fallback[key];
     });
     cardMap=pickCanonical(cards);
   }

@@ -29,7 +29,27 @@
  deckControls.append(deckRegion,deckSeries,deckSearch);deckGrid.before(deckControls,deckCount);deckGrid.after(deckMore);refreshDeckSeries();deckRegion.onchange=()=>{deckPage=1;refreshDeckSeries();renderDecks();};deckSeries.onchange=deckSearch.oninput=()=>{deckPage=1;renderDecks();};renderDecks();
  if(!en&&!jp)return;
  const cardDialog=el('dialog',null,'ua-card-dialog'),dialogClose=button('关闭 ×',()=>cardDialog.close(),'ua-card-dialog-close'),dialogContent=el('div');cardDialog.append(dialogClose,dialogContent);document.body.append(cardDialog);cardDialog.addEventListener('click',e=>{if(e.target===cardDialog)cardDialog.close();});
- function openCard(card){const text=el('div');text.append(el('small',card.number),el('h2',card.name),el('p',card.series+' · '+card.set));for(const [key,title] of [['colors','颜色'],['types','类型'],['rarities','稀有度']])text.append(el('p',title+'：'+((card[key]||[]).map(v=>labels[v]||v).join(' / ')||'官方未标注')));const a=el('a','查看官方资料来源 ↗');a.href=card.source;a.target='_blank';a.rel='noopener';text.append(a);dialogContent.replaceChildren(image(card.image,card.name),text);cardDialog.showModal();}
+ let cardRequest=0,preferredTextLanguage='';cardDialog.addEventListener('close',()=>{cardRequest++;});
+ function openCard(card){
+  const token=++cardRequest,api=window.MetaLabUACardText,available=api?.available(card)||[],artLanguage=api?.artLanguage(card)||(/\/jp\//.test(card.image||'')?'ja':/\/na\//.test(card.image||'')?'en':''),languageName=language=>language==='ja'?'日文':language==='en'?'英文':'未标注';
+  const text=el('div',null,'ua-card-copy'),art=el('div',null,'ua-card-art'),img=el('img'),imageStatus=el('p',null,'ua-card-image-status');img.alt=card.name||card.number;img.loading='eager';img.onerror=()=>{if(token!==cardRequest||!cardDialog.open)return;img.hidden=true;imageStatus.textContent='卡图暂时无法载入，仍可阅读下方原文。';};img.src=card.image;art.append(img,el('small','卡图：'+languageName(artLanguage)),imageStatus);
+  text.append(el('small',card.number),el('h2',card.name),el('p',(card.series||'')+' · '+(card.set||'')));
+  const controls=el('label',null,'ua-card-text-language'),switcher=select('卡牌效果文字语言');controls.append(el('span','卡文语言'),switcher);
+  for(const [language,name] of [['en','英文原文'],['ja','日文原文']]){const option=el('option',name+(available.includes(language)?'':' · 尚未收录'));option.value=language;option.disabled=!available.includes(language);switcher.append(option);}
+  const wanted=preferredTextLanguage||(document.documentElement.lang?.startsWith('ja')?'ja':'en');switcher.value=available.includes(wanted)?wanted:available[0]||artLanguage||'ja';switcher.disabled=!available.length;text.append(controls);
+  const body=el('section',null,'ua-card-effect-panel');body.setAttribute('aria-live','polite');text.append(body);
+  function renderText(){if(token!==cardRequest)return;const detail=api?.resolve(card,switcher.value);body.replaceChildren();
+   if(!detail){body.append(el('p','此卡的可复制官方卡文尚未收录。保留原始卡图与下方官方单卡来源；不会用同角色的其他卡代替。','ua-card-text-pending'));return;}
+   const language=detail.language;body.lang=language;body.append(el('small','卡文：'+languageName(language)+' · 官方原文 · 核验 '+detail.checked),el('h3',detail.name));
+   if(artLanguage&&artLanguage!==language)body.append(el('p','文字切换为已核验同卡版本；上方卡图保留原印刷语言。','ua-card-text-note'));
+   const attrs=el('dl',null,'ua-card-facts');for(const [label,value] of [['卡号',detail.number],['需要能量',detail.requiredEnergy],['AP',detail.ap],['BP',detail.bp],['产生能量',detail.generatedEnergy],['类型',detail.category],['特征',detail.affinity]]){if(!value)continue;attrs.append(el('dt',label),el('dd',value));}body.append(attrs);
+   for(const [heading,value] of [[language==='en'?'Effect':'効果',detail.effect],[language==='en'?'Trigger':'トリガー',detail.trigger]]){body.append(el('h4',heading),el('p',value&&value!=='-'?value:'—（官方未列此项效果）','ua-card-rules'));}
+   const source=el('a','查看这段卡文的官方原页 ↗');source.href=detail.source;source.target='_blank';source.rel='noopener';body.append(source);
+   if(!available.includes('en'))body.append(el('p','此卡已核验的英文同卡效果尚未收录，先显示日文原文。','ua-card-text-note'));
+  }
+  switcher.onchange=()=>{if(token!==cardRequest)return;preferredTextLanguage=switcher.value;renderText();};renderText();
+  const original=el('a','查看原卡官方来源 ↗');original.href=card.source;original.target='_blank';original.rel='noopener';text.append(original);dialogContent.replaceChildren(art,text);if(!cardDialog.open)cardDialog.showModal();
+ }
  const panel=el('div',null,'ua-local-library');panel.append(el('h2','站内卡牌图鉴'));const intro=el('p');panel.append(intro);const keyword=el('input');keyword.type='search';keyword.placeholder='输入卡名 / 卡号，例如 ニコ、BLC-4-025';keyword.setAttribute('aria-label','搜索站内 UA 卡牌');
  const controls=el('div',null,'usage-controls'),region=select('卡牌地区'),series=select('作品'),set=select('系列'),color=select('颜色'),type=select('类型'),rarity=select('稀有度');
  for(const [value,name] of [['all','全部版本 · 跨语言搜索'],['jp','日文版 · 日本'],['na','英文版 · 北美']])if(catalogs[value]){const o=el('option',name);o.value=value;region.append(o);}

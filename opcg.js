@@ -39,8 +39,9 @@
   const cardLocale=card=>(uiLang==='ja'||currentFormat==='EB05JP')&&card?.name_ja&&card?.image_ja?'ja':'en';
   const cardName=card=>cardLocale(card)==='ja'?card.name_ja:card?.name||card?.code||'';
   const cardImage=card=>{if(!card?.code)return '';const locale=cardLocale(card),official=locale==='ja'?card.image_ja:card.image;if(official)return official;const set=card.code.split('-')[0];return `https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/${encodeURIComponent(set)}/${encodeURIComponent(card.code)}_${locale==='ja'?'JP':'EN'}.webp`};
-  const cardEffect=card=>cardLocale(card)==='ja'?(card?.effect_ja||'—'):card?.effect||'—';
-  const cardTrigger=card=>cardLocale(card)==='ja'?(card?.trigger_ja||'—'):card?.trigger||'—';
+  const cardTextLocale=(card,field)=>{const preferred=cardLocale(card),other=preferred==='ja'?'en':'ja',value=locale=>locale==='ja'?card?.[field+'_ja']:card?.[field];return String(value(preferred)||'').trim()?preferred:String(value(other)||'').trim()?other:preferred;};
+  const cardEffect=card=>{const locale=cardTextLocale(card,'effect');return(locale==='ja'?card?.effect_ja:card?.effect)||'—';};
+  const cardTrigger=card=>{const locale=cardTextLocale(card,'trigger');return(locale==='ja'?card?.trigger_ja:card?.trigger)||'—';};
   const displayDate=value=>{if(!value)return '—';const match=String(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);if(match)return `${match[1]}.${match[2]}.${match[3]}`;return value};
   const imageError=event=>{const img=event.currentTarget,code=img.dataset.cardCode||img.closest?.('[data-card-code]')?.dataset.cardCode||img.src.match(/([A-Z]+\d+-\d{3})/)?.[1],card=cardMap.get(code);if(card&&!img.dataset.samePrintRetry){const set=code.split('-')[0],fallback=`https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/${encodeURIComponent(set)}/${encodeURIComponent(code)}_${cardLocale(card)==='ja'?'JP':'EN'}.webp`;img.dataset.samePrintRetry='1';if(img.src!==fallback){img.src=fallback;return}}img.style.opacity='.2';img.alt=(cardName(card)||code||'Card')+' · Image unavailable';};
   function showToast(message){const toast=$('#toast');toast.textContent=message;toast.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove('show'),2600)}
@@ -174,7 +175,7 @@
   }
   function openCard(code,open=true){
     const card=cardMap.get(code);if(!card){showToast(uiLang==='en'?'Card data not found.':'没有找到这张卡的资料。');return}currentCard=card;
-    $('#cardModalImage').src=cardImage(card);$('#cardModalImage').dataset.cardCode=card.code;delete $('#cardModalImage').dataset.samePrintRetry;$('#cardModalImage').style.opacity='';$('#cardModalImage').onerror=imageError;$('#cardModalImage').alt=cardName(card);$('#cardModalCode').textContent=`${card.code} · ${card.rarity} · ${card.category} · ART/TEXT ${cardLocale(card).toUpperCase()}`;$('#cardModalName').textContent=cardName(card);
+    $('#cardModalImage').src=cardImage(card);$('#cardModalImage').dataset.cardCode=card.code;delete $('#cardModalImage').dataset.samePrintRetry;$('#cardModalImage').style.opacity='';$('#cardModalImage').onerror=imageError;$('#cardModalImage').alt=cardName(card);$('#cardModalCode').textContent=`${card.code} · ${card.rarity} · ${card.category} · ART ${cardLocale(card).toUpperCase()} · TEXT ${cardTextLocale(card,'effect').toUpperCase()} · TRIGGER ${cardTextLocale(card,'trigger').toUpperCase()}`;$('#cardModalName').textContent=cardName(card);
     const stats=[card.color,card.cost&&(card.category==='Leader'?`LIFE ${card.cost}`:`COST ${card.cost}`),card.power&&`POWER ${card.power}`,card.counter&&`COUNTER ${card.counter}`,card.attribute,uiLang==='ja'?(card.traits_ja||card.traits):card.traits].filter(Boolean);
     $('#cardModalBadges').innerHTML=stats.map(value=>`<span>${esc(value)}</span>`).join('');$('#cardModalEffect').textContent=cardEffect(card);$('#cardModalTrigger').textContent=cardTrigger(card);if(open)openModal('cardModal');
   }
@@ -233,4 +234,4 @@
   setLanguage(uiLang);if(autoToggle.checked)setTimeout(checkPublishedUpdate,800);
 })();
 
-    const imageNote=$('[data-i18n="imageLangNote"]');if(imageNote)imageNote.textContent=uiLang==='en'?'Card art and rules text use the same verified print language. Japan EB05 uses Japanese originals; unavailable editions are not invented.':uiLang==='ja'?'画像とカード文は確認済みの同じ言語版です。日本EB05は日本語原版を使用し、未収録の言語版は推測しません。':uiLang==='zh'?'卡圖與卡文依同一已核驗印刷語言顯示。日本 EB05 使用日文原圖及日文卡文，不虛構未收錄語言。':'卡图与卡文按同一已核验印刷语言显示。日本 EB05 使用日文原图和日文卡文，不虚构未收录语言。';
+    const imageNote=$('[data-i18n="imageLangNote"]');if(imageNote)imageNote.textContent=uiLang==='en'?'Japanese EB05 art keeps its original print. Any available verified text for this exact card code remains readable, with art and text languages labelled independently.':uiLang==='ja'?'日本EB05は原版画像を保持します。同じカード番号の確認済みカード文は別言語でも表示し、画像と文章の言語を明示します。':uiLang==='zh'?'日本 EB05 保留原版卡圖；同一卡號已有的可靠原文不會因圖片或介面語言而隱藏，圖像／效果／觸發的語言分別標示。':'日本 EB05 保留原版卡图；同一卡号已有的可靠原文不会因图片或界面语言而隐藏，图片／效果／触发的语言分别标示。';

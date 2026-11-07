@@ -36,19 +36,10 @@
   $('#homeLang').addEventListener('change',event=>setLanguage(event.target.value));
   $('#homeMenu').addEventListener('click',()=>$('#homeNav').classList.toggle('open'));
   $$('#homeNav a').forEach(link=>link.addEventListener('click',()=>$('#homeNav').classList.remove('open')));
-  const assetMap={
-    'ptcg.html':['decks-data.js?v=14','sources-data.js?v=13','site-data-quality.css?v=2','site-data-quality.js?v=2026110710','matchup-evidence.js?v=2026110712','media-video-data.js?v=2026110712','media-deck-videos.js?v=2026110712','ptcg-language-links.js?v=2026110801','app.js?v=2026110801'],
-    'gcg.html':['gcg.css?v=2026110708','comfort.css?v=2026110712','site-data-quality.css?v=2','gcg-data.js?v=5','gcg-x-data.js?v=4','gcg-visual-data.js?v=1','gcg-jp-recent.js?v=2026110706','gcg-official-decks.js?v=2026110706','site-data-quality.js?v=2026110710','multilingual-search.js?v=2026110710','gcg.js?v=2026110712'],
-    'beyblade.html':['beyblade.css?v=9','site-data-quality.css?v=2','beyblade-data.js?v=3','site-data-quality.js?v=2026110710','beyblade.js?v=2026110712'],
-    'opcg.html':['opcg.css?v=13','site-data-quality.css?v=2','opcg-data.js?v=3','opcg-recent-data.js?v=1','site-data-quality.js?v=2026110710','opcg.js?v=2026110712'],
-    'marvel.html':['marvel.css?v=4','site-data-quality.css?v=2','marvel-data.js?v=1','site-data-quality.js?v=2026110710','marvel.js?v=2026110712'],
-    'riftbound.html':['riftbound.css?v=6','site-data-quality.css?v=2','riftbound-data.js?v=2','site-data-quality.js?v=2026110710','riftbound.js?v=2026110712'],
-    'unionarena.html':['unionarena.css?v=1','unionarena-data.js?v=1','unionarena.js?v=1']
-  };
   const warmed=new Set();
   function prefetchPage(href){
     if(warmed.has(href))return;warmed.add(href);
-    [href,...(assetMap[href]||[])].forEach(url=>{const link=document.createElement('link');link.rel='prefetch';link.href=url;document.head.appendChild(link)});
+    const link=document.createElement('link');link.rel='prefetch';link.href=href;document.head.appendChild(link);
   }
   $$('.game-card').forEach(card=>{
     const href=card.getAttribute('href');
