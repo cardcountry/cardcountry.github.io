@@ -11,10 +11,12 @@
   <link rel="stylesheet" href="deck-responsive.css?v=20261106">
 <link rel="stylesheet" href="usage-ranking.css?v=20261107">
 <script src="usage-ranking.js?v=2026110710" defer></script>
-<link rel="stylesheet" href="media-library.css?v=20261107">
-<script src="media-library.js?v=20261107" defer></script>
-  <link rel="stylesheet" href="comfort.css?v=2026110710">
-  <script src="comfort-ui.js?v=2026110710" defer></script>
+<link rel="stylesheet" href="media-library.css?v=2026110712">
+<script src="media-video-data.js?v=2026110712" defer></script>
+<script src="media-deck-videos.js?v=2026110712" defer></script>
+<script src="matchup-evidence.js?v=2026110712"></script>
+  <link rel="stylesheet" href="comfort.css?v=2026110712">
+  <script src="comfort-ui.js?v=2026110712" defer></script>
 </head>
 <body>
   <div class="rift-ticker" aria-hidden="true"><span>RADIANCE META · 1,408 OFFICIAL PRINTS · 2,538 PUBLISHED EVENTS · CONSTRUCTED</span><span>RADIANCE META · 1,408 OFFICIAL PRINTS · 2,538 PUBLISHED EVENTS · CONSTRUCTED</span></div>
@@ -55,7 +57,7 @@
       <div class="subhead"><span>VERIFIED ARCHETYPES</span><h3 data-i18n="mainDecksTitle">主流卡组与同型完整卡表</h3><p data-i18n="mainDecksText">点击任一牌型后，会一次列出全部已收录的同型赛事版本；卡表在站内展开，不跳转外站。</p></div>
       <div class="deck-grid" id="deckGrid"></div>
       <div class="rogue-block"><div class="subhead"><span>ROGUE / EMERGING</span><h3 data-i18n="rogueTitle">非主流与新兴牌型</h3><p data-i18n="rogueText">附代表性传奇卡图；仅显示有明确完整卡表或可交叉核对赛事记录的牌型。</p></div><div class="rogue-grid" id="rogueGrid"></div></div>
-      <div class="matchup-lab"><div class="subhead"><span>MATCHUP LAB</span><h3 data-i18n="matchupTitle">赛场优势局与劣势局分析</h3><p data-i18n="matchupText">选择自己的牌型和对手，查看核心目标、风险窗口及调整方向；结论结合当前赛事样本与牌型结构。</p></div><div class="matchup-controls"><label><span data-i18n="yourDeck">你的牌型</span><select id="matchupMine"></select></label><span class="versus">VS</span><label><span data-i18n="opponentDeck">对手牌型</span><select id="matchupOpp"></select></label></div><div class="matchup-result" id="matchupResult"></div></div>
+      <div class="matchup-lab"><div class="subhead"><span>MATCHUP LAB</span><h3 data-i18n="matchupTitle">实际对局记录</h3><p data-i18n="matchupText">选择双方牌型，查看可核验的交锋记录、样本量和覆盖日期；样本不足不判断优劣。</p></div><div class="matchup-controls"><label><span data-i18n="yourDeck">你的牌型</span><select id="matchupMine"></select></label><span class="versus">VS</span><label><span data-i18n="opponentDeck">对手牌型</span><select id="matchupOpp"></select></label></div><div class="matchup-result" id="matchupResult"></div></div>
       <div class="forecast-block"><div class="subhead"><span>FORWARD META MODEL</span><h3 data-i18n="forecastTitle">未来环境观察</h3><p data-i18n="forecastText">依据 Radiance 使用率、上位转换与大型赛事结果推算；这是测试优先级，不是胜率保证。</p></div><div class="forecast-grid"><article><b>01 / SURGE</b><h4>Rengar, Pridestalker</h4><p data-i18n="forecastRengar">126 人赛事包办冠亚军，代表 Body / Fury 的正面交换强度被低估；预计针对宽铺与战斗增益的卡位会上升。</p></article><article><b>02 / STABLE</b><h4>Riven, The Exile</h4><p data-i18n="forecastRiven">13% 使用率与 60% 胜率仍是测试基准；环境会更重视在 Riven 控制首个战场前施压。</p></article><article><b>03 / ENGINE</b><h4>Kennen, Heart of the Tempest</h4><p data-i18n="forecastKennen">Radiance 补强从手牌外出牌的资源链，若快攻数量下降，Kennen 的长局占比可能继续增加。</p></article></div></div>
       <div class="event-block"><div class="subhead"><span>EVENT LEDGER</span><h3 data-i18n="eventsTitle">赛事日期与参赛人数</h3></div><div class="event-table-wrap"><table><thead><tr><th data-i18n="eventDate">日期</th><th data-i18n="eventName">赛事</th><th data-i18n="eventPlayers">人数</th><th data-i18n="eventWinner">冠军</th></tr></thead><tbody id="eventRows"></tbody></table></div></div>
       <div class="signal-block"><div class="subhead"><span>X / VIDEO SIGNALS</span><h3 data-i18n="signalTitle">近期攻略与对战视频</h3><p data-i18n="signalText">视频与 X 只用作发现信号；卡表必须回到公开赛事与官方卡牌资料交叉核对。</p></div><div class="video-grid" id="videoGrid"></div></div>
@@ -81,6 +83,6 @@
   <script src="riftbound-data.js?v=2"></script>
   <script src="site-data-quality.js?v=2026110710"></script>
   <script src="multilingual-search.js?v=2026110710"></script>
-  <script src="riftbound.js?v=2026110706"></script>
+  <script src="riftbound.js?v=2026110712"></script>
 </body>
 </html>

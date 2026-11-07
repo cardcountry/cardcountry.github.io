@@ -11,5 +11,7 @@
   const inputs=[...new Set([deckInput,document.querySelector('input[aria-label="搜索 UA 卡组"]')].filter(Boolean))];for(const input of inputs){const hint=node('small');hint.className='cross-search-hint';const host=input.closest('.deck-finder')||input.parentElement;host.append(hint);}document.addEventListener('keydown',e=>{if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)&&!document.activeElement.isContentEditable&&deckInput){e.preventDefault();deckInput.focus();deckInput.scrollIntoView({block:'center',behavior:'smooth'});}});
  }
  back=node('button','↑');back.type='button';back.className='back-to-top';back.addEventListener('click',()=>window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));document.body.append(back);
+ function tidy(){const audit=byId('siteDataAudit');if(audit&&!audit.closest('.quality-details')){const details=node('details');details.className='quality-details';const summary=node('summary','资料核验与更新记录');details.append(summary);audit.before(details);details.append(audit);}}
+ if(document.readyState!=='complete')document.addEventListener('DOMContentLoaded',tidy);else tidy();
  (byId('uiLang')||byId('homeLang'))?.addEventListener('change',()=>requestAnimationFrame(update));update();
 })();

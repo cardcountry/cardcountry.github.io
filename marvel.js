@@ -19,6 +19,7 @@
 
   // DATA MODEL
   let cards=[...D.cards];
+  const cachedImageKeys=new Set((D.cards||[]).flatMap(card=>Object.values(card.fallback||{})).filter(Boolean)),imageRefreshes=new Map();
   const pickCanonical=input=>{
     const map=new Map();
     input.forEach(card=>{const prior=map.get(card.code);if(!prior||(['C','R','SR'].includes(card.rarity)&&!['C','R','SR'].includes(prior.rarity)))map.set(card.code,card)});
@@ -38,10 +39,11 @@
     return String(value).split(' / ').map(part=>map[part]?.[uiLang]||part).join(' / ');
   };
   const langKey=()=>uiLang==='ja'?'en':uiLang;
-  const cardName=card=>card?.names?.[langKey()]||card?.names?.en||card?.code||'—';
-  const cardEffect=card=>card?.effects?.[langKey()]||card?.effects?.en||'—';
-  const cardTrait=card=>card?.traits?.[langKey()]||card?.traits?.en||'—';
-  const cardImage=(card,large=false)=>{const key=card?.fallback?.[langKey()]||card?.fallback?.en;if(key&&!String(card?.id||'').startsWith('live-'))return `marvel-cards/${encodeURIComponent(key)}.webp`;return card?.[large?'large':'images']?.[langKey()]||card?.[large?'large':'images']?.en||''};
+  const cardLocale=card=>[langKey(),'en','zh-cn','zh'].find(locale=>card?.names?.[locale]&&(card?.images?.[locale]||card?.large?.[locale]||card?.fallback?.[locale])&&Object.hasOwn(card.effects||{},locale))||'en';
+  const cardName=card=>card?.names?.[cardLocale(card)]||card?.names?.en||card?.code||'—';
+  const cardEffect=card=>card?.effects?.[cardLocale(card)]||'—';
+  const cardTrait=card=>card?.traits?.[cardLocale(card)]||'—';
+  const cardImage=(card,large=false)=>{const locale=cardLocale(card),key=card?.fallback?.[locale];if(key&&cachedImageKeys.has(key))return `marvel-cards/${encodeURIComponent(key)}.webp`;return card?.[large?'large':'images']?.[locale]||card?.images?.[locale]||''};
   const displayDate=value=>String(value||'—').replace(/-/g,'.');
   const deckHero=deck=>cardMap.get(heroCards[deck.name])||cardMap.get(deck.lists[0]?.cards[0]?.[0]);
   const deckHaystack=deck=>`${deck.name} ${deck.lists.map(list=>`${list.player} ${list.event.name} ${list.cards.map(row=>`${row[0]} ${cardName(cardMap.get(row[0]))}`).join(' ')}`).join(' ')}`.toLowerCase();
@@ -56,8 +58,9 @@
     $$('[data-i18n]').forEach(node=>{const value=t(node.dataset.i18n);if(value)node.textContent=value});
     $$('[data-i18n-placeholder]').forEach(node=>node.placeholder=t(node.dataset.i18nPlaceholder));
     renderAll();
+    const imageNote=$('[data-i18n="imageLangNote"]');if(imageNote)imageNote.textContent=uiLang==='en'?'Art and rules text use one verified language bundle. If the requested edition is unavailable, another published edition is labelled. Japanese UI does not imply a Japanese physical print.':uiLang==='ja'?'画像とカード文は同じ確認済み言語版です。未収録の場合は別の公開版を明示します。日本語UIは日本語の実物版を意味しません。':uiLang==='zh'?'卡圖與卡文採用同一已核驗語言版本；所選版本未收錄時明確標示另一已公開版本。日文介面不代表有日文實體印刷。':'卡图与卡文采用同一已核验语言版本；所选版本未收录时明确标示另一已公开版本。日文界面不代表存在日文实体印刷。';
     if(currentDeck)renderDeckModal(false);
-    if(currentCard)openCard(currentCard.code,false);
+    if(currentCard)openCard(currentCard.id||currentCard.code,false);
   }
 
   // META RENDERING
@@ -143,22 +146,21 @@
     const labels=uiLang==='en'?['LV 0–2','LV 3–4','LV 5+']:uiLang==='ja'?['Lv 0–2','Lv 3–4','Lv 5+']:['等级 0–2','等级 3–4','等级 5+'];
     return `<section class="deck-intel"><header><div><span>AUTO LIST ANALYSIS</span><h3>${uiLang==='en'?'Deck structure':uiLang==='ja'?'デッキ構造分析':'卡组结构分析'}</h3></div><small>${uiLang==='en'?'Calculated from this exact public list':'由当前公开完整卡表自动计算'}</small></header><div class="intel-stats"><span><b>${list.total}/50</b><small>${uiLang==='en'?'COMPLETE':'完整度'}</small></span><span><b>${average.toFixed(1)}</b><small>${uiLang==='en'?'AVG LEVEL':'平均等级'}</small></span><span><b>${new Set(rows.map(row=>row.card?.color).filter(Boolean)).size}</b><small>${uiLang==='en'?'COLORS':'颜色数'}</small></span><span><b>${rows.length}</b><small>${uiLang==='en'?'UNIQUE CODES':'独立卡号'}</small></span></div>${curve.map((count,index)=>`<div class="curve-row"><label>${labels[index]}</label><i><b style="width:${count/max*100}%"></b></i><strong>${count}</strong></div>`).join('')}<p>${uiLang==='en'?'Highest-copy cards:':'高投入核心：'} ${core.map(row=>`${row.qty}× ${cardName(row.card)}`).join(' · ')}</p></section>`;
   }
+  function relatedDeckVideoCards(){if(!currentDeck||!currentList)return'';return window.MetaLabMedia?.cards?.('marvel',{archetype:currentDeck.name,name:currentDeck.name,cards:(currentList.cards||[]).flatMap(([code])=>{const card=cardMap.get(code);return[code,cardName(card),...Object.values(card?.names||{})]}),format:currentList.format||currentList.event?.format||'Constructed',region:currentList.region||currentList.event?.region||currentList.event?.location||'',language:currentList.language||'',date:currentList.event?.date||'',deckId:currentList.id||currentList.event?.id||''})||'';}
+  function relatedDeckVideosPanel(){const related=relatedDeckVideoCards();return related?`<div class="video-panel"><h3>${uiLang==='ja'?'関連する解説・対戦':uiLang==='en'?'RELATED GUIDES & MATCHES':'相关教学与对战'}</h3><div class="video-grid">${related}</div></div>`:'';}
   function renderDeckList(){
     const list=currentList;const header=`<div class="deck-detail-head"><div><h3>${esc(list.place)} · ${esc(list.player||'—')}</h3><p>${esc(displayDate(list.event.date))} · ${esc(list.event.name)} · ${esc(list.event.location||'—')} · ${esc(attendance(list.event))}</p><p>${esc(list.event.source)} · ${list.total}/50 VERIFIED · ${uiLang==='en'?'STORED ON-SITE':'站内显示'}</p></div><div class="deck-view-toggle"><button class="${deckView==='image'?'active':''}" data-deck-view="image">${t('imageView')}</button><button class="${deckView==='name'?'active':''}" data-deck-view="name">${t('nameView')}</button></div></div>`;
-    if(deckView==='name')return header+listIntel(list)+`<table class="deck-name-list"><tbody>${list.cards.map(([code,qty])=>{const card=cardMap.get(code);return `<tr data-card-code="${esc(code)}"><td>${qty}×</td><td>${esc(cardName(card))}</td><td>${esc(code)}</td><td>LV ${esc(card?.level??'—')} · ${esc(card?.color||'')}</td></tr>`}).join('')}</tbody></table>`;
-    return header+listIntel(list)+`<div class="deck-cards">${list.cards.map(([code,qty])=>{const card=cardMap.get(code);return `<button class="deck-card-item" data-card-code="${esc(code)}"><span class="qty" data-qty="${qty}"><img src="${esc(cardImage(card))}" alt="${esc(cardName(card))}" loading="lazy"></span><b>${esc(cardName(card))}</b><small>${esc(code)}</small></button>`}).join('')}</div>`;
+    if(deckView==='name')return header+listIntel(list)+`<table class="deck-name-list"><tbody>${list.cards.map(([code,qty])=>{const card=cardMap.get(code);return `<tr data-card-code="${esc(code)}"><td>${qty}×</td><td>${esc(cardName(card))}</td><td>${esc(code)}</td><td>LV ${esc(card?.level??'—')} · ${esc(card?.color||'')}</td></tr>`}).join('')}</tbody></table>`+relatedDeckVideosPanel();
+    return header+listIntel(list)+`<div class="deck-cards">${list.cards.map(([code,qty])=>{const card=cardMap.get(code);return `<button class="deck-card-item" data-card-code="${esc(code)}"><span class="qty" data-qty="${qty}"><img src="${esc(cardImage(card))}" alt="${esc(cardName(card))}" loading="lazy"></span><b>${esc(cardName(card))}</b><small>${esc(code)}</small></button>`}).join('')}</div>`+relatedDeckVideosPanel();
   }
   function renderGuide(){
     const steps=strategy[currentDeck.name]?.guide?.[uiLang]||genericGuide[currentDeck.name]?.[uiLang]||genericGuide[currentDeck.name]?.en||['Build around the highest-copy cards in the selected list.','Plan BATTLE / BASE movement before declaring combat.','This archetype has a small sample; test the exact curve rather than assuming a favorable field.'];
     const headings=uiLang==='en'?['OPENING & MULLIGAN','MIDGAME SEQUENCING','CLOSING & RISK']:uiLang==='ja'?['初手・引き直し','中盤の手順','終盤・リスク']:['起手与重抽','中盘操作','收尾与风险'];
     return `<div class="guide-grid">${steps.map((step,index)=>`<article><span>0${index+1} / ${headings[index]}</span><h3>${headings[index]}</h3><p>${esc(step)}</p></article>`).join('')}<article><span>LIST-SPECIFIC CHECK</span><h3>${uiLang==='en'?'Before every turn':'每回合检查'}</h3><p>${uiLang==='en'?'Count cards still available for Counter, choose the next BATTLE / BASE position, then decide which attacker actually needs protection.':'先计算仍可用于 Counter 的手牌，确认下一步 BATTLE / BASE 位置，再决定哪一名攻击者真正值得保护。'}</p></article></div>`;
   }
-  function renderMatchups(){
-    const opponents=deckGroups.slice(0,4);const known=strategy[currentDeck.name]?.matchup||{};const notes=fallbackMatchups[currentDeck.name]||{};
-    return `<div class="matchup-grid">${opponents.map(opponent=>{const item=known[opponent.name];const state=item?.[0]||'even';const base=item?.[1]||notes[opponent.name]||'Protect the engine and adapt the BATTLE / BASE plan to the opposing curve.';const label=state==='favored'?'ADVANTAGE PLAN':state==='unfavored'?'RISK PLAN':'EVEN / SKILL PLAN';return `<article class="${state}"><span>${label}</span><h3>VS ${esc(colorLabel(opponent.name))}</h3><p>${esc(base)}</p></article>`}).join('')}</div><p class="official-note">${uiLang==='en'?'These are strategic field plans, not unverified win-rate claims.':'对局标签是主流牌型的操作计划，不冒充未经公开样本验证的胜率。'}</p>`;
-  }
-  function renderVideos(){const videos=D.videos[currentDeck.name]||D.videos.meta||[];return `<div class="video-grid">${videos.map(video=>`<article><iframe src="https://www.youtube-nocookie.com/embed/${esc(video.id)}" title="${esc(video.title)}" loading="lazy" allowfullscreen></iframe><h4>${esc(video.title)}</h4></article>`).join('')}</div>`}
-  function renderDeckDetail(){const detail=$('#deckDetail');detail.innerHTML=currentDeckTab==='list'?renderDeckList():currentDeckTab==='guide'?renderGuide():currentDeckTab==='matchup'?renderMatchups():renderVideos()}
+  function renderMatchups(){return window.MetaLabMatchups?.render?.('marvel',{archetype:currentDeck?.name||'',name:currentDeck?.name||'',cards:(currentList?.cards||[]).flatMap(([code])=>[code,cardName(cardMap.get(code))]),format:currentList?.format||currentList?.event?.format||'Constructed',region:currentList?.region||currentList?.event?.region||currentList?.event?.location||'',language:currentList?.language||'',uiLang,date:currentList?.event?.date||'',deckId:currentList?.id||currentList?.event?.id||''})||'<section class="matchup-panel"><h3>等待当前版本对局样本</h3><p>尚未载入适用地区与卡池的逐对局记录，暂不判断优劣。</p></section>';}
+  function renderVideos(){const videos=D.videos[currentDeck.name]||D.videos.meta||[];return `<div class="video-grid">${videos.map(video=>`<article><iframe src="https://www.youtube-nocookie.com/embed/${esc(video.id)}" title="${esc(video.title)}" loading="lazy" allowfullscreen></iframe><h4>${esc(video.title)}</h4></article>`).join('')}${relatedDeckVideoCards()}</div>`}
+  function renderDeckDetail(){const detail=$('#deckDetail');detail.innerHTML=currentDeckTab==='list'?renderDeckList():currentDeckTab==='guide'?renderGuide():currentDeckTab==='matchup'?renderMatchups():renderVideos();detail.querySelectorAll('img').forEach(img=>img.addEventListener('error',imageError))}
 
   // CARD CATALOG
   function populateSetFilter(){const sets=[...new Set(cards.map(card=>card.series).filter(Boolean))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));$('#setFilter').innerHTML=`<option value="">ALL SERIES</option>${sets.map(set=>`<option value="${esc(set)}">${esc(set)}</option>`).join('')}`}
@@ -170,21 +172,19 @@
       return !query||(window.MetaSearch?window.MetaSearch.matches(query,fields):fields.join(' ').toLowerCase().includes(query));
     });
   }
-  function imageError(event){
-    const img=event.currentTarget;const card=cards.find(item=>item.id===img.dataset.cardId)||cardMap.get(img.dataset.cardCode);const fallback=card?.fallback?.[langKey()]||card?.fallback?.en;
-    const remote=card?.images?.[langKey()]||card?.images?.en;if(remote&&!img.dataset.fallback){img.dataset.fallback='1';img.src=remote;return}img.style.opacity='.18';
-  }
+  function freshImageUrl(value){try{const expires=Number(new URL(value,location.href).searchParams.get('e'));return !expires||expires*1000>Date.now()}catch(error){return false}}
+  async function imageError(event){const img=event.currentTarget,card=cards.find(item=>item.id===img.dataset.cardId)||cardMap.get(img.dataset.cardCode||img.closest?.('[data-card-code]')?.dataset.cardCode);if(!card){img.style.opacity='.18';return}const locale=cardLocale(card),before=img.src;let remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&!img.dataset.fallback&&remote!==before){img.dataset.fallback='1';img.src=remote;return}if(!img.dataset.signatureRefreshed){img.dataset.signatureRefreshed='1';let pending=imageRefreshes.get(locale);if(!pending){pending=fetchOfficialLanguage(apiLanguage[locale]).then(payload=>{mergeOfficial(payload,apiLanguage[locale]);return true}).catch(()=>false).finally(()=>imageRefreshes.delete(locale));imageRefreshes.set(locale,pending)}await pending;if(img.src!==before)return;remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&remote!==img.src&&cardLocale(card)===locale){img.src=remote;img.style.opacity='';return}}img.style.opacity='.18';img.alt=card.code+' · image unavailable';}
   function renderCards(){
     const results=filteredCards(),shown=results.slice(0,cardPage*56),grid=$('#cardGrid');grid.classList.toggle('name-view',cardView==='name');
     grid.innerHTML=shown.map(card=>`<button class="card-item" data-card-id="${esc(card.id)}"><img src="${esc(cardImage(card))}" data-card-id="${esc(card.id)}" alt="${esc(cardName(card))}" loading="lazy"><b>${esc(cardName(card))}</b><small>${esc(card.code)} · ${esc(card.color)} · LV ${esc(card.level)} · ${esc(card.rarity)}</small><span class="name-effect">${esc(cardEffect(card))}</span></button>`).join('');
-    grid.querySelectorAll('img').forEach(img=>img.addEventListener('error',imageError,{once:true}));
+    grid.querySelectorAll('img').forEach(img=>img.addEventListener('error',imageError));
     $('#cardResultCount').textContent=uiLang==='ja'?`${results.length.toLocaleString()}件中 ${shown.length.toLocaleString()}件を表示`:uiLang==='en'?`SHOWING ${shown.length.toLocaleString()} OF ${results.length.toLocaleString()} PRINTS`:`显示 ${shown.length.toLocaleString()} / ${results.length.toLocaleString()} 张官方卡图记录`;
     $('#loadMoreCards').hidden=shown.length>=results.length;$$('.view-toggle button').forEach(button=>button.classList.toggle('active',button.dataset.view===cardView));
   }
   function openCard(reference,open=true){
     const card=cards.find(item=>item.id===reference)||cardMap.get(reference);if(!card){showToast(uiLang==='en'?'Card data not found.':'没有找到这张卡的资料。');return}currentCard=card;
-    $('#cardModalImage').src=cardImage(card,true)||cardImage(card);$('#cardModalImage').dataset.cardId=card.id;$('#cardModalImage').alt=cardName(card);$('#cardModalImage').onerror=imageError;
-    $('#cardModalCode').textContent=`${card.code} · ${card.series} · ${card.rarity}`;$('#cardModalName').textContent=cardName(card);
+    $('#cardModalImage').src=cardImage(card,true)||cardImage(card);$('#cardModalImage').dataset.cardId=card.id;delete $('#cardModalImage').dataset.fallback;$('#cardModalImage').style.opacity='';$('#cardModalImage').alt=cardName(card);$('#cardModalImage').onerror=imageError;
+    $('#cardModalCode').textContent=`${card.code} · ${card.series} · ${card.rarity} · ART/TEXT ${cardLocale(card).toUpperCase()}`;$('#cardModalName').textContent=cardName(card);
     const badges=[card.color,`LV ${card.level}`,card.power&&`POWER ${card.power}`,card.range&&`R ${card.range}`,card.type].filter(Boolean);$('#cardModalBadges').innerHTML=badges.map(value=>`<span>${esc(value)}</span>`).join('');
     $('#cardModalEffect').textContent=cardEffect(card);$('#cardModalTrait').textContent=cardTrait(card);if(open)openModal('cardModal');
   }
@@ -224,7 +224,7 @@
     const key=dataLanguage[language],used=new Set(),buckets=new Map();
     cards.forEach(card=>{const bucket=`${card.code}|${card.rarity}`;(buckets.get(bucket)||buckets.set(bucket,[]).get(bucket)).push(card)});
     payload.list.forEach(raw=>{
-      const bucket=`${raw.card_no}|${raw.rarity}`,keyId=raw.image?.key;let card=(buckets.get(bucket)||[]).find(item=>!used.has(item)&&item.fallback?.[key]===keyId)||(buckets.get(bucket)||[]).find(item=>!used.has(item));
+      const bucket=`${raw.card_no}|${raw.rarity}`,keyId=raw.image?.key;let card=(buckets.get(bucket)||[]).find(item=>!used.has(item)&&item.fallback?.[key]===keyId)||cards.find(item=>!used.has(item)&&item.id===`live-${language}-${raw.id}`);
       if(!card){card={id:`live-${language}-${raw.id}`,code:raw.card_no,series:raw.product_series,rarity:raw.rarity,level:Number(raw.level)||0,range:Number(raw.attack_range)||0,power:Number(raw.power)||0,color:raw.attribute,type:raw.card_type,names:{},effects:{},traits:{},images:{},large:{},fallback:{}};cards.push(card);(buckets.get(bucket)||buckets.set(bucket,[]).get(bucket)).push(card)}
       used.add(card);card.series=raw.product_series||card.series;card.level=Number(raw.level)||card.level;card.range=Number(raw.attack_range)||card.range;card.power=Number(raw.power)||card.power;card.color=raw.attribute||card.color;card.type=raw.card_type||card.type;
       card.names[key]=raw.name;card.effects[key]=raw.effect;card.traits[key]=raw.feature;card.images[key]=raw.image?.variants?.small?.url||raw.image?.url||card.images[key];card.large[key]=raw.image?.variants?.medium?.url||raw.image?.variants?.large?.url||raw.image?.url||card.large[key];card.fallback[key]=raw.image?.key||card.fallback[key];

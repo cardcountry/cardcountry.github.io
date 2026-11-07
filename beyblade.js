@@ -362,12 +362,12 @@
     $('#modalImage').src=blade.image||'';$('#modalImage').alt=combo.blade||'';$('#modalImage').hidden=!blade.image;
     $('#modalTier').textContent=`${t('tier')} ${combo.tier||'—'} · ${labelType(combo.cat)}`;$('#modalTitle').textContent=combo.blade||'—';$('#modalType').textContent=comboPartsLine(combo)||'—';
     $('#modalStats').innerHTML=[
-      [t('appearances'),number(combo.app)],[t('wins'),number(combo.wins)],[t('winRate'),`${rate}%`],[t('metaIndex'),number(combo.meta)]
+      [t('appearances'),number(combo.app)],[t('wins'),number(combo.wins)],['对局胜率','暂无逐局样本'],[t('metaIndex'),number(combo.meta)]
     ].map(([label,value])=>`<div><small>${esc(label)}</small><b>${esc(value)}</b></div>`).join('');
     const notes=[];if(combo.pro)notes.push(`<article><b>${esc(t('strength'))}</b><p>${esc(combo.pro)}</p></article>`);if(combo.contro)notes.push(`<article><b>${esc(t('caution'))}</b><p>${esc(combo.contro)}</p></article>`);
     $('#modalCopy').innerHTML=notes.join('')||`<article><b>${esc(t('calculated'))}</b><p>${esc(`${combo.app||0} ${t('records')} · ${labelType(combo.cat)}`)}</p></article>`;
     $('#modalRecords').innerHTML=`<h3>${esc(t('placements'))}</h3>`+(records.length?records.map(record=>`<div><time>${esc(formatDate(record.date||''))}</time><b>#${esc(record.place||'—')}</b><span>${esc(comboName(record))}</span></div>`).join(''):`<p>${esc(t('noRecords'))}</p>`);
-    $('#comboModal').classList.add('open');document.body.classList.add('modal-open');$('#closeModal').focus();
+    const context={...combo,archetype:combo.blade,name:combo.blade,format:'BEYBLADE X',date:state.summary.end||'',region:''},videos=window.MetaLabMedia?.cards?.('beyblade',context)||'';let related=$('#comboRelatedVideos');if(!related){related=document.createElement('div');related.id='comboRelatedVideos';related.className='deck-related-videos';$('#modalRecords').after(related)}related.innerHTML=videos?'<h3>相关实测与创意参考</h3><div class="video-grid">'+videos+'</div>':'';related.hidden=!videos;$('#modalCopy').innerHTML=window.MetaLabMatchups?.render?.('beyblade',context)||'<p>暂无可核验的当前配置逐局对战样本。</p>';$('#comboModal').classList.add('open');document.body.classList.add('modal-open');$('#closeModal').focus();
   }
   function closeModal(){$('#comboModal').classList.remove('open');document.body.classList.remove('modal-open')}
   function renderAll(){updateSummary();renderMeta();renderConfigs();renderPlacements();renderParts();renderBuilder();renderSources()}
