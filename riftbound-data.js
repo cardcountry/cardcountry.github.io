@@ -1,7 +1,7 @@
 window.RIFTBOUND_CARDS=[];
 window.RIFTBOUND_DECKS=[];
 window.RIFTBOUND_DATA={
-  generatedAt:"2026-10-31",
+  generatedAt:"2026-11-09",
   snapshot:"Radiance · Constructed",
   cards:window.RIFTBOUND_CARDS,
   decks:window.RIFTBOUND_DECKS,
@@ -16,6 +16,7 @@ window.RIFTBOUND_DATA={
     {key:"azir",legend:"Azir, Emperor of the Sands",domains:["Calm","Order"],share:2,win:48,decks:34,top8:6,tier:"C",imageId:"sfd-197-221",trend:"watch",guide:"通过 Gear 与 Order 的持续价值建立难以突破的板面；需要提前规划每个回合的资源与战场摆位。",matchup:{favored:"对缺少装备处理、主要依靠正面战斗的牌型，长期资源优势明显。",unfavored:"面对早期爆发或能在多战场同时计分的牌型，引擎启动速度可能落后。",plan:"先以最低成本确保一个稳定战场，再逐步铺设装备；落后时不要继续贪价值，转为集中争夺即时得分。"},videos:["XPakHS_zta8","Tnl3TFqIDho"]}
   ],
   events:[
+    {date:"2026-11-08",name:"Regional Championship Europe · Stuttgart",players:315,country:"DE",winner:"Kennen",format:"Radiance"},
     {date:"2026-10-29",name:"Thursday’s Nexus Night · Caesar Cards",players:8,country:"SG",winner:"—",format:"Radiance"},
     {date:"2026-10-28",name:"Mint Meow Ranked Tournament BO1",players:10,country:"CN",winner:"Riven",format:"Radiance"},
     {date:"2026-10-27",name:"Nexus Nights at Zulu’s BO3",players:37,country:"US",winner:"—",format:"Radiance"},
