@@ -36,4 +36,7 @@ html{scroll-padding-top:130px;scroll-behavior:smooth}body{background-color:var(-
  .modal-card{max-height:90dvh}
  .source-modal-card{max-height:88dvh}
  .deck-modal-card{max-height:92dvh}
+ .modal.open .close,.modal.open .modal-close{position:fixed;top:max(8px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));width:44px;height:44px;min-width:44px;min-height:44px;margin:0;float:none;z-index:150}
+ .site-header #menuBtn{min-height:44px}
 }
+.source-card{min-width:0;overflow-wrap:anywhere}

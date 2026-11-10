@@ -38,3 +38,4 @@ main{overflow:hidden}.hero{max-width:var(--max);margin:auto;min-height:700px;pad
 /* Keep a readable event selector when an archetype has many public lists. */
 #deckListPicker{max-width:100%;scroll-snap-type:x proximity;align-items:stretch}
 #deckListPicker .list-pick{flex:0 0 250px;min-width:230px;max-width:calc(100vw - 76px);white-space:normal;overflow-wrap:anywhere;scroll-snap-align:start}
+@media(min-width:761px){.card-shell>.modal-close{position:absolute;top:14px;right:14px;margin:0;z-index:4}}
