@@ -10,3 +10,30 @@ html{scroll-padding-top:130px;scroll-behavior:smooth}body{background-color:var(-
 .ua-deck-card{display:block;min-width:0;padding:0;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer}.ua-deck-card .ua-list-card{height:100%}
 .toast{max-width:min(92vw,480px);overflow-wrap:anywhere;line-height:1.5}
 .quick-tools{padding:8px 12px;box-shadow:none;border-color:#2b414c}.quick-tools strong{font-size:11px}.quick-tools a{min-height:40px;padding:7px 15px}.quality-details{margin:16px 0;border:1px solid #2d424e;border-radius:13px;background:#101d25}.quality-details>summary{cursor:pointer;padding:12px 16px;color:#b8cdc9;font-size:13px;min-height:44px}.quality-details>#siteDataAudit{margin:0;border:0;border-top:1px solid #2d424e;border-radius:0 0 13px 13px}.deck-grid,.cards-grid{gap:18px}.source-card p,.rule-card p{max-width:70ch}.advanced-filters{border-radius:12px}body.modal-open .back-to-top,body:has(.modal.open) .back-to-top,body:has(dialog[open]) .back-to-top,body:has(#uaDeckModal:not(.hidden)) .back-to-top{display:none}@media(max-width:600px){.quick-tools{padding:6px;gap:3px}.quick-tools a{padding:7px 4px;font-size:12px}.deck-modal-head h2{font-size:24px}.deck-shell .deck-modal-head img{max-height:96px;width:66px}.event-summary{gap:12px}.quality-details>summary{padding:11px 13px}.section-head h2{font-size:clamp(25px,7vw,36px)}}
+/* Keep narrow phone headers usable without clipping their controls. */
+@media(max-width:430px){
+ .home-header{grid-template-columns:minmax(0,1fr) auto;gap:6px;padding-inline:12px}
+ .home-header .home-brand{min-width:0;width:auto;gap:6px}
+ .home-header .home-brand img{width:28px;height:28px;flex:0 0 28px}
+ .home-header .home-brand span{min-width:0}
+ .home-header .home-brand b{font-size:21px;white-space:nowrap}
+ .home-header .home-brand small{font-size:7px;letter-spacing:.08em}
+ .home-header .home-tools{gap:6px;min-width:0}
+ .home-header .home-tools select{width:108px;font-size:16px;letter-spacing:normal;padding-inline:6px}
+ .home-header .home-tools button{min-width:44px;min-height:44px;padding:8px}
+ header>.wrap.nav{width:calc(100% - 24px);gap:8px;min-width:0}
+ header>.nav .brand{min-width:0;gap:6px;flex:1 1 0}
+ header>.nav .brand-mark{width:28px;height:28px;flex:0 0 28px}
+ header>.nav .brand-mark:after{width:26px}
+ header>.nav .brand b{font-size:13px;letter-spacing:.04em;white-space:nowrap}
+ header>.nav .nav-actions{flex:0 0 auto;gap:6px;min-width:0}
+ header>.nav .nav-actions select{width:108px;padding-inline:8px;font-size:16px}
+ header>.nav .menu-btn{min-width:44px;min-height:44px;padding:8px}
+}
+@media(max-width:360px){.home-header .home-brand small{display:none}header>.nav .nav-actions .auto-update-toggle{display:none}}
+@media(max-width:760px){
+ .activity-section .activity-fields input,.activity-section .activity-fields select,.ua-local-library>input{font-size:16px}
+ .modal-card{max-height:90dvh}
+ .source-modal-card{max-height:88dvh}
+ .deck-modal-card{max-height:92dvh}
+}

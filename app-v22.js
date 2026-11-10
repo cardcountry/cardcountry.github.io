@@ -373,8 +373,45 @@ const mainMatchupLocales={
       let [,family,number,pointFive,localId]=match;if(family!=='SV'&&family!=='ME')return'';
       return `${family.toLowerCase()}${number.padStart(2,'0')}${pointFive?'.5':''}-${localId.padStart(3,'0')}`;
     }
+    const normalizeCardPrintSet=value=>String(value||'').toUpperCase().replace(/PT5$/,'.5').replace(/^([A-Z]+)0+(\d)/,'$1$2');
+    const namedImageSetCache=new Map();
     async function hydrateNamedImages(selector){
-      for(const img of $$(selector)){const name=decodeURIComponent(img.dataset.cardName),code=decodeURIComponent(img.dataset.cardCode||''),expectedId=tcgdexIdFromCode(code),cacheKey=`${code}|${name}`;try{let src=recipeImageCache.get(cacheKey),pending=recipeImagePending.get(cacheKey);if(!src){if(!pending){pending=(async()=>{const params=new URLSearchParams({name,'pagination:page':1,'pagination:itemsPerPage':100}),response=await fetch(`https://api.tcgdex.net/v2/en/cards?${params}`);if(!response.ok)throw new Error();const found=(await response.json()).filter(c=>isPhysicalTcgdexImage(c.image)),exactName=found.filter(c=>c.name.toLowerCase()===name.toLowerCase()),localId=code.split('-').pop()?.replace(/^0+/,'');const card=exactName.find(c=>c.id.toLowerCase()===expectedId)||exactName.find(c=>String(c.localId).replace(/^0+/,'')===localId)||exactName[0]||found[0];return card?.image?card.image+'/low.webp':''})();recipeImagePending.set(cacheKey,pending)}src=await pending;recipeImagePending.delete(cacheKey);if(src)recipeImageCache.set(cacheKey,src)}if(src)img.src=src;else img.classList.add('image-unavailable')}catch(error){recipeImagePending.delete(cacheKey);img.classList.add('image-unavailable')}await new Promise(resolve=>setTimeout(resolve,100))}
+      for(const img of $$(selector)){
+        if(img.isConnected===false)continue;
+        const name=decodeURIComponent(img.dataset.cardName),code=decodeURIComponent(img.dataset.cardCode||''),expectedId=tcgdexIdFromCode(code),cacheKey=`${code}|${name}`,printMatch=code.match(/^(.+)-(\d+)$/);
+        try{
+          if(!printMatch)throw Error('EXACT PRINT NOT VERIFIED');
+          let src=recipeImageCache.get(cacheKey),pending=recipeImagePending.get(cacheKey);
+          if(!src){
+            if(!pending){
+              pending=(async()=>{
+                const params=new URLSearchParams({name,'pagination:page':1,'pagination:itemsPerPage':100}),response=await fetch(`https://api.tcgdex.net/v2/en/cards?${params}`);
+                if(!response.ok)throw Error('CARD INDEX UNAVAILABLE');
+                const normalizeName=value=>String(value||'').normalize('NFKC').trim().toLowerCase(),localId=printMatch[2].replace(/^0+/,'');
+                const found=(await response.json()).filter(card=>card?.id&&isPhysicalTcgdexImage(card.image)&&normalizeName(card.name)===normalizeName(name)&&String(card.localId).replace(/^0+/,'')===localId);
+                let picked=found.find(card=>expectedId&&card.id.toLowerCase()===expectedId);
+                if(!picked)for(const candidate of found){
+                  const setId=candidate.id.slice(0,candidate.id.lastIndexOf('-'));
+                  if(!namedImageSetCache.has(setId)){
+                    const result=await fetch(`https://api.tcgdex.net/v2/en/sets/${encodeURIComponent(setId)}`);
+                    if(!result.ok)continue;
+                    namedImageSetCache.set(setId,await result.json());
+                  }
+                  const set=namedImageSetCache.get(setId);
+                  if(set?.id!==setId||![set.id,set.tcgOnline].some(value=>normalizeCardPrintSet(value)===normalizeCardPrintSet(printMatch[1])))continue;
+                  picked=candidate;break;
+                }
+                return picked?.image?picked.image+'/low.webp':'';
+              })();
+              recipeImagePending.set(cacheKey,pending);
+            }
+            src=await pending;recipeImagePending.delete(cacheKey);if(src)recipeImageCache.set(cacheKey,src);
+          }
+          if(img.isConnected===false)continue;
+          if(src)img.src=src;else img.classList.add('image-unavailable');
+        }catch(error){recipeImagePending.delete(cacheKey);if(img.isConnected!==false)img.classList.add('image-unavailable')}
+        await new Promise(resolve=>setTimeout(resolve,100));
+      }
     }
     const hydrateRecipeImages=()=>hydrateNamedImages('#sourceDeckChoices img[data-card-name]');
     function openSourceDeck(index){
@@ -498,10 +535,22 @@ const mainMatchupLocales={
       status.textContent=kind?cardLanguageMessage(kind):'';
     }
     function cardDetailImage(card){return isPhysicalTcgdexImage(card?.image)?card.image+'/high.webp':card?.physicalOfficial&&/^https:\/\/(www\.pokemon-card\.com\/assets\/images\/card_images\/large\/|asia\.pokemon-card\.com\/tw\/card-img\/)/.test(card.image)?card.image:card?.verifiedReference&&/^https:\/\/limitlesstcg\.nyc3\.cdn\.digitaloceanspaces\.com\/tpci\//.test(card.image)?card.image:''}
+    function sameVerifiedCatalogPrint(detail,print,lang){
+      if(lang!=='ja'||!isPhysicalTcgdexImage(detail?.image))return false;
+      const api=String(detail.id||'').match(/^([A-Z0-9.]+)-(\d+)$/i),known=String(print.code||print.sourceCode||'').match(/^([A-Z0-9.]+)-(\d+)$/i);
+      if(!api||!known||api[1].toUpperCase()!==known[1].toUpperCase()||api[2].replace(/^0+/,'')!==known[2].replace(/^0+/,''))return false;
+      if(String(detail.set?.id||'').toUpperCase()!==api[1].toUpperCase()||String(detail.localId).replace(/^0+/,'')!==api[2].replace(/^0+/,''))return false;
+      const image=String(detail.image).match(/^https:\/\/assets\.tcgdex\.net\/ja\/[^/]+\/([^/]+)\/(\d+)$/);
+      if(!image||image[1].toUpperCase()!==api[1].toUpperCase()||image[2].replace(/^0+/,'')!==api[2].replace(/^0+/,''))return false;
+      const name=value=>String(value||'').normalize('NFKC').replace(/\s+/g,'').replace(/\(ACESPEC\)/gi,'');
+      if(name(detail.name)!==name(print.name)||detail.category!==print.category)return false;
+      if(detail.category==='Pokemon'){const hp=Number(print.hp||String(print.effect||'').match(/HP\s*(\d+)/)?.[1]);if(!hp||Number(detail.hp)!==hp)return false}
+      return true;
+    }
     function verifiedCardLanguageRecord(source){
       const lang=source?.remote?source.lang:'en',detail=source?.detail||source;if(!detail)return null;
       return (window.PTCG_LANGUAGE_LINKS?.records||[]).find(record=>record.verified===true&&record.sources?.length>=2&&(
-        (record.prints?.[lang]||[]).some(print=>print.id===detail.id||print.image===detail.image)||
+        (record.prints?.[lang]||[]).some(print=>print.id===detail.id||print.image===detail.image||sameVerifiedCatalogPrint(detail,print,lang))||
         (record.imageAliases?.[lang]||[]).includes(detail.image)
       ))||null;
     }
@@ -517,7 +566,7 @@ const mainMatchupLocales={
     }
     async function openRemoteCard(id){
       const request=++cardDetailRequest,lang=dexLang;++cardLanguageRequest;
-      toast('正在读取卡牌效果…');try{const response=await fetch(`https://api.tcgdex.net/v2/${lang}/cards/${encodeURIComponent(id)}`);if(!response.ok)throw new Error(`HTTP ${response.status}`);const detail=await response.json();if(request!==cardDetailRequest)return;if(detail.id!==id||!cardDetailImage(detail))throw Error('CARD IDENTITY MISMATCH');displayRemoteCard(detail,lang,false);setCardLanguageStatus()}catch(error){if(request===cardDetailRequest)toast(`无法读取卡牌：${error.message}`)}
+      toast('正在读取卡牌效果…');try{const response=await fetch(`https://api.tcgdex.net/v2/${lang}/cards/${encodeURIComponent(id)}`);if(!response.ok)throw new Error(`HTTP ${response.status}`);const detail=await response.json();if(request!==cardDetailRequest)return;if(detail.id!==id||!cardDetailImage(detail))throw Error('CARD IDENTITY MISMATCH');displayRemoteCard(detail,lang,false);if(uiLang==='en'&&lang!=='en')await switchRemoteCardLanguage('en');else setCardLanguageStatus()}catch(error){if(request===cardDetailRequest)toast(`无法读取卡牌：${error.message}`)}
     }
     const deckCardSetCache=new Map();
     async function openDeckCardEffect(name,code='',sourceImage=''){
@@ -537,11 +586,11 @@ const mainMatchupLocales={
           if(request!==cardDetailRequest)return;
           const setId=candidate.id.slice(0,candidate.id.lastIndexOf('-')),key=lang+':'+setId;
           if(!deckCardSetCache.has(key)){const result=await fetch(`https://api.tcgdex.net/v2/${lang}/sets/${encodeURIComponent(setId)}`);if(!result.ok)continue;deckCardSetCache.set(key,await result.json())}
-          const set=deckCardSetCache.get(key);if(set?.id!==setId||![set.id,set.tcgOnline].some(value=>value&&value.toLowerCase()===setCode))continue;
+          const set=deckCardSetCache.get(key);if(set?.id!==setId||![set.id,set.tcgOnline].some(value=>value&&normalizeCardPrintSet(value)===normalizeCardPrintSet(setCode)))continue;
           picked=candidate;break;
         }
         if(!picked)throw Error('EXACT PRINT NOT VERIFIED');
-        const responseDetail=await fetch(`https://api.tcgdex.net/v2/${lang}/cards/${encodeURIComponent(picked.id)}`);if(!responseDetail.ok)throw Error(`HTTP ${responseDetail.status}`);const detail=await responseDetail.json();if(request!==cardDetailRequest)return;if(detail.id!==picked.id||!cardDetailImage(detail))throw Error('CARD IDENTITY MISMATCH');displayRemoteCard(detail,lang,true);
+        const responseDetail=await fetch(`https://api.tcgdex.net/v2/${lang}/cards/${encodeURIComponent(picked.id)}`);if(!responseDetail.ok)throw Error(`HTTP ${responseDetail.status}`);const detail=await responseDetail.json();if(request!==cardDetailRequest)return;if(detail.id!==picked.id||!cardDetailImage(detail))throw Error('CARD IDENTITY MISMATCH');displayRemoteCard(detail,lang,true);if(uiLang==='en'&&lang!=='en')await switchRemoteCardLanguage('en');
       }catch(error){if(request===cardDetailRequest)toast(`暂时无法读取 ${name} 的准确版本：${error.message}`)}
     }
     function setDexLanguage(lang){const sameLanguage=dexLang===lang;dexLang=lang;$$('#dexLangs button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));const hints={en:'Search English card name or number…',ja:'日本語のカード名・番号を検索…','zh-tw':uiLang==='zh-cn'?'输入简体中文卡名或编号…':'輸入繁體中文卡名或編號…'};$('#cardSearch').placeholder=hints[lang];if(sameLanguage&&(dexCards.length||$('#cardGrid .dex-loading'))){if(dexCards.length)renderDexCards();return}$('#cardSearch').value='';searchDex('',true);startDexAutoSync()}
