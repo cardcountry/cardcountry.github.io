@@ -513,8 +513,8 @@ const mainMatchupLocales={
       try{const response=await fetch(`https://api.tcgdex.net/v2/${dexLang}/cards?${params}`);if(!response.ok)throw new Error(`HTTP ${response.status}`);const raw=await response.json(),incoming=raw.filter(c=>c?.id&&c?.localId&&/^[a-z0-9][a-z0-9.-]*-[a-z0-9]+$/i.test(c.id)&&isPhysicalTcgdexImage(c.image));if(request!==dexRequest)return;const known=new Set(dexCards.map(c=>c.id));dexCards=[...dexCards,...incoming.filter(c=>!known.has(c.id))];renderDexCards();$('#resultCount').textContent=`${dexCards.length}${raw.length===24?'+':''} CARDS`;$('#loadMoreCards').classList.toggle('hidden',raw.length<24)}catch(error){if(request!==dexRequest)return;$('#cardGrid').innerHTML=`<div class="empty">CARD DATABASE UNAVAILABLE<br><small>${error.message} · ${pageText().retry}</small></div>`;$('#resultCount').textContent='OFFLINE'}
     }
     function renderDexCards(){
-      $('#cardGrid').innerHTML=dexCards.length?dexCards.map(c=>{const name=uiLang==='zh-cn'&&dexLang==='zh-tw'?toSimplified(c.name):c.name;return `<button class="card-item remote-card" data-remote-id="${c.id}"><span class="card-art"><img src="${c.image}/low.webp" alt="${name} physical Pokémon TCG card" loading="lazy"><i>IMAGE UNAVAILABLE</i></span><div class="card-type">${dexLang.toUpperCase()} · PHYSICAL TCG${uiLang==='zh-cn'&&dexLang==='zh-tw'?' · 简体名称显示':''}</div><h3>${name}</h3><div class="card-code">${c.id.toUpperCase()} · #${c.localId}</div></button>`}).join(''):`<div class="empty">NO CARDS FOUND<br><small>${pageText().noCards}</small></div>`;
-      $$('.remote-card img').forEach(img=>{img.addEventListener('load',()=>img.closest('.card-art').classList.remove('image-missing'));img.addEventListener('error',()=>{if(!img.dataset.retry&&/\/low\.webp$/.test(img.src)){img.dataset.retry='high';img.src=img.src.replace(/\/low\.webp$/,'/high.webp');return}img.closest('.card-art').classList.add('image-missing')});});
+      $('#cardGrid').innerHTML=dexCards.length?dexCards.map(c=>{const name=uiLang==='zh-cn'&&dexLang==='zh-tw'?toSimplified(c.name):c.name;return `<button class="card-item remote-card" data-remote-id="${c.id}"><span class="card-art"><img src="${c.image}/low.webp" data-card-id="${c.id}" alt="${name} physical Pokémon TCG card" loading="lazy"><i>IMAGE UNAVAILABLE</i></span><div class="card-type">${dexLang.toUpperCase()} · PHYSICAL TCG${uiLang==='zh-cn'&&dexLang==='zh-tw'?' · 简体名称显示':''}</div><h3>${name}</h3><div class="card-code">${c.id.toUpperCase()} · #${c.localId}</div></button>`}).join(''):`<div class="empty">NO CARDS FOUND<br><small>${pageText().noCards}</small></div>`;
+      $$('.remote-card img').forEach(img=>{const card=dexCards.find(item=>item.id===img.dataset.cardId),lang=dexLang;if(card)bindCardImageRecovery(img,card,lang,{active:()=>dexLang===lang&&dexCards.includes(card)})});
       $$('.remote-card').forEach(el=>el.addEventListener('click',()=>openRemoteCard(el.dataset.remoteId)));
     }
     function displayRemoteCard(card,lang=dexLang,overDeck=false,art=null){
@@ -523,8 +523,10 @@ const mainMatchupLocales={
       currentCard={remote:true,lang,id:card.id,name:card.name,detail:card,imageDetail,imageLang,overDeck,dexIds:card.dexId||[]};effectLang=lang==='zh-tw'?'zh':lang;
       const simplify=uiLang==='zh-cn'&&lang==='zh-tw',shown=value=>simplify?toSimplified(value):value;
       $('#modalImage').src=art?.url||cardDetailImage(imageDetail);$('#modalImage').alt=`${imageDetail.name||shown(card.name)} · ${imageLang.toUpperCase()} physical Pokémon TCG card`;const imageLabel=uiLang==='en'?'IMAGE':uiLang==='ja'?'画像':'卡圖',textLabel=uiLang==='en'?'TEXT':uiLang==='ja'?'本文':'原文';$('#modalCode').textContent=`${(imageDetail.code||imageDetail.id).toUpperCase()} · ${imageLabel} ${imageLang.toUpperCase()} · ${textLabel} ${lang.toUpperCase()} (${(card.code||card.id).toUpperCase()})`;$('#modalCode').dataset.imageLang=imageLang;$('#modalCode').dataset.textLang=lang;$('#modalName').textContent=shown(card.name);$('#modalSub').textContent=[shown(card.category),card.hp?`HP ${card.hp}`:'',shown(card.stage),shown(card.rarity),card.regulationMark?`REG ${card.regulationMark}`:''].filter(Boolean).join(' · ');
+      const displayedCard=currentCard;bindCardImageRecovery($('#modalImage'),imageDetail,imageLang,{fullDetail:true,active:()=>currentCard===displayedCard&&$('#cardModal').classList.contains('open')});
       const parts=[];(card.abilities||[]).forEach(a=>parts.push(`【${a.name}】\n${a.effect||''}`));(card.attacks||[]).forEach(a=>parts.push(`【${a.name}】${a.damage?'  '+a.damage:''}\n${a.effect||'—'}`));if(card.effect)parts.push(`【EFFECT】\n${card.effect}`);$('#effectTitle').textContent=uiLang==='en'?(card.category==='Pokemon'?'ABILITIES & ATTACKS':'CARD EFFECT'):uiLang==='ja'?(card.category==='Pokemon'?'特性・ワザ':'カード効果'):card.category==='Pokemon'?'特性・招式':'卡牌效果';const emptyText=uiLang==='en'?'No effect text is available for this print.':uiLang==='ja'?'この収録版の効果テキストは未収録です。':uiLang==='zh'?'此版本暫無效果文字記錄。':'此版本暂无效果文字记录。';$('#effectText').textContent=shown(parts.join('\n\n')||emptyText);$$('.effect-langs button').forEach(b=>b.classList.toggle('active',b.dataset.lang===effectLang));$('#cardModal').classList.toggle('card-over-deck',overDeck);$('#cardModal').classList.add('open');document.body.style.overflow='hidden';
       setCardLanguageStatus();
+      const originalImage=officialCatalogImageRecord(imageDetail,imageLang,true);if(originalImage){const link=document.createElement('a');link.id='cardOriginalImageLink';link.href=originalImage.image;link.target='_blank';link.rel='noopener';link.textContent=uiLang==='en'?'Original image · exact print ↗':uiLang==='ja'?'同収録版の元画像 ↗':'原始卡图 · 同一印刷 ↗';$('#effectText').append('\n\n',link)}
       if(/^https:\/\//.test(card.sourceUrl||'')){const link=document.createElement('a');link.href=card.sourceUrl;link.target='_blank';link.rel='noopener';link.textContent=uiLang==='en'?'Card source ↗':uiLang==='ja'?'カード原文 ↗':'卡片原文 ↗';$('#effectText').append('\n\n',link)}
     }
     const effectToDexLang=lang=>lang==='zh'?'zh-tw':lang;
@@ -535,17 +537,35 @@ const mainMatchupLocales={
       status.textContent=kind?cardLanguageMessage(kind):'';
     }
     function cardDetailImage(card){return isPhysicalTcgdexImage(card?.image)?card.image+'/high.webp':card?.physicalOfficial&&/^https:\/\/(www\.pokemon-card\.com\/assets\/images\/card_images\/large\/|asia\.pokemon-card\.com\/tw\/card-img\/)/.test(card.image)?card.image:card?.verifiedReference&&/^https:\/\/limitlesstcg\.nyc3\.cdn\.digitaloceanspaces\.com\/tpci\//.test(card.image)?card.image:''}
-    function sameVerifiedCatalogPrint(detail,print,lang){
-      if(lang!=='ja'||!isPhysicalTcgdexImage(detail?.image))return false;
-      const api=String(detail.id||'').match(/^([A-Z0-9.]+)-(\d+)$/i),known=String(print.code||print.sourceCode||'').match(/^([A-Z0-9.]+)-(\d+)$/i);
-      if(!api||!known||api[1].toUpperCase()!==known[1].toUpperCase()||api[2].replace(/^0+/,'')!==known[2].replace(/^0+/,''))return false;
-      if(String(detail.set?.id||'').toUpperCase()!==api[1].toUpperCase()||String(detail.localId).replace(/^0+/,'')!==api[2].replace(/^0+/,''))return false;
+    function sameJapaneseCatalogNumber(detail,print){
+      if(!isPhysicalTcgdexImage(detail?.image)||print?.language!=='ja')return false;
+      const api=String(detail.id||'').match(/^([A-Z0-9.-]+)-(\d+)$/i),known=String(print.code||print.sourceCode||'').match(/^([A-Z0-9.-]+)-(\d+)$/i),number=value=>String(value).replace(/^0+/,'');
+      if(!api||!known||api[1].toUpperCase()!==known[1].toUpperCase()||number(api[2])!==number(known[2])||number(detail.localId)!==number(api[2]))return false;
+      if(detail.set?.id&&String(detail.set.id).toUpperCase()!==api[1].toUpperCase())return false;
       const image=String(detail.image).match(/^https:\/\/assets\.tcgdex\.net\/ja\/[^/]+\/([^/]+)\/(\d+)$/);
-      if(!image||image[1].toUpperCase()!==api[1].toUpperCase()||image[2].replace(/^0+/,'')!==api[2].replace(/^0+/,''))return false;
+      if(!image||image[1].toUpperCase()!==api[1].toUpperCase()||number(image[2])!==number(api[2]))return false;
       const name=value=>String(value||'').normalize('NFKC').replace(/\s+/g,'').replace(/\(ACESPEC\)/gi,'');
-      if(name(detail.name)!==name(print.name)||detail.category!==print.category)return false;
+      return name(detail.name)===name(print.name);
+    }
+    function sameVerifiedCatalogPrint(detail,print,lang){
+      if(lang!=='ja'||!detail.set?.id||!sameJapaneseCatalogNumber(detail,print)||detail.category!==print.category)return false;
       if(detail.category==='Pokemon'){const hp=Number(print.hp||String(print.effect||'').match(/HP\s*(\d+)/)?.[1]);if(!hp||Number(detail.hp)!==hp)return false}
       return true;
+    }
+    function officialCatalogImageRecord(card,lang,fullDetail=false){
+      const rows=window.PTCG_OFFICIAL_DETAILS?.cards||[];
+      if(card?.physicalOfficial)return rows.find(print=>print.id===card.id&&print.code===card.code&&print.image===card.image&&print.language===lang)||null;
+      if(lang!=='ja')return null;
+      return rows.find(print=>print.physicalOfficial&&/^https:\/\/www\.pokemon-card\.com\/assets\/images\/card_images\/large\//.test(print.image||'')&&(fullDetail?sameVerifiedCatalogPrint(card,print,lang):sameJapaneseCatalogNumber(card,print)))||null;
+    }
+    function bindCardImageRecovery(img,card,lang,{fullDetail=false,active=()=>true}={}){
+      if(!img)return;const binding={},original=officialCatalogImageRecord(card,lang,fullDetail),attempts=[img.src];
+      if(/\/low\.webp$/.test(img.src))attempts.push(img.src.replace(/\/low\.webp$/,'/high.webp'));
+      if(original?.image&&!attempts.includes(original.image))attempts.push(original.image);
+      let index=0;img._metalabImageBinding=binding;delete img.dataset.retry;img.dataset.imageSource=img.src===original?.image?'official-exact':'original';img.dataset.imageState='loading';
+      const current=()=>img._metalabImageBinding===binding&&img.isConnected!==false&&active()&&img.src===attempts[index],art=()=>img.closest?.('.card-art');
+      img.onload=()=>{if(!current())return;img.dataset.imageState='ready';art()?.classList.remove('image-missing');if(img.style)img.style.opacity=''};
+      img.onerror=()=>{if(!current())return;if(index+1<attempts.length){index++;const next=attempts[index];img.dataset.retry=next===original?.image?'official-exact':'high';img.dataset.imageSource=next===original?.image?'official-exact':'original';img.src=next;return}img.dataset.imageState='unavailable';art()?.classList.add('image-missing');if(img.style)img.style.opacity='.25'};
     }
     function verifiedCardLanguageRecord(source){
       const lang=source?.remote?source.lang:'en',detail=source?.detail||source;if(!detail)return null;

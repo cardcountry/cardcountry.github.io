@@ -7,7 +7,7 @@
   <title>META LAB — ONE PIECE CARD GAME</title>
   <link rel="preconnect" href="https://en.onepiece-cardgame.com">
   <link rel="preconnect" href="https://www.onepiece-cardgame.com">
-  <link rel="stylesheet" href="opcg.css?v=14">
+  <link rel="stylesheet" href="opcg.css?v=2026111004">
   <link rel="stylesheet" href="site-data-quality.css?v=2">
   <link rel="stylesheet" href="deck-responsive.css?v=20261106">
   <link rel="stylesheet" href="usage-ranking.css?v=20261107">
@@ -17,7 +17,7 @@
 <script src="media-deck-videos.js?v=2026110712" defer></script>
 <script src="matchup-evidence.js?v=2026110712"></script>
   <link rel="stylesheet" href="comfort.css?v=2026111002">
-  <script src="comfort-ui.js?v=2026110712" defer></script>
+  <script src="comfort-ui.js?v=2026111003" defer></script>
 </head>
 <body>
   <div class="tide-strip" aria-hidden="true"><span>GRAND LINE DATA · JAPAN EB05 / REGIONAL ARCHIVES · 2,850 UNIQUE CARDS · PHYSICAL CARD GAME</span><span>GRAND LINE DATA · JAPAN EB05 / REGIONAL ARCHIVES · 2,850 UNIQUE CARDS · PHYSICAL CARD GAME</span></div>
@@ -58,7 +58,7 @@
     <section class="section card-section" id="cards">
       <div class="section-head"><div><span>03 / CARD ATLAS</span><h2 data-i18n="cardsTitle">OPCG 完整卡牌图鉴</h2></div><p><b id="cardTotal">2,850</b> UNIQUE CARDS · OP01—OP17 / EB / ST / PRB / PROMO</p></div>
       <div class="card-toolbar"><div class="card-search-row"><div class="card-search"><span>⌕</span><input id="cardSearch" type="search" autocomplete="off" spellcheck="false" aria-label="Search card name, number or text" data-i18n-placeholder="cardSearchPlaceholder" placeholder="输入卡名、卡号、效果或特征…"></div><button class="card-clear-button" id="clearCardFilters" data-i18n="clearFilters">清除筛选</button></div><details class="card-extra-filters"><summary data-i18n="moreFilters">更多筛选</summary><div class="card-filter-options"><select id="setFilter" aria-label="Set filter"><option value="">ALL SETS</option></select><select id="colorFilter" aria-label="Color filter"><option value="">ALL COLORS</option><option>Red</option><option>Green</option><option>Blue</option><option>Purple</option><option>Black</option><option>Yellow</option></select><select id="typeFilter" aria-label="Card type filter"><option value="">ALL TYPES</option><option>Leader</option><option>Character</option><option>Event</option><option>Stage</option><option>Don!!</option></select><select id="costFilter" aria-label="Cost filter"><option value="">ALL COSTS</option><option value="0">COST 0</option><option value="1">COST 1</option><option value="2">COST 2</option><option value="3">COST 3</option><option value="4">COST 4</option><option value="5">COST 5</option><option value="6">COST 6</option><option value="7">COST 7</option><option value="8">COST 8</option><option value="9">COST 9</option><option value="10+">COST 10+</option></select></div></details></div>
-      <div class="language-image-note"><span data-i18n="imageLangNote">日文界面使用官方日文卡图与日文效果；简中、繁中与英文界面使用官方英文实体卡图。中文界面保留官方英文卡文，避免非官方翻译影响裁定。</span><b>AUTO CATALOG CHECK · 2026.10.30</b></div>
+      <div class="language-image-note"><span data-i18n="imageLangNote">卡图、效果与 Trigger 分别标示语言。卡图使用已核实同一卡号的日文或英文公开来源及本站缓存；实际语言与来源见卡片详情。</span><b>AUTO CATALOG CHECK · 2026.10.30</b></div>
       <div class="card-results-head"><span id="cardResultCount"></span><div class="view-toggle"><button class="active" data-view="image" data-i18n="imageView">卡图</button><button data-view="name" data-i18n="nameView">卡名</button></div></div>
       <div class="card-grid" id="cardGrid"></div><button class="load-more" id="loadMoreCards" data-i18n="loadMore">载入更多卡牌</button>
     </section>
@@ -77,6 +77,7 @@
   <script src="site-data-quality.js?v=2026110710"></script>
   <script src="opcg-eb05-jp.js?v=20261107"></script>
   <script src="multilingual-search.js?v=2026110710"></script>
-  <script src="opcg.js?v=2026110801"></script>
+  <script src="opcg-image-cache.js?v=2026111004"></script>
+  <script src="opcg.js?v=2026111004"></script>
 </body>
 </html>

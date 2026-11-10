@@ -35,3 +35,201 @@ body>footer{padding:2rem clamp(20px,6vw,96px);display:grid;grid-template-columns
 /* Exact Counter, Character-cost and Event counts for the selected list. */
 .list-composition{display:grid;grid-template-columns:.55fr 1.45fr;gap:.75rem;margin:0 0 1rem}.list-composition>div{padding:.75rem;border:1px solid rgba(7,23,34,.13);background:rgba(255,255,255,.22)}.list-composition h4{margin:0 0 .55rem;font-size:.6rem;letter-spacing:.09em}.composition-chips{display:grid;gap:.35rem}.counter-chips{grid-template-columns:repeat(3,1fr)}.cost-chips{grid-template-columns:repeat(6,1fr)}.composition-chips span{min-width:0;padding:.48rem .35rem;background:rgba(255,255,255,.32);border:1px solid rgba(7,23,34,.09);display:flex;flex-direction:column;align-items:center;text-align:center}.composition-chips b{font-family:var(--display);font-size:1rem}.composition-chips small{color:#676a64;font-size:.45rem;font-weight:900;letter-spacing:.04em;white-space:nowrap}@media(max-width:760px){.list-composition{grid-template-columns:1fr}.cost-chips{grid-template-columns:repeat(4,1fr)}}
 
+/* OPCG: readable sample ranking and complete-card mobile dialogs. */
+.meta-chart-panel #usageChart.usage-chart{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#usageChart .usage-cell{display:grid;grid-template-columns:25px 43px minmax(0,1fr) auto;align-items:center;gap:12px;min-height:78px;padding:10px 14px;border:1px solid #35515c;border-radius:10px;background:#102d3b;color:#f1e7d3;text-align:left;overflow:visible}
+#usageChart .usage-cell:hover{background:#173b49;border-color:var(--gold)}
+#usageChart .usage-position{font-size:13px;font-weight:800;color:#96aeb9;text-align:center}
+#usageChart .usage-cell .usage-art{position:static;display:block;width:43px;height:60px;object-fit:contain;border-radius:4px;border:0;background:#071722}
+#usageChart .usage-copy{display:block;min-width:0}
+#usageChart .usage-cell strong{display:block;min-height:0;padding:0;font-family:inherit;font-size:15px;font-weight:800;line-height:1.35;overflow-wrap:anywhere}
+#usageChart .usage-cell small{display:block;padding:0;margin-top:3px;color:#b1c3cb;font-size:11px;line-height:1.45}
+#usageChart .usage-track{display:block;height:5px;margin-top:7px;overflow:hidden;border-radius:10px;background:#254753}
+#usageChart .usage-track i{display:block;height:100%;border-radius:inherit;background:#ed705e}
+#usageChart .usage-value{min-width:58px;text-align:right}
+#usageChart .usage-value>b{display:block;font-size:19px;font-weight:800;line-height:1.2;color:#f1e7d3;font-variant-numeric:tabular-nums}
+#usageChart .usage-baseline{display:block;margin-top:5px;font-size:11px;line-height:1.35;color:#a2b6c0}
+#usageChart .usage-more{display:none;min-height:44px;border:1px solid #45626f;border-radius:9px;background:#173b49;color:#f1e7d3;font-size:14px;font-weight:800}
+.usage-empty{margin:0;color:#b6cad4;font-size:14px;line-height:1.6}
+.chart-legend[hidden]{display:none!important}
+.deck-card-copy,.rogue-card-copy{min-width:0}
+.deck-card-art .deck-art-card,.rogue-card-art .rogue-art-card{object-fit:contain}
+.image-unavailable{background:repeating-linear-gradient(135deg,#18313b,#18313b 12px,#203c47 12px,#203c47 24px);color:#f1e7d3;object-fit:contain!important;font-size:12px;line-height:1.5}
+.deck-card-item>.card-image-language,.card-item>.card-image-language{display:inline-block;margin:4px 0 0;padding:2px 5px;border:1px solid #888b7e;border-radius:4px;color:#475146;font-family:inherit;font-size:10px;line-height:1.2;font-weight:700}
+.card-grid.name-view .card-item>.card-image-language{display:none}
+#deckModal .deck-list-picker{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;overflow:visible;padding:0}
+.deck-list-picker>label{font-size:12px;font-weight:800;color:#515d59}
+.deck-list-select{display:block;width:100%;min-width:0;max-width:100%;height:48px;padding:0 32px 0 11px;border:1px solid #9d9d89;border-radius:8px;background:#fffaf0;color:#142632;font:inherit;font-size:14px;text-overflow:ellipsis}
+#deckModal .deck-detail-head h3{font-family:inherit;font-size:19px;line-height:1.45}
+#deckModal .deck-detail-head p{font-size:13px;line-height:1.65;overflow-wrap:anywhere}
+#deckModal .list-intel{margin:12px 0 18px;padding:12px;border-radius:10px;background:#e4d7bc;color:#152934}
+.list-composition-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.list-composition-summary>span{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:61px;padding:8px 4px;background:#f5ecd9;border:1px solid #c7bda3;border-radius:7px;text-align:center}
+.list-composition-summary b{font-family:inherit;font-size:21px;line-height:1.2;font-weight:800;font-variant-numeric:tabular-nums}
+.list-composition-summary small{margin-top:5px;color:#4b5852;font-size:11px;line-height:1.25}
+.list-analysis-more{margin-top:11px;border-top:1px solid #b6ad94}
+.list-analysis-more>summary{padding:12px 2px 0;min-height:34px;font-size:13px;font-weight:800;line-height:1.5;cursor:pointer}
+.list-analysis-more[open]>summary{padding-bottom:14px}
+#deckModal .list-composition{display:block;margin-bottom:12px}
+#deckModal .list-composition>div{padding:10px;border-radius:7px}
+#deckModal .list-composition h4{font-size:13px;line-height:1.5;letter-spacing:0}
+#deckModal .cost-chips{grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+#deckModal .composition-chips b{font-family:inherit;font-size:19px;font-weight:800}
+#deckModal .composition-chips small{font-size:11px;letter-spacing:0;white-space:normal}
+#deckModal .list-intel-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:10px 0}
+#deckModal .list-intel-stats>span{min-height:59px;padding:8px;border-radius:6px}
+#deckModal .list-intel-stats b{font-family:inherit;font-size:19px}
+#deckModal .list-intel-stats small,#deckModal .list-intel-note{font-size:11px;line-height:1.5;letter-spacing:0}
+#deckModal .list-intel-body h4{font-size:13px;letter-spacing:0}
+#deckModal .list-core span{font-size:13px;white-space:normal}
+#deckModal .list-core small{font-size:11px}
+#deckModal .list-intel-advice{font-size:13px;line-height:1.7}
+#deckModal .deck-card-item{display:block;min-width:0;color:#142632}
+#deckModal .deck-card-item img{display:block;aspect-ratio:5/7;object-fit:contain;background:#d8ccb0}
+#deckModal .deck-card-item b{margin-top:7px;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+#deckModal .deck-card-item small{display:block;margin-top:3px;font-size:11px;line-height:1.4}
+#deckModal .qty-badge{display:block}
+#deckModal .qty-badge:after{top:5px;right:5px;bottom:auto;width:29px;height:29px;border:2px solid #fff9e9;border-radius:8px;font-size:15px;box-shadow:0 2px 5px #0004}
+.deck-name-rows{border:1px solid #b5ae97;border-radius:9px;overflow:hidden}
+.deck-name-row{display:grid;grid-template-columns:32px minmax(0,1fr) 16px;align-items:center;gap:10px;width:100%;min-height:61px;padding:10px 12px;border:0;border-bottom:1px solid #c7bda3;background:#f5eddc;color:#142632;text-align:left;font:inherit;font-size:14px;line-height:1.5}
+.deck-name-row:last-child{border-bottom:0}
+.deck-name-row>b{font-size:18px;color:#a12820}
+.deck-name-row>span{min-width:0;overflow-wrap:anywhere}
+.deck-name-row small{display:block;margin-top:2px;font-size:12px;color:#59625a}
+.deck-name-row:hover{background:#e6d8bc}
+#cardModal .card-modal-art img{object-fit:contain}
+#cardModalCode{display:block;line-height:1.7;letter-spacing:.04em;overflow-wrap:anywhere}
+#cardModal .effect-panel p{font-size:15px;line-height:1.8}
+
+@media(max-width:760px){
+  .hero{padding:28px 18px 20px;gap:14px;min-height:0}
+  .hero h1{margin:12px 0 14px;font-size:clamp(38px,10.5vw,58px);line-height:.91}
+  .hero .eyebrow{font-size:10px;letter-spacing:.09em}
+  .hero-copy>p:not(.eyebrow){margin:0;font-size:14px;line-height:1.65}
+  .hero-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin:17px 0}
+  .hero-actions a{display:flex;align-items:center;justify-content:center;min-height:45px;padding:9px 7px;border-radius:8px;font-size:12px;line-height:1.4;text-align:center;letter-spacing:0}
+  .hero-stats{justify-content:space-between;gap:10px;padding-top:12px}
+  .hero-stats b{font-size:24px}
+  .hero-stats small{font-size:11px;letter-spacing:0}
+  .cover-byline{display:none}
+  .hero .hero-visual{height:116px;margin-top:0}
+  .hero .hero-card{width:65px;border-radius:4px;box-shadow:0 5px 12px #0007}
+  .hero .hero-card-back{left:12px;top:8px;transform:rotate(-7deg)}
+  .hero .hero-card-front{left:64px;right:auto;top:17px;transform:rotate(6deg)}
+  .hero .hero-stamp{left:auto;right:0;bottom:22px;padding:9px 10px;max-width:calc(100% - 155px)}
+  .hero .hero-stamp b{font-size:18px;line-height:1.4}
+  .hero .hero-stamp span,.hero .hero-stamp small{font-size:9px;line-height:1.5;letter-spacing:.04em}
+  .hero .compass-ring{display:none}
+  main{display:flex;flex-direction:column}
+  main>#meta{order:0}main>#cards{order:1}main>#rules{order:2}main>#sources{order:3}
+  .section{padding:32px 16px}
+  .section-head{margin-bottom:18px;padding-bottom:14px}
+  .section-head h2{font-size:28px;line-height:1.3}
+  .section-head>p{margin:10px 0 0;line-height:1.7;letter-spacing:0;font-size:12px}
+  .restriction-alert{padding:12px;border-radius:9px;font-size:13px;line-height:1.7}
+  .restriction-alert>b{font-size:11px}
+  .meta-toolbar{gap:12px;margin:16px 0}
+  .format-tabs{display:flex;gap:5px;flex-wrap:wrap;width:100%}
+  .format-tabs button{flex:1 1 auto;min-width:0;min-height:44px;padding:10px 7px;border-radius:7px;font-size:12px;line-height:1.4}
+  .sync-status{font-size:11px;line-height:1.5;white-space:normal}
+  .deck-finder{padding:12px;margin-bottom:18px}
+  .deck-finder label{font-size:12px;letter-spacing:0;line-height:1.5}
+  .deck-finder input{min-width:0;min-height:44px;font-size:16px}
+  .meta-chart-panel{padding:12px;border-radius:12px}
+  .chart-head{gap:12px}
+  .chart-head h3{font-family:inherit;font-size:20px;line-height:1.4}
+  .chart-head p{font-size:12px;line-height:1.7}
+  .chart-legend{flex-wrap:wrap;white-space:normal;font-size:11px}
+  .meta-chart-panel #usageChart.usage-chart{display:flex;flex-direction:column;margin-top:13px;gap:7px}
+  #usageChart .usage-cell{grid-template-columns:17px 35px minmax(0,1fr) 50px;gap:8px;min-height:74px;padding:9px 8px;border-radius:8px}
+  #usageChart .usage-cell .usage-art{width:35px;height:49px}
+  #usageChart .usage-cell strong{font-size:13px;line-height:1.4}
+  #usageChart .usage-cell small{font-size:10px;line-height:1.5}
+  #usageChart .usage-position{font-size:11px}
+  #usageChart .usage-value{min-width:0}
+  #usageChart .usage-value>b{font-size:17px}
+  #usageChart .usage-baseline{font-size:10px}
+  #usageChart:not(.is-expanded) .usage-cell:nth-of-type(n+6){display:none}
+  #usageChart .usage-more{display:block;width:100%;margin-top:3px}
+  .subhead{margin-top:24px}
+  .subhead h3{font-family:inherit;font-size:22px;line-height:1.5}
+  .subhead p{font-size:13px;line-height:1.7}
+  .deck-grid{gap:12px}
+  .deck-grid .deck-card{grid-template-columns:94px minmax(0,1fr);min-height:160px;border-radius:12px}
+  .deck-grid .deck-card-art{min-height:160px}
+  .deck-grid .deck-card-art .deck-art-card{height:132px;max-width:86%}
+  .deck-grid .deck-card-copy{padding:13px 11px}
+  .deck-grid .deck-card-copy>span{display:block;font-size:10px;line-height:1.4;letter-spacing:0}
+  .deck-grid .deck-card h4{margin:6px 0;font-family:inherit;font-size:17px;line-height:1.35;overflow-wrap:anywhere}
+  .deck-grid .deck-card p{font-size:11px;line-height:1.5}
+  .deck-grid .deck-card-stats{gap:20px;margin-top:12px}
+  .deck-grid .deck-card-stats b{font-family:inherit;font-size:19px}
+  .deck-grid .deck-card-stats small{font-size:10px;line-height:1.5;letter-spacing:0}
+  .rogue-grid{gap:10px}
+  .rogue-grid .rogue-card{min-height:0;border-radius:10px}
+  .rogue-grid .rogue-card-art{height:150px}
+  .rogue-grid .rogue-card-art .rogue-art-card{height:132px}
+  .rogue-grid .rogue-card-copy{min-height:0;padding:10px}
+  .rogue-grid .rogue-card b{font-family:inherit;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+  .rogue-grid .rogue-card small{font-size:11px;line-height:1.5}
+  #deckModal.modal,#cardModal.modal{padding:0;align-items:end}
+  #deckModal .modal-shell,#cardModal .modal-shell{width:100%;max-width:100%;max-height:96dvh;border-radius:16px 16px 0 0}
+  #deckModal .deck-modal-head{min-height:0;padding:18px 50px 16px 14px;gap:12px;align-items:flex-start}
+  #deckModal .deck-modal-head img{width:64px;height:90px;max-height:90px;object-fit:contain;border-radius:5px}
+  #deckModal .deck-modal-head>div{min-width:0}
+  #deckModal .deck-modal-head h2{margin:5px 0;font-family:inherit;font-size:21px;line-height:1.4}
+  #deckModal .deck-modal-head span{font-size:10px;line-height:1.6;letter-spacing:0;overflow-wrap:anywhere}
+  #deckModal .deck-modal-head p{margin:6px 0 0;font-size:12px;line-height:1.6}
+  #deckModal .deck-modal-body{padding:13px}
+  #deckModal .deck-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:13px 0;background:transparent}
+  #deckModal .deck-tabs button{min-width:0;min-height:44px;padding:7px 3px;border-radius:6px;font-size:12px;line-height:1.35;letter-spacing:0}
+  #deckModal .deck-detail-head{gap:9px;margin-bottom:10px}
+  #deckModal .deck-detail-head h3{font-size:16px}
+  #deckModal .deck-detail-head p{font-size:12px;line-height:1.6}
+  #deckModal .deck-view-toggle button{font-size:13px}
+  #deckModal .list-intel{padding:9px;margin:10px 0 14px}
+  .list-composition-summary{gap:5px}
+  .list-composition-summary>span{min-height:58px;padding:7px 2px}
+  .list-composition-summary b{font-size:19px}
+  .list-composition-summary small{font-size:10px;line-height:1.35}
+  .list-analysis-more>summary{font-size:12px;padding-top:10px}
+  #deckModal .cost-chips{grid-template-columns:repeat(4,minmax(0,1fr))}
+  #deckModal .deck-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 10px}
+  #deckModal .deck-card-item b{font-size:13px;line-height:1.5}
+  #deckModal .deck-card-item small{font-size:11px}
+  #cardModal .card-modal-art{padding:15px 45px 14px;background:#d6c7a5}
+  #cardModal .card-modal-art img{width:auto;max-width:100%;height:auto;max-height:35dvh}
+  #cardModal .card-modal-copy{padding:17px 16px 24px}
+  #cardModalCode{font-size:11px;line-height:1.8}
+  #cardModal .card-modal-copy h2{font-family:inherit;font-size:24px;line-height:1.4}
+  #cardModal .effect-panel{padding:13px}
+  #cardModal .effect-panel p{font-size:14px;line-height:1.8}
+  #cardModal .card-badges span{font-size:11px;line-height:1.5}
+  #cardModal .official-note{font-size:12px;line-height:1.7}
+  .card-grid .card-item b{font-family:inherit;font-size:14px;line-height:1.45}
+  .card-grid .card-item small{font-size:11px;line-height:1.5}
+  .language-image-note{font-size:12px;line-height:1.7}
+  .language-image-note b{white-space:normal;font-size:11px}
+  .rule-grid article{padding:20px}
+  .rule-grid p,.rule-video p,.rule-video li{font-size:14px;line-height:1.8}
+}
+@media(max-width:350px){
+  .hero{padding-left:14px;padding-right:14px}
+  .hero h1{font-size:36px}
+  .hero .hero-card-back{left:0}.hero .hero-card-front{left:44px}
+  .hero .hero-stamp{max-width:calc(100% - 125px);padding:7px}
+  .hero .hero-stamp b{font-size:15px}
+  #usageChart .usage-cell{grid-template-columns:15px 31px minmax(0,1fr) 44px;gap:6px;padding:8px 6px}
+  #usageChart .usage-cell .usage-art{width:31px;height:44px}
+  #usageChart .usage-cell strong{font-size:12px}
+  #usageChart .usage-value>b{font-size:15px}
+  .deck-grid .deck-card{grid-template-columns:80px minmax(0,1fr)}
+  .deck-grid .deck-card-copy{padding:12px 9px}
+  .deck-grid .deck-card h4{font-size:15px}
+  .deck-grid .deck-card-stats{gap:13px}
+  #deckModal .deck-tabs button{font-size:11px}
+  .list-composition-summary small{font-size:9px}
+}
+@media(max-width:680px){
+  .deck-list-select,header.site-header #uiLang{font-size:16px}
+}
