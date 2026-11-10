@@ -523,7 +523,7 @@ const mainMatchupLocales={
     }
     function renderDexCards(){
       $('#cardGrid').innerHTML=dexCards.length?dexCards.map(c=>{const name=uiLang==='zh-cn'&&dexLang==='zh-tw'?toSimplified(c.name):c.name;return `<button class="card-item remote-card" data-remote-id="${c.id}"><span class="card-art"><img src="${c.image}/low.webp" alt="${name} physical Pokémon TCG card" loading="lazy"><i>IMAGE UNAVAILABLE</i></span><div class="card-type">${dexLang.toUpperCase()} · PHYSICAL TCG${uiLang==='zh-cn'&&dexLang==='zh-tw'?' · 简体名称显示':''}</div><h3>${name}</h3><div class="card-code">${c.id.toUpperCase()} · #${c.localId}</div></button>`}).join(''):`<div class="empty">NO CARDS FOUND<br><small>${pageText().noCards}</small></div>`;
-      $('.remote-card img').forEach(img=>{img.addEventListener('load',()=>img.closest('.card-art').classList.remove('image-missing'));img.addEventListener('error',()=>{if(!img.dataset.retry&&/\/low\.webp$/.test(img.src)){img.dataset.retry='high';img.src=img.src.replace(/\/low\.webp$/,'/high.webp');return}img.closest('.card-art').classList.add('image-missing')});});
+      $$('.remote-card img').forEach(img=>{img.addEventListener('load',()=>img.closest('.card-art').classList.remove('image-missing'));img.addEventListener('error',()=>{if(!img.dataset.retry&&/\/low\.webp$/.test(img.src)){img.dataset.retry='high';img.src=img.src.replace(/\/low\.webp$/,'/high.webp');return}img.closest('.card-art').classList.add('image-missing')});});
       $$('.remote-card').forEach(el=>el.addEventListener('click',()=>openRemoteCard(el.dataset.remoteId)));
     }
     function displayRemoteCard(card,lang=dexLang,overDeck=false,art=null){
