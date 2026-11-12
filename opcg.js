@@ -1,5 +1,8 @@
 (()=>{
   'use strict';
+  // Independent topic pages keep compatibility DOM, but only run their own render/sync work.
+  const pageView=document.documentElement.dataset?.pageView||'';
+  const pageAllows=(...views)=>!pageView||views.includes(pageView);
   const D=window.OPCG_DATA||{meta:{OP17:[],OP16:[]},events:[],xSignals:[],sources:[],videos:{}};
   const cards=window.OPCG_CARDS||[];
   const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -77,7 +80,7 @@
     const imageNote=$('[data-i18n="imageLangNote"]');if(imageNote)imageNote.textContent=t('imageLangNote');
     try{localStorage.setItem('metalab-opcg-language',uiLang)}catch(error){}
     renderMeta();renderEvents();renderX();renderSources();renderCards();
-    if(currentDeck)renderDeckModal(false);if(currentCard)openCard(currentCard.code,false);bindCardImages($('.hero'));
+    if(currentDeck)renderDeckModal(false);if(currentCard)openCard(currentCard.code,false);if(!pageView)bindCardImages($('.hero'));
   }
   function openModal(id){const modal=$('#'+id);modal.classList.add('open');document.body.style.overflow='hidden'}
   function closeModal(id){$('#'+id)?.classList.remove('open');if(!$('.modal.open'))document.body.style.overflow=''}
@@ -117,7 +120,7 @@
     const label=uiLang==='ja'?'リスト':uiLang==='en'?'LISTS':uiLang==='zh'?'牌組':'卡表';return `<button class="rogue-card" data-open-deck="${esc(deck.leader)}"><span class="rogue-card-art"><img class="rogue-art-bg" src="${esc(image)}" alt="" aria-hidden="true"><img class="rogue-art-card" src="${esc(image)}" alt="${esc(deck.name)}" loading="lazy"></span><div class="rogue-card-copy"><b>${esc(deck.name)}</b><small>${esc(deck.leader)} · ${deck.lists.length} ${label}</small></div></button>`;
   }
   function searchableDecks(){if(!deckQuery.trim())return D.meta[currentFormat]||[];const pool=new Map();for(const deck of Object.values(D.meta).flat()){if(!deck.lists?.length)continue;let group=pool.get(deck.leader);if(!group){group={...deck,share:null,priorShare:null,winrate:null,rank:null,lists:[]};pool.set(deck.leader,group)}const seen=new Set(group.lists.map(l=>l.id||l.sourceUrl));for(const list of deck.lists)if(!seen.has(list.id||list.sourceUrl)){group.lists.push(list);seen.add(list.id||list.sourceUrl)}group.lists.sort((a,b)=>String(b.date).localeCompare(String(a.date)));}return [...pool.values()];}
-  function renderMeta(){
+  function renderMeta(){if(!pageAllows('decks'))return;
     const all=searchableDecks();const query=deckQuery.trim().toLowerCase();const decks=all.filter(deck=>deck.lists?.length&&(!query||(window.MetaSearch?window.MetaSearch.matches(query,[deckHaystack(deck)]):deckHaystack(deck).includes(query))));
     const main=decks.filter(deck=>!deck.rogue),rogue=decks.filter(deck=>deck.rogue);
     renderChart(all);renderForecast();
@@ -194,7 +197,7 @@
       return true;
     });
   }
-  function renderCards(){
+  function renderCards(){if(!pageAllows('cards'))return;
     const results=filteredCards(),shown=results.slice(0,cardPage*60),grid=$('#cardGrid');grid.classList.toggle('name-view',cardView==='name');
     grid.innerHTML=shown.map(card=>`<button class="card-item" data-card-code="${esc(card.code)}"><img src="${esc(cardImage(card))}" alt="${esc(cardName(card))}" loading="lazy"><b>${esc(cardName(card))}</b><small>${esc(card.code)} · ${esc(card.color)} · ${esc(card.category)}</small><span class="name-effect">${esc(cardEffect(card))}</span></button>`).join('');
     bindCardImages(grid);
@@ -207,14 +210,14 @@
     const stats=[card.color,card.cost&&(card.category==='Leader'?`LIFE ${card.cost}`:`COST ${card.cost}`),card.power&&`POWER ${card.power}`,card.counter&&`COUNTER ${card.counter}`,card.attribute,uiLang==='ja'?(card.traits_ja||card.traits):card.traits].filter(Boolean);
     $('#cardModalBadges').innerHTML=stats.map(value=>`<span>${esc(value)}</span>`).join('');$('#cardModalEffect').textContent=cardEffect(card);$('#cardModalTrigger').textContent=cardTrigger(card);if(open)openModal('cardModal');
   }
-  function renderEvents(){const rows=currentFormat==='EB05JP'?Object.values(Object.fromEntries((D.meta.EB05JP||[]).flatMap(d=>d.lists.map(l=>[l.date+'|'+l.event+'|'+l.host,{date:l.date,name:l.event+' · '+l.host,source:l.source,players:l.players,winner:'参见完整卡表'}])))):D.events.filter(event=>event.format===currentFormat);$('#eventRows').innerHTML=rows.map(event=>`<tr><td>${esc(displayDate(event.date))}</td><td><b>${esc(event.name)}</b><small>${esc(event.source)}</small></td><td>${event.players==null?'—':event.players.toLocaleString()}</td><td>${esc(event.winner)}</td></tr>`).join('')}
+  function renderEvents(){if(!pageAllows('decks','events'))return;const rows=currentFormat==='EB05JP'?Object.values(Object.fromEntries((D.meta.EB05JP||[]).flatMap(d=>d.lists.map(l=>[l.date+'|'+l.event+'|'+l.host,{date:l.date,name:l.event+' · '+l.host,source:l.source,players:l.players,winner:'参见完整卡表'}])))):D.events.filter(event=>event.format===currentFormat);$('#eventRows').innerHTML=rows.map(event=>`<tr><td>${esc(displayDate(event.date))}</td><td><b>${esc(event.name)}</b><small>${esc(event.source)}</small></td><td>${event.players==null?'—':event.players.toLocaleString()}</td><td>${esc(event.winner)}</td></tr>`).join('')}
   function xDescription(signal){if(uiLang==='zh'||uiLang==='zh-cn')return signal.detail;if(uiLang==='ja'){
     if(signal.deck==='OP15-001')return '128人のStore Championshipで7-0優勝。公開大会の同リーダーリストと照合済み。';
     if(signal.deck==='OP17-020')return 'Blue Rocks戦7回中6勝という3V3 CSの記録。全体勝率ではなく対面観察として使用。';
     if(signal.deck==='OP05-098')return '日本のFlagship／EGB優勝シグナル。サイト内リストは公開大会記録と照合済み。';
     return '公式Xのカード紹介を新カード発見に使用。効果と画像はBandai公式カードリストで確認。';
   }if(signal.deck==='OP15-001')return '7-0 winner of a 128-player Store Championship, cross-checked against a public list for the same Leader.';if(signal.deck==='OP17-020')return 'A 3v3 CS report recording 6 wins across 7 Blue Rocks rounds; treated as matchup observation, not a population win rate.';if(signal.deck==='OP05-098')return 'Recent Japanese Flagship/EGB winner signal; the on-site list is cross-checked against published event records.';return 'Official X card reveal used as a discovery signal; rules text and art still come from Bandai’s official catalog.'}
-  function renderX(){$('#xSignalGrid').innerHTML=D.xSignals.map(signal=>`<article class="x-card" data-x-deck="${esc(signal.deck)}"><span>X VERIFIED SIGNAL · ${esc(signal.date)}</span><h4>${esc(signal.title)}</h4><p>${esc(xDescription(signal))}</p><footer><b>${esc(signal.handle)}</b><span>${esc(signal.deck)}</span></footer></article>`).join('')}
+  function renderX(){if(!pageAllows('decks'))return;$('#xSignalGrid').innerHTML=D.xSignals.map(signal=>`<article class="x-card" data-x-deck="${esc(signal.deck)}"><span>X VERIFIED SIGNAL · ${esc(signal.date)}</span><h4>${esc(signal.title)}</h4><p>${esc(xDescription(signal))}</p><footer><b>${esc(signal.handle)}</b><span>${esc(signal.deck)}</span></footer></article>`).join('')}
   function sourceCopy(source,index){
     if(index===3)return uiLang==='ja'?{type:'日本・過去環境の公開デッキリスト',note:'日本EB05の公開リストとOP17／OP17.5の過去リスト。日付と地域は各情報源の記録に従います。'}:uiLang==='en'?{type:'JAPANESE / HISTORICAL DECKLISTS',note:'Public Japanese EB05 lists and historical OP17 / OP17.5 lists; dates and regions follow each source record.'}:uiLang==='zh'?{type:'日本／歷史環境公開卡表',note:'日本 EB05 公開卡表與 OP17／OP17.5 歷史卡表；日期與地區依各來源記錄。'}:{type:'日本／历史环境公开卡表',note:'日本 EB05 公开卡表与 OP17／OP17.5 历史卡表；日期与地区依各来源记录。'};
     if(index===1){const copy=uiLang==='ja'?{type:'カード画像・カード文の検証',note:'カードの識別と文章は公式資料で確認します。画像は同じカード番号の確認済み日本語・英語の公開情報源と当サイトのキャッシュを使用し、実際の言語と出典を詳細に表示します。'}:uiLang==='en'?{type:'CARD ART / TEXT VERIFICATION',note:'Card identity and text are verified against official data. Images use verified Japanese or English prints of the same card number from public sources and our cache, with the actual language and source shown in card details.'}:uiLang==='zh'?{type:'卡圖與卡文核驗',note:'卡牌身份與卡文依據官方資料核驗。卡圖使用已核實同一卡號的日文或英文公開來源及本站快取；實際圖片語言與來源在卡片詳情標示。'}:{type:'卡图与卡文核验',note:'卡牌身份与卡文依据官方资料核验。卡图使用已核实同一卡号的日文或英文公开来源及本站缓存；实际图片语言与来源在卡片详情标示。'};return copy}
@@ -225,7 +228,7 @@
     const notesJa=['総合ルール、10月の禁止制限、公式英語カード情報。','日本語UIに公式日本語カード画像とテキストを使用。','大規模大会の日付、人数、順位、完全な50枚リスト。','OP17／OP17.5の公開リストを解析しサイト内表示。','制限後13大会、396デッキ、非ミラー765試合。','OP17／OP16大会索引を照合に使用。','公式カードまたは公開大会と照合できる投稿のみ収録。'];
     return uiLang==='ja'?{type:typesJa[index],note:notesJa[index]}:{type:typesEn[index],note:notesEn[index]};
   }
-  function renderSources(){$('#sourceGrid').innerHTML=D.sources.map((source,index)=>{const copy=sourceCopy(source,index);return `<article class="source-card"><span>${esc(copy.type)}</span><h3>${esc(source.name)}</h3><p>${esc(copy.note)}</p><a href="${esc(source.url)}" target="_blank" rel="noopener">${uiLang==='ja'?'情報源を確認':uiLang==='en'?'VERIFY SOURCE':'查看来源记录'} ↗</a></article>`}).join('')}
+  function renderSources(){if(!pageAllows('sources'))return;$('#sourceGrid').innerHTML=D.sources.map((source,index)=>{const copy=sourceCopy(source,index);return `<article class="source-card"><span>${esc(copy.type)}</span><h3>${esc(source.name)}</h3><p>${esc(copy.note)}</p><a href="${esc(source.url)}" target="_blank" rel="noopener">${uiLang==='ja'?'情報源を確認':uiLang==='en'?'VERIFY SOURCE':'查看来源记录'} ↗</a></article>`}).join('')}
   function bindEvents(){
     $('#uiLang').addEventListener('change',event=>setLanguage(event.target.value));
     $('#menuBtn').addEventListener('click',()=>$('#siteNav').classList.toggle('open'));
@@ -256,12 +259,12 @@
   function readAuto(){try{return localStorage.getItem(AUTO_KEY)!=='off'}catch(error){return true}}
   function saveAuto(value){try{localStorage.setItem(AUTO_KEY,value?'on':'off')}catch(error){}}
   async function checkPublishedUpdate(){
-    if(!autoToggle.checked)return;const status=$('.sync-status');status.classList.add('checking');
-    try{const responses=await Promise.all(['opcg-data.js','opcg-recent-data.js'].map(file=>fetch(`${file}?check=${Date.now()}`,{method:'HEAD',cache:'no-store'})));if(responses.some(response=>!response.ok))throw new Error('check failed');const modified=responses.map(response=>response.headers.get('last-modified')).filter(Boolean).sort((a,b)=>Date.parse(a)-Date.parse(b)).at(-1)||D.generated;let previous='';try{previous=localStorage.getItem('metalab-opcg-data-version')||'';localStorage.setItem('metalab-opcg-data-version',modified)}catch(error){}if(previous&&previous!==modified)showToast(uiLang==='en'?'A newer published data file is available. Refresh to load it.':'已检测到较新的已发布资料，刷新页面即可载入。');$('#syncText').textContent=uiLang==='ja'?`公開データ確認済み · ${D.generated}`:uiLang==='en'?`PUBLISHED DATA CHECKED · ${D.generated}`:`已检查已发布资料 · ${D.generated}`}
+    if(!pageAllows('decks','cards','usage','events')||!autoToggle.checked)return;const status=$('.sync-status');status.classList.add('checking');
+    try{const responses=await Promise.all((pageView==='cards'?['opcg-data.js']:['opcg-data.js','opcg-recent-data.js']).map(file=>fetch(`${file}?check=${Date.now()}`,{method:'HEAD',cache:'no-store'})));if(responses.some(response=>!response.ok))throw new Error('check failed');const modified=responses.map(response=>response.headers.get('last-modified')).filter(Boolean).sort((a,b)=>Date.parse(a)-Date.parse(b)).at(-1)||D.generated;let previous='';try{previous=localStorage.getItem('metalab-opcg-data-version')||'';localStorage.setItem('metalab-opcg-data-version',modified)}catch(error){}if(previous&&previous!==modified)showToast(uiLang==='en'?'A newer published data file is available. Refresh to load it.':'已检测到较新的已发布资料，刷新页面即可载入。');$('#syncText').textContent=uiLang==='ja'?`公開データ確認済み · ${D.generated}`:uiLang==='en'?`PUBLISHED DATA CHECKED · ${D.generated}`:`已检查已发布资料 · ${D.generated}`}
     catch(error){$('#syncText').textContent=t('syncText')}finally{status.classList.remove('checking')}
   }
   autoToggle.checked=readAuto();autoToggle.addEventListener('change',event=>{saveAuto(event.target.checked);if(event.target.checked)checkPublishedUpdate()});
   populateSetFilter();bindEvents();
   $('#statCards').textContent=cards.length.toLocaleString();$('#cardTotal').textContent=cards.length.toLocaleString();$('#statLists').textContent=(D.meta.EB05JP||[]).reduce((sum,deck)=>sum+(deck.lists?.length||0),0).toLocaleString();
-  setLanguage(uiLang);if(autoToggle.checked)setTimeout(checkPublishedUpdate,800);
+  setLanguage(uiLang);if(pageAllows('decks','cards','usage','events')&&autoToggle.checked)setTimeout(checkPublishedUpdate,800);
 })();

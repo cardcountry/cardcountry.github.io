@@ -1,5 +1,8 @@
 (()=>{
  'use strict';
+ const pageView=document.documentElement?.getAttribute?.('data-page-view')||'';
+ // Independent documents own one topic; do not mount a second hidden ranking.
+ if(pageView&&pageView!=='usage')return;
  function mountRanking(){
  const old=document.querySelector('#usage-ranking');const previous=old?[...old.querySelectorAll('select')].map(s=>s.value):[];old?.remove();
  const rows=[];let label='',note='每份已收录卡表计一次；上位及公开卡表样本有收录偏差，不代表全体参赛者使用率。',fixedRange='';
@@ -24,7 +27,7 @@
  const summary=node('p');summary.setAttribute('aria-live','polite');const list=node('ol');list.className='usage-list';section.append(summary,list,more);
  function render(){const now=Date.now(),days=Number(period.value);const selected=unique.filter(r=>(format.selectedIndex===0||r.format===format.value)&&(version.selectedIndex===0||r.version===version.value)&&(period.value==='all'||(Number.isFinite(Date.parse(r.date))&&now-Date.parse(r.date)<=days*86400000&&now>=Date.parse(r.date))));const groups=new Map();let total=0;for(const r of selected){const name=fixedRange&&kind.value!=='配置'?r.id.split('|')[{Blade:0,Ratchet:1,Bit:2}[kind.value]]:r.name;const groupName=name||('未注明 '+kind.value);const g=groups.get(groupName)||{name:groupName,count:0,source:r.source};g.count+=r.weight;groups.set(groupName,g);total+=r.weight;}const dates=selected.map(r=>Date.parse(r.date)).filter(Number.isFinite).sort((a,b)=>a-b);summary.textContent=`${total} ${fixedRange?'次配置记录':'份去重卡表'} · ${fixedRange||(dates.length?new Date(dates[0]).toISOString().slice(0,10)+' — '+new Date(dates.at(-1)).toISOString().slice(0,10):'暂无日期')} · 按份数自动排序`;list.replaceChildren();let rank=0,prior=-1;const sorted=[...groups.values()].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name));more.hidden=sorted.length<=limit;sorted.slice(0,limit).forEach((g,i)=>{if(g.count!==prior)rank=i+1;prior=g.count;const row=node('li'),title=node('span',`${rank}. ${g.name}`),value=node('b',`${(g.count/total*100).toFixed(1)}% · ${g.count}`);row.append(title,value);const bar=node('progress');bar.max=total;bar.value=g.count;bar.setAttribute('aria-label',g.name+' 样本使用率');row.append(bar);if(typeof g.source==='string'&&/^https?:\/\//.test(g.source)){const a=node('a','来源 ↗');a.href=g.source;a.target='_blank';a.rel='noopener';row.append(a);}list.append(row);});if(!total)list.append(node('li','当前范围没有可统计样本。'));}
  [format,version,period,kind].forEach(x=>x.addEventListener('change',()=>{limit=20;render()}));const main=document.querySelector('main')||document.body;main.append(section);[format,version,period,kind].forEach((s,i)=>{if(previous[i]&&[...s.options].some(o=>o.value===previous[i]))s.value=previous[i]});render();
- const nav=document.querySelector('header nav');if(nav&&!nav.querySelector('a[href="#usage-ranking"]')){const a=node('a','使用率');a.href='#usage-ranking';nav.append(a);}
+ const nav=document.querySelector('header nav');if(!pageView&&nav&&!nav.querySelector('a[href="#usage-ranking"],a[data-section-view="usage"],a[href*="-usage.html"]')){const a=node('a','使用率');a.href='#usage-ranking';nav.append(a);}
  }
  mountRanking();document.addEventListener('metalab:data-updated',mountRanking);
 })();

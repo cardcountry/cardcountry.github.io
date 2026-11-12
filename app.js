@@ -315,6 +315,7 @@ const mainMatchupLocales={
     };
     const pageText=()=>pageLocales[uiLang]||pageLocales.zh;
     const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+    function ptcgPageAllows(...views){const view=document.documentElement?.dataset?.pageView;return !view||views.includes(view)}
     const zhHansMap={體:'体',環:'环',境:'境',組:'组',賽:'赛',實:'实',資:'资',訊:'讯',則:'则',檢:'检',從:'从',參:'参',讀:'读',為:'为',寶:'宝',獎:'奖',進:'进',場:'场',擲:'掷',幣:'币',決:'决',後:'后',獲:'获',勝:'胜',構:'构',築:'筑',張:'张',數:'数',讓:'让',無:'无',變:'变',動:'动',圖:'图',鑑:'鉴',庫:'库',與:'与',關:'关',權:'权',歸:'归',僅:'仅',錄:'录',過:'过',稱:'称',擊:'击',傷:'伤',點:'点',這:'这',隻:'只',對:'对',戰:'战',選:'选',擇:'择',備:'备',區:'区',將:'将',葉:'叶',雙:'双',發:'发',連:'连',屬:'属',礎:'础',時:'时',會:'会',長:'长',開:'开',顯:'显',歡:'欢',據:'据',壓:'压',電:'电',夢:'梦',靈:'灵',尋:'寻',啟:'启',應:'应',網:'网',頁:'页',隨:'随',該:'该',處:'处',導:'导',個:'个',暫:'暂',還:'还',寫:'写',異:'异',碼:'码',擁:'拥',燈:'灯',龍:'龙',噴:'喷',龜:'龟',鳥:'鸟',馬:'马',風:'风',鋼:'钢',鐵:'铁',級:'级',惡:'恶',氣:'气',聯:'联',隊:'队',東:'东',亞:'亚',灣:'湾',頂:'顶',題:'题',來:'来',萬:'万',測:'测',試:'试',確:'确',認:'认',優:'优',預:'预',設:'设',載:'载',並:'并'};
     const toSimplified=value=>String(value??'').replace(/[\u3400-\u9fff]/g,char=>zhHansMap[char]||char);
     const toTraditional=value=>{const reverse=Object.fromEntries(Object.entries(zhHansMap).map(([traditional,simplified])=>[simplified,traditional]));return String(value??'').replace(/[\u3400-\u9fff]/g,char=>reverse[char]||char)};
@@ -504,12 +505,14 @@ const mainMatchupLocales={
     let autoUpdateEnabled=readAutoUpdate(),autoVideoSyncTimer=null;
     let dexLang='en',dexPage=1,dexQuery='',dexCards=[],dexRequest=0,dexSyncTimer=null;
     async function syncDexCatalog(force=false){
+      if(!ptcgPageAllows('cards'))return;
       const status=$('#dexSyncStatus');
       try{const response=await fetch(`https://api.tcgdex.net/v2/${dexLang}/sets`);if(!response.ok)throw new Error(`HTTP ${response.status}`);const sets=await response.json(),fingerprint=sets.map(s=>s.id).join('|'),key=`metalab-dex-${dexLang}-sets`,previous=localStorage.getItem(key);localStorage.setItem(key,fingerprint);if(force||previous&&previous!==fingerprint){if(!dexQuery)await searchDex('',true)}const stamp=new Intl.DateTimeFormat('zh-TW',{hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());status.textContent=`LIVE AUTO-SYNC · ${sets.length} SETS · ${stamp}`}
       catch(error){status.textContent='LIVE AUTO-SYNC · RETRYING'}
     }
     function startDexAutoSync(){
       clearInterval(dexSyncTimer);dexSyncTimer=null;
+      if(!ptcgPageAllows('cards'))return;
       if(!autoUpdateEnabled){$('#dexSyncStatus').textContent='AUTO UPDATE OFF';return}
       syncDexCatalog(false);
       dexSyncTimer=setInterval(()=>{if(!document.hidden)syncDexCatalog(true)},10*60*1000)
@@ -622,7 +625,7 @@ const mainMatchupLocales={
         const responseDetail=await fetch(`https://api.tcgdex.net/v2/${lang}/cards/${encodeURIComponent(picked.id)}`);if(!responseDetail.ok)throw Error(`HTTP ${responseDetail.status}`);const detail=await responseDetail.json();if(request!==cardDetailRequest)return;if(detail.id!==picked.id||!cardDetailImage(detail))throw Error('CARD IDENTITY MISMATCH');displayRemoteCard(detail,lang,true);if(uiLang==='en'&&lang!=='en')await switchRemoteCardLanguage('en');
       }catch(error){if(request===cardDetailRequest)toast(`暂时无法读取 ${name} 的准确版本：${error.message}`)}
     }
-    function setDexLanguage(lang){const sameLanguage=dexLang===lang;dexLang=lang;$$('#dexLangs button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));const hints={en:'Search English card name or number…',ja:'日本語のカード名・番号を検索…','zh-tw':uiLang==='zh-cn'?'输入简体中文卡名或编号…':'輸入繁體中文卡名或編號…'};$('#cardSearch').placeholder=hints[lang];if(sameLanguage&&(dexCards.length||$('#cardGrid .dex-loading'))){if(dexCards.length)renderDexCards();return}$('#cardSearch').value='';searchDex('',true);startDexAutoSync()}
+    function setDexLanguage(lang){if(!ptcgPageAllows('cards'))return;const sameLanguage=dexLang===lang;dexLang=lang;$$('#dexLangs button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));const hints={en:'Search English card name or number…',ja:'日本語のカード名・番号を検索…','zh-tw':uiLang==='zh-cn'?'输入简体中文卡名或编号…':'輸入繁體中文卡名或編號…'};$('#cardSearch').placeholder=hints[lang];if(sameLanguage&&(dexCards.length||$('#cardGrid .dex-loading'))){if(dexCards.length)renderDexCards();return}$('#cardSearch').value='';searchDex('',true);startDexAutoSync()}
     function openCard(id){++cardLanguageRequest;++cardDetailRequest;currentCard=cards.find(c=>c.id===id);if(!currentCard)return;effectLang='en';$('#modalImage').src=currentCard.image;$('#modalImage').alt=`${currentCard.name.en} physical Pokémon TCG card`;$('#modalCode').textContent=`${currentCard.id.toUpperCase()} · EN · PHYSICAL TCG`;$('#modalSub').textContent=uiLang==='zh-cn'?toSimplified(currentCard.meta):currentCard.meta;updateEffect();setCardLanguageStatus();$('#cardModal').classList.add('open');document.body.style.overflow='hidden';updateLocalCardLanguageImage(uiToEffectLang(uiLang))}
     function updateEffect(){const e=currentCard.effect[effectLang]||currentCard.effect.en,simplify=uiLang==='zh-cn'&&effectLang==='zh',name=currentCard.name[effectLang]||currentCard.name.en;$('#modalName').textContent=simplify?toSimplified(name):name;$('#effectTitle').textContent=simplify?toSimplified(e.title):e.title;$('#effectText').textContent=simplify?toSimplified(e.text):e.text;$$('.effect-langs button').forEach(b=>b.classList.toggle('active',b.dataset.lang===effectLang))}
     async function updateLocalCardLanguageImage(targetLang=effectLang){
@@ -695,6 +698,7 @@ const mainMatchupLocales={
     async function syncAutoVideos(){let changed=false;await Promise.all(Object.entries(autoVideoCandidates).flatMap(([key,videos])=>videos.map(async video=>{const valid=await validateAutoVideo(key,video);if(!valid)return;const current=autoVerifiedVideos[key]||(autoVerifiedVideos[key]=[]);if(!current.some(item=>item.id===video.id)){current.push(video);changed=true}})));if(changed)refreshVisibleAutoVideos()}
     function startAutoVideoSync(){
       clearInterval(autoVideoSyncTimer);autoVideoSyncTimer=null;
+      if(!ptcgPageAllows('decks'))return;
       if(!autoUpdateEnabled)return;
       syncAutoVideos();
       autoVideoSyncTimer=setInterval(()=>{if(document.hidden)return;Object.keys(autoVideoChecks).forEach(key=>delete autoVideoChecks[key]);syncAutoVideos()},10*60*1000)
@@ -779,6 +783,6 @@ const mainMatchupLocales={
     $$('.meta-tools .pill').forEach(p=>p.addEventListener('click',()=>{$$('.meta-tools .pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');const query=p.textContent.trim()==='JAPAN'?'Japan':p.textContent.trim()==='ONLINE'?'__NO_VERIFIED_ONLINE_EVENT__':'';$('#deckSearch').value=query;searchDecklists(query);}));
     $('#deckSearch').addEventListener('input',e=>searchDecklists(e.target.value));$('#clearDeckSearch').addEventListener('click',()=>{$('#deckSearch').value='';searchDecklists('');$('#deckSearch').focus()});$$('.finder-examples button').forEach(b=>b.addEventListener('click',()=>{$('#deckSearch').value=b.dataset.query;searchDecklists(b.dataset.query)}));
     $('#deskBtn').addEventListener('click',()=>toast('店員支援模組已預留，可串接 LINE / Discord'));
-    renderArenaLab();
+    if(ptcgPageAllows('decks'))renderArenaLab();
     setLanguage($('#uiLang').value);
     applyAutoUpdate(autoUpdateEnabled,false);

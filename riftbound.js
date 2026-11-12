@@ -1,5 +1,8 @@
 (()=>{
   'use strict';
+  // Independent topic pages keep compatibility DOM, but only run their own render/sync work.
+  const pageView=document.documentElement.dataset?.pageView||'';
+  const pageAllows=(...views)=>!pageView||views.includes(pageView);
   const DATA=window.RIFTBOUND_DATA||{cards:[],decks:[],archetypes:[],events:[],videos:[],sources:[]};
   const $=selector=>document.querySelector(selector),$$=selector=>[...document.querySelectorAll(selector)];
   const translations={
@@ -94,9 +97,9 @@
     $$('[data-i18n]').forEach(node=>{const value=translations[language][node.dataset.i18n];if(value)node.textContent=value});
     $$('[data-i18n-placeholder]').forEach(node=>{const value=translations[language][node.dataset.i18nPlaceholder];if(value)node.placeholder=value});
     try{localStorage.setItem('metalab-riftbound-language',language)}catch(error){}
-    renderDecks();renderCards(true);renderSources();renderMatchup();renderQuality();if($('#deckModal').classList.contains('open')&&activeArchetype)renderDeckModal();
+    renderDecks();renderCards(true);renderSources();if(pageAllows('decks','matchups'))renderMatchup();renderQuality();if($('#deckModal').classList.contains('open')&&activeArchetype)renderDeckModal();
   }
-  function renderUsage(){
+  function renderUsage(){if(!pageAllows('decks','usage'))return;
     const maxShare=Math.max(...DATA.archetypes.map(item=>item.share),1);
     $('#usageChart').innerHTML=DATA.archetypes.map(item=>{const art=archetypeImage(item);return `<button class="usage-row" data-archetype="${item.key}">${art?`<img class="usage-art" src="${escapeHtml(art)}" alt="${escapeHtml(item.legend)}" loading="lazy">`:''}<strong>${escapeHtml(item.legend)}</strong><span class="usage-bars"><i class="share-bar" style="width:${Math.max(4,item.share/maxShare*100)}%"></i><i class="win-bar" style="width:${item.win}%"></i></span><b>${item.share}%</b><small>${item.win}% WIN</small><span class="trend ${item.trend}">${item.trend==='surge'?'SURGE':item.trend==='up'?'UP':'WATCH'}</span></button>`}).join('');
     $$('#usageChart [data-archetype]').forEach(button=>button.addEventListener('click',()=>openDeck(button.dataset.archetype)));
@@ -115,7 +118,7 @@
     if(rogue)return`<button class="rogue-card" data-archetype="${item.key}"><div class="rogue-art"><img class="blur" src="${image}" alt=""><img class="card" src="${image}" alt="${escapeHtml(item.legend)}"></div><div class="rogue-copy"><b>${escapeHtml(item.legend)}</b><small>${item.domains.join(' · ')} · ${lists} LIST${lists===1?'':'S'} · ${item.share}% META</small></div></button>`;
     return`<button class="deck-card" data-archetype="${item.key}"><div class="deck-art"><img class="blur" src="${image}" alt=""><img class="card" src="${image}" alt="${escapeHtml(item.legend)}"></div><div class="deck-copy"><span>TIER ${item.tier} · ${item.domains.join(' / ')}</span><h4>${escapeHtml(item.legend)}</h4><p>${lists} VERIFIED EVENT LIST${lists===1?'':'S'}</p><div class="deck-stats"><span><b>${item.share}%</b><small>META SHARE</small></span><span><b>${item.win}%</b><small>WIN RATE</small></span><span><b>${item.top8}</b><small>TOP 8s</small></span></div></div></button>`;
   }
-  function renderDecks(){
+  function renderDecks(){if(!pageAllows('decks'))return;
     const all=matchingArchetypes(),main=all.slice(0,5),rogue=all.slice(5);
     $('#deckGrid').innerHTML=main.map(item=>deckButton(item)).join('')||'<p class="no-data">NO MATCHING ARCHETYPE</p>';
     $('#rogueGrid').innerHTML=rogue.map(item=>deckButton(item,true)).join('')||'<p class="no-data">NO MATCHING ROGUE LIST</p>';
@@ -182,7 +185,7 @@
     const allLocales=Object.values(card.l||{}).flatMap(value=>[value?.[0],value?.[1],value?.[3]]).join(' ');
     return smartScore(query,[[local.displayName,12],[[card.name,card.subtitle].filter(Boolean).join(' '),11],[allLocales,10],[card.code,10],[card.tags.join(' '),7],[card.text,6],[local.displayText,6],[card.set.join(' '),5],[card.domains.join(' '),5],[card.type,4],[card.rarity,3]]);
   }
-  function renderCards(reset=false){
+  function renderCards(reset=false){if(!pageAllows('cards'))return;
     if(reset)cardLimit=48;filteredCards=VERIFIED_CARDS.map((card,index)=>({card,index,score:cardScore(card)})).filter(item=>item.score>0).sort((a,b)=>b.score-a.score||a.index-b.index).map(item=>item.card);const visible=filteredCards.slice(0,cardLimit);
     $('#cardResultCount').textContent=`${filteredCards.length.toLocaleString()} / ${VERIFIED_CARDS.length.toLocaleString()} VERIFIED PRINTS`;
     $('#cardGrid').classList.toggle('name-view',cardView==='name');
@@ -204,16 +207,16 @@
     if(['TOURNAMENT','ANALYSIS','CROSS-CHECK','CARD DATA'].includes(source.type))return['B','tier-b'];
     return['C','tier-c'];
   }
-  function renderQuality(){
+  function renderQuality(){if(!pageAllows('decks','sources'))return;
     const copy=qualityLocales[language],grade=AUDIT.quarantined===0?'A+':AUDIT.quarantined<=2?'A':'REVIEW';
     $('#qualityLabel').textContent=copy.label;$('#qualityGrade').textContent=grade;$('#qualityStatus').textContent=AUDIT.quarantined===0?copy.healthy:`${AUDIT.quarantined} ${copy.quarantine}`;
     $('#qualityCards').textContent=`${VERIFIED_CARDS.length}/${DATA.cards.length}`;$('#qualityDecks').textContent=`${VERIFIED_DECKS.length}/${DATA.decks.length}`;$('#qualitySources').textContent=`${VERIFIED_SOURCES.length}`;$('#qualityQuarantine').textContent=AUDIT.quarantined;
     $('#qualityCardsLabel').textContent=copy.cards;$('#qualityDecksLabel').textContent=copy.decks;$('#qualitySourcesLabel').textContent=copy.sources;$('#qualityQuarantineLabel').textContent=copy.quarantine;$('#runIntegrityCheck').textContent=copy.run;$('#cardSearchHelp').textContent=copy.search;
   }
-  function renderSources(){
+  function renderSources(){if(!pageAllows('sources'))return;
     $('#sourceGrid').innerHTML=VERIFIED_SOURCES.map(source=>{const[tier,css]=sourceTier(source);return`<article class="source-card"><span>${escapeHtml(source.type)}</span><span class="source-tier ${css}">TIER ${tier}</span><h3>${escapeHtml(source.name)}</h3><p>${language==='en'?'Cross-checked rules, card or tournament data source.':language==='ja'?'ルール・カード・大会データの照合元。':escapeHtml(language==='zh'?traditionalize(source.note):source.note)}</p><a href="${source.url}" target="_blank" rel="noreferrer">${language==='ja'?'情報源を確認':language==='en'?'OPEN SOURCE':language==='zh'?'查看來源':'查看来源'} ↗</a></article>`}).join('');
   }
-  function renderEvents(){
+  function renderEvents(){if(!pageAllows('decks','events'))return;
     $('#eventRows').innerHTML=VERIFIED_EVENTS.map(event=>`<tr><td>${event.date}</td><td><b>${escapeHtml(event.name)}</b><br><small>${escapeHtml(event.country)} · ${escapeHtml(event.format)}</small></td><td>${event.players}</td><td>${escapeHtml(event.winner)}</td></tr>`).join('');
     $('#videoGrid').innerHTML=VERIFIED_VIDEOS.map(video=>`<article class="video-card"><iframe src="https://www.youtube-nocookie.com/embed/${video.id}" title="${escapeHtml(video.title)}" loading="lazy" allowfullscreen></iframe><div><span>${video.kind.toUpperCase()}</span><h4>${escapeHtml(video.title)}</h4></div></article>`).join('');
   }
@@ -223,6 +226,7 @@
     const options=DATA.archetypes.map(item=>`<option value="${item.key}">${escapeHtml(item.legend)}</option>`).join('');$('#matchupMine').innerHTML=options;$('#matchupOpp').innerHTML=options;$('#matchupMine').value='riven';$('#matchupOpp').value='kennen';
   }
   async function checkUpdate(){
+    if(!pageAllows('decks','cards','usage','events','matchups'))return;
     const status=$('.sync-status'),text=$('#syncText');status.classList.add('checking');
     try{const response=await fetch(`riftbound-data.js?check=${Date.now()}`,{method:'HEAD',cache:'no-store'});if(!response.ok)throw new Error('check failed');text.textContent=language==='ja'?`公開データ確認済み · ${DATA.generatedAt}`:language==='en'?`PUBLISHED DATA CHECKED · ${DATA.generatedAt}`:language==='zh'?`已檢查已發佈資料 · ${DATA.generatedAt}`:`已检查已发布资料 · ${DATA.generatedAt}`}
     catch(error){text.textContent=translations[language].syncText}
@@ -240,5 +244,5 @@
   $$('.deck-tabs button').forEach(button=>button.addEventListener('click',()=>{activeDeckTab=button.dataset.deckTab;renderDeckModal()}));
   $$('.modal-close').forEach(button=>button.addEventListener('click',()=>closeModal(button.closest('.modal'))));$$('.modal').forEach(modal=>modal.addEventListener('click',event=>{if(event.target===modal)closeModal(modal)}));document.addEventListener('keydown',event=>{if(event.key==='Escape')$$('.modal.open').forEach(closeModal)});
   const auto=$('#autoUpdate');try{auto.checked=localStorage.getItem('metalab-auto-update')!=='off'}catch(error){}auto.addEventListener('change',()=>{try{localStorage.setItem('metalab-auto-update',auto.checked?'on':'off')}catch(error){}if(auto.checked)checkUpdate()});
-  populateControls();renderUsage();renderDecks();renderMatchup();renderEvents();renderSources();renderQuality();setLanguage(language);if(auto.checked)checkUpdate();
+  populateControls();renderUsage();renderDecks();if(pageAllows('decks','matchups'))renderMatchup();renderEvents();renderSources();renderQuality();setLanguage(language);if(pageAllows('decks','cards','usage','events','matchups')&&auto.checked)checkUpdate();
 })();

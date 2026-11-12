@@ -1,5 +1,8 @@
 (()=>{
   'use strict';
+  // Independent topic pages keep compatibility DOM, but only run their own render/sync work.
+  const pageView=document.documentElement.dataset?.pageView||'';
+  const pageAllows=(...views)=>!pageView||views.includes(pageView);
   const D=window.MARVEL_DATA||{cards:[],tournaments:[],videos:{},sources:[],xSignals:[]};
   const $=selector=>document.querySelector(selector);
   const $$=selector=>[...document.querySelectorAll(selector)];
@@ -92,16 +95,16 @@
     }
   };
 
-  function renderUsage(){
+  function renderUsage(){if(!pageAllows('decks','usage'))return;
     const max=Math.max(1,...deckGroups.flatMap(deck=>[deck.share,deck.priorShare]));
     $('#usageChart').innerHTML=deckGroups.map(deck=>{const delta=deck.share-deck.priorShare;const heroArt=cardImage(deckHero(deck));return `<button class="usage-cell" data-deck-name="${esc(deck.name)}">${heroArt?`<img class="usage-hero" src="${esc(heroArt)}" alt="${esc(colorLabel(deck.name))}" loading="lazy">`:''}<strong>${esc(colorLabel(deck.name))}</strong><small>${deck.recent} / ${D.tournaments.slice(0,5).flatMap(event=>event.lists).length} · ${deck.prior} / ${D.tournaments.slice(5).flatMap(event=>event.lists).length}</small><div class="usage-bars"><i class="current" style="height:${Math.max(3,deck.share/max*60)}px"></i><i class="previous" style="height:${Math.max(3,deck.priorShare/max*60)}px"></i></div><span class="${delta<0?'down':''}">${delta>0?'+':''}${delta.toFixed(1)}pt</span></button>`}).join('');
   }
-  function renderDecks(){
+  function renderDecks(){if(!pageAllows('decks'))return;
     const query=deckQuery.trim().toLowerCase();const shown=deckGroups.filter(deck=>!query||(window.MetaSearch?window.MetaSearch.matches(query,[deckHaystack(deck)]):deckHaystack(deck).includes(query)));
     $('#deckResultNote').textContent=query?(uiLang==='en'?`${shown.length} archetypes · all matching lists retained`:`${shown.length} 个类型 · 保留所有匹配卡表`):'';
     $('#deckGrid').innerHTML=shown.map((deck,index)=>{const hero=deckHero(deck);return `<button class="deck-card" data-deck-name="${esc(deck.name)}"><div class="deck-card-art"><img src="${esc(cardImage(hero))}" alt="${esc(cardName(hero))}" loading="lazy"></div><div class="deck-card-copy"><span>${index<2?'META CORE':index<4?'RISING SIGNAL':'ROGUE VERIFIED'}</span><h4>${esc(colorLabel(deck.name))}</h4><p>${esc(cardName(hero))} · ${esc(hero?.code||'')}</p><div class="deck-stats"><span><b>${deck.lists.length}</b><small>${uiLang==='en'?'LISTS':'完整卡表'}</small></span><span><b>${deck.share.toFixed(1)}%</b><small>${uiLang==='en'?'RECENT SHARE':'近期占比'}</small></span></div></div></button>`}).join('')||`<p>${uiLang==='en'?'No matching verified list.':'没有找到匹配的核实卡表。'}</p>`;
   }
-  function renderPredictions(){
+  function renderPredictions(){if(!pageAllows('decks'))return;
     const items=[
       {type:'hold',name:'Red / Blue',tag:'HOLD · HIGH SHARE',reason:{'zh-cn':'近 5 场占 60.7%，与此前 62.5% 接近；卡差、回场与站位控制仍完整，预计维持第一梯队。',zh:'近 5 場占 60.7%，與此前 62.5% 接近；卡差、回場與站位控制仍完整，預計維持第一梯隊。',ja:'直近60.7%、以前62.5%で高位横ばい。手札差、再展開、位置制御が揃い第一集団を維持する予測。',en:'60.7% in the latest sample versus 62.5% prior. Card advantage, replay and position control support a top-tier hold.'}},
       {type:'watch',name:'Red / Green',tag:'WATCH · PULLBACK',reason:{'zh-cn':'仍是第二大类型，但样本由 31.2% 降至 21.4%；需要证明它能稳定穿过蓝色控制与 Web 新体系。',zh:'仍是第二大類型，但樣本由 31.2% 降至 21.4%；需要證明它能穩定穿過藍色控制與 Web 新體系。',ja:'第2勢力だが31.2%から21.4%へ低下。青の制御と新Web系を安定して突破できるかが焦点。',en:'Still second, but down from 31.2% to 21.4%. It must prove a stable route through blue control and the new Web shell.'}},
@@ -175,7 +178,7 @@
   }
   function freshImageUrl(value){try{const expires=Number(new URL(value,location.href).searchParams.get('e'));return !expires||expires*1000>Date.now()}catch(error){return false}}
   async function imageError(event){const img=event.currentTarget,card=img.dataset.cardId?cards.find(item=>item.id===img.dataset.cardId):cardMap.get(img.dataset.cardCode||img.closest?.('[data-card-code]')?.dataset.cardCode);if(!card){img.style.opacity='.18';return}const locale=cardLocale(card),before=img.src,cardId=img.dataset.cardId||card.id,modalRequest=img.id==='cardModalImage'?cardRequestEpoch:null;let remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&!img.dataset.fallback&&remote!==before){img.dataset.fallback='1';img.src=remote;return}if(!img.dataset.signatureRefreshed){img.dataset.signatureRefreshed='1';let pending=imageRefreshes.get(locale);if(!pending){pending=fetchOfficialLanguage(apiLanguage[locale]).then(payload=>{mergeOfficial(payload,apiLanguage[locale]);return true}).catch(()=>false).finally(()=>imageRefreshes.delete(locale));imageRefreshes.set(locale,pending)}await pending;if(img.src!==before||img.isConnected===false||img.dataset.cardId&&img.dataset.cardId!==cardId||modalRequest!==null&&(modalRequest!==cardRequestEpoch||currentCard?.id!==cardId||!$('#cardModal').classList.contains('open')))return;remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&remote!==img.src&&cardLocale(card)===locale){img.src=remote;img.style.opacity='';return}}img.style.opacity='.18';img.alt=card.code+' · image unavailable';}
-  function renderCards(){
+  function renderCards(){if(!pageAllows('cards'))return;
     const results=filteredCards(),shown=results.slice(0,cardPage*56),grid=$('#cardGrid');grid.classList.toggle('name-view',cardView==='name');
     grid.innerHTML=shown.map(card=>`<button class="card-item" data-card-id="${esc(card.id)}"><img src="${esc(cardImage(card))}" data-card-id="${esc(card.id)}" alt="${esc(cardName(card))}" loading="lazy"><b>${esc(cardName(card))}</b><small>${esc(card.code)} · ${esc(card.color)} · LV ${esc(card.level)} · ${esc(card.rarity)}</small><span class="name-effect">${esc(cardEffect(card))}</span></button>`).join('');
     grid.querySelectorAll('img').forEach(img=>img.addEventListener('error',imageError));
@@ -191,11 +194,11 @@
   }
 
   // AUXILIARY SECTIONS
-  function renderRuleVideos(){$('#ruleVideos').innerHTML=(D.videos.rules||[]).map(video=>`<article><iframe src="https://www.youtube-nocookie.com/embed/${esc(video.id)}" title="${esc(video.title)}" loading="lazy" allowfullscreen></iframe><h4>${esc(video.title)}</h4></article>`).join('')}
-  function renderEvents(){
+  function renderRuleVideos(){if(!pageAllows('rules'))return;$('#ruleVideos').innerHTML=(D.videos.rules||[]).map(video=>`<article><iframe src="https://www.youtube-nocookie.com/embed/${esc(video.id)}" title="${esc(video.title)}" loading="lazy" allowfullscreen></iframe><h4>${esc(video.title)}</h4></article>`).join('')}
+  function renderEvents(){if(!pageAllows('events'))return;
     $('#eventGrid').innerHTML=D.tournaments.map(event=>`<article class="event-card"><header><div><time>${esc(displayDate(event.date))}</time><h3>${esc(event.name)}</h3></div><b>${esc(attendance(event))}</b></header><p>${esc(event.location)} · ${esc(event.organizer)} · ${esc(event.source)}</p><div>${event.lists.map((list,index)=>`<button data-event-id="${esc(event.id)}" data-event-list="${index}"><b>${esc(list.place)}</b> ${esc(list.player||'—')} · ${esc(colorLabel(list.archetype))}</button>`).join('')}</div></article>`).join('');
   }
-  function renderX(){
+  function renderX(){if(!pageAllows('decks'))return;
     const localized={
       'zh-cn':['公开对局记录提到快攻与控制对面；仅作发现信号，不视为完整卡表。','SP01 产品与 Infinity Clash 2026 赛事讯息；赛事卡表仍需另行核实。','五轮 Starter Deck 赛事观察，仅保留作环境背景。'],
       zh:['公開對局紀錄提到快攻與控制對面；僅作發現信號，不視為完整牌組。','SP01 產品與 Infinity Clash 2026 賽事訊息；賽事牌組仍需另行核實。','五輪 Starter Deck 賽事觀察，僅保留作環境背景。'],
@@ -204,7 +207,7 @@
     };
     $('#xGrid').innerHTML=D.xSignals.map((signal,index)=>`<article class="x-card"><span>X DISCOVERY · ${esc(signal.handle)}</span><h4>${esc(signal.title)}</h4><p>${esc(localized[uiLang]?.[index]||signal.note)}</p></article>`).join('');
   }
-  function renderSources(){
+  function renderSources(){if(!pageAllows('sources'))return;
     const roleCopy={
       'zh-cn':['官方规则、卡牌图鉴、卡图、产品与公告','核实上位赛事卡表与社群牌组分析','官方教学与 Infinity Clash 赛事公告','仅用作赛事与卡组线索发现；完整卡表必须另行核实'],
       zh:['官方規則、卡牌圖鑑、卡圖、產品與公告','核實上位賽事牌組與社群牌組分析','官方教學與 Infinity Clash 賽事公告','僅用作賽事與牌組線索發現；完整牌組必須另行核實'],
@@ -219,6 +222,7 @@
   const apiLanguage={"zh-cn":'zh-CN',zh:'zh-TW',ja:'en',en:'en'};
   const dataLanguage={'zh-CN':'zh-cn','zh-TW':'zh',en:'en'};
   async function fetchOfficialLanguage(language){
+    if(!pageAllows('cards'))return null;
     const response=await fetch(`https://server.marvelherorush.com/marvel/card/list?language=${encodeURIComponent(language)}&page=1&page_size=1000`,{cache:'no-store'});if(!response.ok)throw new Error(`official api ${response.status}`);const payload=await response.json();if(!Array.isArray(payload.list))throw new Error('invalid official payload');return payload;
   }
   function mergeOfficial(payload,language){
@@ -233,7 +237,13 @@
     cardMap=pickCanonical(cards);
   }
   async function checkPublishedUpdate(){
-    const toggle=$('#autoUpdate');if(!toggle.checked)return;const status=$('#syncStatus');status.classList.add('checking');status.classList.remove('error');
+    const toggle=$('#autoUpdate');if(!pageAllows('cards','decks','events','usage')||!toggle.checked)return;const status=$('#syncStatus');status.classList.add('checking');status.classList.remove('error');
+    if(!pageAllows('cards')){
+      try{const published=await fetch(`marvel-data.js?check=${Date.now()}`,{method:'HEAD',cache:'no-store'});if(!published.ok)throw new Error('published check failed');status.querySelector('span').textContent=uiLang==='en'?'PUBLISHED DATA CHECKED · VERIFIED SNAPSHOT ACTIVE':'已检查发布资料 · 核实快照正常';}
+      catch(error){status.classList.add('error');status.querySelector('span').textContent=uiLang==='en'?'UPDATE CHECK UNAVAILABLE · VERIFIED SNAPSHOT ACTIVE':'暂时无法检查更新 · 已保留核实快照';}
+      finally{status.classList.remove('checking');}
+      return;
+    }
     try{
       const desired=[apiLanguage[uiLang],...['zh-CN','zh-TW','en']].filter((item,index,array)=>array.indexOf(item)===index);let synced=0;
       for(const language of desired){try{const payload=await fetchOfficialLanguage(language);mergeOfficial(payload,language);synced+=payload.total||payload.list.length}catch(error){if(language===desired[0])throw error}}
@@ -270,5 +280,5 @@
   }
   populateSetFilter();bindEvents();
   $('#statCards').textContent=cards.length.toLocaleString();$('#statLists').textContent=allLists.length.toLocaleString();$('#statEvents').textContent=D.tournaments.length.toLocaleString();$('#cardTotal').textContent=cards.length.toLocaleString();$('#metaStamp').textContent=`${D.tournaments.length} EVENTS · ${allLists.length} VERIFIED 50-CARD LISTS`;
-  setLanguage('zh-cn');if($('#autoUpdate').checked)setTimeout(checkPublishedUpdate,700);
+  setLanguage('zh-cn');if(pageAllows('cards','decks','events','usage')&&$('#autoUpdate').checked)setTimeout(checkPublishedUpdate,700);
 })();

@@ -1,5 +1,8 @@
 (()=>{
   'use strict';
+  const pageView=document.documentElement?.getAttribute?.('data-page-view')||'';
+  const onPage=(...views)=>!pageView||views.includes(pageView);
+  const remotePage=onPage('decks','configs','usage');
   const snapshot=window.BEYX_DATA||{meta:[],all:[],rare:[],summary:{},blades:[],ratchets:[],bits:[],assists:[],sources:[]};
   const state={
     meta:[...(snapshot.meta||[])],all:[...(snapshot.all||[])],rare:[...(snapshot.rare||[])],summary:{...(snapshot.summary||{})},
@@ -370,8 +373,8 @@
     const context={...combo,archetype:combo.blade,name:combo.blade,format:'BEYBLADE X',date:state.summary.end||'',region:''},videos=window.MetaLabMedia?.cards?.('beyblade',context)||'';let related=$('#comboRelatedVideos');if(!related){related=document.createElement('div');related.id='comboRelatedVideos';related.className='deck-related-videos';$('#modalRecords').after(related)}related.innerHTML=videos?'<h3>相关实测与创意参考</h3><div class="video-grid">'+videos+'</div>':'';related.hidden=!videos;$('#modalCopy').innerHTML=window.MetaLabMatchups?.render?.('beyblade',context)||'<p>暂无可核验的当前配置逐局对战样本。</p>';$('#comboModal').classList.add('open');document.body.classList.add('modal-open');$('#closeModal').focus();
   }
   function closeModal(){$('#comboModal').classList.remove('open');document.body.classList.remove('modal-open')}
-  function renderAll(){updateSummary();renderMeta();renderConfigs();renderPlacements();renderParts();renderBuilder();renderSources()}
-  setupSmartBuilder();
+  function renderAll(){updateSummary();if(onPage('decks'))renderMeta();if(onPage('configs')){renderConfigs();renderPlacements()}if(onPage('parts','cards'))renderParts();if(onPage('builder'))renderBuilder();if(onPage('sources'))renderSources()}
+  if(onPage('builder'))setupSmartBuilder();
 
   $('#uiLang').addEventListener('change',event=>setLanguage(event.target.value));
   $('#menuBtn').addEventListener('click',()=>$('#nav').classList.toggle('open'));
@@ -403,7 +406,7 @@
   try{autoEnabled=localStorage.getItem(AUTO_KEY)!=='off'}catch(error){}
   function setAuto(enabled,persist=true){
     autoEnabled=enabled;$('#autoUpdate').checked=enabled;if(persist){try{localStorage.setItem(AUTO_KEY,enabled?'on':'off')}catch(error){}}
-    clearInterval(autoTimer);autoTimer=null;if(enabled){syncRemote();autoTimer=setInterval(syncRemote,600000)}updateSummary();
+    clearInterval(autoTimer);autoTimer=null;if(enabled&&remotePage){syncRemote();autoTimer=setInterval(syncRemote,600000)}updateSummary();
   }
   function setSync(message){$('#syncStatus').textContent=message}
   function usableRemote(remote){return remote&&(['meta','all','rare'].some(key=>Array.isArray(remote[key]))||remote.bbx||remote.parts)}
@@ -414,7 +417,7 @@
     renderAll();setSync(`${t('synced')} · ${state.summary.week||'LIVE'}`);
   }
   function syncRemote(){
-    if(!autoEnabled||syncing)return;syncing=true;setSync(t('syncing'));
+    if(!remotePage||!autoEnabled||syncing)return;syncing=true;setSync(t('syncing'));
     const prior=window.BBX_DATA;try{delete window.BBX_DATA}catch(error){window.BBX_DATA=undefined}
     const script=document.createElement('script'),timeout=setTimeout(()=>finish(false),12000);let done=false;
     function finish(ok){if(done)return;done=true;clearTimeout(timeout);syncing=false;script.remove();const remote=window.BBX_DATA;if(ok&&usableRemote(remote))mergeRemote(remote);else{window.BBX_DATA=prior;setSync(`${t('syncFailed')} · ${state.summary.week||'LOCAL'}`)}}

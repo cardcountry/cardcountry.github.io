@@ -30,7 +30,14 @@
   }
   const escape=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   function sourceUrl(value){try{const u=new URL(value);return u.protocol==='https:'?u.href:''}catch{return ''}}
-  function internalUrl(value){return /^(?:ptcg|gcg|opcg|unionarena|riftbound|marvel|beyblade)\.html(?:[?#][^\s<>"']*)?$/.test(value||'')?value:''}
+  const routeTopics={ptcg:['news','decks','cards','rules','usage','sources'],gcg:['news','decks','official','cards','rules','usage','sources'],opcg:['news','decks','cards','rules','usage','sources'],unionarena:['news','decks','cards','rules','usage','sources'],riftbound:['news','decks','cards','rules','usage','sources'],marvel:['news','decks','cards','rules','usage','sources','events'],beyblade:['news','decks','configs','parts','builder','usage','sources']};
+  function internalUrl(value){
+    const match=String(value||'').match(/^(ptcg|gcg|opcg|unionarena|riftbound|marvel|beyblade)(?:-([a-z]+))?\.html([?#][^\s<>"']*)?$/);
+    if(!match)return '';const [,game,topic,suffix='']=match;
+    if(topic)return routeTopics[game].includes(topic)?value:'';
+    const hash=suffix.match(/#([^?&]+)/)?.[1],target={meta:'decks',decks:'decks','official-decks':game==='gcg'?'official':'decks',cards:game==='beyblade'?'parts':'cards',catalog:'cards',rules:'rules',learn:'rules','usage-ranking':'usage',sources:'sources',parts:'parts',configs:'configs',builder:'builder',events:'events'}[hash];
+    return target&&routeTopics[game].includes(target)?`${game}-${target}.html${suffix}`:value;
+  }
   function card(item,t){
     const src=sourceUrl(item.sourceUrl),dest=internalUrl(item.internalUrl),day=dateOf(item);
     const kind=date(item.publishedOn)?t.published:date(item.sourceUpdatedOn)?t.updated:t.eventDate;
@@ -54,8 +61,10 @@
   // Pure helpers also support deterministic build checks without loading game catalogs.
   window.MetaLabActivity={select,dateOf,sourceUrl,internalUrl,card};
   const root=document.getElementById('activityFeed');if(!root)return;
-  let data=null,visible=12,filters={game:'',type:'',language:'',query:''};
-  const language=()=>document.getElementById('homeLang')?.value||'zh-cn';
+  const declaredGame=document.documentElement?.getAttribute?.('data-page-game')||'';
+  const fixedGame=declaredGame==='v22'?'ptcg':gameNames[declaredGame]?declaredGame:'';
+  let data=null,visible=12,filters={game:fixedGame,type:'',language:'',query:''};
+  const language=()=>document.getElementById('homeLang')?.value||document.getElementById('uiLang')?.value||'zh-cn';
   const dict=()=>translations[language()]||translations['zh-cn'];
   const options=(values,t)=>`<option value="">${escape(t.any)}</option>`+values.map(value=>`<option value="${value}">${escape(t[value])}</option>`).join('');
   function renderResults(){
@@ -67,10 +76,12 @@
   }
   function render(){
     if(!data)return;const t=dict();
-    root.innerHTML=`<div class="activity-controls"><fieldset class="activity-games"><legend>${escape(t.game)}</legend>${[['',t.all],...data.games.map(game=>[game.id,gameNames[game.id]||game.name])].map(([id,label])=>`<button type="button" data-activity-game="${escape(id)}" aria-pressed="${id===filters.game}">${escape(label)}</button>`).join('')}</fieldset><div class="activity-fields"><label>${escape(t.search)}<input type="search" data-activity-search placeholder="${escape(t.placeholder)}" value="${escape(filters.query)}" autocomplete="off"></label><label>${escape(t.type)}<select data-activity-type>${options(types,t)}</select></label><label>${escape(t.language)}<select data-activity-language>${options(languages,t)}</select></label></div></div><div class="activity-meta"><p data-activity-count role="status" aria-live="polite"></p><p>${escape(t.snapshot)} <time datetime="${escape(data.builtOn)}">${escape(data.builtOn)}</time></p></div><div class="activity-list" data-activity-results></div><button class="activity-more" type="button" data-activity-more>${escape(t.more)}</button><details class="activity-coverage"><summary>${escape(t.coverage)}</summary><p>${escape(t.coverageText)}</p><p>${escape(t.coverageNote)}</p><div class="activity-coverage-grid">${data.games.map(game=>`<a href="${escape(internalUrl(game.page))}"><b>${escape(gameNames[game.id]||game.name)}</b><span>${game.recordCount} ${escape(t.records)} · ${game.sourceCount} ${escape(t.sources)}</span><span>${escape(t.latestSource)} ${escape(date(game.latestSourceDate)||t.unknown)}</span><span>${escape(t.latestEvent)} ${escape(date(game.latestEventDate)||t.unknown)}</span><span>${escape(t.checked)} ${escape(date(game.reviewedOn)||t.pending)}</span></a>`).join('')}</div></details>`;
+    const games=fixedGame?data.games.filter(game=>game.id===fixedGame):data.games;
+    const gameControls=fixedGame?`<span class="activity-fixed-game">${escape(gameNames[fixedGame])}</span>`:[['',t.all],...games.map(game=>[game.id,gameNames[game.id]||game.name])].map(([id,label])=>`<button type="button" data-activity-game="${escape(id)}" aria-pressed="${id===filters.game}">${escape(label)}</button>`).join('');
+    root.innerHTML=`<div class="activity-controls"><fieldset class="activity-games"><legend>${escape(t.game)}</legend>${gameControls}</fieldset><div class="activity-fields"><label>${escape(t.search)}<input type="search" data-activity-search placeholder="${escape(t.placeholder)}" value="${escape(filters.query)}" autocomplete="off"></label><label>${escape(t.type)}<select data-activity-type>${options(types,t)}</select></label><label>${escape(t.language)}<select data-activity-language>${options(languages,t)}</select></label></div></div><div class="activity-meta"><p data-activity-count role="status" aria-live="polite"></p><p>${escape(t.snapshot)} <time datetime="${escape(data.builtOn)}">${escape(data.builtOn)}</time></p></div><div class="activity-list" data-activity-results></div><button class="activity-more" type="button" data-activity-more>${escape(t.more)}</button><details class="activity-coverage"><summary>${escape(t.coverage)}</summary><p>${escape(t.coverageText)}</p><p>${escape(t.coverageNote)}</p><div class="activity-coverage-grid">${games.map(game=>`<a href="${escape(internalUrl(game.page))}"><b>${escape(gameNames[game.id]||game.name)}</b><span>${game.recordCount} ${escape(t.records)} · ${game.sourceCount} ${escape(t.sources)}</span><span>${escape(t.latestSource)} ${escape(date(game.latestSourceDate)||t.unknown)}</span><span>${escape(t.latestEvent)} ${escape(date(game.latestEventDate)||t.unknown)}</span><span>${escape(t.checked)} ${escape(date(game.reviewedOn)||t.pending)}</span></a>`).join('')}</div></details>`;
     root.querySelector('[data-activity-type]').value=filters.type;
     root.querySelector('[data-activity-language]').value=filters.language;
-    root.querySelectorAll('[data-activity-game]').forEach(button=>button.addEventListener('click',()=>{filters.game=button.dataset.activityGame;visible=12;renderResults()}));
+    root.querySelectorAll('[data-activity-game]').forEach(button=>button.addEventListener('click',()=>{filters.game=fixedGame||button.dataset.activityGame;visible=12;renderResults()}));
     root.querySelector('[data-activity-search]').addEventListener('input',event=>{filters.query=event.target.value;visible=12;renderResults()});
     ['type','language'].forEach(key=>root.querySelector(`[data-activity-${key}]`).addEventListener('change',event=>{filters[key]=event.target.value;visible=12;renderResults()}));
     root.querySelector('[data-activity-more]').addEventListener('click',()=>{visible+=12;renderResults()});renderResults();
@@ -80,5 +91,8 @@
     try{const response=await fetch('activity-feed.json?v=2026110801',{cache:'no-cache'});if(!response.ok)throw Error(response.status);const next=await response.json();if(next.schemaVersion!==1||!Array.isArray(next.items)||!Array.isArray(next.games))throw Error('Unsupported feed');data=next;render()}
     catch(error){root.innerHTML=`<p class="activity-error" role="status">${escape(dict().failed)} <button type="button">${escape(dict().retry)}</button></p>`;root.querySelector('button').addEventListener('click',load)}
   }
-  window.addEventListener('metalab:home-language',()=>{if(data)render()});load();
+  const updateLanguage=()=>{if(data)render()};
+  window.addEventListener('metalab:home-language',updateLanguage);
+  window.addEventListener('metalab:section-language',updateLanguage);
+  ['homeLang','uiLang'].forEach(id=>document.getElementById(id)?.addEventListener('change',updateLanguage));load();
 })();

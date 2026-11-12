@@ -20,8 +20,10 @@
   window.MetaSearch={normalize,tokens,distance,score,matches:(query,fields)=>score(query,fields)>0};
 
   function detectGame(){
+    const declared=document.documentElement?.getAttribute?.('data-page-game');
+    if(['ptcg','v22','gcg','opcg','unionarena','marvel','beyblade','riftbound'].includes(declared))return declared==='v22'?'ptcg':declared;
     const file=(location.pathname.split('/').pop()||'index.html').toLowerCase();
-    if(file.includes('gcg'))return'gcg';if(file.includes('opcg'))return'opcg';if(file.includes('marvel'))return'marvel';if(file.includes('beyblade'))return'beyblade';if(file.includes('riftbound'))return'riftbound';if(file.includes('ptcg')||file.includes('v22'))return'ptcg';return'';
+    if(file.includes('unionarena'))return'unionarena';if(file.includes('gcg'))return'gcg';if(file.includes('opcg'))return'opcg';if(file.includes('marvel'))return'marvel';if(file.includes('beyblade'))return'beyblade';if(file.includes('riftbound'))return'riftbound';if(file.includes('ptcg')||file.includes('v22'))return'ptcg';return'';
   }
 
   function readLexical(name){try{return(0,eval)(name)}catch(error){return undefined}}
@@ -74,7 +76,15 @@
     const data=window.RIFTBOUND_DATA||{cards:[],decks:[],sources:[]};return{game:'riftbound',label:'RIFTBOUND',records:data.cards.length,lists:data.decks.length,sources:data.sources.length,quarantined:window.META_LAB_DATA_AUDIT?.quarantined||0,checked:data.generatedAt||'—',notes:['Official-first','66-card export validation','Social signals never stand alone']};
   }
 
-  function audit(game){return({ptcg:auditPtcg,gcg:auditGcg,opcg:auditOpcg,marvel:auditMarvel,beyblade:auditBeyblade,riftbound:auditRiftbound}[game]||(()=>({game,label:game.toUpperCase(),records:0,lists:0,sources:0,quarantined:0,checked:'—',notes:[]})))()}
+  function auditUnionarena(){
+    const data=window.UNION_ARENA_DATA||{},lists=data.eventDecks||[],sources=Object.values(data.sources||{}).filter(https);
+    const catalogs=[window.UNION_ARENA_CATALOG,window.UNION_ARENA_CATALOG_JP].filter(Boolean);
+    const records=catalogs.length?catalogs.reduce((sum,catalog)=>sum+(Array.isArray(catalog)?catalog.length:catalog.cards?.length||0),0):null;
+    const quarantined=lists.filter(list=>Number(list.composition?.total)!==50||!https(list.source)||!list.id).length;
+    return{game:'unionarena',label:'UNION ARENA',records,lists:lists.length,sources:new Set(sources).size,quarantined,checked:data.checked||data.eventDecksUpdated||'—',notes:['Official published lists','Team placement remains a team result','Catalog counts only when loaded']};
+  }
+
+  function audit(game){return({ptcg:auditPtcg,gcg:auditGcg,opcg:auditOpcg,marvel:auditMarvel,beyblade:auditBeyblade,riftbound:auditRiftbound,unionarena:auditUnionarena}[game]||(()=>({game,label:game.toUpperCase(),records:0,lists:0,sources:0,quarantined:0,checked:'—',notes:[]})))()}
   const copyFor=()=>{
     const lang=document.documentElement.lang.toLowerCase();
     if(lang.startsWith('ja'))return{title:'データ品質',records:'検証済み記録',lists:'完全リスト／構成',sources:'承認ソース',quarantine:'隔離',checked:'データ／同期日',run:'再チェック',pass:'必須チェック合格'};
@@ -84,14 +94,16 @@
   };
 
   function renderAudit(result){
-    if(document.querySelector('#qualityConsole'))return;
-    const target=document.querySelector('.meta-toolbar,.deck-finder,.config-tools,.section-head');if(!target)return;
+    const pageView=document.documentElement?.getAttribute?.('data-page-view')||'';
+    if(!pageView&&document.querySelector('#qualityConsole'))return;
+    const sourceHost=pageView==='sources'?document.querySelector('#sources'):null;
+    const target=sourceHost?.querySelector('.section-head')||sourceHost||document.querySelector('.meta-toolbar,.deck-finder,.config-tools,.section-head');if(!target)return;
     const panel=document.createElement('aside');panel.className='site-data-audit';panel.id='siteDataAudit';
-    const draw=()=>{const copy=copyFor(),grade=result.quarantined===0?'A+':result.quarantined<=2?'A':'REVIEW';panel.innerHTML=`<div class="sda-grade"><span>${copy.title} · ${result.label}</span><b>${grade}</b><small>${result.quarantined===0?copy.pass:`${result.quarantined} ${copy.quarantine}`}</small></div><div class="sda-metrics"><span><b>${Number(result.records).toLocaleString()}</b><small>${copy.records}</small></span><span><b>${Number(result.lists).toLocaleString()}</b><small>${copy.lists}</small></span><span><b>${Number(result.sources).toLocaleString()}</b><small>${copy.sources}</small></span><span><b>${result.quarantined}</b><small>${copy.quarantine}</small></span></div><div class="sda-action"><span>${copy.checked}<b>${result.checked}</b></span><button type="button">${copy.run}</button></div>`;panel.querySelector('button').addEventListener('click',()=>{panel.classList.add('checking');setTimeout(()=>{const next=audit(result.game);Object.assign(result,next);draw();panel.classList.remove('checking')},380)})};
-    target.insertAdjacentElement('afterend',panel);draw();
+const draw=()=>{const copy=copyFor(),grade=result.quarantined===0?'A+':result.quarantined<=2?'A':'REVIEW';panel.innerHTML=`<div class="sda-grade"><span>${copy.title} · ${result.label}</span><b>${grade}</b><small>${result.quarantined===0?copy.pass:`${result.quarantined} ${copy.quarantine}`}</small></div><div class="sda-metrics"><span><b>${(result.records==null?'—':Number(result.records).toLocaleString())}</b><small>${copy.records}</small></span><span><b>${Number(result.lists).toLocaleString()}</b><small>${copy.lists}</small></span><span><b>${Number(result.sources).toLocaleString()}</b><small>${copy.sources}</small></span><span><b>${result.quarantined}</b><small>${copy.quarantine}</small></span></div><div class="sda-action"><span>${copy.checked}<b>${result.checked}</b></span><button type="button">${copy.run}</button></div>`;panel.querySelector('button').addEventListener('click',()=>{panel.classList.add('checking');setTimeout(()=>{const next=audit(result.game);Object.assign(result,next);draw();panel.classList.remove('checking')},380)})};
+    if(target===sourceHost)target.append(panel);else target.insertAdjacentElement('afterend',panel);draw();
     document.addEventListener('metalab:data-updated',()=>{Object.assign(result,audit(result.game));draw()});
     const lang=document.querySelector('#uiLang,#langSelect');if(lang)lang.addEventListener('change',()=>setTimeout(draw,0));
   }
 
-  document.addEventListener('DOMContentLoaded',()=>{const game=detectGame();if(!game)return;const result=audit(game);window.META_LAB_DATA_AUDIT=result;renderAudit(result)});
+  document.addEventListener('DOMContentLoaded',()=>{const pageView=document.documentElement?.getAttribute?.('data-page-view')||'';if(pageView&&pageView!=='sources')return;const game=detectGame();if(!game)return;const result=audit(game);window.META_LAB_DATA_AUDIT=result;renderAudit(result)});
 })();
