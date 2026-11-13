@@ -1,0 +1,48 @@
+{
+  "version": 3,
+  "game": "Riftbound",
+  "format": "Radiance Constructed",
+  "updatedAt": "2026-11-13",
+  "tiers": {
+    "A": {
+      "purpose": ["rules", "bans", "errata", "card text", "card images"],
+      "hosts": ["playriftbound.com", "cmsassets.rgpub.io"]
+    },
+    "B": {
+      "purpose": ["tournament results", "complete decklists", "metagame analysis"],
+      "hosts": ["riftdecks.com", "hextechanalytics.com", "riftmana.com", "piltoverarchive.com", "runesandrift.com"]
+    },
+    "C": {
+      "purpose": ["discovery signal only", "video discovery"],
+      "hosts": ["x.com", "youtube.com", "www.youtube.com"]
+    }
+  },
+  "acceptance": {
+    "rules": "Tier A only",
+    "cards": "Tier A only; unique card id and official image host required",
+    "decklists": "Public event page, complete 66-card export and valid zone totals required. The verified official RC Europe article is accepted; explicitly unpublished attendance remains null and must carry a note, never inferred from submitted deck counts.",
+    "metagame": "Published sample size and current-format date required; cross-check with a second Tier B source",
+    "social": "Never accepted as sole evidence for rules, card text, decklists or win rates"
+  },
+  "deckComposition": {
+    "legend": 1,
+    "mainDeck": 40,
+    "battlefields": 3,
+    "runes": 12,
+    "sideboard": 10,
+    "totalExport": 66
+  },
+  "deduplicationKeys": {
+    "cards": ["id", "code"],
+    "decklists": ["source", "event", "player", "legend", "date"],
+    "events": ["name", "date", "players"]
+  },
+  "quarantineOn": [
+    "missing source URL",
+    "untrusted source host",
+    "invalid deck zone totals",
+    "duplicate identifier",
+    "missing event date or unlabelled missing player count",
+    "non-Radiance event mixed into current snapshot"
+  ]
+}

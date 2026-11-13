@@ -84,7 +84,7 @@
   }
   function openModal(id){const modal=$('#'+id);modal.classList.add('open');document.body.style.overflow='hidden'}
   function closeModal(id){$('#'+id)?.classList.remove('open');if(!$('.modal.open'))document.body.style.overflow=''}
-  function deckHaystack(deck){const listText=(deck.lists||[]).flatMap(list=>[list.player,list.event,list.host,list.country,...list.cards.flatMap(card=>[card.code,card.name])]).join(' ');return `${deck.name} ${deck.leader} ${deck.color} ${listText}`.toLowerCase()}
+  function deckHaystack(deck){const listText=(deck.lists||[]).flatMap(list=>[list.player,list.event,list.host,list.country,...list.cards.flatMap(card=>[card.code,card.name])]).join(' ');return `${deck.name} ${(deck.aliases||[]).join(' ')} ${deck.leader} ${deck.color} ${listText}`.toLowerCase()}
   function localizedGuide(deck){return deck.guide?.[uiLang]||deck.guide?.en||''}
   function formatLabel(){if(deckQuery.trim())return 'ALL VERSIONS · 跨语言搜索';return currentFormat==='EB05JP'?'JAPAN · EB05':currentFormat==='OP17'?'OP17.5 HISTORICAL SAMPLE':'OP16 ARCHIVE'}
   function renderChart(decks){

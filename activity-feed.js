@@ -21,8 +21,9 @@
   const languages=['ja','en','zh-CN','zh-TW','th','unknown'];
   const normalize=value=>String(value??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s・·_—–-]+/g,' ').trim();
   const date=value=>/^\d{4}-\d{2}-\d{2}$/.test(value||'')?value:null;
-  const dateOf=item=>date(item.publishedOn)||date(item.sourceUpdatedOn)||date(item.eventOn)||'';
-  const timelineDate=(item,asOf)=>date(item.publishedOn)||date(item.sourceUpdatedOn)||(date(item.eventOn)&&item.eventOn<=asOf?item.eventOn:'');
+  const sourceDate=item=>[date(item.publishedOn),date(item.sourceUpdatedOn)].filter(Boolean).sort().at(-1)||'';
+  const dateOf=item=>sourceDate(item)||date(item.eventOn)||'';
+  const timelineDate=(item,asOf)=>sourceDate(item)||(date(item.eventOn)&&item.eventOn<=asOf?item.eventOn:'');
   function select(items,filters={},asOf='9999-12-31'){
     const terms=normalize(filters.query).split(' ').filter(Boolean);
     const matches=item=>{const fields=[item.title,item.originalTitle,item.summary,item.sourceName,item.format,item.region,gameNames[item.game],item.printEdition,({ja:'Japanese 日文 日本語',en:'English 英文','zh-TW':'Traditional Chinese 繁体中文 繁體中文','zh-CN':'Simplified Chinese 简体中文 簡體中文'})[item.printEdition]||'',...(item.aliases||[])];return window.MetaSearch?.matches?window.MetaSearch.matches(filters.query||'',fields):terms.every(term=>normalize(fields.join(' ')).includes(term))};
@@ -40,7 +41,7 @@
   }
   function card(item,t){
     const src=sourceUrl(item.sourceUrl),dest=internalUrl(item.internalUrl),day=dateOf(item);
-    const kind=date(item.publishedOn)?t.published:date(item.sourceUpdatedOn)?t.updated:t.eventDate;
+    const kind=sourceDate(item)?(day===date(item.sourceUpdatedOn)&&day!==date(item.publishedOn)?t.updated:t.published):t.eventDate;
     const checked=item.status==='verified'&&date(item.verifiedOn),evidence=sourceUrl(item.dateEvidenceUrl),result=sourceUrl(item.resultSourceUrl);
     const alternates=(item.alternateSources||[]).filter(x=>sourceUrl(x.url));
     const sourceLanguages=[...new Set([item.sourceLanguage,...alternates.map(x=>x.language)])];

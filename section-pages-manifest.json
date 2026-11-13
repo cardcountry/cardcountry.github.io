@@ -101,13 +101,13 @@
       "path": "opcg-decks.html",
       "game": "opcg",
       "view": "decks",
-      "bytes": 18208
+      "bytes": 18210
     },
     {
       "path": "opcg-cards.html",
       "game": "opcg",
       "view": "cards",
-      "bytes": 18190
+      "bytes": 18192
     },
     {
       "path": "opcg-news.html",
@@ -119,19 +119,19 @@
       "path": "opcg-usage.html",
       "game": "opcg",
       "view": "usage",
-      "bytes": 18247
+      "bytes": 18249
     },
     {
       "path": "opcg-rules.html",
       "game": "opcg",
       "view": "rules",
-      "bytes": 18196
+      "bytes": 18198
     },
     {
       "path": "opcg-sources.html",
       "game": "opcg",
       "view": "sources",
-      "bytes": 18210
+      "bytes": 18212
     },
     {
       "path": "unionarena.html",
@@ -143,13 +143,13 @@
       "path": "unionarena-decks.html",
       "game": "unionarena",
       "view": "decks",
-      "bytes": 15344
+      "bytes": 15346
     },
     {
       "path": "unionarena-cards.html",
       "game": "unionarena",
       "view": "cards",
-      "bytes": 15326
+      "bytes": 15328
     },
     {
       "path": "unionarena-news.html",
@@ -161,19 +161,19 @@
       "path": "unionarena-usage.html",
       "game": "unionarena",
       "view": "usage",
-      "bytes": 15188
+      "bytes": 15190
     },
     {
       "path": "unionarena-rules.html",
       "game": "unionarena",
       "view": "rules",
-      "bytes": 15137
+      "bytes": 15139
     },
     {
       "path": "unionarena-sources.html",
       "game": "unionarena",
       "view": "sources",
-      "bytes": 15151
+      "bytes": 15153
     },
     {
       "path": "riftbound.html",
@@ -185,13 +185,13 @@
       "path": "riftbound-decks.html",
       "game": "riftbound",
       "view": "decks",
-      "bytes": 20694
+      "bytes": 20703
     },
     {
       "path": "riftbound-cards.html",
       "game": "riftbound",
       "view": "cards",
-      "bytes": 20676
+      "bytes": 20685
     },
     {
       "path": "riftbound-news.html",
@@ -203,19 +203,19 @@
       "path": "riftbound-usage.html",
       "game": "riftbound",
       "view": "usage",
-      "bytes": 20733
+      "bytes": 20742
     },
     {
       "path": "riftbound-rules.html",
       "game": "riftbound",
       "view": "rules",
-      "bytes": 20682
+      "bytes": 20691
     },
     {
       "path": "riftbound-sources.html",
       "game": "riftbound",
       "view": "sources",
-      "bytes": 20696
+      "bytes": 20705
     },
     {
       "path": "marvel.html",
@@ -227,13 +227,13 @@
       "path": "marvel-decks.html",
       "game": "marvel",
       "view": "decks",
-      "bytes": 15561
+      "bytes": 15570
     },
     {
       "path": "marvel-cards.html",
       "game": "marvel",
       "view": "cards",
-      "bytes": 15543
+      "bytes": 15552
     },
     {
       "path": "marvel-news.html",
@@ -245,25 +245,25 @@
       "path": "marvel-events.html",
       "game": "marvel",
       "view": "events",
-      "bytes": 15535
+      "bytes": 15544
     },
     {
       "path": "marvel-usage.html",
       "game": "marvel",
       "view": "usage",
-      "bytes": 15600
+      "bytes": 15609
     },
     {
       "path": "marvel-rules.html",
       "game": "marvel",
       "view": "rules",
-      "bytes": 15549
+      "bytes": 15558
     },
     {
       "path": "marvel-sources.html",
       "game": "marvel",
       "view": "sources",
-      "bytes": 15563
+      "bytes": 15572
     },
     {
       "path": "beyblade.html",

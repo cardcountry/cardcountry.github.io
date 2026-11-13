@@ -10,7 +10,9 @@ import { fileURLToPath } from 'node:url';
 // PowerShell example: $env:METALAB_FEED_DATE='2026-11-08'; node data-pipeline/build-activity-feed.mjs
 // Never infer the maintenance date from the execution host's timezone.
 const site = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const work = path.resolve(site, '../work/aggregation-20261108');
+const work = process.env.METALAB_FEED_REPORT_DIR
+  ? path.resolve(process.env.METALAB_FEED_REPORT_DIR)
+  : path.resolve(site, '../work/aggregation-20261108');
 const builtOn = process.env.METALAB_FEED_DATE;
 const output = path.join(site, 'activity-feed.json');
 const games = [
@@ -67,20 +69,38 @@ function sourceLanguageOf(value, explicit) {
 }
 const previous = fs.existsSync(output) ? JSON.parse(fs.readFileSync(output,'utf8')) : {items:[]};
 const oldById = new Map((previous.items||[]).map(x=>[x.id,x]));
+const firstCollectedFile=path.join(site,'data-pipeline/feed-first-collected.json');
+const firstCollected=new Map(Object.entries(fs.existsSync(firstCollectedFile)?JSON.parse(fs.readFileSync(firstCollectedFile,'utf8')).firstCollectedOn||{}:{}));
+const history=process.env.METALAB_FEED_PREVIOUS?JSON.parse(fs.readFileSync(process.env.METALAB_FEED_PREVIOUS,'utf8')):{items:[]};
+for(const item of [...(previous.items||[]),...(history.items||[])]){const known=date(item.firstCollectedOn),saved=firstCollected.get(item.id);if(known&&(!saved||known<saved))firstCollected.set(item.id,known);}
 const context = {window:{}};
 vm.createContext(context);
 const inputFiles = ['decks-data.js','community-data.js','ptcg-visual-data.js','ptcg-jp-recent.js','ptcg-tw-public.js','gcg-data.js','gcg-jp-recent.js','gcg-official-decks.js','opcg-data.js','opcg-recent-data.js','opcg-photo-data.js','opcg-eb05-jp.js','unionarena-data.js','unionarena-recipes.js','unionarena-jp-decks.js','riftbound-data.js','marvel-data.js','beyblade-data.js'];
 for (const file of inputFiles) vm.runInContext(fs.readFileSync(path.join(site,file),'utf8'),context,{filename:file,timeout:10000});
 const data = context.window;
-const records = new Map(), pending = [], duplicates = [];
-const htmlIds = new Map(games.map(g=>[g.id,new Set([...fs.readFileSync(path.join(site,g.page),'utf8').matchAll(/\bid=["']([^"']+)["']/g)].map(x=>x[1]))]));
+const records = new Map(), pending = [], duplicates = [], curatedIds = new Set();
+const sectionContext={window:{}};
+vm.runInNewContext(fs.readFileSync(path.join(site,'section-map.js'),'utf8'),sectionContext);
+const sections=sectionContext.window.METALAB_SECTIONS.games;
+const manifest=JSON.parse(fs.readFileSync(path.join(site,'section-pages-manifest.json'),'utf8'));
+const htmlIds = new Map(manifest.pages.map(p=>[p.path,new Set([...fs.readFileSync(path.join(site,p.path),'utf8').matchAll(/\bid=["']([^"']+)["']/g)].map(x=>x[1]))]));
+function internalDestination(game,requested){
+  let [page,anchor]=String(requested||game.page).split('#');
+  // Preserve old source adapters while publishing direct links to the new
+  // physical topic documents. Validate against the real generated documents.
+  if(page===game.page&&anchor){
+    const topic=anchor==='usage-ranking'?'usage':Object.entries(sections[game.id].roots).find(([,roots])=>roots.includes(anchor))?.[0];
+    if(topic){page=`${game.id}-${topic}.html`;if(topic==='usage')anchor=undefined;}
+  }
+  if(!manifest.pages.some(p=>p.path===page&&p.game===game.id&&p.view!=='compatibility')||
+     (anchor&&!htmlIds.get(page)?.has(anchor)))throw new Error(`Unknown internal destination ${requested}`);
+  return page+(anchor?'#'+anchor:'');
+}
 function add(input, semantic='') {
   const game = games.find(g=>g.id===input.game);
   const sourceUrl = canonical(input.sourceUrl);
   if (!game || !types.has(input.type) || !sourceUrl || !input.title || input.status==='pending') { pending.push({game:input.game,title:input.title,reason:'Missing public source, title, supported game/type, or pending verification'}); return; }
-  const internalUrl = input.internalUrl || game.page;
-  const [page,anchor] = internalUrl.split('#');
-  if (page!==game.page || (anchor && !htmlIds.get(game.id).has(anchor))) throw new Error(`Unknown internal destination ${internalUrl}`);
+  const internalUrl = internalDestination(game,input.internalUrl);
   const identity = `${input.game}|${input.type}|${sourceUrl}|${semantic}`;
   const id = `${input.game}-${crypto.createHash('sha256').update(identity).digest('hex').slice(0,16)}`;
   const publishedOn = date(input.publishedOn), sourceUpdatedOn = date(input.sourceUpdatedOn), eventOn = date(input.eventOn), verifiedOn = date(input.verifiedOn);
@@ -88,15 +108,17 @@ function add(input, semantic='') {
     ...input,id,sourceUrl,sourceName:input.sourceName||new URL(sourceUrl).hostname,
     sourceLanguage:normalizeLanguage(input.sourceLanguage),printEdition:normalizeLanguage(input.printEdition),
     publishedOn,sourceUpdatedOn,eventOn,availableOn:date(input.availableOn),
-    firstCollectedOn:date(oldById.get(id)?.firstCollectedOn)||builtOn,
+    firstCollectedOn:date(firstCollected.get(id))||date(oldById.get(id)?.firstCollectedOn)||builtOn,
     verifiedOn,status:input.status==='verified'&&verifiedOn?'verified':'indexed',
     internalUrl,format:input.format||'unknown',region:input.region||'unknown',
     aliases:[...new Set(input.aliases||[])].filter(x=>typeof x==='string'&&x)
   };
   if (publishedOn && publishedOn>builtOn) throw new Error(`Future publication date: ${record.title}`);
   if (sourceUpdatedOn && sourceUpdatedOn>builtOn) throw new Error(`Future source update date: ${record.title}`);
-  if (records.has(id)) { duplicates.push({id,title:record.title}); if(records.get(id).status==='verified')return; }
+  if (verifiedOn && verifiedOn>builtOn) throw new Error(`Future verification date: ${record.title}`);
+  if (records.has(id)) { duplicates.push({id,title:record.title}); if(records.get(id).status==='verified')return id; }
   records.set(id,record);
+  return id;
 }
 const sum = (entries,field='qty') => (entries||[]).reduce((n,x)=>n+(Number(x[field])||0),0);
 const decklists = vm.runInContext('decklists',context);
@@ -158,9 +180,12 @@ for(const deck of data.UNION_ARENA_DATA.eventDecks||[]) {
     alternateSources:deck.source?[{url:deck.source,language:sourceLanguageOf(deck.source),label:'Official event results',publishedOn:date(deck.revealed)}]:[]},`${deck.event}|${deck.place}`);
 }
 for(const deck of data.RIFTBOUND_DATA.decks||[]) {
+  const official=new URL(deck.source).hostname==='playriftbound.com';
+  const verifiedOn=deck.verifiedOn||deck.checked||null;
   add({game:'riftbound',type:'deck',title:`${deck.legend} · ${deck.player}`,summary:`${deck.event}；${deck.placement}；${deck.total} 张（包含来源记录的传奇、符文、战场与备牌）。`,
-    sourceUrl:deck.source,sourceName:'Riftdecks',sourceLanguage:'en',publishedOn:null,eventOn:deck.date,verifiedOn:null,status:'indexed',
-    internalUrl:'riftbound.html#meta',format:'Radiance · Constructed',region:'unknown',aliases:[deck.legend,...(deck.domains||[])]},deck.id);
+    sourceUrl:deck.source,sourceName:deck.sourceName||(official?'Riftbound 官方网站':'Riftdecks'),sourceLanguage:deck.sourceLanguage||'en',printEdition:deck.printLanguage,
+    publishedOn:deck.publishedOn||null,eventOn:deck.date,verifiedOn,status:verifiedOn?'verified':'indexed',
+    internalUrl:'riftbound.html#meta',format:deck.format||'Radiance · Constructed',region:deck.region||'unknown',aliases:[deck.legend,...(deck.domains||[])]},deck.id);
 }
 // These legacy aggregates lack per-event original URLs. Keep one plainly scoped
 // index record, without inventing a publication date or a verification date.
@@ -184,21 +209,25 @@ if(fs.existsSync(curatedPath)) {
   if(!Array.isArray(inputs))throw new Error('activity-curated.json must be an array or {items:[]}');
   for(const r of inputs) {
     if(r.status!=='verified'||!date(r.verifiedOn)){pending.push({game:r.game,title:r.title,reason:'Curated item needs explicit verified status and date'});continue;}
-    add(r,r.semanticKey||'');curatedCount++;
+    const id=add(r,r.semanticKey||'');if(id)curatedIds.add(id);curatedCount++;
   }
 }
-const timelineDate = item => item.publishedOn || item.sourceUpdatedOn || (item.eventOn && item.eventOn<=builtOn ? item.eventOn : '') || '';
+const timelineDate = item => [item.publishedOn,item.sourceUpdatedOn].filter(Boolean).sort().at(-1) || (item.eventOn && item.eventOn<=builtOn ? item.eventOn : '') || '';
 const sort=(a,b)=>timelineDate(b).localeCompare(timelineDate(a))||a.id.localeCompare(b.id);
 const all=[...records.values()].sort(sort),included=[],trimmed=[];
 for(const game of games) {
   const entries=all.filter(x=>x.game===game.id);
-  // Keep both official recipes and event records represented in capped games.
-  let chosen=entries.slice(0,160);
-  const missingType=[...new Set(entries.map(x=>x.type))].filter(t=>!chosen.some(x=>x.type===t));
-  for(const type of missingType){chosen.pop();chosen.push(entries.find(x=>x.type===type));}
+  // Keep every reviewed news/product/rules record and one of every content type.
+  // A run of new tournament lists must not silently hide undated official news.
+  const chosen=entries.filter(x=>curatedIds.has(x.id));
+  for(const type of new Set(entries.map(x=>x.type)))if(!chosen.some(x=>x.type===type))chosen.push(entries.find(x=>x.type===type));
+  if(chosen.length>160)throw new Error(`Reviewed records exceed feed cap for ${game.id}`);
+  const selected=new Set(chosen.map(x=>x.id));
+  for(const record of entries){if(chosen.length>=160)break;if(!selected.has(record.id)){chosen.push(record);selected.add(record.id);}}
+  chosen.sort(sort);
   included.push(...chosen);
   trimmed.push(...entries.filter(x=>!chosen.includes(x)).map(x=>({id:x.id,game:x.game,reason:'Per-game feed cap; full record retained in game database'})));
-  const sourceDates=chosen.map(x=>x.publishedOn||x.sourceUpdatedOn).filter(Boolean).sort();
+  const sourceDates=chosen.map(x=>[x.publishedOn,x.sourceUpdatedOn].filter(Boolean).sort().at(-1)).filter(Boolean).sort();
   const eventDates=chosen.map(x=>x.eventOn).filter(x=>x&&x<=builtOn).sort();
   const upcomingEvents=chosen.map(x=>x.eventOn).filter(x=>x&&x>builtOn).sort();
   game.reviewedOn=chosen.map(x=>x.verifiedOn).filter(Boolean).sort().at(-1)||null;
@@ -211,6 +240,8 @@ for(const game of games) {
 }
 included.sort(sort);
 const result={schemaVersion:1,builtOn,games,items:included};
+for(const item of included)firstCollected.set(item.id,item.firstCollectedOn);
+fs.writeFileSync(firstCollectedFile,JSON.stringify({schemaVersion:1,firstCollectedOn:Object.fromEntries([...firstCollected].sort(([a],[b])=>a.localeCompare(b)))},null,2)+'\n');
 fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
 fs.mkdirSync(work,{recursive:true});
 const report={builtOn,files:inputFiles,curatedCount,totalBeforeCap:all.length,totalIncluded:included.length,

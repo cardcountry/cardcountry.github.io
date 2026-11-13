@@ -4,6 +4,7 @@
  const normalize=value=>String(value??'').normalize('NFKC').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\p{L}\p{N}]/gu,'');
  function register(rows){for(const row of rows){const values=[...new Set(row.filter(v=>typeof v==='string'&&v.trim()).map(normalize))].filter(v=>v.length>1);if(values.length>1)groups.push(values);}cache.clear();}
  register([
+ ['Rayquaza','烈空坐','レックウザ'],['Archaludon','铝钢桥龙','鋁鋼橋龍','ブリジュラス'],['Palafin','海豚侠','海豚俠','イルカマン'],['Starmie','宝石海星','寶石海星','スターミー'],['Talonflame','烈箭鹰','烈箭鷹','ファイアロー'],['Prism Box','棱镜工具箱','稜鏡工具箱','プリズムバレット'],
  ['Traditional Chinese','繁中','繁體中文','繁体中文','Taiwan','台灣','台湾'],['Mega Charizard X','メガリザードンX','超級噴火龍X','超级喷火龙X'],['Team Rocket Mewtwo','ロケット団のミュウツー','火箭隊的超夢','火箭队的超梦'],['Mewtwo','ミュウツー','超夢','超梦'],
  ['Japan','Japanese','日本','日文','日本語'],['English','英文','英语','英語'],['Chinese','中文','中国','中國'],
  ['Red Blue','红蓝','紅藍','赤青'],['Red Green','红绿','紅綠','赤緑'],['Red White','红白','紅白','赤白'],['Red Purple','红紫','紅紫','赤紫'],['Red Black','红黑','紅黑','赤黒'],['Blue Green','蓝绿','藍綠','青緑'],['Blue White','蓝白','藍白','青白'],['Blue Purple','蓝紫','藍紫','青紫'],['Green Purple','绿紫','綠紫','緑紫'],['Green White','绿白','綠白','緑白'],['Purple Yellow','紫黄','紫黃'],['Black Yellow','黑黄','黑黃'],
@@ -37,6 +38,7 @@
  ]);
  if(window.GCG_OFFICIAL_DECKS)register(Object.entries(window.GCG_OFFICIAL_DECKS.names).map(([code,names])=>[code,...Object.values(names)]));
  if(window.OPCG_CARDS)register(window.OPCG_CARDS.map(c=>[c.code,c.name,c.name_ja]));
+ if(window.OPCG_DATA?.meta)register(Object.values(window.OPCG_DATA.meta).flat().map(d=>[d.leader,d.name,...(d.aliases||[])]));
  function variants(value){const needle=normalize(value);if(cache.has(needle))return cache.get(needle);const found=new Set([needle]),relevant=groups.filter(aliases=>aliases.some(a=>needle.includes(a)));for(const aliases of relevant){for(const candidate of [...found])for(const a of aliases.filter(a=>candidate.includes(a)))for(const b of aliases){found.add(candidate.replaceAll(a,b));if(found.size>=160)break;}if(found.size>=160)break;}const values=[...found].filter(Boolean);if(cache.size>80)cache.clear();cache.set(needle,values);return values;}
  function values(fields){return fields.flatMap(v=>Array.isArray(v)?typeof v[1]==='number'?values([v[0]]):values(v):v&&typeof v==='object'?values(Object.values(v)):[v]).filter(v=>v!=null);}
  function matches(query,fields){if(!String(query).trim())return true;const hay=normalize(values(fields).join(' ')),qs=variants(query);if(qs.some(q=>hay.includes(q)))return true;if(groups.some(aliases=>aliases.includes(normalize(query))))return false;const words=String(query).trim().split(/\s+/);return words.length>1&&words.every(word=>variants(word).some(q=>hay.includes(q)));}

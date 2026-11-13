@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 const site=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(site,'section-map.js'),'utf8'),context);
 const {games,topics,words,version}=context.window.METALAB_SECTIONS;
+const assetVersions=JSON.parse(fs.readFileSync(path.join(site,'data-pipeline/asset-versions.json'),'utf8'));
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const lang='zh-cn',w=words[lang],files=[];
 const route=(g,t)=>t==='overview'?`${g}.html`:`${g}-${t}.html`;
@@ -23,7 +24,7 @@ function hub(g,t='overview'){
 <footer class="ml-hub-footer"><a href="index.html" data-section-word="all">${w.all}</a> · META LAB / CARD COUNTRY KC</footer></body></html>\n`;
 }
 const changes=['comfort-ui.js','app.js','app-v22.js','gcg.js','opcg.js','riftbound.js','marvel.js','unionarena.js','unionarena-library.js','beyblade.js','usage-ranking.js','site-data-quality.js','activity-feed.js'];
-function versionAssets(text){for(const asset of changes)text=text.replace(new RegExp(`((?:src|href)=["']${asset.replaceAll('.','\\.')})(?:\\?[^"']*)?(["'])`,'g'),(_,a,b)=>`${a}?v=${version}${b}`);return text;}
+function versionAssets(text){for(const asset of new Set([...changes,...Object.keys(assetVersions)]))text=text.replace(new RegExp(`((?:src|href)=["']${asset.replaceAll('.','\\.')})(?:\\?[^"']*)?(["'])`,'g'),(_,a,b)=>`${a}?v=${assetVersions[asset]||version}${b}`);return text;}
 function markSections(main,active){let depth=0,stack=[];return main.replace(/<\/?section\b[^>]*>/gi,tag=>{if(/^<\//.test(tag)){depth--;stack.pop();if(depth<0)throw Error('Unbalanced section');return tag;}const id=tag.match(/\bid=["']([^"']+)["']/)?.[1];const isRoot=depth++===0;stack.push(id);if(!isRoot)return tag;if(active.includes(id)){if(/\bclass=/.test(tag))return tag.replace(/\bclass=(["'])(.*?)\1/,(_,q,c)=>`class=${q}${c} ml-active-section${q}`);return tag.replace(/>$/,' class="ml-active-section">');}return tag.replace(/>$/,' data-inactive-root hidden inert aria-hidden="true">');});}
 function documentPage(g,t){let source=fs.readFileSync(path.join(site,'data-pipeline/page-templates',g+'.html'),'utf8');source=versionAssets(source);
  source=source.replace(/<html\b([^>]*)>/,`<html$1 data-page-game="${g}" data-page-view="${t}" style="--ml-accent:${games[g].accent}">`);
@@ -40,7 +41,7 @@ function documentPage(g,t){let source=fs.readFileSync(path.join(site,'data-pipel
  source=source.replace(/<footer\b/,`<nav class="ml-page-heading ml-return" aria-label="Return"><a href="${g}.html" data-section-word="back">${w.back}</a> · <a href="index.html" data-section-word="all">${w.all}</a></nav><footer`);
  return source;
 }
-for(const [g,G]of Object.entries(games)){for(const t of ['overview',...G.topics]){const name=route(g,t),content=t==='overview'||t==='news'?hub(g,t):documentPage(g,t);fs.writeFileSync(path.join(site,name),content);files.push({path:name,game:g,view:t,bytes:Buffer.byteLength(content)});}}
+for(const [g,G]of Object.entries(games)){for(const t of ['overview',...G.topics]){const name=route(g,t),content=versionAssets(t==='overview'||t==='news'?hub(g,t):documentPage(g,t));fs.writeFileSync(path.join(site,name),content);files.push({path:name,game:g,view:t,bytes:Buffer.byteLength(content)});}}
 // The legacy compatibility address forwards its known section bookmarks too.
 fs.writeFileSync(path.join(site,'v22.html'),`<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PTCG — META LAB</title><script>const routes={meta:'decks',cards:'cards',rules:'rules',sources:'sources','usage-ranking':'usage'};const section=routes[location.hash.slice(1)];location.replace((section?'ptcg-'+section+'.html':'ptcg.html')+location.search);</script></head><body><a href="ptcg.html">进入 PTCG</a></body></html>\n`);files.push({path:'v22.html',game:'ptcg',view:'compatibility'});
 const indexPath=path.join(site,'index.html');let index=versionAssets(fs.readFileSync(indexPath,'utf8'));fs.writeFileSync(indexPath,index);
