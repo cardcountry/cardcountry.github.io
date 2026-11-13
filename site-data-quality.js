@@ -57,7 +57,8 @@
 
   function auditMarvel(){
     const data=window.MARVEL_DATA||{cards:[],tournaments:[],sources:[]},lists=data.tournaments.flatMap(event=>event.lists||[]);let quarantined=uniqueFailures(data.cards,'id');
-    quarantined+=data.cards.filter(card=>!card.code||!card.names?.en||!card.images?.en).length;
+    // Validate a name/artwork pair in the same collected source language.
+    quarantined+=data.cards.filter(card=>!card.code||!['zh-cn','zh','en'].some(language=>typeof card.names?.[language]==='string'&&card.names[language].trim()&&typeof card.images?.[language]==='string'&&card.images[language].trim())).length;
     quarantined+=lists.filter(list=>sumCards(list.cards)!==50||!list.archetype).length;
     return{game:'marvel',label:'MARVEL HERO RUSH',records:data.cards.length,lists:lists.length,sources:data.sources?.length||0,quarantined,checked:String(data.generated||'').slice(0,10)||latestDate(data.tournaments.map(item=>item.date)),notes:['Official print records','50-card list validation','Unpublished attendance is never inferred']};
   }
