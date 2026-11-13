@@ -7,7 +7,7 @@
   "ptcg-official-details.js": "2026111301",
   "ptcg-card-types.js": "2026111301",
   "gcg-jp-recent.js": "2026111301",
-  "gcg.js": "2026111301",
+  "gcg.js": "2026111306",
   "opcg-eb05-jp.js": "2026111301",
   "opcg.js": "2026111301",
   "unionarena-data.js": "2026111301",
@@ -18,5 +18,7 @@
   "marvel-data.js": "2026111304",
   "section-pages.css": "2026111303",
   "marvel.js": "2026111304",
-  "site-data-quality.js": "2026111305"
+  "site-data-quality.js": "2026111305",
+  "app.js": "2026111306",
+  "gcg.css": "2026111306"
 }

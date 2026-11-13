@@ -11,13 +11,13 @@
       "path": "ptcg-decks.html",
       "game": "ptcg",
       "view": "decks",
-      "bytes": 79507
+      "bytes": 79352
     },
     {
       "path": "ptcg-cards.html",
       "game": "ptcg",
       "view": "cards",
-      "bytes": 79489
+      "bytes": 79334
     },
     {
       "path": "ptcg-news.html",
@@ -29,19 +29,19 @@
       "path": "ptcg-usage.html",
       "game": "ptcg",
       "view": "usage",
-      "bytes": 79546
+      "bytes": 79391
     },
     {
       "path": "ptcg-rules.html",
       "game": "ptcg",
       "view": "rules",
-      "bytes": 79495
+      "bytes": 79340
     },
     {
       "path": "ptcg-sources.html",
       "game": "ptcg",
       "view": "sources",
-      "bytes": 79509
+      "bytes": 79354
     },
     {
       "path": "gcg.html",
@@ -53,13 +53,13 @@
       "path": "gcg-decks.html",
       "game": "gcg",
       "view": "decks",
-      "bytes": 17165
+      "bytes": 17348
     },
     {
       "path": "gcg-cards.html",
       "game": "gcg",
       "view": "cards",
-      "bytes": 17147
+      "bytes": 17330
     },
     {
       "path": "gcg-news.html",
@@ -71,25 +71,25 @@
       "path": "gcg-official.html",
       "game": "gcg",
       "view": "official",
-      "bytes": 17159
+      "bytes": 17342
     },
     {
       "path": "gcg-usage.html",
       "game": "gcg",
       "view": "usage",
-      "bytes": 17204
+      "bytes": 17387
     },
     {
       "path": "gcg-rules.html",
       "game": "gcg",
       "view": "rules",
-      "bytes": 17153
+      "bytes": 17336
     },
     {
       "path": "gcg-sources.html",
       "game": "gcg",
       "view": "sources",
-      "bytes": 17167
+      "bytes": 17350
     },
     {
       "path": "opcg.html",

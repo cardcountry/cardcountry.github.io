@@ -4,6 +4,9 @@
   const pageView=document.documentElement.dataset?.pageView||'';
   const pageAllows=(...views)=>!pageView||views.includes(pageView);
   const D=window.GCG_DATA||{cards:[],tournaments:[],meta:{}};
+  // Keep the published archive distinct from changes fetched in this browser session.
+  const archivedCoverage=coverageFacts(D),archiveDate=String(D.checked||D.synced||'').slice(0,10);
+  let syncState='idle',liveChecks={cards:false,events:false};
   const official=window.GCG_OFFICIAL_DECKS||{records:[],names:{},locales:[]};
   const jpImages=new Map(official.records.filter(r=>r.sourceLocale==='jp').flatMap(r=>r.entries.map(c=>[c.code,c.image])));
   let deckRegion='',officialPage=1,officialRows=[],deckGroupLimit=20;
@@ -13,6 +16,28 @@
   const AUTO_KEY='metalab-auto-update';
   let uiLang='zh-cn',currentFormat='ALL',deckQuery='',cardQuery='',cardPage=1,cardView='image',currentCard=null,currentCardImage='',currentDeckCode=null,currentDeckResults=[],liveSynced=false,autoUpdateEnabled=true,autoRefreshTimer=null,syncInFlight=false;
   try{const savedLanguage=localStorage.getItem('metalab-gcg-language');if(['zh-cn','zh','ja','en'].includes(savedLanguage))uiLang=savedLanguage}catch(error){}
+  function coverageFacts(data){
+    const events=Array.isArray(data.tournaments)?data.tournaments:[],cards=Array.isArray(data.cards)?data.cards:[];
+    const complete=result=>Array.isArray(result?.main)&&result.main.every(row=>Array.isArray(row)&&typeof row[0]==='string'&&Number.isInteger(Number(row[1]))&&Number(row[1])>0)&&result.main.reduce((sum,row)=>sum+Number(row[1]),0)===50;
+    const dates=events.filter(event=>(event.results||[]).some(complete)).map(event=>String(event.date||'')).filter(date=>/^\d{4}-\d{2}-\d{2}$/.test(date)).sort();
+    return{cards:new Set(cards.map(card=>card.code).filter(Boolean)).size,events:events.length,lists:events.reduce((sum,event)=>sum+(event.results||[]).filter(complete).length,0),first:dates[0]||'',last:dates.at(-1)||''};
+  }
+  function coverageWords(lang){if(!['zh-cn','zh','ja','en'].includes(lang))lang='en';return({
+    'zh-cn':{archive:'发布归档',current:'当前载入',cards:'卡牌',events:'赛事',lists:'完整卡表',date:'归档整理',range:'完整卡表日期',none:'暂无完整卡表',all:'全部环境',idle:'使用已发布归档',loading:'正在读取公开API',ready:'公开API已读取',failed:'在线读取未完成 · 使用已载入资料',off:'自动读取已关闭',unrequested:'本页未请求此API'},
+    zh:{archive:'發布歸檔',current:'目前載入',cards:'卡牌',events:'賽事',lists:'完整牌組',date:'歸檔整理',range:'完整牌組日期',none:'暫無完整牌組',all:'全部環境',idle:'使用已發布歸檔',loading:'正在讀取公開API',ready:'公開API已讀取',failed:'線上讀取未完成 · 使用已載入資料',off:'自動讀取已關閉',unrequested:'本頁未請求此API'},
+    ja:{archive:'公開アーカイブ',current:'現在の読込数',cards:'カード',events:'大会',lists:'完全デッキ',date:'アーカイブ整理日',range:'完全デッキの大会日',none:'完全デッキなし',all:'全環境',idle:'公開アーカイブを使用',loading:'公開APIを読込中',ready:'公開API読込済',failed:'オンライン読込未完了 · 読込済データを使用',off:'自動読込オフ',unrequested:'このページではAPI未要求'},
+    en:{archive:'PUBLISHED ARCHIVE',current:'CURRENTLY LOADED',cards:'CARDS',events:'EVENTS',lists:'FULL LISTS',date:'ARCHIVE COMPILED',range:'FULL-LIST EVENT DATES',none:'NO FULL LISTS',all:'ALL FORMATS',idle:'USING PUBLISHED ARCHIVE',loading:'READING PUBLIC API',ready:'PUBLIC API READ',failed:'ONLINE READ INCOMPLETE · USING LOADED DATA',off:'AUTO READ OFF',unrequested:'API NOT REQUESTED ON THIS PAGE'}
+  })[lang]}
+  function renderCoverage(){
+    const words=coverageWords(uiLang),current=coverageFacts(D),number=value=>Number(value).toLocaleString('en-US');
+    for(const [id,value]of Object.entries({statCards:current.cards,statEvents:current.events,statLists:current.lists,cardTotal:current.cards})){const target=$('#'+id);if(target)target.textContent=number(value)}
+    const state=scope=>!autoUpdateEnabled?words.off:syncState==='loading'?words.loading:syncState==='failed'?words.failed:liveChecks[scope]?words.ready:pageAllows(...(scope==='cards'?['cards','decks']:['decks','usage','events']))?words.idle:words.unrequested;
+    const counts=stats=>`${number(stats.events)} ${words.events} / ${number(stats.lists)} ${words.lists}`;
+    const catalog=$('#catalogCoverage'),decks=$('#deckCoverage');
+    if(catalog)catalog.textContent=`${words.archive} ${number(archivedCoverage.cards)} ${words.cards} · ${words.current} ${number(current.cards)} ${words.cards} · ${words.date} ${archiveDate||'—'} · ${state('cards')}`;
+    if(decks)decks.textContent=`${words.archive} ${counts(archivedCoverage)} · ${words.current} ${counts(current)} · ${words.date} ${archiveDate||'—'} · ${state('events')}`;
+    const status=$('.sync-status span');if(status)status.textContent=!autoUpdateEnabled?words.off:words[syncState]||words.idle;
+  }
   const text={
     'zh-cn':{autoUpdate:'自动更新',autoOff:'自动更新已关闭',navRules:'基础规则',navMeta:'环境卡组',navCards:'卡牌检索',navSources:'资料来源',heroText:'从规则、区域赛环境到完整卡牌效果。为实体 GUNDAM CARD GAME 玩家整理的站内竞技资料库。',heroMeta:'查看当前环境',heroCards:'检索完整图鉴',statCards:'独立卡牌',statEvents:'收录赛事',statLists:'赛事卡表',rulesTitle:'从零开始部署',ruleStartTitle:'开局设置',ruleStart:'准备 50 张主牌组、10 张资源牌组与 Token；抽 5 张起手牌并可重抽一次，设置 6 张护盾。后攻玩家开局获得 1 个 EX Resource。',ruleBuildTitle:'牌组构筑',ruleBuild:'主牌组必须正好 50 张、最多 2 种颜色；同一卡号最多 4 张。资源牌组固定 10 张。',ruleTurnTitle:'回合流程',ruleTurn:'Start → Draw → Resource → Main → End。主要阶段可部署卡牌、发动能力或让 Unit 攻击。',ruleWinTitle:'胜利条件',ruleWin:'对手没有护盾时再造成战斗伤害，或令对手的主牌组耗尽即可获胜。',videoTitle:'GCG 官方对战教学',videoText:'涵盖场地设置、资源支付、Unit 与 Pilot 配对、攻击和护盾处理。',phase1:'重置所有横置卡牌',phase2:'抽 1 张牌与加入 1 张资源',phase3:'主要阶段部署、配对、发动与攻击',phase4:'结束回合并交给对手',metaTitle:'当前 GD05 赛事环境',syncText:'赛事资料已同步',deckSearchLabel:'搜索卡组、卡名、选手或赛事',deckSearchPlaceholder:'例如 Strike Freedom / Barbatos / Brisbane…',chartTitle:'上位使用率与近期变化',recent:'最近 7 场',prior:'此前 7 场',rogueTitle:'非主流与新兴卡组',rogueText:'保留所有有公开上位记录的类型，不只显示主流卡组。',xTitle:'X 卡组与赛事战绩',xText:'只保留能够与站内完整卡表交叉核对的 X 赛事记录。',cardsTitle:'GCG 完整卡牌图鉴',cardSearchPlaceholder:'输入卡名、卡号、效果或系列…',imageLangNote:'所有界面使用实体 GCG 英文版卡图；卡片效果以官方英文卡文为准，避免跨语版本误配。',imageView:'卡图',nameView:'卡名',loadMore:'载入更多卡牌',clearFilters:'清除筛选',moreFilters:"更多筛选",sourcesTitle:'筛选后的资料来源',sourcePolicyTitle:'资料处理原则',sourcePolicy:'规则和卡图优先采用 GCG 官方；赛事日期、人数与卡表采用公开赛事数据库并交叉核对。外部链接仅作为来源记录，卡表与卡片效果在站内显示。',footerCredit:'制作是由 Card Country KC',disclaimer:'非官方玩家资料工具。GUNDAM CARD GAME 的卡名、卡图及相关权利归 Bandai 与各权利人所有；环境占比只反映所列赛事样本。',effectTitle:'官方卡片效果',effectNote:'效果文字来自公开卡牌资料 API；比赛裁定请以官方 FAQ 与最新综合规则为准。'},
     zh:{autoUpdate:'自動更新',autoOff:'自動更新已關閉',navRules:'基礎規則',navMeta:'環境牌組',navCards:'卡牌檢索',navSources:'資料來源',heroText:'從規則、區域賽環境到完整卡牌效果。為實體 GUNDAM CARD GAME 玩家整理的站內競技資料庫。',heroMeta:'查看目前環境',heroCards:'檢索完整圖鑑',statCards:'獨立卡牌',statEvents:'收錄賽事',statLists:'賽事牌組',rulesTitle:'從零開始部署',ruleStartTitle:'開局設置',ruleStart:'準備 50 張主牌組、10 張資源牌組與 Token；抽 5 張起手牌並可重抽一次，設置 6 張護盾。後攻玩家開局獲得 1 個 EX Resource。',ruleBuildTitle:'牌組構築',ruleBuild:'主牌組必須正好 50 張、最多 2 種顏色；同一卡號最多 4 張。資源牌組固定 10 張。',ruleTurnTitle:'回合流程',ruleTurn:'Start → Draw → Resource → Main → End。主要階段可部署卡牌、發動能力或讓 Unit 攻擊。',ruleWinTitle:'勝利條件',ruleWin:'對手沒有護盾時再造成戰鬥傷害，或令對手的主牌組耗盡即可獲勝。',videoTitle:'GCG 官方對戰教學',videoText:'涵蓋場地設置、資源支付、Unit 與 Pilot 配對、攻擊和護盾處理。',phase1:'重置所有橫置卡牌',phase2:'抽 1 張牌與加入 1 張資源',phase3:'主要階段部署、配對、發動與攻擊',phase4:'結束回合並交給對手',metaTitle:'目前 GD05 賽事環境',syncText:'賽事資料已同步',deckSearchLabel:'搜尋牌組、卡名、選手或賽事',deckSearchPlaceholder:'例如 Strike Freedom / Barbatos / Brisbane…',chartTitle:'上位使用率與近期變化',recent:'最近 7 場',prior:'此前 7 場',rogueTitle:'非主流與新興牌組',rogueText:'保留所有有公開上位紀錄的類型，不只顯示主流牌組。',xTitle:'X 牌組與賽事戰績',xText:'只保留能夠與站內完整牌組交叉核對的 X 賽事紀錄。',cardsTitle:'GCG 完整卡牌圖鑑',cardSearchPlaceholder:'輸入卡名、卡號、效果或系列…',imageLangNote:'所有介面使用實體 GCG 英文版卡圖；卡片效果以官方英文卡文為準，避免跨語版本誤配。',imageView:'卡圖',nameView:'卡名',loadMore:'載入更多卡牌',clearFilters:'清除篩選',moreFilters:"更多篩選",sourcesTitle:'篩選後的資料來源',sourcePolicyTitle:'資料處理原則',sourcePolicy:'規則和卡圖優先採用 GCG 官方；賽事日期、人數與牌組採用公開賽事資料庫並交叉核對。外部連結僅作為來源紀錄，牌組與卡片效果在站內顯示。',footerCredit:'製作是由 Card Country KC',disclaimer:'非官方玩家資料工具。GUNDAM CARD GAME 的卡名、卡圖及相關權利歸 Bandai 與各權利人所有；環境占比只反映所列賽事樣本。',effectTitle:'官方卡片效果',effectNote:'效果文字來自公開卡牌資料 API；比賽裁定請以官方 FAQ 與最新綜合規則為準。'},
@@ -81,7 +106,7 @@
   function renderMeta(){if(!pageAllows('decks','events'))return;
     const all=formatResults(),q=deckQuery.trim().toLowerCase(),matching=all.filter(result=>resultMatches(result,q));
     const total=all.length,items=groupRows(matching).map(g=>({...g,share:total?g.results.length/total*100:0})),main=q?items.slice(0,deckGroupLimit):items.slice(0,8),rogue=q?[]:items.slice(8,deckGroupLimit);
-    const dates=formatEvents().map(e=>e.date).filter(Boolean).sort();$('#metaStamp').textContent=(currentFormat==='ALL'?'ALL FORMATS':currentFormat)+' · '+(dates.length?dates[0]+' — '+dates.at(-1):'暂无样本')+' · 核验 '+(D.checked||'2026-11-07');
+    const coverage=coverageFacts({tournaments:formatEvents()}),words=coverageWords(uiLang);$('#metaStamp').textContent=(currentFormat==='ALL'?words.all:currentFormat)+' · '+words.range+' · '+(coverage.first?coverage.first+' — '+coverage.last:words.none);
     $('#deckResultNote').textContent=q?`${matching.length} ${d('topLists')} · ${items.length} ${d('archetypes')}`:`${total} ${d('topLists')} · ${items.length} ${d('archetypes')} · ${formatEvents().length} ${d('events')}`;
     $('#deckGrid').innerHTML=main.map((g,i)=>{const card=cardMap.get(g.imageCode);return `<button class="deck-card" data-deck="${esc(g.code)}"><span class="deck-rank">${String(i+1).padStart(2,'0')}</span><strong class="share">${g.share.toFixed(1)}%</strong><h3>${esc(g.name)}</h3><p>${g.code} · ${g.results.length} ${d('topLists')}</p>${imageTag(card,g.name)}<span class="list-count">${d('openAll')} · ${g.results.length} →</span></button>`}).join('')||'<p>NO MATCHING DECKLISTS</p>';
     $('#rogueGrid').innerHTML=rogue.map(g=>{const card=cardMap.get(g.imageCode);return `<button class="rogue-card" data-deck="${esc(g.code)}">${imageTag(card,g.name)}<span><b>${esc(g.name)}</b><small>${g.results.length} ${d('topLists')} · ${g.share.toFixed(1)}%</small></span></button>`}).join('');
@@ -162,17 +187,17 @@
     if(!wantCards&&!wantEvents)return;
     if(syncInFlight)return;
     syncInFlight=true;
+    syncState='loading';renderCoverage();
     try{
       const [cardResponse,eventResponse]=await Promise.all([wantCards?fetch('https://deckbuilder.egmanevents.com/api/cards/gundam'):null,wantEvents?fetch('https://deckbuilder.egmanevents.com/api/tournaments/gundam'):null]);
       if(cardResponse&&!cardResponse.ok||eventResponse&&!eventResponse.ok)throw new Error('SYNC HTTP');
       const [liveCards,liveEvents]=await Promise.all([cardResponse?cardResponse.json():null,eventResponse?eventResponse.json():null]);
+      if(cardResponse&&!Array.isArray(liveCards)||eventResponse&&!Array.isArray(liveEvents))throw new Error('SYNC PAYLOAD');
       if(Array.isArray(liveCards)&&liveCards.length>=D.cards.length){D.cards.splice(0,D.cards.length,...liveCards.map(normalizeLiveCard));cardMap.clear();D.cards.forEach(card=>cardMap.set(card.code,card))}
       if(Array.isArray(liveEvents)){const byId=new Map(D.tournaments.map(e=>[e.id,e]));for(const raw of liveEvents){const next=normalizeLiveEvent(raw),old=byId.get(next.id);byId.set(next.id,{...old,...next,region:old?.region||'International',language:old?.language||'Unspecified',sourceLanguage:old?.sourceLanguage||'English',sourceUrl:old?.sourceUrl||'https://deckbuilder.egmanevents.com/gundam/tournaments/'+encodeURIComponent(next.id)});}D.tournaments.splice(0,D.tournaments.length,...byId.values());}
       initFilters();
-      const totalLists=D.tournaments.reduce((sum,event)=>sum+(event.results?.filter(r=>r.main?.length).length||0),0);
-      $('#statCards').textContent=D.cards.length.toLocaleString();$('#statEvents').textContent=D.tournaments.length.toLocaleString();$('#statLists').textContent=totalLists.toLocaleString();$('#cardTotal').textContent=D.cards.length.toLocaleString();
-      liveSynced=true;$('.sync-status span').textContent=`${d('live')} · ${D.cards.length.toLocaleString()} ${d('cards')} · ${D.tournaments.length} ${d('events')}`;renderMeta();renderCards(true);document.dispatchEvent(new CustomEvent('metalab:data-updated',{detail:{game:'gcg'}}))
-    }catch(error){liveSynced=false;$('.sync-status span').textContent=t('syncText')+' · SNAPSHOT'}
+      liveChecks={cards:liveChecks.cards||!!cardResponse,events:liveChecks.events||!!eventResponse};syncState='ready';liveSynced=true;renderCoverage();renderMeta();renderCards(true);document.dispatchEvent(new CustomEvent('metalab:data-updated',{detail:{game:'gcg'}}))
+    }catch(error){syncState='failed';liveSynced=false;renderCoverage()}
     finally{syncInFlight=false}
   }
   function readAutoUpdate(){try{return localStorage.getItem(AUTO_KEY)!=='off'}catch(error){return true}}
@@ -181,7 +206,7 @@
     if(persist){try{localStorage.setItem(AUTO_KEY,enabled?'on':'off')}catch(error){}}
     clearInterval(autoRefreshTimer);autoRefreshTimer=null;
     if(enabled&&pageAllows('cards','decks','usage','events')){syncLiveData();autoRefreshTimer=setInterval(()=>{if(!document.hidden)syncLiveData()},10*60*1000)}
-    else $('.sync-status span').textContent=t('autoOff');
+    renderCoverage();
   }
   function renderOfficial(reset=false){if(!pageAllows('official','official-decks'))return;
     if(reset)officialPage=1;const locale=$('#officialLocale').value,q=$('#officialSearch').value.trim(),selected=official.records.filter(r=>(!locale||r.sourceLocale===locale)&&(!q||(window.MetaSearch?window.MetaSearch.matches(q,[r.title,r.format,...r.entries.flatMap(c=>[c.code,c.name,...Object.values(official.names[c.code]||{})])]):r.title.toLowerCase().includes(q.toLowerCase()))));const groups=new Map();for(const r of selected){if(!groups.has(r.fingerprint))groups.set(r.fingerprint,[]);groups.get(r.fingerprint).push(r)}const preferred=uiLang==='ja'?'jp':uiLang==='en'?'en':'zh-tw';officialRows=[...groups.values()].map(rows=>({...((rows.find(r=>r.sourceLocale===preferred))||rows[0]),variants:rows})).sort((a,b)=>String(b.date).localeCompare(String(a.date))||a.id.localeCompare(b.id));$('#officialCount').textContent=officialRows.length+' 套完整配方 · '+selected.length+' 份各语言资料 · 官方示例不计入赛事样本';
@@ -189,10 +214,10 @@
   }
   function openOfficial(id){const r=official.records.find(x=>x.id===id);if(!r)return;currentDeckCode=null;const result={officialRecipe:true,officialEntries:r.entries,main:r.entries.map(c=>[c.code,c.qty]),side:[],player:null,place:null,sourceUrl:r.sourceUrl,event:{name:r.title,date:r.date,format:r.format,region:r.sourceLocaleLabel,language:r.edition+' card images',players:null,sourceUrl:r.sourceUrl}};currentDeckResults=[result];$('#deckModalImage').src=r.entries[0].image;$('#deckModalTitle').textContent=r.title;$('#deckModalRank').textContent=r.sourceLocaleLabel+' · 官方构筑示例';$('#deckModalSummary').textContent='50 张主牌组；资源牌组另备。资料语言与卡图印刷版本分别保留。';$('#deckListPicker').innerHTML='';showDeckList([result],0);openModal('deckModal');}
   function initVersionFilters(){const selected=$('#deckFormat')?.value||currentFormat,formats=[...new Set(D.tournaments.map(e=>e.setGroup))].filter(Boolean).sort((a,b)=>b.localeCompare(a,undefined,{numeric:true}));$('#deckFormat').innerHTML='<option value="ALL">全部环境 · 所有版本</option>'+formats.map(f=>'<option value="'+esc(f)+'">'+esc(f)+(f==='GD06'?' · 日本最新已收录':'')+'</option>').join('');$('#deckFormat').value=selected;for(const l of official.locales){const o=document.createElement('option');o.value=l.key;o.textContent=l.label;$('#officialLocale').append(o)}}
-  function setLanguage(lang){if(!text[lang])lang='zh-cn';uiLang=lang;$('#uiLang').value=lang;try{localStorage.setItem('metalab-gcg-language',lang)}catch(error){}document.documentElement.lang=lang==='zh'?'zh-Hant':lang==='zh-cn'?'zh-Hans':lang;$$('[data-i18n]').forEach(el=>{if(t(el.dataset.i18n)!==el.dataset.i18n)el.textContent=t(el.dataset.i18n)});$$('[data-i18n-placeholder]').forEach(el=>el.placeholder=t(el.dataset.i18nPlaceholder));renderBanNotice();renderMeta();renderCards();renderSources();renderOfficial();$('.sync-status span').textContent=!autoUpdateEnabled?t('autoOff'):liveSynced?`${d('live')} · ${D.cards.length.toLocaleString()} ${d('cards')} · ${D.tournaments.length} ${d('events')}`:t('syncText');if(!pageView)$('#heroCard').src=cardImage(cardMap.get('GD05-002'));if(currentCard&&$('#cardModal').classList.contains('open'))openCard(currentCard.code,currentCardImage);if(currentDeckCode&&$('#deckModal').classList.contains('open'))openDeck(currentDeckCode)}
+  function setLanguage(lang){if(!text[lang])lang='zh-cn';uiLang=lang;$('#uiLang').value=lang;try{localStorage.setItem('metalab-gcg-language',lang)}catch(error){}document.documentElement.lang=lang==='zh'?'zh-Hant':lang==='zh-cn'?'zh-Hans':lang;$$('[data-i18n]').forEach(el=>{if(t(el.dataset.i18n)!==el.dataset.i18n)el.textContent=t(el.dataset.i18n)});$$('[data-i18n-placeholder]').forEach(el=>el.placeholder=t(el.dataset.i18nPlaceholder));renderBanNotice();renderMeta();renderCards();renderSources();renderOfficial();renderCoverage();if(!pageView)$('#heroCard').src=cardImage(cardMap.get('GD05-002'));if(currentCard&&$('#cardModal').classList.contains('open'))openCard(currentCard.code,currentCardImage);if(currentDeckCode&&$('#deckModal').classList.contains('open'))openDeck(currentDeckCode)}
   function initFilters(){const sets=[...new Set(D.cards.map(card=>card.code.split('-')[0]))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));$('#setFilter').innerHTML='<option value="">ALL SETS</option>'+sets.map(set=>`<option>${esc(set)}</option>`).join('')}
   function init(){
-    initFilters();initVersionFilters();const totalLists=D.tournaments.reduce((sum,event)=>sum+(event.results?.filter(r=>r.main?.length).length||0),0);$('#statCards').textContent=D.cards.length.toLocaleString();$('#statEvents').textContent=D.tournaments.length.toLocaleString();$('#statLists').textContent=totalLists.toLocaleString();$('#cardTotal').textContent=D.cards.length.toLocaleString();
+    initFilters();initVersionFilters();renderCoverage();
     setLanguage(uiLang);
     const languageHandler=event=>{if(uiLang!==event.target.value)setLanguage(event.target.value)};$('#uiLang').addEventListener('input',languageHandler);$('#uiLang').addEventListener('change',languageHandler);$('#menuBtn').addEventListener('click',()=>$('nav').classList.toggle('open'));
     $('#gcgAutoUpdate').addEventListener('change',event=>applyAutoUpdate(event.target.checked));
