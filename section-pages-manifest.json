@@ -5,313 +5,313 @@
       "path": "ptcg.html",
       "game": "ptcg",
       "view": "overview",
-      "bytes": 4994
+      "bytes": 6067
     },
     {
       "path": "ptcg-decks.html",
       "game": "ptcg",
       "view": "decks",
-      "bytes": 79881
+      "bytes": 79842
     },
     {
       "path": "ptcg-cards.html",
       "game": "ptcg",
       "view": "cards",
-      "bytes": 79863
+      "bytes": 79824
     },
     {
       "path": "ptcg-news.html",
       "game": "ptcg",
       "view": "news",
-      "bytes": 3037
+      "bytes": 4144
     },
     {
       "path": "ptcg-usage.html",
       "game": "ptcg",
       "view": "usage",
-      "bytes": 79920
+      "bytes": 79881
     },
     {
       "path": "ptcg-rules.html",
       "game": "ptcg",
       "view": "rules",
-      "bytes": 79869
+      "bytes": 79830
     },
     {
       "path": "ptcg-sources.html",
       "game": "ptcg",
       "view": "sources",
-      "bytes": 79883
+      "bytes": 79844
     },
     {
       "path": "gcg.html",
       "game": "gcg",
       "view": "overview",
-      "bytes": 5461
+      "bytes": 6617
     },
     {
       "path": "gcg-decks.html",
       "game": "gcg",
       "view": "decks",
-      "bytes": 17392
+      "bytes": 18095
     },
     {
       "path": "gcg-cards.html",
       "game": "gcg",
       "view": "cards",
-      "bytes": 17374
+      "bytes": 18077
     },
     {
       "path": "gcg-news.html",
       "game": "gcg",
       "view": "news",
-      "bytes": 3120
+      "bytes": 4310
     },
     {
       "path": "gcg-official.html",
       "game": "gcg",
       "view": "official",
-      "bytes": 17386
+      "bytes": 18089
     },
     {
       "path": "gcg-usage.html",
       "game": "gcg",
       "view": "usage",
-      "bytes": 17431
+      "bytes": 18134
     },
     {
       "path": "gcg-rules.html",
       "game": "gcg",
       "view": "rules",
-      "bytes": 17380
+      "bytes": 18083
     },
     {
       "path": "gcg-sources.html",
       "game": "gcg",
       "view": "sources",
-      "bytes": 17394
+      "bytes": 18097
     },
     {
       "path": "opcg.html",
       "game": "opcg",
       "view": "overview",
-      "bytes": 5018
+      "bytes": 6091
     },
     {
       "path": "opcg-decks.html",
       "game": "opcg",
       "view": "decks",
-      "bytes": 18210
+      "bytes": 18899
     },
     {
       "path": "opcg-cards.html",
       "game": "opcg",
       "view": "cards",
-      "bytes": 18192
+      "bytes": 18881
     },
     {
       "path": "opcg-news.html",
       "game": "opcg",
       "view": "news",
-      "bytes": 3051
+      "bytes": 4158
     },
     {
       "path": "opcg-usage.html",
       "game": "opcg",
       "view": "usage",
-      "bytes": 18249
+      "bytes": 18938
     },
     {
       "path": "opcg-rules.html",
       "game": "opcg",
       "view": "rules",
-      "bytes": 18198
+      "bytes": 18887
     },
     {
       "path": "opcg-sources.html",
       "game": "opcg",
       "view": "sources",
-      "bytes": 18212
+      "bytes": 18901
     },
     {
       "path": "unionarena.html",
       "game": "unionarena",
       "view": "overview",
-      "bytes": 5107
+      "bytes": 6222
     },
     {
       "path": "unionarena-decks.html",
       "game": "unionarena",
       "view": "decks",
-      "bytes": 15346
+      "bytes": 16039
     },
     {
       "path": "unionarena-cards.html",
       "game": "unionarena",
       "view": "cards",
-      "bytes": 15328
+      "bytes": 16021
     },
     {
       "path": "unionarena-news.html",
       "game": "unionarena",
       "view": "news",
-      "bytes": 3096
+      "bytes": 4245
     },
     {
       "path": "unionarena-usage.html",
       "game": "unionarena",
       "view": "usage",
-      "bytes": 15190
+      "bytes": 15883
     },
     {
       "path": "unionarena-rules.html",
       "game": "unionarena",
       "view": "rules",
-      "bytes": 15139
+      "bytes": 15832
     },
     {
       "path": "unionarena-sources.html",
       "game": "unionarena",
       "view": "sources",
-      "bytes": 15153
+      "bytes": 15846
     },
     {
       "path": "riftbound.html",
       "game": "riftbound",
       "view": "overview",
-      "bytes": 5039
+      "bytes": 6147
     },
     {
       "path": "riftbound-decks.html",
       "game": "riftbound",
       "view": "decks",
-      "bytes": 20829
+      "bytes": 21518
     },
     {
       "path": "riftbound-cards.html",
       "game": "riftbound",
       "view": "cards",
-      "bytes": 20811
+      "bytes": 21500
     },
     {
       "path": "riftbound-news.html",
       "game": "riftbound",
       "view": "news",
-      "bytes": 3081
+      "bytes": 4223
     },
     {
       "path": "riftbound-usage.html",
       "game": "riftbound",
       "view": "usage",
-      "bytes": 20868
+      "bytes": 21557
     },
     {
       "path": "riftbound-rules.html",
       "game": "riftbound",
       "view": "rules",
-      "bytes": 20817
+      "bytes": 21506
     },
     {
       "path": "riftbound-sources.html",
       "game": "riftbound",
       "view": "sources",
-      "bytes": 20831
+      "bytes": 21520
     },
     {
       "path": "marvel.html",
       "game": "marvel",
       "view": "overview",
-      "bytes": 5474
+      "bytes": 6650
     },
     {
       "path": "marvel-decks.html",
       "game": "marvel",
       "view": "decks",
-      "bytes": 15365
+      "bytes": 16111
     },
     {
       "path": "marvel-cards.html",
       "game": "marvel",
       "view": "cards",
-      "bytes": 15347
+      "bytes": 16093
     },
     {
       "path": "marvel-news.html",
       "game": "marvel",
       "view": "news",
-      "bytes": 3149
+      "bytes": 4359
     },
     {
       "path": "marvel-events.html",
       "game": "marvel",
       "view": "events",
-      "bytes": 15339
+      "bytes": 16085
     },
     {
       "path": "marvel-usage.html",
       "game": "marvel",
       "view": "usage",
-      "bytes": 15404
+      "bytes": 16150
     },
     {
       "path": "marvel-rules.html",
       "game": "marvel",
       "view": "rules",
-      "bytes": 15353
+      "bytes": 16099
     },
     {
       "path": "marvel-sources.html",
       "game": "marvel",
       "view": "sources",
-      "bytes": 15367
+      "bytes": 16113
     },
     {
       "path": "beyblade.html",
       "game": "beyblade",
       "view": "overview",
-      "bytes": 5508
+      "bytes": 6706
     },
     {
       "path": "beyblade-configs.html",
       "game": "beyblade",
       "view": "configs",
-      "bytes": 13144
+      "bytes": 13873
     },
     {
       "path": "beyblade-parts.html",
       "game": "beyblade",
       "view": "parts",
-      "bytes": 13116
+      "bytes": 13845
     },
     {
       "path": "beyblade-builder.html",
       "game": "beyblade",
       "view": "builder",
-      "bytes": 13156
+      "bytes": 13885
     },
     {
       "path": "beyblade-news.html",
       "game": "beyblade",
       "view": "news",
-      "bytes": 3170
+      "bytes": 4402
     },
     {
       "path": "beyblade-decks.html",
       "game": "beyblade",
       "view": "decks",
-      "bytes": 13142
+      "bytes": 13871
     },
     {
       "path": "beyblade-usage.html",
       "game": "beyblade",
       "view": "usage",
-      "bytes": 13187
+      "bytes": 13916
     },
     {
       "path": "beyblade-sources.html",
       "game": "beyblade",
       "view": "sources",
-      "bytes": 13150
+      "bytes": 13879
     },
     {
       "path": "v22.html",
