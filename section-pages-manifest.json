@@ -11,13 +11,13 @@
       "path": "ptcg-decks.html",
       "game": "ptcg",
       "view": "decks",
-      "bytes": 79892
+      "bytes": 79881
     },
     {
       "path": "ptcg-cards.html",
       "game": "ptcg",
       "view": "cards",
-      "bytes": 79874
+      "bytes": 79863
     },
     {
       "path": "ptcg-news.html",
@@ -29,19 +29,19 @@
       "path": "ptcg-usage.html",
       "game": "ptcg",
       "view": "usage",
-      "bytes": 79931
+      "bytes": 79920
     },
     {
       "path": "ptcg-rules.html",
       "game": "ptcg",
       "view": "rules",
-      "bytes": 79880
+      "bytes": 79869
     },
     {
       "path": "ptcg-sources.html",
       "game": "ptcg",
       "view": "sources",
-      "bytes": 79894
+      "bytes": 79883
     },
     {
       "path": "gcg.html",

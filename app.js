@@ -630,8 +630,17 @@ const mainMatchupLocales={
       toast('正在读取卡牌效果…');try{const response=await fetch(`https://api.tcgdex.net/v2/${lang}/cards/${encodeURIComponent(id)}`);if(!response.ok)throw new Error(`HTTP ${response.status}`);const detail=await response.json();if(request!==cardDetailRequest)return;if(detail.id!==id||!cardDetailImage(detail))throw Error('CARD IDENTITY MISMATCH');displayRemoteCard(detail,lang,false);if(uiLang==='en'&&lang!=='en')await switchRemoteCardLanguage('en');else setCardLanguageStatus()}catch(error){if(request===cardDetailRequest)toast(`无法读取卡牌：${error.message}`)}
     }
     const deckCardSetCache=new Map();
+    function verifiedTaiwanDeckPrint(name,code,sourceImage=''){
+      const parts=String(code||'').trim().match(/^([A-Z0-9.-]+)[ -]+([A-Z0-9]+)(?:\/([A-Z0-9.-]+))?$/i);if(!parts)return null;
+      const token=value=>/^\d+$/.test(String(value))?String(Number(value)):String(value||'').toUpperCase(),label=value=>String(value||'').normalize('NFKC').replace(/\s/g,'').toLowerCase();
+      const card=Object.values(window.PTCG_TW_PUBLIC?.cardsByCode||{}).find(value=>{const set=typeof value.set==='object'?value.set.name:value.set,no=String(value.no||'').split('/');return label(value.name)===label(name)&&token(set)===token(parts[1])&&token(no[0])===token(parts[2])&&(!parts[3]||token(no[1])===token(parts[3]))&&(!sourceImage||value.image===sourceImage)&&/^https:\/\/asia\.pokemon-card\.com\/tw\/card-img\/tw\d+\.png$/.test(String(value.image||''))&&value.sourceUrl===`https://asia.pokemon-card.com/tw/card-search/detail/${value.officialId}/`&&String(value.effect||'').trim()});
+      return card?{...card,code:`${parts[1].toUpperCase()}-${String(card.no).split('/')[0]}`,sourceCode:`${parts[1].toUpperCase()}-${card.no}`,physicalOfficial:true,language:'zh-tw'}:null;
+    }
+    function deckListKind(list){return !list?'STANDARD DECKLIST':list.competitive===false||list.evidenceType==='public-build'?'STANDARD PUBLIC BUILD':'STANDARD TOURNAMENT DECKLIST'}
     async function openDeckCardEffect(name,code='',sourceImage=''){
       const request=++cardDetailRequest;++cardLanguageRequest;
+      const taiwan=verifiedTaiwanDeckPrint(name,code,sourceImage);
+      if(taiwan){displayRemoteCard(taiwan,'zh-tw',true);if(uiLang==='en'&&currentCard.lang!=='en')await switchRemoteCardLanguage('en');return}
       const normalize=v=>String(v||'').normalize('NFKC').replace(/\s/g,'').replace(/\(ACESPEC\)/gi,''),rows=window.PTCG_OFFICIAL_DETAILS?.cards||[],matches=rows.filter(c=>normalize(c.name)===normalize(name)),hasCode=code&&code!=='-',official=(sourceImage&&rows.find(c=>c.image===sourceImage))||(hasCode&&matches.find(c=>normalize(c.code)===normalize(code)||normalize(c.sourceCode)===normalize(code)));
       if(official){displayRemoteCard(official,official.language||'ja',true);if(uiLang==='en'&&currentCard.lang!=='en')await switchRemoteCardLanguage('en');return}
       const known=(window.PTCG_LANGUAGE_LINKS?.records||[]).filter(record=>record.verified).flatMap(record=>Object.entries(record.prints||{}).flatMap(([lang,prints])=>prints.map(card=>({card,lang,record})))) .find(({card,lang,record})=>sourceImage&&(card.image===sourceImage||(record.imageAliases?.[lang]||[]).includes(sourceImage)));
@@ -673,6 +682,7 @@ const mainMatchupLocales={
     }
     function renderDeckListCards(){
       if(!currentDeckView)return;const {list}=currentDeckView;
+      const kind=$('.deck-modal-kicker');if(kind)kind.textContent=deckListKind(list)+' · 60 CARDS';
       $$('#deckViewToggle button').forEach(b=>b.classList.toggle('active',b.dataset.view===deckViewMode));
       if(deckViewMode==='image'){
         const cards=list.categories.flatMap(cat=>cat.cards.map(card=>({...card,category:cat.name})));
@@ -760,6 +770,7 @@ const mainMatchupLocales={
     }
     function openDeck(key){
       const deck=decklists.find(d=>d.key===key);if(!deck)return;const lists=standardDeckLists(deck);
+      const kind=$('.deck-modal-kicker');if(kind)kind.textContent=deckListKind(null)+' · 60 CARDS';
       $('#deckModalImage').src=deck.image;$('#deckModalImage').alt=`${deck.name} physical Pokémon TCG card`;
       $('#deckModalName').textContent=deck.name;$('#deckModalPlayer').textContent=`${lists.length} COMPLETE DECKLISTS`;
       $('.event-summary').classList.add('hidden');$('#deckChoiceView').classList.remove('hidden');$('#deckDetailView').classList.add('hidden');$('#backToChoices').classList.remove('hidden');$('#matchVideos').classList.add('hidden');$('#deckGuide').classList.add('hidden');$('#deckMatchup').classList.add('hidden');
