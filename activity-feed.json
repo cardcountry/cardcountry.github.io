@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtOn": "2026-11-13",
+  "builtOn": "2026-11-14",
   "games": [
     {
       "id": "ptcg",
       "name": "Pokémon TCG",
       "page": "ptcg.html",
-      "reviewedOn": "2026-11-13",
+      "reviewedOn": "2026-11-14",
       "latestSourceDate": "2026-11-12",
       "latestEventDate": "2026-11-12",
       "upcomingEventDate": null,
@@ -11896,33 +11896,6 @@
       "firstCollectedOn": "2026-11-08"
     },
     {
-      "game": "ptcg",
-      "type": "deck",
-      "title": "Basic Box · Adrian Serrano",
-      "summary": "Regional Puebla；32nd；2,234 人；60 张。",
-      "sourceUrl": "https://limitlesstcg.com/decks/list/30640",
-      "sourceName": "Limitless TCG",
-      "sourceLanguage": "en",
-      "printEdition": "unknown",
-      "publishedOn": null,
-      "eventOn": "2026-10-24",
-      "verifiedOn": null,
-      "status": "indexed",
-      "internalUrl": "ptcg-decks.html#meta",
-      "format": "Standard",
-      "region": "International",
-      "aliases": [
-        "Basic Box",
-        "basic",
-        "ogerpon + clefairy"
-      ],
-      "resultSourceUrl": "https://limitlesstcg.com/tournaments/583",
-      "id": "ptcg-dd9372201ea16f0e",
-      "sourceUpdatedOn": null,
-      "availableOn": null,
-      "firstCollectedOn": "2026-11-08"
-    },
-    {
       "game": "opcg",
       "type": "deck",
       "title": "Yellow Kid · Henry",
@@ -17629,6 +17602,33 @@
       "id": "ptcg-bd12b0c0a31a456e",
       "printEdition": "unknown",
       "firstCollectedOn": "2026-11-13"
+    },
+    {
+      "game": "ptcg",
+      "type": "deck",
+      "title": "夠讚狗／龜足巨鎧 · Okidogi / Barbaracle · 公開配方",
+      "summary": "繁中公開構築 · 夠讚狗／龜足巨鎧 · Okidogi / Barbaracle；完整公开构筑，原页未声明比赛成绩；60 张。",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/deck-build/recipe/AtBLTv-WTxiRk-UMKASj/",
+      "sourceName": "Pokémon Taiwan public recipe · publication date not stated",
+      "sourceLanguage": "zh-TW",
+      "printEdition": "zh-TW",
+      "publishedOn": null,
+      "eventOn": null,
+      "verifiedOn": "2026-11-14",
+      "status": "verified",
+      "internalUrl": "ptcg-decks.html#meta",
+      "format": "Standard",
+      "region": "Taiwan",
+      "aliases": [
+        "夠讚狗／龜足巨鎧 · Okidogi / Barbaracle",
+        "okidogi_barbaracle",
+        "夠讚狗／龜足巨鎧 · Okidogi / Barbaracle · イイネイヌ / ガメノデス"
+      ],
+      "resultSourceUrl": "https://asia.pokemon-card.com/tw/deck-build/recipe/AtBLTv-WTxiRk-UMKASj/",
+      "id": "ptcg-ff70683e8af97aa9",
+      "sourceUpdatedOn": null,
+      "availableOn": null,
+      "firstCollectedOn": "2026-11-14"
     },
     {
       "game": "unionarena",

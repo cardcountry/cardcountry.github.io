@@ -1056,6 +1056,38 @@
       "dateEvidenceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
       "evidence": "官方目录明确产品名、限定方式与2026.11.5发售日；首次发布日期未注明。",
       "semanticKey": "bey-cx00-vv-gunmetal-20261105"
+    },
+    {
+      "game": "ptcg",
+      "type": "deck",
+      "title": "繁中公开构筑：夠讚狗／龜足巨鎧",
+      "originalTitle": null,
+      "summary": "完整60张公开配方；24种官方繁中卡号、卡图、原文与类型已核对。原页面未注明作者或发布日期，保留未注明；公开构筑不计赛事使用率。",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/deck-build/recipe/AtBLTv-WTxiRk-UMKASj/",
+      "sourceName": "Pokémon Taiwan 官方工具中的公开配方",
+      "sourceLanguage": "zh-TW",
+      "printEdition": "zh-TW",
+      "publishedOn": null,
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "verifiedOn": "2026-11-14",
+      "status": "verified",
+      "internalUrl": "ptcg-decks.html",
+      "region": "Taiwan",
+      "format": "Standard",
+      "aliases": [
+        "Okidogi",
+        "Barbaracle",
+        "夠讚狗",
+        "够赞狗",
+        "龜足巨鎧",
+        "龟足巨铠",
+        "イイネイヌ",
+        "ガメノデス"
+      ],
+      "evidence": "配方列出60张与24种印刷；逐卡详情和PNG已核对，官方Standard筛选返回全部非基本能量卡ID。无赛事或官方推荐声明。",
+      "semanticKey": "tw-public-AtBLTv-WTxiRk-UMKASj"
     }
-  ]
+  ],
+  "updatedOn": "2026-11-14"
 }
