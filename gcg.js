@@ -23,10 +23,10 @@
     return{cards:new Set(cards.map(card=>card.code).filter(Boolean)).size,events:events.length,lists:events.reduce((sum,event)=>sum+(event.results||[]).filter(complete).length,0),first:dates[0]||'',last:dates.at(-1)||''};
   }
   function coverageWords(lang){if(!['zh-cn','zh','ja','en'].includes(lang))lang='en';return({
-    'zh-cn':{archive:'发布归档',current:'当前载入',cards:'卡牌',events:'赛事',lists:'完整卡表',date:'归档整理',range:'完整卡表日期',none:'暂无完整卡表',all:'全部环境',idle:'使用已发布归档',loading:'正在读取公开API',ready:'公开API已读取',failed:'在线读取未完成 · 使用已载入资料',off:'自动读取已关闭',unrequested:'本页未请求此API'},
-    zh:{archive:'發布歸檔',current:'目前載入',cards:'卡牌',events:'賽事',lists:'完整牌組',date:'歸檔整理',range:'完整牌組日期',none:'暫無完整牌組',all:'全部環境',idle:'使用已發布歸檔',loading:'正在讀取公開API',ready:'公開API已讀取',failed:'線上讀取未完成 · 使用已載入資料',off:'自動讀取已關閉',unrequested:'本頁未請求此API'},
-    ja:{archive:'公開アーカイブ',current:'現在の読込数',cards:'カード',events:'大会',lists:'完全デッキ',date:'アーカイブ整理日',range:'完全デッキの大会日',none:'完全デッキなし',all:'全環境',idle:'公開アーカイブを使用',loading:'公開APIを読込中',ready:'公開API読込済',failed:'オンライン読込未完了 · 読込済データを使用',off:'自動読込オフ',unrequested:'このページではAPI未要求'},
-    en:{archive:'PUBLISHED ARCHIVE',current:'CURRENTLY LOADED',cards:'CARDS',events:'EVENTS',lists:'FULL LISTS',date:'ARCHIVE COMPILED',range:'FULL-LIST EVENT DATES',none:'NO FULL LISTS',all:'ALL FORMATS',idle:'USING PUBLISHED ARCHIVE',loading:'READING PUBLIC API',ready:'PUBLIC API READ',failed:'ONLINE READ INCOMPLETE · USING LOADED DATA',off:'AUTO READ OFF',unrequested:'API NOT REQUESTED ON THIS PAGE'}
+    'zh-cn':{archive:'发布归档',current:'当前载入',cards:'卡牌',events:'赛事',lists:'完整卡表',date:'归档整理',artMap:'卡图语言对应核对',range:'完整卡表日期',none:'暂无完整卡表',all:'全部环境',idle:'使用已发布归档',loading:'正在读取公开API',ready:'公开API已读取',failed:'在线读取未完成 · 使用已载入资料',off:'自动读取已关闭',unrequested:'本页未请求此API'},
+    zh:{archive:'發布歸檔',current:'目前載入',cards:'卡牌',events:'賽事',lists:'完整牌組',date:'歸檔整理',artMap:'卡圖語言對應核對',range:'完整牌組日期',none:'暫無完整牌組',all:'全部環境',idle:'使用已發布歸檔',loading:'正在讀取公開API',ready:'公開API已讀取',failed:'線上讀取未完成 · 使用已載入資料',off:'自動讀取已關閉',unrequested:'本頁未請求此API'},
+    ja:{archive:'公開アーカイブ',current:'現在の読込数',cards:'カード',events:'大会',lists:'完全デッキ',date:'アーカイブ整理日',artMap:'画像言語の対応確認',range:'完全デッキの大会日',none:'完全デッキなし',all:'全環境',idle:'公開アーカイブを使用',loading:'公開APIを読込中',ready:'公開API読込済',failed:'オンライン読込未完了 · 読込済データを使用',off:'自動読込オフ',unrequested:'このページではAPI未要求'},
+    en:{archive:'PUBLISHED ARCHIVE',current:'CURRENTLY LOADED',cards:'CARDS',events:'EVENTS',lists:'FULL LISTS',date:'ARCHIVE COMPILED',artMap:'ART-LANGUAGE MAPPINGS CHECKED',range:'FULL-LIST EVENT DATES',none:'NO FULL LISTS',all:'ALL FORMATS',idle:'USING PUBLISHED ARCHIVE',loading:'READING PUBLIC API',ready:'PUBLIC API READ',failed:'ONLINE READ INCOMPLETE · USING LOADED DATA',off:'AUTO READ OFF',unrequested:'API NOT REQUESTED ON THIS PAGE'}
   })[lang]}
   function renderCoverage(){
     const words=coverageWords(uiLang),current=coverageFacts(D),number=value=>Number(value).toLocaleString('en-US');
@@ -36,6 +36,7 @@
     const catalog=$('#catalogCoverage'),decks=$('#deckCoverage');
     if(catalog)catalog.textContent=`${words.archive} ${number(archivedCoverage.cards)} ${words.cards} · ${words.current} ${number(current.cards)} ${words.cards} · ${words.date} ${archiveDate||'—'} · ${state('cards')}`;
     if(decks)decks.textContent=`${words.archive} ${counts(archivedCoverage)} · ${words.current} ${counts(current)} · ${words.date} ${archiveDate||'—'} · ${state('events')}`;
+    const artStatus=$('#artMapStatus');if(artStatus)artStatus.textContent=words.artMap+' · '+(official.checked||'—');
     const status=$('.sync-status span');if(status)status.textContent=!autoUpdateEnabled?words.off:words[syncState]||words.idle;
   }
   const text={

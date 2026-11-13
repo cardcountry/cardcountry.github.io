@@ -53,13 +53,13 @@
       "path": "gcg-decks.html",
       "game": "gcg",
       "view": "decks",
-      "bytes": 17348
+      "bytes": 17392
     },
     {
       "path": "gcg-cards.html",
       "game": "gcg",
       "view": "cards",
-      "bytes": 17330
+      "bytes": 17374
     },
     {
       "path": "gcg-news.html",
@@ -71,25 +71,25 @@
       "path": "gcg-official.html",
       "game": "gcg",
       "view": "official",
-      "bytes": 17342
+      "bytes": 17386
     },
     {
       "path": "gcg-usage.html",
       "game": "gcg",
       "view": "usage",
-      "bytes": 17387
+      "bytes": 17431
     },
     {
       "path": "gcg-rules.html",
       "game": "gcg",
       "view": "rules",
-      "bytes": 17336
+      "bytes": 17380
     },
     {
       "path": "gcg-sources.html",
       "game": "gcg",
       "view": "sources",
-      "bytes": 17350
+      "bytes": 17394
     },
     {
       "path": "opcg.html",
