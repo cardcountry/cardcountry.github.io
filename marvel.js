@@ -37,17 +37,25 @@
     return {name,lists,recent,prior,share:recent/Math.max(1,D.tournaments.slice(0,5).flatMap(event=>event.lists).length)*100,priorShare:prior/Math.max(1,D.tournaments.slice(5).flatMap(event=>event.lists).length)*100};
   }).sort((a,b)=>b.share-a.share||b.lists.length-a.lists.length);
   const heroCards={'Red / Blue':'BP01-077','Red / Green':'SD04-001','Yellow / Green':'SP01-021','Blue / Green':'SP01-085','Red / Yellow':'BP01-040','Yellow / Blue':'SD03-011'};
+  const normalizeColor=value=>{
+    const raw=String(value??'').trim(),key=raw.toLowerCase();
+    return ({red:'Red',红:'Red',红色:'Red',紅:'Red',紅色:'Red',yellow:'Yellow',黄:'Yellow',黄色:'Yellow',黃:'Yellow',黃色:'Yellow',blue:'Blue',蓝:'Blue',蓝色:'Blue',藍:'Blue',藍色:'Blue',green:'Green',绿:'Green',绿色:'Green',綠:'Green',綠色:'Green',purple:'Purple',紫:'Purple',紫色:'Purple',orange:'Orange',橙:'Orange',橙色:'Orange'})[key]||raw;
+  };
   const colorLabel=value=>{
     const map={Red:{'zh-cn':'红','zh':'紅',ja:'赤',en:'Red'},Blue:{'zh-cn':'蓝','zh':'藍',ja:'青',en:'Blue'},Green:{'zh-cn':'绿','zh':'綠',ja:'緑',en:'Green'},Yellow:{'zh-cn':'黄','zh':'黃',ja:'黄',en:'Yellow'},Purple:{'zh-cn':'紫','zh':'紫',ja:'紫',en:'Purple'},Orange:{'zh-cn':'橙','zh':'橙',ja:'橙',en:'Orange'}};
-    return String(value).split(' / ').map(part=>map[part]?.[uiLang]||part).join(' / ');
+    return String(value).split(/\s*\/\s*/).map(part=>{const color=normalizeColor(part);return map[color]?.[uiLang]||color}).join(' / ');
   };
+  function sameLocaleCopy(card,locale){return ['zh','en'].includes(locale)&&!!card?.fallback?.['zh-cn']&&card.fallback[locale]===card.fallback['zh-cn']&&!!card.names?.['zh-cn']&&card.names[locale]===card.names['zh-cn']&&String(card.effects?.[locale]||'')===String(card.effects?.['zh-cn']||'')}
+  const copiedLocaleKeys=new Map((D.cards||[]).flatMap(card=>['zh','en'].filter(locale=>sameLocaleCopy(card,locale)).map(locale=>[`${card.id}|${locale}`,card.fallback[locale]])));
+  function isCopiedLocale(card,locale){const key=card?.fallback?.[locale];return sameLocaleCopy(card,locale)||!!key&&key===card?.fallback?.['zh-cn']&&copiedLocaleKeys.get(`${card.id}|${locale}`)===key}
   const langKey=()=>uiLang==='ja'?'en':uiLang;
-  const cardLocale=card=>[langKey(),'en','zh-cn','zh'].find(locale=>card?.names?.[locale]&&(card?.images?.[locale]||card?.large?.[locale]||card?.fallback?.[locale]))||'en';
+  const cardLocale=card=>[langKey(),'en','zh-cn','zh'].find(locale=>!isCopiedLocale(card,locale)&&card?.names?.[locale]&&(card?.images?.[locale]||card?.large?.[locale]||card?.fallback?.[locale]))||'en';
   const cardName=card=>card?.names?.[cardLocale(card)]||card?.names?.en||card?.code||'—';
-  const cardTextLocale=(card,field='effects')=>[langKey(),cardLocale(card),'en','zh-cn','zh'].find(locale=>typeof card?.[field]?.[locale]==='string'&&card[field][locale].trim())||cardLocale(card);
+  const cardTextLocale=(card,field='effects')=>[langKey(),cardLocale(card),'en','zh-cn','zh'].find(locale=>!isCopiedLocale(card,locale)&&typeof card?.[field]?.[locale]==='string'&&card[field][locale].trim())||cardLocale(card);
   const cardEffect=card=>card?.effects?.[cardTextLocale(card)]||'—';
   const cardTrait=card=>card?.traits?.[cardTextLocale(card,'traits')]||'—';
   const cardImage=(card,large=false)=>{const locale=cardLocale(card),key=card?.fallback?.[locale];if(key&&cachedImageKeys.has(key))return `marvel-cards/${encodeURIComponent(key)}.webp`;return card?.[large?'large':'images']?.[locale]||card?.images?.[locale]||''};
+  const unverifiedLocaleNote=card=>{const locale=langKey();if(!isCopiedLocale(card,locale))return'';const requested=locale==='zh'?'ZH-TW':locale.toUpperCase();return uiLang==='en'?` · COLLECTED ${requested} UNVERIFIED; RETAINED ZH-CN`:uiLang==='ja'?` · 収録${requested}は未確認・保持した簡体字原文を表示`:uiLang==='zh'?` · 目前收錄未核驗${requested}；顯示保留的簡中原文`:` · 当前收录未核验${requested}；显示保留的简中原文`};
   const displayDate=value=>String(value||'—').replace(/-/g,'.');
   const deckHero=deck=>cardMap.get(heroCards[deck.name])||cardMap.get(deck.lists[0]?.cards[0]?.[0]);
   const deckHaystack=deck=>`${deck.name} ${deck.lists.map(list=>`${list.player} ${list.event.name} ${list.cards.map(row=>`${row[0]} ${cardName(cardMap.get(row[0]))}`).join(' ')}`).join(' ')}`.toLowerCase();
@@ -61,7 +69,7 @@
     $$('#uiLang option').forEach(option=>option.selected=option.value===uiLang);
     $$('[data-i18n]').forEach(node=>{const value=t(node.dataset.i18n);if(value)node.textContent=value});
     $$('[data-i18n-placeholder]').forEach(node=>node.placeholder=t(node.dataset.i18nPlaceholder));
-    renderAll();
+    populateRarityFilter();renderAll();
     const imageNote=$('[data-i18n="imageLangNote"]');if(imageNote)imageNote.textContent=uiLang==='en'?'Art and available verified text are resolved independently for this exact print identity. A missing image does not hide existing card text; each language is labelled. Japanese UI does not imply a Japanese physical print.':uiLang==='ja'?'同じカード印刷IDの画像と確認済みカード文を独立して表示し、それぞれの言語を明示します。画像の不足で既存の文章は隠れません。':uiLang==='zh'?'同一印刷 ID 的卡圖與已有可靠原文分別解析，缺圖不會隱藏文字，圖像與文字語言均明確標示；日文介面不代表有日文實體印刷。':'同一印刷 ID 的卡图与已有可靠原文分别解析，缺图不会隐藏文字，图片与文字语言均明确标示；日文界面不代表存在日文实体印刷。';
     if(currentDeck)renderDeckModal(false);
     if(currentCard)openCard(currentCard.id||currentCard.code,false);
@@ -168,11 +176,19 @@
 
   // CARD CATALOG
   function populateSetFilter(){const sets=[...new Set(cards.map(card=>card.series).filter(Boolean))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));$('#setFilter').innerHTML=`<option value="">ALL SERIES</option>${sets.map(set=>`<option value="${esc(set)}">${esc(set)}</option>`).join('')}`}
+  function populateRarityFilter(){
+    const select=$('#rarityFilter');if(!select)return;
+    const selected=select.value,order=['C','R','SR','GR','UR','MR','SEC','PR','ER','TR','HR','CR'];
+    const rarities=[...new Set(cards.map(card=>String(card.rarity||'').trim()).filter(Boolean))].sort((a,b)=>{const ai=order.indexOf(a),bi=order.indexOf(b);return (ai<0?order.length:ai)-(bi<0?order.length:bi)||a.localeCompare(b,undefined,{numeric:true})});
+    const all={'zh-cn':'不限稀有度',zh:'不限稀有度',en:'All rarities',ja:'すべてのレアリティ'}[uiLang]||'All rarities';
+    select.innerHTML=`<option value="">${esc(all)}</option>${rarities.map(rarity=>`<option value="${esc(rarity)}">${esc(rarity)}</option>`).join('')}`;
+    select.value=rarities.includes(selected)?selected:'';
+  }
   function filteredCards(){
     const set=$('#setFilter').value,color=$('#colorFilter').value,level=$('#levelFilter').value,rarity=$('#rarityFilter').value,query=cardQuery.trim().toLowerCase();
     return cards.filter(card=>{
-      if(set&&card.series!==set)return false;if(color&&card.color!==color)return false;if(level&&String(card.level)!==level)return false;if(rarity&&card.rarity!==rarity)return false;
-      const fields=[card.code,...Object.values(card.names||{}),...Object.values(card.effects||{}),...Object.values(card.traits||{}),card.color,card.rarity];
+      if(set&&card.series!==set)return false;if(color&&normalizeColor(card.color)!==normalizeColor(color))return false;if(level&&String(card.level)!==level)return false;if(rarity&&card.rarity!==rarity)return false;
+      const fields=[card.code,...Object.values(card.names||{}),...Object.values(card.effects||{}),...Object.values(card.traits||{}),card.color,normalizeColor(card.color),card.rarity];
       return !query||(window.MetaSearch?window.MetaSearch.matches(query,fields):fields.join(' ').toLowerCase().includes(query));
     });
   }
@@ -180,7 +196,7 @@
   async function imageError(event){const img=event.currentTarget,card=img.dataset.cardId?cards.find(item=>item.id===img.dataset.cardId):cardMap.get(img.dataset.cardCode||img.closest?.('[data-card-code]')?.dataset.cardCode);if(!card){img.style.opacity='.18';return}const locale=cardLocale(card),before=img.src,cardId=img.dataset.cardId||card.id,modalRequest=img.id==='cardModalImage'?cardRequestEpoch:null;let remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&!img.dataset.fallback&&remote!==before){img.dataset.fallback='1';img.src=remote;return}if(!img.dataset.signatureRefreshed){img.dataset.signatureRefreshed='1';let pending=imageRefreshes.get(locale);if(!pending){pending=fetchOfficialLanguage(apiLanguage[locale]).then(payload=>{mergeOfficial(payload,apiLanguage[locale]);return true}).catch(()=>false).finally(()=>imageRefreshes.delete(locale));imageRefreshes.set(locale,pending)}await pending;if(img.src!==before||img.isConnected===false||img.dataset.cardId&&img.dataset.cardId!==cardId||modalRequest!==null&&(modalRequest!==cardRequestEpoch||currentCard?.id!==cardId||!$('#cardModal').classList.contains('open')))return;remote=card.images?.[locale]||card.large?.[locale];if(remote&&freshImageUrl(remote)&&remote!==img.src&&cardLocale(card)===locale){img.src=remote;img.style.opacity='';return}}img.style.opacity='.18';img.alt=card.code+' · image unavailable';}
   function renderCards(){if(!pageAllows('cards'))return;
     const results=filteredCards(),shown=results.slice(0,cardPage*56),grid=$('#cardGrid');grid.classList.toggle('name-view',cardView==='name');
-    grid.innerHTML=shown.map(card=>`<button class="card-item" data-card-id="${esc(card.id)}"><img src="${esc(cardImage(card))}" data-card-id="${esc(card.id)}" alt="${esc(cardName(card))}" loading="lazy"><b>${esc(cardName(card))}</b><small>${esc(card.code)} · ${esc(card.color)} · LV ${esc(card.level)} · ${esc(card.rarity)}</small><span class="name-effect">${esc(cardEffect(card))}</span></button>`).join('');
+    grid.innerHTML=shown.map(card=>`<button class="card-item" data-card-id="${esc(card.id)}"><img src="${esc(cardImage(card))}" data-card-id="${esc(card.id)}" alt="${esc(cardName(card))}" loading="lazy"><b>${esc(cardName(card))}</b><small>${esc(card.code)} · ${esc(colorLabel(card.color))} · LV ${esc(card.level)} · ${esc(card.rarity)}</small><span class="name-effect">${esc(cardEffect(card))}</span></button>`).join('');
     grid.querySelectorAll('img').forEach(img=>img.addEventListener('error',imageError));
     $('#cardResultCount').textContent=uiLang==='ja'?`${results.length.toLocaleString()}件中 ${shown.length.toLocaleString()}件を表示`:uiLang==='en'?`SHOWING ${shown.length.toLocaleString()} OF ${results.length.toLocaleString()} PRINTS`:`显示 ${shown.length.toLocaleString()} / ${results.length.toLocaleString()} 张官方卡图记录`;
     $('#loadMoreCards').hidden=shown.length>=results.length;$$('.view-toggle button').forEach(button=>button.classList.toggle('active',button.dataset.view===cardView));
@@ -188,8 +204,8 @@
   function openCard(reference,open=true){
     const card=cards.find(item=>item.id===reference)||cardMap.get(reference);if(!card){showToast(uiLang==='en'?'Card data not found.':'没有找到这张卡的资料。');return}currentCard=card;cardRequestEpoch++;
     $('#cardModalImage').src=cardImage(card,true)||cardImage(card);$('#cardModalImage').dataset.cardId=card.id;delete $('#cardModalImage').dataset.fallback;delete $('#cardModalImage').dataset.signatureRefreshed;$('#cardModalImage').style.opacity='';$('#cardModalImage').alt=cardName(card);$('#cardModalImage').onerror=imageError;
-    $('#cardModalCode').textContent=`${card.code} · ${card.series} · ${card.rarity} · ART ${cardLocale(card).toUpperCase()} · TEXT ${cardTextLocale(card).toUpperCase()} · TRAITS ${cardTextLocale(card,'traits').toUpperCase()}`;$('#cardModalName').textContent=cardName(card);
-    const badges=[card.color,`LV ${card.level}`,card.power&&`POWER ${card.power}`,card.range&&`R ${card.range}`,card.type].filter(Boolean);$('#cardModalBadges').innerHTML=badges.map(value=>`<span>${esc(value)}</span>`).join('');
+    $('#cardModalCode').textContent=`${card.code} · ${card.series} · ${card.rarity} · ART ${cardLocale(card).toUpperCase()} · TEXT ${cardTextLocale(card).toUpperCase()} · TRAITS ${cardTextLocale(card,'traits').toUpperCase()}${unverifiedLocaleNote(card)}`;$('#cardModalName').textContent=cardName(card);
+    const badges=[colorLabel(card.color),`LV ${card.level}`,card.power&&`POWER ${card.power}`,card.range&&`R ${card.range}`,card.type].filter(Boolean);$('#cardModalBadges').innerHTML=badges.map(value=>`<span>${esc(value)}</span>`).join('');
     $('#cardModalEffect').textContent=cardEffect(card);$('#cardModalTrait').textContent=cardTrait(card);if(open)openModal('cardModal');
   }
 
@@ -231,7 +247,7 @@
     payload.list.forEach(raw=>{
       const bucket=`${raw.card_no}|${raw.rarity}`,keyId=raw.image?.key;let card=(buckets.get(bucket)||[]).find(item=>!used.has(item)&&keyId&&item.fallback?.[key]===keyId)||cards.find(item=>!used.has(item)&&raw.id!=null&&item.id===`live-${language}-${raw.id}`);
       if(!card){if(!raw.card_no||raw.id==null)return;card={id:`live-${language}-${raw.id}`,code:raw.card_no,series:raw.product_series,rarity:raw.rarity,level:Number(raw.level)||0,range:Number(raw.attack_range)||0,power:Number(raw.power)||0,color:raw.attribute,type:raw.card_type,names:{},effects:{},traits:{},images:{},large:{},fallback:{}};cards.push(card);(buckets.get(bucket)||buckets.set(bucket,[]).get(bucket)).push(card)}
-      used.add(card);card.series=raw.product_series||card.series;card.level=Number(raw.level)||card.level;card.range=Number(raw.attack_range)||card.range;card.power=Number(raw.power)||card.power;card.color=raw.attribute||card.color;card.type=raw.card_type||card.type;
+      used.add(card);card.series=raw.product_series||card.series;card.level=Number(raw.level)||card.level;card.range=Number(raw.attack_range)||card.range;card.power=Number(raw.power)||card.power;card.color=normalizeColor(raw.attribute||card.color);card.type=raw.card_type||card.type;
       if(typeof raw.name==='string'&&raw.name.trim())card.names[key]=raw.name;if(typeof raw.effect==='string'&&raw.effect.trim())card.effects[key]=raw.effect;if(typeof raw.feature==='string'&&raw.feature.trim())card.traits[key]=raw.feature;card.images[key]=raw.image?.variants?.small?.url||raw.image?.url||card.images[key];card.large[key]=raw.image?.variants?.medium?.url||raw.image?.variants?.large?.url||raw.image?.url||card.large[key];card.fallback[key]=raw.image?.key||card.fallback[key];
     });
     cardMap=pickCanonical(cards);
@@ -247,7 +263,7 @@
     try{
       const desired=[apiLanguage[uiLang],...['zh-CN','zh-TW','en']].filter((item,index,array)=>array.indexOf(item)===index);let synced=0;
       for(const language of desired){try{const payload=await fetchOfficialLanguage(language);mergeOfficial(payload,language);synced+=payload.total||payload.list.length}catch(error){if(language===desired[0])throw error}}
-      populateSetFilter();renderCards();$('#statCards').textContent=cards.length.toLocaleString();$('#cardTotal').textContent=cards.length.toLocaleString();
+      populateSetFilter();populateRarityFilter();renderCards();$('#statCards').textContent=cards.length.toLocaleString();$('#cardTotal').textContent=cards.length.toLocaleString();
       const stamp=`OFFICIAL API LIVE · ${new Date().toISOString().slice(0,10)} · ${synced.toLocaleString()} LANGUAGE RECORDS`;status.querySelector('span').textContent=stamp;$('#liveCardNote').textContent='OFFICIAL API · LIVE';
       try{localStorage.setItem('metalab-marvel-api-check',new Date().toISOString())}catch(error){}
     }catch(error){

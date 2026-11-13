@@ -227,13 +227,13 @@
       "path": "marvel-decks.html",
       "game": "marvel",
       "view": "decks",
-      "bytes": 15570
+      "bytes": 15365
     },
     {
       "path": "marvel-cards.html",
       "game": "marvel",
       "view": "cards",
-      "bytes": 15552
+      "bytes": 15347
     },
     {
       "path": "marvel-news.html",
@@ -245,25 +245,25 @@
       "path": "marvel-events.html",
       "game": "marvel",
       "view": "events",
-      "bytes": 15544
+      "bytes": 15339
     },
     {
       "path": "marvel-usage.html",
       "game": "marvel",
       "view": "usage",
-      "bytes": 15609
+      "bytes": 15404
     },
     {
       "path": "marvel-rules.html",
       "game": "marvel",
       "view": "rules",
-      "bytes": 15558
+      "bytes": 15353
     },
     {
       "path": "marvel-sources.html",
       "game": "marvel",
       "view": "sources",
-      "bytes": 15572
+      "bytes": 15367
     },
     {
       "path": "beyblade.html",
