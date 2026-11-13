@@ -141,8 +141,8 @@ html[data-page-view='news'] .ml-hub-main>.ml-page-heading{padding:0;margin-botto
  html[data-page-view] .ml-page-heading{padding:18px 15px 20px}
  html[data-page-view] .ml-breadcrumb{font-size:11px;margin-bottom:12px;gap:7px}
  html[data-page-view] .ml-heading-row{gap:12px;margin-bottom:10px}
- html[data-page-view] .ml-page-title{flex-basis:110px;font-size:26px!important}
- html[data-page-view] .ml-mobile-nav{flex-basis:150px}
+ html[data-page-view] .ml-page-title{flex-basis:max-content;font-size:26px!important;overflow-wrap:normal;word-break:normal}
+ html[data-page-view] .ml-mobile-nav{flex-basis:150px;margin-left:auto}
  html[data-page-view] .ml-page-desc{font-size:12px!important}
 }
 @media(max-width:600px){
