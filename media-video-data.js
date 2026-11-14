@@ -365,7 +365,7 @@ window.META_LAB_VIDEO_DATA={
       "game": "unionarena",
       "relation": "historical-archetype-reference",
       "historical": true,
-      "scope": "2024年紫色BLEACH卡组历史教学。仅紫色一护系牌型思路参考，不是本站2026年北美赛事卡表复现；原文未确认卡池版本或印刷语言，不推断当前禁限、对局优劣或胜率。",
+      "scope": "2024年紫色BLEACH卡组历史教学。仅紫色一护系牌型思路参考，不是本站北美归档赛事卡表复现；原文未确认卡池版本或印刷语言，不推断当前禁限、对局优劣或胜率。",
       "verification": "verified",
       "kind": "历史同牌型教学",
       "match": {
