@@ -7,7 +7,7 @@
   "ptcg-official-details.js": "2026111301",
   "ptcg-card-types.js": "2026111301",
   "gcg-jp-recent.js": "2026111301",
-  "gcg.js": "2026111307",
+  "gcg.js": "2026111407",
   "opcg-eb05-jp.js": "2026111301",
   "opcg.js": "2026111301",
   "unionarena-data.js": "2026111301",
@@ -25,5 +25,9 @@
   "riftbound-field.js": "2026111401",
   "riftbound-field.css": "2026111401",
   "ptcg-tw-public.js": "2026111402",
-  "ptcg-language-links.js": "2026111406"
+  "ptcg-language-links.js": "2026111406",
+  "media-video-data.js": "2026111407",
+  "media-deck-videos.js": "2026111407",
+  "media-library.css": "2026111407",
+  "unionarena-library.js": "2026111407"
 }
