@@ -7,7 +7,7 @@
   "ptcg-official-details.js": "2026111301",
   "ptcg-card-types.js": "2026111301",
   "gcg-jp-recent.js": "2026111301",
-  "gcg.js": "2026111409",
+  "gcg.js": "2026111501",
   "opcg-eb05-jp.js": "2026111301",
   "opcg.js": "2026111408",
   "unionarena-data.js": "2026111301",
@@ -31,5 +31,6 @@
   "media-library.css": "2026111409",
   "unionarena-library.js": "2026111407",
   "ptcg-matchups.js": "2026111411",
-  "ptcg-matchups.css": "2026111411"
+  "ptcg-matchups.css": "2026111411",
+  "gcg-preview-increment.js": "2026111501"
 }

@@ -75,7 +75,7 @@ const history=process.env.METALAB_FEED_PREVIOUS?JSON.parse(fs.readFileSync(proce
 for(const item of [...(previous.items||[]),...(history.items||[])]){const known=date(item.firstCollectedOn),saved=firstCollected.get(item.id);if(known&&(!saved||known<saved))firstCollected.set(item.id,known);}
 const context = {window:{}};
 vm.createContext(context);
-const inputFiles = ['decks-data.js','community-data.js','ptcg-visual-data.js','ptcg-jp-recent.js','ptcg-tw-public.js','gcg-data.js','gcg-jp-recent.js','gcg-official-decks.js','opcg-data.js','opcg-recent-data.js','opcg-photo-data.js','opcg-eb05-jp.js','unionarena-data.js','unionarena-recipes.js','unionarena-jp-decks.js','riftbound-data.js','marvel-data.js','beyblade-data.js'];
+const inputFiles = ['decks-data.js','community-data.js','ptcg-visual-data.js','ptcg-jp-recent.js','ptcg-tw-public.js','gcg-data.js','gcg-jp-recent.js','gcg-preview-increment.js','gcg-official-decks.js','opcg-data.js','opcg-recent-data.js','opcg-photo-data.js','opcg-eb05-jp.js','unionarena-data.js','unionarena-recipes.js','unionarena-jp-decks.js','riftbound-data.js','marvel-data.js','beyblade-data.js'];
 for (const file of inputFiles) vm.runInContext(fs.readFileSync(path.join(site,file),'utf8'),context,{filename:file,timeout:10000});
 const data = context.window;
 const records = new Map(), pending = [], duplicates = [], curatedIds = new Set();

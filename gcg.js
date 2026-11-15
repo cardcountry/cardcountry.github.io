@@ -5,7 +5,7 @@
   const pageAllows=(...views)=>!pageView||views.includes(pageView);
   const D=window.GCG_DATA||{cards:[],tournaments:[],meta:{}};
   // Keep the published archive distinct from changes fetched in this browser session.
-  const archivedCoverage=coverageFacts(D),archiveDate=String(D.checked||D.synced||'').slice(0,10);
+  const archivedCoverage=coverageFacts(D),archiveDate=String(D.archiveUpdatedOn||D.checked||D.synced||'').slice(0,10);
   let syncState='idle',liveChecks={cards:false,events:false};
   const official=window.GCG_OFFICIAL_DECKS||{records:[],names:{},locales:[]};
   const jpImages=new Map(official.records.filter(r=>r.sourceLocale==='jp').flatMap(r=>r.entries.map(c=>[c.code,c.image])));
