@@ -140,7 +140,7 @@ for (const event of data.GCG_DATA.tournaments||[]) {
   add({game:'gcg',type:'event',title:event.name,
     summary:`${event.players?event.players+' 人；':''}${complete.length} 份完整 50 张赛事卡表；${event.venue||event.region||'地区未注明'}。`,
     sourceUrl:event.sourceUrl,sourceName:event.sourceUrl?.includes('gcg-stats')?'GCG STATS':'Egman Events',
-    sourceLanguage:sourceLanguageOf(event.sourceUrl,event.sourceLanguage),printEdition:event.language,eventOn:event.date,publishedOn:null,verifiedOn:event.checked,
+    sourceLanguage:sourceLanguageOf(event.sourceUrl,event.sourceLanguage),printEdition:event.printLanguage??event.language,eventOn:event.date,publishedOn:null,verifiedOn:event.checked,
     status:event.checked?'verified':'indexed',internalUrl:'gcg.html#meta',format:event.format,region:event.region,
     listCount:complete.length,aliases:[event.venue||'',event.setGroup||'']},event.id);
 }
