@@ -14,7 +14,7 @@
   "unionarena-recipes.js": "2026111301",
   "unionarena-card-details.js": "2026111301",
   "riftbound-data.js": "2026111301",
-  "riftbound.js": "2026111410",
+  "riftbound.js": "2026111601",
   "marvel-data.js": "2026111304",
   "section-pages.css": "2026111405",
   "marvel.js": "2026111410",
@@ -32,5 +32,7 @@
   "unionarena-library.js": "2026111407",
   "ptcg-matchups.js": "2026111411",
   "ptcg-matchups.css": "2026111411",
-  "gcg-preview-increment.js": "2026111501"
+  "gcg-preview-increment.js": "2026111501",
+  "riftbound-bans.js": "2026111601",
+  "riftbound-bans.css": "2026111601"
 }

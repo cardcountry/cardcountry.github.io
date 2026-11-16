@@ -185,13 +185,13 @@
       "path": "riftbound-decks.html",
       "game": "riftbound",
       "view": "decks",
-      "bytes": 21627
+      "bytes": 22291
     },
     {
       "path": "riftbound-cards.html",
       "game": "riftbound",
       "view": "cards",
-      "bytes": 21609
+      "bytes": 22273
     },
     {
       "path": "riftbound-news.html",
@@ -203,19 +203,19 @@
       "path": "riftbound-usage.html",
       "game": "riftbound",
       "view": "usage",
-      "bytes": 21666
+      "bytes": 22330
     },
     {
       "path": "riftbound-rules.html",
       "game": "riftbound",
       "view": "rules",
-      "bytes": 21615
+      "bytes": 22279
     },
     {
       "path": "riftbound-sources.html",
       "game": "riftbound",
       "view": "sources",
-      "bytes": 21629
+      "bytes": 22293
     },
     {
       "path": "marvel.html",
