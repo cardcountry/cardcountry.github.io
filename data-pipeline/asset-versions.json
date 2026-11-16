@@ -9,7 +9,7 @@
   "gcg-jp-recent.js": "2026111301",
   "gcg.js": "2026111501",
   "opcg-eb05-jp.js": "2026111301",
-  "opcg.js": "2026111408",
+  "opcg.js": "2026111608",
   "unionarena-data.js": "2026111301",
   "unionarena-recipes.js": "2026111301",
   "unionarena-card-details.js": "2026111301",
@@ -37,5 +37,7 @@
   "riftbound-bans.css": "2026111601",
   "arena-theme.css": "2026111602",
   "home.css": "2026111603",
-  "gcg-event-increment.js": "2026111605"
+  "gcg-event-increment.js": "2026111605",
+  "opcg-eb05-increment.js": "2026111606",
+  "opcg-image-cache.js": "2026111607"
 }

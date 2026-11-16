@@ -72,6 +72,12 @@
   }
   function bindCardImages(scope=document){scope.querySelectorAll('img').forEach(img=>bindCardImage(img))}
   function showToast(message){const toast=$('#toast');toast.textContent=message;toast.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove('show'),2600)}
+  function sourceCheckLabel(){
+    const checked=currentFormat==='EB05JP'?D.eb05jp?.checked:null;
+    if(!checked)return t('syncText');
+    const labels={'zh-cn':'日本 EB05 卡表核验','zh':'日本 EB05 卡表核驗',en:'JP EB05 LISTS CHECKED',ja:'日本 EB05 リスト確認'};
+    return (labels[uiLang]||labels['zh-cn'])+' · '+checked;
+  }
   function setLanguage(next){
     uiLang=text[next]?next:'zh-cn';$('#uiLang').value=uiLang;
     document.documentElement.lang=uiLang==='zh'?'zh-Hant':uiLang==='zh-cn'?'zh-Hans':uiLang;
@@ -131,6 +137,7 @@
     const title=$('#meta .section-head h2');
     if(currentFormat==='OP16')title.textContent=uiLang==='ja'?'OP16 大会アーカイブ':uiLang==='en'?'OP16 TOURNAMENT ARCHIVE':uiLang==='zh'?'OP16 賽事環境歸檔':'OP16 赛事环境归档';
     else title.textContent=currentFormat==='EB05JP'?'日本 EB05 · 已收录赛事卡表':'OP17.5 · 历史样本';
+    $('#syncText').textContent=sourceCheckLabel();
     $('#metaStamp').textContent=currentFormat==='EB05JP'?`${D.eb05jp?.lists||0} VERIFIED LISTS · ${D.eb05jp?.from||'—'} — ${D.eb05jp?.to||'—'} · JP`:currentFormat==='OP17'?'HISTORICAL SNAPSHOT · COMPLETE LISTS THROUGH 2026-11-03':'LIMITLESS OFFLINE EVENTS · JUNE—JULY 2026';
     $('[data-i18n="chartNote"]').textContent=currentFormat==='EB05JP'?'日本已收录卡表的份数占比，并非全体参赛者使用率；同一比赛多位选手分别计数。缺少可比历史基线，不显示涨跌结论。':t('chartNote');
     $('#forecastGrid').parentElement.hidden=currentFormat==='EB05JP'||!!query;if(query){title.textContent='跨语言卡组搜索 · 所有版本';$('#metaStamp').textContent='ALL LANGUAGES · ALL INDEXED FORMATS · 来源与版本见卡表详情';}
@@ -260,8 +267,8 @@
   function saveAuto(value){try{localStorage.setItem(AUTO_KEY,value?'on':'off')}catch(error){}}
   async function checkPublishedUpdate(){
     if(!pageAllows('decks','cards','usage','events')||!autoToggle.checked)return;const status=$('.sync-status');status.classList.add('checking');
-    try{const responses=await Promise.all((pageView==='cards'?['opcg-data.js']:['opcg-data.js','opcg-recent-data.js']).map(file=>fetch(`${file}?check=${Date.now()}`,{method:'HEAD',cache:'no-store'})));if(responses.some(response=>!response.ok))throw new Error('check failed');const modified=responses.map(response=>response.headers.get('last-modified')).filter(Boolean).sort((a,b)=>Date.parse(a)-Date.parse(b)).at(-1)||D.generated;let previous='';try{previous=localStorage.getItem('metalab-opcg-data-version')||'';localStorage.setItem('metalab-opcg-data-version',modified)}catch(error){}if(previous&&previous!==modified)showToast(uiLang==='en'?'A newer published data file is available. Refresh to load it.':'已检测到较新的已发布资料，刷新页面即可载入。');$('#syncText').textContent=uiLang==='ja'?`公開データ確認済み · ${D.generated}`:uiLang==='en'?`PUBLISHED DATA CHECKED · ${D.generated}`:`已检查已发布资料 · ${D.generated}`}
-    catch(error){$('#syncText').textContent=t('syncText')}finally{status.classList.remove('checking')}
+    try{const responses=await Promise.all((pageView==='cards'?['opcg-data.js']:['opcg-data.js','opcg-recent-data.js']).map(file=>fetch(`${file}?check=${Date.now()}`,{method:'HEAD',cache:'no-store'})));if(responses.some(response=>!response.ok))throw new Error('check failed');const modified=responses.map(response=>response.headers.get('last-modified')).filter(Boolean).sort((a,b)=>Date.parse(a)-Date.parse(b)).at(-1)||D.generated;let previous='';try{previous=localStorage.getItem('metalab-opcg-data-version')||'';localStorage.setItem('metalab-opcg-data-version',modified)}catch(error){}if(previous&&previous!==modified)showToast(uiLang==='en'?'A newer published data file is available. Refresh to load it.':'已检测到较新的已发布资料，刷新页面即可载入。');$('#syncText').textContent=currentFormat==='EB05JP'?sourceCheckLabel():(uiLang==='ja'?`公開データ確認済み · ${D.generated}`:uiLang==='en'?`PUBLISHED DATA CHECKED · ${D.generated}`:`已检查已发布资料 · ${D.generated}`)}
+    catch(error){$('#syncText').textContent=sourceCheckLabel()}finally{status.classList.remove('checking')}
   }
   autoToggle.checked=readAuto();autoToggle.addEventListener('change',event=>{saveAuto(event.target.checked);if(event.target.checked)checkPublishedUpdate()});
   populateSetFilter();bindEvents();
