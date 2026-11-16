@@ -1,5 +1,5 @@
 {
-  "home.js": "2026111301",
+  "home.js": "2026111602",
   "section-pages.js": "2026111404",
   "activity-feed.js": "2026111301",
   "multilingual-search.js": "2026111301",
@@ -34,5 +34,7 @@
   "ptcg-matchups.css": "2026111411",
   "gcg-preview-increment.js": "2026111501",
   "riftbound-bans.js": "2026111601",
-  "riftbound-bans.css": "2026111601"
+  "riftbound-bans.css": "2026111601",
+  "arena-theme.css": "2026111602",
+  "home.css": "2026111602"
 }
