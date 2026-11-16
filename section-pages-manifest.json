@@ -11,13 +11,13 @@
       "path": "ptcg-decks.html",
       "game": "ptcg",
       "view": "decks",
-      "bytes": 80126
+      "bytes": 80184
     },
     {
       "path": "ptcg-cards.html",
       "game": "ptcg",
       "view": "cards",
-      "bytes": 80108
+      "bytes": 80166
     },
     {
       "path": "ptcg-news.html",
@@ -29,19 +29,19 @@
       "path": "ptcg-usage.html",
       "game": "ptcg",
       "view": "usage",
-      "bytes": 80165
+      "bytes": 80223
     },
     {
       "path": "ptcg-rules.html",
       "game": "ptcg",
       "view": "rules",
-      "bytes": 80114
+      "bytes": 80172
     },
     {
       "path": "ptcg-sources.html",
       "game": "ptcg",
       "view": "sources",
-      "bytes": 80128
+      "bytes": 80186
     },
     {
       "path": "gcg.html",
@@ -143,13 +143,13 @@
       "path": "unionarena-decks.html",
       "game": "unionarena",
       "view": "decks",
-      "bytes": 16207
+      "bytes": 16278
     },
     {
       "path": "unionarena-cards.html",
       "game": "unionarena",
       "view": "cards",
-      "bytes": 16189
+      "bytes": 16260
     },
     {
       "path": "unionarena-news.html",
@@ -161,19 +161,19 @@
       "path": "unionarena-usage.html",
       "game": "unionarena",
       "view": "usage",
-      "bytes": 16051
+      "bytes": 16122
     },
     {
       "path": "unionarena-rules.html",
       "game": "unionarena",
       "view": "rules",
-      "bytes": 16000
+      "bytes": 16071
     },
     {
       "path": "unionarena-sources.html",
       "game": "unionarena",
       "view": "sources",
-      "bytes": 16014
+      "bytes": 16085
     },
     {
       "path": "riftbound.html",

@@ -75,7 +75,7 @@ const history=process.env.METALAB_FEED_PREVIOUS?JSON.parse(fs.readFileSync(proce
 for(const item of [...(previous.items||[]),...(history.items||[])]){const known=date(item.firstCollectedOn),saved=firstCollected.get(item.id);if(known&&(!saved||known<saved))firstCollected.set(item.id,known);}
 const context = {window:{}};
 vm.createContext(context);
-const inputFiles = ['decks-data.js','community-data.js','ptcg-visual-data.js','ptcg-jp-recent.js','ptcg-tw-public.js','gcg-data.js','gcg-jp-recent.js','gcg-preview-increment.js','gcg-event-increment.js','gcg-official-decks.js','opcg-data.js','opcg-recent-data.js','opcg-photo-data.js','opcg-eb05-jp.js','opcg-eb05-increment.js','unionarena-data.js','unionarena-recipes.js','unionarena-jp-decks.js','riftbound-data.js','marvel-data.js','beyblade-data.js'];
+const inputFiles = ['decks-data.js','community-data.js','ptcg-visual-data.js','ptcg-jp-recent.js','ptcg-tw-public.js','ptcg-jp-increment.js','gcg-data.js','gcg-jp-recent.js','gcg-preview-increment.js','gcg-event-increment.js','gcg-official-decks.js','opcg-data.js','opcg-recent-data.js','opcg-photo-data.js','opcg-eb05-jp.js','opcg-eb05-increment.js','unionarena-data.js','unionarena-recipes.js','unionarena-jp-decks.js','unionarena-recommended.js','riftbound-data.js','marvel-data.js','beyblade-data.js'];
 for (const file of inputFiles) vm.runInContext(fs.readFileSync(path.join(site,file),'utf8'),context,{filename:file,timeout:10000});
 const data = context.window;
 const records = new Map(), pending = [], duplicates = [], curatedIds = new Set();
@@ -130,9 +130,9 @@ for (const group of decklists) for (const list of group.lists||[]) {
     summary:`${list.event}；${publicBuild?'完整公开构筑，原页未声明比赛成绩':`${list.place||'未注明名次'}${list.players?'；'+list.players+' 人':''}`}；60 张。`,
     sourceUrl:list.listUrl,sourceName:list.sourceLabel||'Limitless TCG',
     sourceLanguage:sourceLanguageOf(list.listUrl,list.sourceLanguage),printEdition:list.language,
-    publishedOn:null,eventOn:publicBuild?null:date(list.date),verifiedOn:list.checked,
+    publishedOn:null,...((list.publishedOn||list.sourceUpdatedOn)?{publishedOn:date(list.publishedOn),sourceUpdatedOn:date(list.sourceUpdatedOn)}:{}),eventOn:publicBuild?null:date(list.date),verifiedOn:list.checked,
     status:list.checked?'verified':'indexed',internalUrl:'ptcg.html#meta',format:list.format||'Standard',
-    region:list.region||'International',aliases:[group.name,group.key,list.variant||''],resultSourceUrl:list.eventUrl},list.listId||list.player||'');
+    region:list.region||'International',aliases:[group.name,group.key,list.variant||'',...(list.searchAliases||[])],resultSourceUrl:list.eventUrl},list.listId||list.player||'');
 }
 for (const event of data.GCG_DATA.tournaments||[]) {
   const complete = (event.results||[]).filter(r=>Array.isArray(r.main)&&r.main.reduce((n,x)=>n+Number(x[1]||0),0)===50);
@@ -178,6 +178,15 @@ for(const deck of data.UNION_ARENA_DATA.eventDecks||[]) {
     internalUrl:'unionarena.html#decks',format:'unknown',region:deck.region||'North America',
     aliases:[deck.series,deck.event],resultSourceUrl:deck.source,
     alternateSources:deck.source?[{url:deck.source,language:sourceLanguageOf(deck.source),label:'Official event results',publishedOn:date(deck.revealed)}]:[]},`${deck.event}|${deck.place}`);
+}
+// Complete official examples are discoverable but never tournament usage samples.
+for(const deck of data.UA_OFFICIAL_RECOMMENDED?.records||[]) {
+  if(deck.composition?.total!==50){pending.push({game:'unionarena',title:deck.series,reason:'Incomplete official recommendation'});continue;}
+  add({game:'unionarena',type:'deck',title:deck.series+' · 官方推荐构筑',summary:deck.colour+'；完整50张官方示例，非赛事成绩，不计入赛事使用率。',
+    sourceUrl:deck.recipe,sourceName:'UNION ARENA Official / TCG+',sourceLanguage:sourceLanguageOf(deck.recipe),printEdition:deck.printLanguage,
+    publishedOn:deck.publishedOn,sourceUpdatedOn:deck.sourceUpdatedOn,eventOn:null,verifiedOn:deck.checked,status:'verified',
+    internalUrl:'unionarena-decks.html',format:'Official recommended build',region:deck.region,competitive:false,usageEligible:false,
+    aliases:[deck.series,...deck.cards.map(c=>c.name)],alternateSources:[{url:deck.sourceUrl,language:sourceLanguageOf(deck.sourceUrl,deck.sourceLanguage),label:'Official recommended builds',publishedOn:date(deck.publishedOn),sourceUpdatedOn:date(deck.sourceUpdatedOn)}]},deck.deckCode);
 }
 for(const deck of data.RIFTBOUND_DATA.decks||[]) {
   const official=new URL(deck.source).hostname==='playriftbound.com';

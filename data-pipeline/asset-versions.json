@@ -19,7 +19,7 @@
   "section-pages.css": "2026111405",
   "marvel.js": "2026111410",
   "site-data-quality.js": "2026111305",
-  "app.js": "2026111403",
+  "app.js": "2026111611",
   "gcg.css": "2026111306",
   "gcg-data.js": "2026111307",
   "riftbound-field.js": "2026111401",
@@ -29,7 +29,7 @@
   "media-video-data.js": "2026111409",
   "media-deck-videos.js": "2026111407",
   "media-library.css": "2026111409",
-  "unionarena-library.js": "2026111407",
+  "unionarena-library.js": "2026111610",
   "ptcg-matchups.js": "2026111411",
   "ptcg-matchups.css": "2026111411",
   "gcg-preview-increment.js": "2026111501",
@@ -39,5 +39,8 @@
   "home.css": "2026111603",
   "gcg-event-increment.js": "2026111605",
   "opcg-eb05-increment.js": "2026111606",
-  "opcg-image-cache.js": "2026111607"
+  "opcg-image-cache.js": "2026111607",
+  "ptcg-jp-increment.js": "2026111606",
+  "unionarena-recommended.js": "2026111609",
+  "unionarena-library.css": "2026111610"
 }
