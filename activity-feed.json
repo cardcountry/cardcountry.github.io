@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "builtOn": "2026-11-16",
+  "builtOn": "2026-11-20",
   "games": [
     {
       "id": "ptcg",
       "name": "Pokémon TCG",
       "page": "ptcg.html",
-      "reviewedOn": "2026-11-16",
+      "reviewedOn": "2026-11-20",
       "latestSourceDate": "2026-11-16",
       "latestEventDate": "2026-11-15",
       "upcomingEventDate": "2026-11-22",
-      "sourceDateKnown": 14,
+      "sourceDateKnown": 15,
       "sourceCount": 5,
       "recordCount": 160
     },
@@ -119,6 +119,33 @@
       "id": "ptcg-08e11d34932e48a2",
       "availableOn": null,
       "firstCollectedOn": "2026-11-16"
+    },
+    {
+      "game": "ptcg",
+      "type": "deck",
+      "title": "Cynthia's Garchomp ex · fuji",
+      "summary": "City League · 北海道 / ブックオフ 札幌南2条店；ベスト4；64 人；60 张。",
+      "sourceUrl": "https://www.pokemon-card.com/deck/result.html/deckID/kVbbwV-Yb26hi-VkV5bV/",
+      "sourceName": "Pokémon official recipe · Pokecahack reported result",
+      "sourceLanguage": "ja",
+      "printEdition": "ja",
+      "publishedOn": "2026-11-15",
+      "sourceUpdatedOn": "2026-11-16",
+      "eventOn": "2026-11-14",
+      "verifiedOn": "2026-11-20",
+      "status": "verified",
+      "internalUrl": "ptcg-decks.html#meta",
+      "format": "Standard",
+      "region": "Japan",
+      "aliases": [
+        "Cynthia's Garchomp ex",
+        "cynthia_garchomp",
+        "シロナの ガブリアスex"
+      ],
+      "resultSourceUrl": "https://pokecahack.com/city-261114/",
+      "id": "ptcg-14ee368d881d205e",
+      "availableOn": null,
+      "firstCollectedOn": "2026-11-20"
     },
     {
       "game": "ptcg",
@@ -13167,32 +13194,6 @@
       ],
       "resultSourceUrl": "https://limitlesstcg.com/tournaments/583",
       "id": "ptcg-c7c4d8c511a4962e",
-      "sourceUpdatedOn": null,
-      "availableOn": null,
-      "firstCollectedOn": "2026-11-08"
-    },
-    {
-      "game": "ptcg",
-      "type": "deck",
-      "title": "Dragapult · Eder Jarillo Soto",
-      "summary": "Regional Puebla；5th；2,234 人；60 张。",
-      "sourceUrl": "https://limitlesstcg.com/decks/list/30795",
-      "sourceName": "Limitless TCG",
-      "sourceLanguage": "en",
-      "printEdition": "unknown",
-      "publishedOn": null,
-      "eventOn": "2026-10-24",
-      "verifiedOn": null,
-      "status": "indexed",
-      "internalUrl": "ptcg-decks.html#meta",
-      "format": "Standard",
-      "region": "International",
-      "aliases": [
-        "Dragapult",
-        "dragapult"
-      ],
-      "resultSourceUrl": "https://limitlesstcg.com/tournaments/583",
-      "id": "ptcg-cdba486576222ded",
       "sourceUpdatedOn": null,
       "availableOn": null,
       "firstCollectedOn": "2026-11-08"
