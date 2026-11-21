@@ -85,6 +85,7 @@
     $$('[data-i18n-placeholder]').forEach(node=>{const value=text[uiLang]?.[node.dataset.i18nPlaceholder];if(value)node.placeholder=value});
     const imageNote=$('[data-i18n="imageLangNote"]');if(imageNote)imageNote.textContent=t('imageLangNote');
     try{localStorage.setItem('metalab-opcg-language',uiLang)}catch(error){}
+    window.OPCG_RULE_NOTICE?.render(uiLang);
     renderMeta();renderEvents();renderX();renderSources();renderCards();
     if(currentDeck)renderDeckModal(false);if(currentCard)openCard(currentCard.code,false);if(!pageView)bindCardImages($('.hero'));
   }

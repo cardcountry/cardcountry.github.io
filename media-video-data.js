@@ -1,5 +1,5 @@
 window.META_LAB_VIDEO_DATA={
-  "checked": "2026-11-07",
+  "checked": "2026-11-20",
   "videos": [
     {
       "bvid": "BV1aTHNzzEHp",
@@ -551,6 +551,37 @@ window.META_LAB_VIDEO_DATA={
       },
       "verifiedOn": "2026-11-14",
       "verificationBasis": "visible-original-page"
+    },
+    {
+      "platform": "youtube",
+      "youtubeId": "4oto1QYhg_E",
+      "title": "WizardRod 1-50 Hexa Competitive Testing | Beyblade X",
+      "creator": "Fabel'd Beyblades",
+      "publishedAt": "2026-04-03",
+      "sourceUrl": "https://www.youtube.com/watch?v=4oto1QYhg_E",
+      "sourceLanguage": "en",
+      "game": "beyblade",
+      "relation": "exact-combo",
+      "historical": true,
+      "scope": "Wizard Rod · 1-50 · Hexa · 无辅助刃。2026年4月历史配置测试；公开标题与简介确认完整配置及六组对局章节，未提取逐局比分或当前胜率。",
+      "verification": "verified",
+      "verificationScope": "saved-source-metadata-and-description",
+      "verifiedOn": "2026-11-20",
+      "kind": "历史完整配置测试",
+      "embedAllowed": true,
+      "playbackVerification": "not-tested",
+      "match": {
+        "blades": [
+          "Wizard Rod"
+        ],
+        "parts": {
+          "blade": "Wizard Rod",
+          "ratchet": "1-50",
+          "bit": "Hexa",
+          "assist": ""
+        }
+      },
+      "evidence": "保存的YouTube原HTML：标题及简介为WizardRod 1-50 Hexa，author为Fabel'd Beyblades，publishDate/uploadDate均为2026-04-03T08:08:20-07:00。playabilityStatus.status=OK且playableInEmbed=true仅为保存页面元数据，未现场验证视频播放。未据此添加比赛成绩、胜率或逐局样本。"
     }
   ],
   "updatedOn": "2026-11-14"

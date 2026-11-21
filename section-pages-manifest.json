@@ -101,13 +101,13 @@
       "path": "opcg-decks.html",
       "game": "opcg",
       "view": "decks",
-      "bytes": 19127
+      "bytes": 23007
     },
     {
       "path": "opcg-cards.html",
       "game": "opcg",
       "view": "cards",
-      "bytes": 19109
+      "bytes": 22989
     },
     {
       "path": "opcg-news.html",
@@ -119,19 +119,19 @@
       "path": "opcg-usage.html",
       "game": "opcg",
       "view": "usage",
-      "bytes": 19166
+      "bytes": 23046
     },
     {
       "path": "opcg-rules.html",
       "game": "opcg",
       "view": "rules",
-      "bytes": 19115
+      "bytes": 22995
     },
     {
       "path": "opcg-sources.html",
       "game": "opcg",
       "view": "sources",
-      "bytes": 19129
+      "bytes": 23009
     },
     {
       "path": "unionarena.html",

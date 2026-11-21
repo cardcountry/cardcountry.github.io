@@ -150,3 +150,5 @@ html[data-page-view='news'] .ml-hub-main>.ml-page-heading{padding:0;margin-botto
  html[data-page-view] .ml-site-header .ml-header-nav.open{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:360px){html[data-page-view] .ml-brand-symbol{display:none}}
+
+body>footer .section-updates-link{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;font-size:1rem;color:inherit;text-decoration:underline;max-width:100%}

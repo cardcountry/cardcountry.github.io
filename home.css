@@ -13,3 +13,5 @@ body[data-home-page] .home-footer{max-width:calc(var(--max) - 56px);padding:24px
 @media(max-width:760px){body[data-home-page] .home-hero-actions{display:none}}
 @media(max-width:360px){body[data-home-page] .home-hero h1{font-size:32px}.home-hero-copy>p:not(.home-eyebrow){font-size:11px}.home-hero-actions{gap:7px}.home-primary-link,.home-secondary-link{gap:10px;padding:9px 11px;font-size:10px}body[data-home-page] .home-game{gap:9px;grid-template-columns:17px 35px minmax(0,1fr) 13px;padding:10px 11px}.home-game img{width:35px;height:50px}.home-game strong{font-size:15px}.home-game-tools{font-size:9px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.home-game,.home-game img,.home-hero-card,.home-update{transition:none!important}}
+
+body[data-home-page] .home-log-access{display:inline-flex;align-items:center;min-height:44px;max-width:100%;padding:8px 14px;margin:14px 0 0;border:1px solid #6b8a68;border-radius:7px;color:#d8efbf;font-size:16px;font-weight:650;text-decoration:underline}body[data-home-page] .home-log-footer{display:inline-flex;align-items:center;min-height:44px;font-size:16px;text-decoration:underline;color:inherit}
