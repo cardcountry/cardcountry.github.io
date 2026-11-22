@@ -13,3 +13,13 @@
 .opcg-rule-notice a:focus-visible{outline:3px solid #087d92;outline-offset:3px}
 .opcg-rule-notice .opcg-rule-notice__scope-note{margin-bottom:0}
 @media(max-width:720px){.opcg-rule-notice{padding:1rem}.opcg-rule-notice .opcg-rule-notice__scopes{grid-template-columns:minmax(0,1fr)}.opcg-rule-notice a{width:100%}}
+/* Native disclosure keeps deck search near the first screen; rules default open in render(). */
+.opcg-rule-notice .opcg-rule-notice__disclosure{margin:0}
+.opcg-rule-notice .opcg-rule-notice__disclosure>summary{min-height:2.75rem;cursor:pointer;color:#12374c;font-size:1rem;font-weight:700;line-height:1.4;list-style-position:outside}
+.opcg-rule-notice .opcg-rule-notice__disclosure>summary::marker{color:#087d92}
+.opcg-rule-notice .opcg-rule-notice__disclosure>summary:focus-visible{outline:3px solid #087d92;outline-offset:5px;border-radius:.125rem}
+.opcg-rule-notice .opcg-rule-notice__summary-title{font-size:1rem;line-height:1.4}
+.opcg-rule-notice .opcg-rule-notice__summary-dates{display:block;margin-top:.35rem;color:#34586b;font-size:.8125rem;font-weight:500;line-height:1.5}
+.opcg-rule-notice .opcg-rule-notice__content{margin-top:1rem;padding-top:.25rem;border-top:1px solid #a8c8d2}
+.opcg-rule-notice .opcg-rule-notice__content>.opcg-rule-notice__heading h3{display:none}
+@media(max-width:720px){html[data-page-view="decks"] .opcg-rule-notice,html[data-page-view="deck"] .opcg-rule-notice{padding:.875rem 1rem .875rem 1.5rem}.opcg-rule-notice .opcg-rule-notice__summary-title{font-size:.9375rem}}

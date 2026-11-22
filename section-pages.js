@@ -26,3 +26,55 @@ languageSelect?.addEventListener('change',()=>{try{localStorage.setItem('metalab
 new MutationObserver(()=>{const lang=pick(),title=`${copy(view,lang)[0]} · ${G.name} — META LAB`;if(document.title!==title)document.title=title;}).observe(document.querySelector('title'),{childList:true,subtree:true,characterData:true});
 if(view==='overview'){const host=document.querySelector('[data-hub-updates]');if(host)fetch('activity-feed.json?v=2026110801',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json();}).then(data=>{const recentDate=row=>[row.publishedOn,row.sourceUpdatedOn].filter(Boolean).sort().at(-1)||(row.eventOn&&row.eventOn<=data.builtOn?row.eventOn:'');const rows=data.items.filter(x=>x.game===gameId).sort((a,b)=>recentDate(b).localeCompare(recentDate(a))).slice(0,3);host.replaceChildren();for(const row of rows){const a=document.createElement('a');a.href=path('news');const small=document.createElement('small');small.textContent=[recentDate(row),row.sourceName].filter(Boolean).join(' · ');const title=document.createElement('strong');title.textContent=row.title;a.append(small,title);host.append(a);}if(!rows.length){const a=document.createElement('a');a.href=path('news');a.textContent=M.words[pick()].empty;host.append(a);}}).catch(()=>{host.replaceChildren();const a=document.createElement('a');a.href=path('news');a.textContent=M.words[pick()].empty;host.append(a);});}
 })();
+/* Shared dialog keyboard support. UA's existing custom/native dialogs own their focus behavior. */
+(()=>{
+ 'use strict';
+ if(!document.documentElement.dataset.pageView)return;
+ const dialogs=[...document.querySelectorAll('.modal[role="dialog"]')];if(!dialogs.length)return;
+ const focusable='a[href],button,input,select,textarea,summary,iframe,[contenteditable="true"],[tabindex]:not([tabindex="-1"])';
+ let stack=[],lastTrigger=null,lastFocused=document.activeElement;
+ const open=modal=>modal.classList.contains('open');
+ const available=node=>node?.isConnected&&!node.disabled&&!node.closest('[hidden],.hidden,[data-inactive-root]')&&node.getClientRects().length>0;
+ const entries=modal=>[...modal.querySelectorAll(focusable)].filter(node=>node.tabIndex>=0&&available(node));
+ const closeButton=modal=>modal.querySelector('.close,.modal-close,[data-close]');
+ const focus=node=>{if(available(node))node.focus({preventScroll:true});};
+ const initial=modal=>{const target=closeButton(modal)||entries(modal)[0];if(target)focus(target);else{modal.tabIndex=-1;modal.focus({preventScroll:true});}};
+ const closeLabel=()=>document.documentElement.lang.startsWith('ja')?'閉じる':document.documentElement.lang.startsWith('en')?'Close dialog':document.documentElement.lang==='zh-Hant'?'關閉視窗':'关闭弹窗';
+ const label=modal=>{const heading=modal.querySelector('h2[id]');if(heading&&!modal.hasAttribute('aria-labelledby')&&!modal.hasAttribute('aria-label'))modal.setAttribute('aria-labelledby',heading.id);const close=closeButton(modal);if(close)close.setAttribute('aria-label',closeLabel());};
+ for(const modal of dialogs)label(modal);
+ document.addEventListener('metalab:section-language',()=>dialogs.forEach(label));
+ document.addEventListener('click',event=>{const target=event.target.closest?.(focusable);if(target)lastTrigger=target;},true);
+ document.addEventListener('keydown',event=>{
+  if(event.key==='Enter'||event.key===' ')lastTrigger=document.activeElement;
+  const modal=stack.at(-1)?.modal;if(!modal)return;
+  if(event.key==='Escape'){
+   const close=closeButton(modal);if(!close)return;
+   event.preventDefault();event.stopImmediatePropagation();close.click();return;
+  }
+  if(event.key!=='Tab')return;
+  const nodes=entries(modal),first=nodes[0],last=nodes.at(-1),active=document.activeElement;
+  if(!first){event.preventDefault();initial(modal);return;}
+  if(!modal.contains(active)||(event.shiftKey&&active===first)||(!event.shiftKey&&active===last)){
+   event.preventDefault();focus(event.shiftKey?last:first);
+  }
+ },true);
+ document.addEventListener('focusin',event=>{const previous=lastFocused;lastFocused=event.target;const pending=observer.takeRecords();if(pending.length)reconcile(pending,previous);const modal=stack.at(-1)?.modal;if(modal&&!modal.contains(event.target))initial(modal);},true);
+ function reconcile(records=[],previousFocus=null){
+  const previousTop=stack.at(-1)?.modal,removed=stack.filter(item=>!open(item.modal));
+  stack=stack.filter(item=>open(item.modal));
+  for(const modal of [...records.map(record=>record.target),...dialogs]){
+   if(!open(modal)||stack.some(item=>item.modal===modal))continue;
+   const active=document.activeElement;
+   const opener=active&&active!==document.body&&!modal.contains(active)?active:previousFocus&&!modal.contains(previousFocus)?previousFocus:lastTrigger;
+   stack.push({modal,opener});label(modal);
+  }
+  const current=stack.at(-1)?.modal;
+  if(current===previousTop)return;
+  const restore=removed[0]?.opener;
+  if(current){if(restore&&current.contains(restore)&&available(restore))focus(restore);else if(!current.contains(document.activeElement))initial(current);}
+  else if(available(restore))focus(restore);
+ }
+ const observer=new MutationObserver(records=>reconcile(records));
+ for(const modal of dialogs)observer.observe(modal,{attributes:true,attributeFilter:['class']});
+ reconcile();
+})();

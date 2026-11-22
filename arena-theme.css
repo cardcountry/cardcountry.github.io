@@ -97,3 +97,70 @@ html[data-page-view=news] .activity-item:hover,body[data-home-page=news] .activi
 @media(max-width:360px){.ml-overview-hero{padding:21px 16px;grid-template-columns:minmax(0,1fr) 68px;gap:10px}.ml-overview-hero h1{font-size:27px}.ml-overview-art{max-width:68px;height:105px}.ml-overview-hero .ml-kicker{font-size:8px;overflow-wrap:anywhere}}
 @media(hover:none){.ml-overview-hero:hover .ml-overview-art{transform:rotate(6deg)}.ml-topic-card:hover,.ml-recent-list>a:hover,html[data-page-view] :is(.search-result-deck,.deck-choice,.deck-card,.event-deck-card,.config-card):hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.ml-overview-art,.ml-topic-card,.ml-topic-card .ml-arrow,.ml-recent-list>a,html[data-page-view] :is(.search-result-deck,.deck-choice,.deck-card,.event-deck-card,.config-card),html[data-page-view] .ml-site-header .ml-header-nav a{transition:none}.ml-overview-hero:hover .ml-overview-art,.ml-topic-card:hover,.ml-topic-card:hover .ml-arrow,.ml-recent-list>a:hover{transform:none}}
+/* 2026-11-22: readable controls and narrow-screen resilience; preserve each game's card-text palette. */
+html[data-page-view] :is(a,button,input,select,textarea,summary):focus-visible,
+body[data-home-page] :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #a0f4d5;outline-offset:3px}
+html[data-page-view] .ml-site-header :is(.ml-site-brand,.ml-header-nav a){min-height:44px;display:flex;align-items:center}
+body[data-home-page] .home-nav a{min-height:44px;display:inline-flex;align-items:center;font-size:13px}
+body[data-home-page] :is(.home-game-name,.home-game-tools,.home-update-meta,.home-update-meta b,.home-update>small,.home-footer){font-size:12px;line-height:1.65}
+body[data-home-page] .home-update>small{white-space:normal;overflow-wrap:anywhere}
+body[data-home-page] :is(.home-section-head>a,.home-section-count){font-size:12px}
+body[data-home-page] .home-section-kicker{font-size:10px;color:#8ea8b4}
+html[data-page-view] :is(.ml-topic-card small,.ml-recent-list small,.ml-hub-footer){font-size:13px;line-height:1.7}
+html[data-page-view] .ml-overview-hero>div{min-width:0}
+html[data-page-view] .ml-overview-hero h1{overflow-wrap:anywhere}
+html[data-page-view] :is(.deck-finder label,.cross-search-hint,.card-results-head,.deck-list-picker small,.deck-list-picker button span,.deck-list-picker button small,.deck-slot span,.deck-card-item b,.deck-card-item small,.deck-name-row small){font-size:12px;line-height:1.55}
+html[data-page-view] :is(.deck-card-stats small,.deck-stats small,.intel-stats small,.gcg-composition-chips small,.composition-grid article span,.composition-head span,.card-item small,.ua-list-card span,.card-badges span,.card-numbers span,.official-note){font-size:12px;line-height:1.55;white-space:normal;overflow-wrap:anywhere}
+html[data-page-view] :is(.effect-panel p,.effect-box p,.ua-card-effect-panel p){font-size:14px;line-height:1.75}
+html[data-page-view] .event-table-wrap :is(th,td){font-size:13px;line-height:1.6}
+html[data-page-view] .source-card a{display:inline-flex;align-items:center;min-height:44px;font-size:13px;line-height:1.5}
+html[data-page-view] .back-to-top{min-width:44px;min-height:44px}
+html[data-page-view] :is(.card-extra-filters>summary,.ua-advanced>summary,.activity-alternates>summary,.activity-coverage>summary){min-height:44px;display:list-item;padding-block:10px;line-height:1.5}
+html[data-page-view] :is(.format-tabs,.view-toggle,.deck-tabs,.deck-view-toggle,.effect-langs) button{min-height:44px;font-size:13px;line-height:1.4}
+html[data-page-view] :is(.deck-tabs,.deck-view-toggle,.effect-langs){flex-wrap:wrap}
+html[data-page-view] .deck-name-list{width:100%;min-width:0;table-layout:fixed}
+html[data-page-view] .deck-name-list td{overflow-wrap:anywhere;font-size:13px;line-height:1.55}
+html[data-page-view] .deck-name-list td:first-child{width:44px}
+html[data-page-view] .deck-shell .deck-cards>*{min-width:0;overflow-wrap:anywhere}
+html[data-page-view] .modal :is(.modal-shell,.modal-card,.deck-modal-card,.source-modal-card){overscroll-behavior:contain}
+:is(html[data-page-view=news],body[data-home-page=news]) .activity-section :is(.activity-tags span,.activity-source-line,.activity-alternates,.activity-coverage-grid span){font-size:12px;line-height:1.6}
+body[data-home-page=news] .activity-section :is(.activity-alternates>summary,.activity-coverage>summary){min-height:44px;display:list-item;padding-block:10px}
+@media(max-width:760px){
+ body[data-home-page] :is(.home-hero-copy>p:not(.home-eyebrow),.news-main .home-intro p:not(.home-eyebrow)){font-size:14px;line-height:1.75}
+ body[data-home-page] .home-game-tools{font-size:12px;line-height:1.6}
+ body[data-home-page] .home-update>strong{font-size:14px;line-height:1.75}
+ html[data-page-view] :is(.ml-page-desc,.ml-overview-hero p){font-size:14px!important;line-height:1.75}
+ html[data-page-view] :is(.card-toolbar input,.card-toolbar select,.official-controls input,.official-controls select,.config-tools input,.config-tools select,.ua-local-library>input),
+ :is(html[data-page-view=news],body[data-home-page=news]) .activity-fields :is(input,select){font-size:16px;min-height:44px;min-width:0}
+ html[data-page-view] :is(.card-toolbar button,.card-extra-filters>summary){font-size:14px;line-height:1.4}
+ html[data-page-view] .card-filter-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+ html[data-page-view] .card-filter-options :is(select,button){min-width:0;max-width:100%}
+ html[data-page-view] .modal :is(.close,.modal-close){min-width:44px;min-height:44px}
+ html[data-page-view] :is(.deck-list-picker,.deck-name-rows){max-width:100%;overscroll-behavior-inline:contain}
+}
+@media(max-width:430px){
+ /* A second header row reserves space for Japanese/English navigation at 320px. */
+ body[data-home-page] .home-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding:8px 14px}
+ body[data-home-page] .home-brand{grid-column:1;grid-row:1;min-width:0;margin:0}
+ body[data-home-page] #homeLang{grid-column:2;grid-row:1;width:108px;max-width:108px}
+ body[data-home-page] .home-nav{grid-column:1/-1;grid-row:2;justify-content:flex-start;gap:4px}
+ body[data-home-page] .home-nav a{padding:8px 12px}
+ html:has(body[data-home-page]){scroll-padding-top:126px}
+ html[data-page-view] .ml-overview-hero{grid-template-columns:minmax(0,1fr) 68px;gap:10px;padding:21px 16px}
+ html[data-page-view] .ml-overview-art{max-width:68px;height:112px}
+ html[data-page-view] .deck-shell .deck-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+}
+
+/* Optional follow-up after the shared bundle: labels confirmed in UA/Bey sources, awaiting rendered layout QA. */
+html[data-page-game=opcg] .deck-card-stats small{color:#a4b7cb}
+html[data-page-game=unionarena] :is(.event-deck-copy>p,.event-composition small,.ua-composition small,.event-deck-note,.ua-modal-toolbar span,.ua-modal-toolbar a,.ua-list-card small){font-size:12px;line-height:1.55;white-space:normal;overflow-wrap:anywhere}
+html[data-page-game=unionarena] .ua-modal-close{min-width:44px;min-height:44px}
+html[data-page-game=beyblade] :is(.smart-builder header p,.smart-system>span,.smart-targets label>span,.smart-result>div:first-child>span,.smart-result>strong small,.smart-actual small){font-size:12px;line-height:1.5}
+html[data-page-game=beyblade] .smart-actual span{min-width:0;overflow-wrap:anywhere}
+html[data-page-game=beyblade] .smart-targets input[type=range]{min-height:44px}
+html[data-page-game=beyblade] .smart-system select{font-size:16px}
+
+/* Rendered 390px UA review: preserve full card art and keep composition labels legible. */
+html[data-page-game=unionarena] .event-deck-card>img{object-fit:contain;padding:10px}
+html[data-page-game=unionarena] #decks .usage-controls input,html[data-page-game=unionarena] .usage-controls input[type=search]{min-height:44px;min-width:0;max-width:100%;padding:12px 14px;border:1px solid #455468;border-radius:10px;background:#111f2e;color:#e8eff4;font:inherit;line-height:1.5}
+@media(max-width:680px){html[data-page-game=unionarena] .event-composition{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}html[data-page-game=unionarena] .event-composition span{padding:8px 5px}html[data-page-game=unionarena] .usage-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}html[data-page-game=unionarena] .usage-controls input[type=search]{grid-column:1/-1;width:100%;font-size:16px}html[data-page-game=unionarena] .ua-card-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
