@@ -41,7 +41,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-metalab-auto-v1-
       - name: Verify collection safety fixtures
-        run: node data-pipeline/auto/test.mjs
+        run: |
+          node data-pipeline/auto/test.mjs
+          node data-pipeline/auto/publish.test.mjs
       - name: Collect and validate incremental public data
         env:
           FORCE_REFRESH: ${{ github.event_name != 'schedule' && '1' || '0' }}
