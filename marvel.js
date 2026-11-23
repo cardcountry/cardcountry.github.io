@@ -146,7 +146,7 @@
   }
   function renderDeckModal(updateHeader=true){
     const hero=deckHero(currentDeck);if(updateHeader){$('#deckModalImage').src=cardImage(hero,true)||cardImage(hero);$('#deckModalImage').alt=cardName(hero);$('#deckModalRank').textContent=`${currentDeck.lists.length} VERIFIED 50-CARD LISTS · ${currentDeck.share.toFixed(1)}% RECENT SHARE`;$('#deckModalTitle').textContent=colorLabel(currentDeck.name);$('#deckModalSummary').textContent=uiLang==='en'?'Choose any event version below. Every list is stored and rendered on-site.':uiLang==='ja'?'下の大会版を選択してください。すべての完全リストをサイト内表示します。':'选择下方任一赛事版本；所有完整卡表都直接在站内显示。'}
-    $('#deckListPicker').innerHTML=currentDeck.lists.map((list,index)=>`<button class="${list===currentList?'active':''}" data-list-index="${index}"><b>${esc(list.place)} · ${esc(list.player||'—')}</b><span>${esc(displayDate(list.event.date))} · ${esc(list.event.name)}</span><small>${list.total}/50 · ${esc(attendance(list.event))}</small></button>`).join('');
+    const pickerLabel=uiLang==='en'?'Choose a tournament list':uiLang==='ja'?'大会リストを選択':uiLang==='zh'?'選擇賽事卡表':'选择赛事卡表';$('#deckListPicker').innerHTML=`<label for="marvelDeckListSelect">${pickerLabel} · ${currentDeck.lists.length}</label><select id="marvelDeckListSelect">${currentDeck.lists.map((list,index)=>`<option value="${index}"${list===currentList?' selected':''}>${esc(displayDate(list.event.date))} · ${esc(list.place)} · ${esc(list.player||'—')} · ${esc(list.event.name)}</option>`).join('')}</select>`;
     $$('.deck-tabs button').forEach(button=>button.classList.toggle('active',button.dataset.deckTab===currentDeckTab));
     renderDeckDetail();
   }
@@ -275,6 +275,7 @@
   // EVENTS AND BOOT
   function bindEvents(){
     $('#uiLang').addEventListener('change',event=>setLanguage(event.target.value));
+    $('#deckListPicker').addEventListener('change',event=>{if(event.target.id!=='marvelDeckListSelect'||!currentDeck)return;const index=Number(event.target.value);if(!Number.isInteger(index)||index<0||index>=currentDeck.lists.length)return;currentList=currentDeck.lists[index];renderDeckDetail();});
     $('#menuBtn').addEventListener('click',()=>$('#nav').classList.toggle('open'));$$('#nav a').forEach(link=>link.addEventListener('click',()=>$('#nav').classList.remove('open')));
     $('#deckSearch').addEventListener('input',event=>{deckQuery=event.target.value;renderDecks()});$('#clearDeckSearch').addEventListener('click',()=>{deckQuery='';$('#deckSearch').value='';renderDecks();$('#deckSearch').focus()});
     $('#cardSearch').addEventListener('input',event=>{cardQuery=event.target.value;cardPage=1;renderCards()});

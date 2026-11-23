@@ -17,7 +17,7 @@
   "riftbound.js": "2026111601",
   "marvel-data.js": "2026111304",
   "section-pages.css": "2026112101",
-  "marvel.js": "2026111410",
+  "marvel.js": "2026112302",
   "site-data-quality.js": "2026111305",
   "app.js": "2026112301",
   "gcg.css": "2026111306",
@@ -49,5 +49,6 @@
   "section-map.js": "2026112201",
   "unionarena-catalog-jp.js": "2026112201",
   "decks-data.js": "2026112301",
-  "app-v22.js": "2026112301"
+  "app-v22.js": "2026112301",
+  "marvel.css": "2026112302"
 }
