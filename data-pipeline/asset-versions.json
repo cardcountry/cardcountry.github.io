@@ -9,7 +9,7 @@
   "gcg-jp-recent.js": "2026111301",
   "gcg.js": "2026112301",
   "opcg-eb05-jp.js": "2026111301",
-  "opcg.js": "2026112301",
+  "opcg.js": "2026112303",
   "unionarena-data.js": "2026111301",
   "unionarena-recipes.js": "2026111301",
   "unionarena-card-details.js": "2026111301",
@@ -50,5 +50,9 @@
   "unionarena-catalog-jp.js": "2026112201",
   "decks-data.js": "2026112301",
   "app-v22.js": "2026112301",
-  "marvel.css": "2026112302"
+  "marvel.css": "2026112302",
+  "usage-ranking.js": "2026112303",
+  "opcg-op18-cards.js": "2026112303",
+  "opcg-op18-jp.js": "2026112303",
+  "opcg-op18-images.js": "2026112303"
 }
