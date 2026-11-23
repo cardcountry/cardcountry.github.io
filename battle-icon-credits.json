@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "updatedOn": "2026-11-23",
+  "description": "Independent battle-report symbols. Custom representative art is not an official item sprite. Pokémon assets remain the property of their respective owners.",
+  "assets": [
+    {
+      "id": "ptcg-trainer-air-balloon",
+      "label": "气球 / Air Balloon",
+      "image": "/battle-icon-assets/ptcg-trainer-air-balloon-sprite-2026112306.png",
+      "sourceUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/air-balloon.png",
+      "attribution": "PokeAPI/sprites, Pokemon assets belong to respective owners.",
+      "credit": "PokeAPI · Pokémon",
+      "customRepresentativeArt": false,
+      "note": "Exact same-name game item sprite; standalone pixel art visually checked."
+    },
+    {
+      "id": "ptcg-trainer-crushing-hammer",
+      "label": "粉碎之锤 / Crushing Hammer",
+      "image": "/battle-icon-assets/ptcg-trainer-crushing-hammer-sprite-2026112306.png",
+      "sourceUrl": "https://raw.githubusercontent.com/jlgrimes/training-court/89d2a9b8728fa6f83e960e9b77c34ee0eac667c7/public/assets/sprites/crushing-hammer.png",
+      "attribution": "Training Court / Jared. Repository README states MIT.",
+      "credit": "Jared · Training Court",
+      "customRepresentativeArt": false,
+      "note": "Publisher code maps exact crushing-hammer slug to this hand-drawn red hammer; visually matches user screenshot."
+    },
+    {
+      "id": "ptcg-trainer-rare-candy",
+      "label": "神奇糖果 / Rare Candy",
+      "image": "/battle-icon-assets/ptcg-trainer-rare-candy-sprite-2026112306.png",
+      "sourceUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rare-candy.png",
+      "attribution": "PokeAPI/sprites, Pokemon assets belong to respective owners.",
+      "credit": "PokeAPI · Pokémon",
+      "customRepresentativeArt": false,
+      "note": "Exact same-name game item sprite; standalone pixel art visually checked."
+    },
+    {
+      "id": "ptcg-trainer-super-rod",
+      "label": "厉害钓竿 / Super Rod",
+      "image": "/battle-icon-assets/ptcg-trainer-super-rod-sprite-2026112306.png",
+      "sourceUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/super-rod.png",
+      "attribution": "PokeAPI/sprites, Pokemon assets belong to respective owners.",
+      "credit": "PokeAPI · Pokémon",
+      "customRepresentativeArt": false,
+      "note": "Exact same-name game item sprite; standalone pixel art visually checked."
+    },
+    {
+      "id": "ptcg-trainer-ultra-ball",
+      "label": "高级球 / Ultra Ball",
+      "image": "/battle-icon-assets/ptcg-trainer-ultra-ball-sprite-2026112306.png",
+      "sourceUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png",
+      "attribution": "PokeAPI/sprites, Pokemon assets belong to respective owners.",
+      "credit": "PokeAPI · Pokémon",
+      "customRepresentativeArt": false,
+      "note": "Exact same-name game item sprite; standalone pixel art visually checked."
+    },
+    {
+      "id": "ptcg-trainer-iono",
+      "label": "奇树 / Iono",
+      "image": "/battle-icon-assets/ptcg-trainer-iono-sprite-2026112306.png",
+      "sourceUrl": "https://play.pokemonshowdown.com/sprites/trainers/iono.png",
+      "attribution": "kyledove / Pokemon Showdown. Directory requires artist credit and no editing without permission.",
+      "credit": "kyledove · Pokémon Showdown",
+      "customRepresentativeArt": false,
+      "note": "Iono; matches sv02-185 yellow oversized coat, pink/blue hair and Magnemite clips"
+    },
+    {
+      "id": "ptcg-trainer-boss-orders",
+      "label": "老大的指令 / Boss's Orders",
+      "image": "/battle-icon-assets/ptcg-trainer-boss-orders-sprite-2026112306.png",
+      "sourceUrl": "https://play.pokemonshowdown.com/sprites/trainers/ghetsis-gen5bw.png",
+      "attribution": "Game Freak / Pokemon Showdown. Directory lists no separate fan artist for ghetsis-gen5bw.",
+      "credit": "Pokémon Showdown",
+      "customRepresentativeArt": false,
+      "note": "Ghetsis Black/White appearance; visual match to currently used English Boss Orders me01-114. Japanese linked old print is Cyrus; do not claim portrait matches all prints."
+    },
+    {
+      "id": "ptcg-trainer-enhanced-hammer",
+      "label": "改造之锤 / Enhanced Hammer",
+      "image": "/battle-icon-assets/ptcg-trainer-enhanced-hammer-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/sv/sv06/148/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/sv/sv06/148/low.webp",
+      "note": {
+        "enId": "sv06-148",
+        "enName": "Enhanced Hammer",
+        "jaName": "改造ハンマー",
+        "zhHans": "改造之锤",
+        "zhHant": "改造之錘",
+        "trainerType": "Item",
+        "functionalCrossprintKey": null,
+        "japaneseReference": "JP-45629",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/sv06-148",
+          "https://www.pokemon-card.com/card-search/details.php/card/45629",
+          "https://asia.pokemon-card.com/tw/rules/regulation/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-counter-catcher",
+      "label": "反击捕捉器 / Counter Catcher",
+      "image": "/battle-icon-assets/ptcg-trainer-counter-catcher-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/sv/sv04/160/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/sv/sv04/160/low.webp",
+      "note": {
+        "enId": "sv04-160",
+        "enName": "Counter Catcher",
+        "jaName": "カウンターキャッチャー",
+        "zhHans": "反击捕捉器",
+        "zhHant": "反擊捕捉器",
+        "trainerType": "Item",
+        "functionalCrossprintKey": null,
+        "japaneseReference": "JP-44371",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/sv04-160",
+          "https://www.pokemon-card.com/card-search/details.php/card/44371",
+          "https://asia.pokemon-card.com/tw/card-search/detail/11664/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-buddy-buddy-poffin",
+      "label": "好友宝芬 / Buddy-Buddy Poffin",
+      "image": "/battle-icon-assets/ptcg-trainer-buddy-buddy-poffin-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/sv/sv05/144/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/sv/sv05/144/low.webp",
+      "note": {
+        "enId": "sv05-144",
+        "enName": "Buddy-Buddy Poffin",
+        "jaName": "なかよしポフィン",
+        "zhHans": "好友宝芬",
+        "zhHant": "好友寶芬",
+        "trainerType": "Item",
+        "functionalCrossprintKey": "crossprint-TEF-144",
+        "japaneseReference": "JP-45209",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/sv05-144",
+          "https://www.pokemon-card.com/card-search/details.php/card/45209",
+          "https://asia.pokemon-card.com/tw/card-search/detail/14228/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-night-stretcher",
+      "label": "夜间担架 / Night Stretcher",
+      "image": "/battle-icon-assets/ptcg-trainer-night-stretcher-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/me/me02.5/196/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/me/me02.5/196/low.webp",
+      "note": {
+        "enId": "me02.5-196",
+        "enName": "Night Stretcher",
+        "jaName": "夜のタンカ",
+        "zhHans": "夜间担架",
+        "zhHant": "夜間擔架",
+        "trainerType": "Item",
+        "functionalCrossprintKey": "crossprint-SFA-61",
+        "japaneseReference": "JP-45931",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/me02.5-196",
+          "https://www.pokemon-card.com/card-search/details.php/card/45931",
+          "https://asia.pokemon-card.com/tw/card-search/detail/19321/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-switch",
+      "label": "宝可梦交替 / Switch",
+      "image": "/battle-icon-assets/ptcg-trainer-switch-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/sv/sv01/194/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/sv/sv01/194/low.webp",
+      "note": {
+        "enId": "sv01-194",
+        "enName": "Switch",
+        "jaName": "ポケモンいれかえ",
+        "zhHans": "宝可梦交替",
+        "zhHant": "寶可夢交替",
+        "trainerType": "Item",
+        "functionalCrossprintKey": null,
+        "japaneseReference": "JP-50744",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/sv01-194",
+          "https://www.pokemon-card.com/card-search/details.php/card/50744",
+          "https://asia.pokemon-card.com/tw/card-search/detail/19299/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-special-red-card",
+      "label": "特殊红牌 / Special Red Card",
+      "image": "/battle-icon-assets/ptcg-trainer-special-red-card-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/me/me04/082/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/me/me04/082/low.webp",
+      "note": {
+        "enId": "me04-082",
+        "enName": "Special Red Card",
+        "jaName": "スペシャルレッドカード",
+        "zhHans": "特殊红牌",
+        "zhHant": "特殊紅牌",
+        "trainerType": "Item",
+        "functionalCrossprintKey": "crossprint-CRI-82",
+        "japaneseReference": "JP-50156",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/me04-082",
+          "https://www.pokemon-card.com/card-search/details.php/card/50156",
+          "https://asia.pokemon-card.com/tw/card-search/detail/18492/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-jamming-tower",
+      "label": "阻碍之塔 / Jamming Tower",
+      "image": "/battle-icon-assets/ptcg-trainer-jamming-tower-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/sv/sv06/153/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/sv/sv06/153/low.webp",
+      "note": {
+        "enId": "sv06-153",
+        "enName": "Jamming Tower",
+        "jaName": "ジャミングタワー",
+        "zhHans": "阻碍之塔",
+        "zhHant": "阻礙之塔",
+        "trainerType": "Stadium",
+        "functionalCrossprintKey": "crossprint-TWM-153",
+        "japaneseReference": "JP-49982",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/sv06-153",
+          "https://www.pokemon-card.com/card-search/details.php/card/49982",
+          "https://asia.pokemon-card.com/tw/deck-build/recipe/iaPaNb-yNiVkP-UedLup/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-tool-scrapper",
+      "label": "道具拆除器 / Tool Scrapper",
+      "image": "/battle-icon-assets/ptcg-trainer-tool-scrapper-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/me/me02.5/212/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/me/me02.5/212/low.webp",
+      "note": {
+        "enId": "me02.5-212",
+        "enName": "Tool Scrapper",
+        "jaName": "ツールスクラッパー",
+        "zhHans": "道具拆除器",
+        "zhHant": "道具拆除器",
+        "trainerType": "Item",
+        "functionalCrossprintKey": "crossprint-DRX-116",
+        "japaneseReference": "JP-50206",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/me02.5-212",
+          "https://www.pokemon-card.com/card-search/details.php/card/50206",
+          "https://asia.pokemon-card.com/tw/card-search/detail/263/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-prime-catcher",
+      "label": "顶尖捕捉器 / Prime Catcher",
+      "image": "/battle-icon-assets/ptcg-trainer-prime-catcher-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/sv/sv05/157/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/sv/sv05/157/low.webp",
+      "note": {
+        "enId": "sv05-157",
+        "enName": "Prime Catcher",
+        "jaName": "プライムキャッチャー",
+        "zhHans": "顶尖捕捉器",
+        "zhHant": "頂尖捕捉器",
+        "trainerType": "Item",
+        "functionalCrossprintKey": "crossprint-TEF-157",
+        "japaneseReference": "JP-45279",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/sv05-157",
+          "https://www.pokemon-card.com/card-search/details.php/card/45279",
+          "https://asia.pokemon-card.com/tw/deck-build/recipe/qiFDzr-PXJbuc-uFBTpS/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-unfair-stamp",
+      "label": "不公印章 / Unfair Stamp",
+      "image": "/battle-icon-assets/ptcg-trainer-unfair-stamp-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/sv/sv06/165/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/sv/sv06/165/low.webp",
+      "note": {
+        "enId": "sv06-165",
+        "enName": "Unfair Stamp",
+        "jaName": "アンフェアスタンプ",
+        "zhHans": "不公印章",
+        "zhHant": "不公印章",
+        "trainerType": "Item",
+        "functionalCrossprintKey": "crossprint-TWM-165",
+        "japaneseReference": "JP-45640",
+        "sources": [
+          "https://api.tcgdex.net/v2/en/cards/sv06-165",
+          "https://www.pokemon-card.com/card-search/details.php/card/45640",
+          "https://asia.pokemon-card.com/tw/card-search/detail/17104/"
+        ],
+        "nameEvidence": "EN type/name verified from TCGdex JSON;JP from saved verified crossprint or official page;ZH traditional from official Taiwan detail/recipe;ZH simplified spelling is searchable transliteration alias"
+      }
+    },
+    {
+      "id": "ptcg-trainer-judge",
+      "label": "裁判 / Judge",
+      "image": "/battle-icon-assets/ptcg-trainer-judge-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/me/me03/076/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/me/me03/076/low.webp",
+      "note": "Referee from current Judge card illustration: spiky black hair, visor and whistle, black/magenta/lime costume."
+    },
+    {
+      "id": "ptcg-trainer-earthen-vessel",
+      "label": "大地之容器 / Earthen Vessel",
+      "image": "/battle-icon-assets/ptcg-trainer-earthen-vessel-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/sv/sv04/163/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/sv/sv04/163/low.webp",
+      "note": "Brown ancient earthen vessel with two curved handles, thick notched rim and angular teal/brown ornament."
+    },
+    {
+      "id": "ptcg-trainer-bravery-charm",
+      "label": "勇气护符 / Bravery Charm",
+      "image": "/battle-icon-assets/ptcg-trainer-bravery-charm-sprite-2026112306.png",
+      "sourceUrl": "https://assets.tcgdex.net/en/sv/sv02/173/low.webp",
+      "attribution": "META LAB · AI制作代表图案",
+      "credit": "META LAB · 代表图案",
+      "customRepresentativeArt": true,
+      "referenceCardUrl": "https://assets.tcgdex.net/en/sv/sv02/173/low.webp",
+      "note": "Orange amber charm pendant with red top cord loop and lower tassel."
+    }
+  ]
+}

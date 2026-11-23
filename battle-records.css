@@ -44,3 +44,5 @@
 
 /* Keep imported round-note line breaks when adding/editing stages. */
 .round-editor .round-note textarea{min-height:64px;resize:vertical}
+
+.icon-option .icon-credit{display:block;color:#9eb39c;font:500 10px/1.35 system-ui,sans-serif;overflow-wrap:anywhere;text-align:center}
