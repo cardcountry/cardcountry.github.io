@@ -31,3 +31,6 @@
 .bey-bout-fields textarea{width:100%;min-width:0;resize:vertical;font-size:16px}
 @media(max-width:760px){.bey-config-table,.bey-config-table tbody{display:block;width:100%}.bey-config-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.bey-config-table tbody tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid #344b58;border-radius:6px;margin:10px 0;overflow:hidden}.bey-config-table tbody th:first-child{display:block;grid-column:1/-1;width:auto;padding:12px;background:#13232c;font-size:14px}.bey-config-table tbody td{display:block;min-width:0;border-bottom:0;padding:10px 8px;font-size:15px}.bey-config-table tbody td:before{content:attr(data-label);display:block;font-size:14px;font-weight:400;color:#adbfca;margin-bottom:5px}.bey-manual-result,.bey-detail-points{font-size:14px}}
 @media print{.bey-config-table tbody tr{border-color:#b2c3cd}.bey-config-table tbody th:first-child{background:#eaf0f3}.bey-config-table tbody td:before{color:#465e6b}}
+
+/* Same-origin species atlas; cropped by a validated SVG viewBox in every UI/print context. */
+.battle-icon .battle-icon-sheet{position:relative;display:block;width:100%;height:100%;min-width:0;overflow:hidden;z-index:1}.battle-icon.kind-sprite .battle-icon-sheet image{image-rendering:pixelated}
