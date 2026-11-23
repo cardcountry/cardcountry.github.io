@@ -1,0 +1,20 @@
+(()=>{'use strict';
+const part=value=>typeof value==='string'?value.trim():'';
+const fold=value=>part(value).normalize('NFKC').replace(/\s+/gu,' ').toLocaleLowerCase('en-US');
+const known=value=>Number.isInteger(value)&&value>=0&&value<=99;
+function beyConfigKey(bout){const values=[bout?.blade,bout?.ratchet,bout?.bit,bout?.assist].map(fold);return values.slice(0,3).every(Boolean)?JSON.stringify(values):null;}
+function beyConfigLabel(bout){return [part(bout?.blade)||'Blade未填',part(bout?.ratchet)||'Ratchet未填',part(bout?.bit)||'Bit未填',...(part(bout?.assist)?['Assist '+part(bout.assist)]:[])].join(' · ');}
+function aggregate(){return{bouts:0,pointsFor:null,pointsAgainst:null,knownFor:0,knownAgainst:0,missingFor:0,missingAgainst:0,fullyScoredBouts:0,fullyScored:false};}
+function add(agg,bout){agg.bouts++;const own=known(bout?.pointsFor),opponent=known(bout?.pointsAgainst);if(own){agg.knownFor++;agg.pointsFor=(agg.pointsFor??0)+bout.pointsFor;}else agg.missingFor++;if(opponent){agg.knownAgainst++;agg.pointsAgainst=(agg.pointsAgainst??0)+bout.pointsAgainst;}else agg.missingAgainst++;if(own&&opponent)agg.fullyScoredBouts++;}
+function finish(agg){agg.fullyScored=agg.bouts>0&&agg.missingFor===0&&agg.missingAgainst===0;return agg;}
+function summarizeBey(record){const eligible=record?.game==='beyblade',rounds=eligible&&Array.isArray(record.rounds)?record.rounds:[],total=aggregate(),unassigned={...aggregate(),roundIds:[],roundCount:0},groups=new Map(),roundSummaries=[];let roundsWithoutDetails=0;
+ for(let rIndex=0;rIndex<rounds.length;rIndex++){const round=rounds[rIndex],roundId=String(round?.id??'round-'+rIndex),bouts=Array.isArray(round?.beyblade?.bouts)?round.beyblade.bouts:[],summary={id:roundId,label:part(round?.label),...aggregate(),hasDetails:bouts.length>0,unassignedBouts:0};if(!bouts.length)roundsWithoutDetails++;
+ for(const bout of bouts){add(total,bout);add(summary,bout);const key=beyConfigKey(bout);if(key===null){add(unassigned,bout);summary.unassignedBouts++;if(!unassigned.roundIds.includes(roundId))unassigned.roundIds.push(roundId);continue;}let group=groups.get(key);if(!group){group={key,blade:part(bout.blade),ratchet:part(bout.ratchet),bit:part(bout.bit),assist:part(bout.assist),label:beyConfigLabel(bout),...aggregate(),roundIds:[],roundCount:0};groups.set(key,group);}add(group,bout);if(!group.roundIds.includes(roundId))group.roundIds.push(roundId);}
+ finish(summary);roundSummaries.push(summary);}
+ finish(total);finish(unassigned);unassigned.roundCount=unassigned.roundIds.length;if(roundsWithoutDetails)total.fullyScored=false;const configurations=[...groups.values()].map(group=>{finish(group);group.roundCount=group.roundIds.length;return group;}).sort((a,b)=>(b.pointsFor??-1)-(a.pointsFor??-1)||b.bouts-a.bouts||(a.label<b.label?-1:a.label>b.label?1:0));return{isBeyblade:eligible,recordCount:eligible?1:0,roundCount:rounds.length,roundsWithoutDetails,hasDetails:total.bouts>0,total,configurations,unassigned,rounds:roundSummaries};}
+function summarizeBeyRecords(records){const items=(Array.isArray(records)?records:[]).filter(record=>record?.game==='beyblade'),summary=summarizeBey({game:'beyblade',rounds:items.flatMap((record,index)=>(Array.isArray(record.rounds)?record.rounds:[]).map((round,rIndex)=>({...round,id:String(record.id??index)+':'+String(round.id??rIndex)})))});summary.recordCount=items.length;return summary;}
+function formatBeyPoints(summary,side='for'){const against=side==='against',value=against?summary?.pointsAgainst:summary?.pointsFor,missing=against?summary?.missingAgainst:summary?.missingFor;if(value===null||value===undefined)return missing?'未记录（'+missing+'条待补）':'未记录';return String(value)+(missing?'（'+missing+'条待补）':'');}
+function formatBeyScore(summary){return formatBeyPoints(summary)+' : '+formatBeyPoints(summary,'against');}
+
+window.MetaLabBeyScore=Object.freeze({summarize:summarizeBey,summarizeMany:summarizeBeyRecords,configKey:beyConfigKey,configLabel:beyConfigLabel,formatPoints:formatBeyPoints,formatScore:formatBeyScore});
+})();

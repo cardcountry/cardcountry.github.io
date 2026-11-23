@@ -13,8 +13,8 @@ const select=document.querySelector('[data-section-select]');select?.addEventLis
 document.querySelector('[data-game-picker]')?.addEventListener('change',event=>location.assign(event.target.value));
 const chromeWords={'zh-cn':['打开导航','关闭导航'],'zh':['開啟導覽','關閉導覽'],en:['Open navigation','Close navigation'],ja:['ナビゲーションを開く','ナビゲーションを閉じる']};
 const header=document.querySelector('body>.ml-site-header'),primaryNav=header?.querySelector('.ml-header-nav'),menuButton=header?.querySelector('#menuBtn');
-const personalRecordsCopy={'zh-cn':['我的战绩','记录自己的赛事与逐轮对局，查看或下载私人战报。'],zh:['我的戰績','記錄自己的賽事與逐輪對局，查看或下載私人戰報。'],en:['My records','Record your events and rounds, then view or download a private match report.'],ja:['自分の戦績','大会と各ラウンドを記録し、非公開の戦績レポートを確認・保存できます。']};
-const personalRecordsUrl='https://metalab-private-log-7ff5.sapphirepaste4.chatgpt.site/battle-records.html?game='+encodeURIComponent(gameId);
+const personalRecordsCopy={'zh-cn':['我的战绩','战绩只存当前浏览器，可下载图片或JSON备份。'],zh:['我的戰績','戰績只存目前瀏覽器，可下載圖片或JSON備份。'],en:['My records','Records stay on this browser. Export images or a JSON backup.'],ja:['自分の戦績','このブラウザーだけに保存。画像やJSONで書き出せます。']};
+const personalRecordsUrl='battle-records.html?game='+encodeURIComponent(gameId);
 if(primaryNav){const personalNav=document.createElement('a');personalNav.href=personalRecordsUrl;personalNav.target='_top';personalNav.dataset.personalRecordsLabel='';primaryNav.append(personalNav);}
 const personalGrid=view==='overview'?document.querySelector('.ml-topic-grid'):null;if(personalGrid){const a=document.createElement('a');a.className='ml-topic-card';a.href=personalRecordsUrl;a.target='_top';a.innerHTML='<span class="ml-topic-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4H4v17h16V4h-3M8 2h8v5H8zM8 11h8M8 15h5"/></svg></span><span class="ml-topic-copy"><strong data-personal-records-label></strong><small data-personal-records-desc></small></span>';personalGrid.append(a);}
 
