@@ -1,0 +1,900 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-23T17:39:13.417Z",
+  "sourcePolicy": "Public official metadata sources; retain original title/date/url and index evidence, no private/social-login scraping; disabled discovery feeds not imported.",
+  "sources": [
+    {
+      "id": "ptcg-ja",
+      "game": "ptcg",
+      "name": "Pokémon Card Game 日本公式",
+      "url": "https://www.pokemon-card.com/info/",
+      "language": "ja",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "Asia/Tokyo",
+      "sourceTimezone": "Asia/Tokyo",
+      "topic": "news",
+      "region": "JP",
+      "scopeTag": "li",
+      "scopeClass": "List_item",
+      "dateTag": "span",
+      "dateClass": "Date",
+      "categoryTag": "div",
+      "categoryClass": "Calendar_Label",
+      "allowedHosts": [
+        "www.pokemon-card.com"
+      ],
+      "linkHosts": [
+        "www.pokemon-card.com",
+        "shibuyatsutaya.tsite.jp",
+        "www.pokemon-team-masters.com"
+      ],
+      "sampleCount": 30,
+      "samples": [
+        {
+          "title": "【重要】フィッシング（詐欺）に対する注意喚起と対策について",
+          "sourceUrl": "https://www.pokemon-card.com/info/005767.html",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20",
+          "type": "news",
+          "evidenceUrl": "https://www.pokemon-card.com/info/"
+        },
+        {
+          "title": "拡張パック「ハドウシーカー」のカードリスト公開！",
+          "sourceUrl": "https://www.pokemon-card.com/ex/m7/",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20",
+          "type": "product",
+          "evidenceUrl": "https://www.pokemon-card.com/info/"
+        },
+        {
+          "title": "ピカチュウのカードイラストがフィギュアになって登場！",
+          "sourceUrl": "https://www.pokemon-card.com/info/005764.html",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20",
+          "type": "product",
+          "evidenceUrl": "https://www.pokemon-card.com/info/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.359Z",
+      "fixtureFile": "work/auto-data-20261124/sources/ptcg-ja.html",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "gcg-ja",
+      "game": "gcg",
+      "name": "GUNDAM CARD GAME 日本公式",
+      "url": "https://www.gundam-gcg.com/jp/news/",
+      "language": "ja",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "Asia/Tokyo",
+      "sourceTimezone": "Asia/Tokyo",
+      "topic": "news",
+      "region": "JP",
+      "scopeTag": "div",
+      "scopeClass": "newsDetail",
+      "titleTag": "dd",
+      "titleClass": "cardLead",
+      "dateTag": "dt",
+      "dateClass": "cardDate",
+      "categoryTag": "span",
+      "categoryClass": "cardCategory",
+      "allowedHosts": [
+        "www.gundam-gcg.com"
+      ],
+      "linkHosts": [
+        "www.gundam-gcg.com"
+      ],
+      "sampleCount": 10,
+      "samples": [
+        {
+          "title": "GCG EXPO 2026 in OSAKA Nov.",
+          "sourceUrl": "https://www.gundam-gcg.com/jp/events/EXPO_2026_OSAKA_Nov.html",
+          "publishedOn": "2026-11-19",
+          "rawDate": "2026.11.19",
+          "type": "event",
+          "evidenceUrl": "https://www.gundam-gcg.com/jp/news/"
+        },
+        {
+          "title": "シールド戦 GCG EXPO 2026 in OSAKA Nov.",
+          "sourceUrl": "https://www.gundam-gcg.com/jp/events/01_366.html",
+          "publishedOn": "2026-11-19",
+          "rawDate": "2026.11.19",
+          "type": "event",
+          "evidenceUrl": "https://www.gundam-gcg.com/jp/news/"
+        },
+        {
+          "title": "マッチングバトル GCG EXPO 2026 in OSAKA Nov.",
+          "sourceUrl": "https://www.gundam-gcg.com/jp/events/01_365.html",
+          "publishedOn": "2026-11-19",
+          "rawDate": "2026.11.19",
+          "type": "event",
+          "evidenceUrl": "https://www.gundam-gcg.com/jp/news/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.360Z",
+      "fixtureFile": "work/auto-data-20261124/sources/gcg-ja.html",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "gcg-en",
+      "game": "gcg",
+      "name": "GUNDAM CARD GAME English official",
+      "url": "https://www.gundam-gcg.com/en/news/",
+      "language": "en",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "America/Los_Angeles",
+      "sourceTimezone": "America/Los_Angeles",
+      "topic": "news",
+      "region": "EN",
+      "scopeTag": "div",
+      "scopeClass": "newsDetail",
+      "titleTag": "dd",
+      "titleClass": "cardLead",
+      "dateTag": "dt",
+      "dateClass": "cardDate",
+      "categoryTag": "span",
+      "categoryClass": "cardCategory",
+      "allowedHosts": [
+        "www.gundam-gcg.com"
+      ],
+      "linkHosts": [
+        "www.gundam-gcg.com"
+      ],
+      "sampleCount": 10,
+      "samples": [
+        {
+          "title": "3on3 Rules for Match Results and Team Composition",
+          "sourceUrl": "https://www.gundam-gcg.com/en/news/3on3_rules.html",
+          "publishedOn": "2026-11-19",
+          "rawDate": "November 19, 2026",
+          "type": "news",
+          "evidenceUrl": "https://www.gundam-gcg.com/en/news/"
+        },
+        {
+          "title": "GUNDAM CARD GAME Premium Goods Set After War Gundam X [PB04]",
+          "sourceUrl": "https://www.gundam-gcg.com/en/products/pb04.html",
+          "publishedOn": "2026-11-09",
+          "rawDate": "November 09, 2026",
+          "type": "product",
+          "evidenceUrl": "https://www.gundam-gcg.com/en/news/"
+        },
+        {
+          "title": "GUNDAM CARD GAME \"CLAIM MIORINE\" 3 on 3 Battle",
+          "sourceUrl": "https://www.gundam-gcg.com/en/events/claim_miorine.html",
+          "publishedOn": "2026-11-06",
+          "rawDate": "November 06, 2026",
+          "type": "event",
+          "evidenceUrl": "https://www.gundam-gcg.com/en/news/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.362Z",
+      "fixtureFile": "work/auto-data-20261124/sources/gcg-en.html",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "gcg-tc",
+      "game": "gcg",
+      "name": "GUNDAM CARD GAME 繁體中文官方",
+      "url": "https://www.gundam-gcg.com/zh-tw/news/",
+      "language": "zh-Hant",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "Asia/Taipei",
+      "sourceTimezone": "Asia/Taipei",
+      "topic": "news",
+      "region": "TW",
+      "scopeTag": "div",
+      "scopeClass": "newsDetail",
+      "titleTag": "dd",
+      "titleClass": "cardLead",
+      "dateTag": "dt",
+      "dateClass": "cardDate",
+      "categoryTag": "span",
+      "categoryClass": "cardCategory",
+      "allowedHosts": [
+        "www.gundam-gcg.com"
+      ],
+      "linkHosts": [
+        "www.gundam-gcg.com"
+      ],
+      "sampleCount": 10,
+      "samples": [
+        {
+          "title": "CHAMPIONSHIPS 26-27 店鋪預選賽 Season 2",
+          "sourceUrl": "https://www.gundam-gcg.com/zh-tw/events/wcs26_27_shop_s2.html",
+          "publishedOn": "2026-11-12",
+          "rawDate": "2026.11.12",
+          "type": "event",
+          "evidenceUrl": "https://www.gundam-gcg.com/zh-tw/news/"
+        },
+        {
+          "title": "CHAMPIONSHIPS 26-27 區域預選賽 Season 2",
+          "sourceUrl": "https://www.gundam-gcg.com/zh-tw/events/wcs26_27_venue_s2.html",
+          "publishedOn": "2026-11-12",
+          "rawDate": "2026.11.12",
+          "type": "event",
+          "evidenceUrl": "https://www.gundam-gcg.com/zh-tw/news/"
+        },
+        {
+          "title": "WORLD CHAMPIONSHIPS 26-27",
+          "sourceUrl": "https://www.gundam-gcg.com/zh-tw/events/cs26-27.html",
+          "publishedOn": "2026-11-12",
+          "rawDate": "2026.11.12",
+          "type": "event",
+          "evidenceUrl": "https://www.gundam-gcg.com/zh-tw/news/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.363Z",
+      "fixtureFile": "work/auto-data-20261124/sources/gcg-tc.html",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "opcg-home",
+      "game": "opcg",
+      "name": "ONE PIECE CARD GAME 日本公式最新情報",
+      "url": "https://www.onepiece-cardgame.com/",
+      "language": "ja",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "Asia/Tokyo",
+      "sourceTimezone": "Asia/Tokyo",
+      "topic": "news",
+      "region": "JP",
+      "scopeTag": "li",
+      "scopeClass": "newsListItem",
+      "titleTag": "h3",
+      "titleClass": "newsTitle",
+      "dateTag": "time",
+      "dateClass": "newsDate",
+      "categoryTag": "div",
+      "categoryClass": "newscategory",
+      "allowedHosts": [
+        "www.onepiece-cardgame.com"
+      ],
+      "linkHosts": [
+        "www.onepiece-cardgame.com",
+        "join.carddass.com",
+        "dcd.sc"
+      ],
+      "sampleCount": 7,
+      "samples": [
+        {
+          "title": "「ブースターパック 神の支配【OP-18】」収録パラレルカードをチェック！",
+          "sourceUrl": "https://www.onepiece-cardgame.com/cardlist/?series=550118",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20 [金]",
+          "type": "cards",
+          "evidenceUrl": "https://www.onepiece-cardgame.com/"
+        },
+        {
+          "title": "「ブースターパック 神の支配【OP-18】」収録カードを使用したおすすめデッキを紹介！",
+          "sourceUrl": "https://www.onepiece-cardgame.com/feature/deck/?tags=OP-18",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20 [金]",
+          "type": "product",
+          "evidenceUrl": "https://www.onepiece-cardgame.com/"
+        },
+        {
+          "title": "アンケートに答えてプレイシートをダウンロード！",
+          "sourceUrl": "https://join.carddass.com/jp/survey/products/detail/758",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20 [金]",
+          "type": "product",
+          "evidenceUrl": "https://www.onepiece-cardgame.com/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.365Z",
+      "fixtureFile": "work/auto-data-20261124/sources/opcg-home.txt",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "opcg-en",
+      "game": "opcg",
+      "name": "ONE PIECE CARD GAME English official",
+      "url": "https://en.onepiece-cardgame.com/",
+      "language": "en",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "America/Los_Angeles",
+      "sourceTimezone": "America/Los_Angeles",
+      "topic": "news",
+      "region": "EN",
+      "scopeTag": "li",
+      "scopeClass": "newsListItem",
+      "titleTag": "h3",
+      "titleClass": "newsTitle",
+      "dateTag": "time",
+      "dateClass": "newsDate",
+      "categoryTag": "div",
+      "categoryClass": "newscategory",
+      "allowedHosts": [
+        "en.onepiece-cardgame.com"
+      ],
+      "linkHosts": [
+        "en.onepiece-cardgame.com",
+        "join.carddass.com"
+      ],
+      "sampleCount": 7,
+      "samples": [
+        {
+          "title": "CARD LIST EXTRA BOOSTER PACK -THE DOMINANCE OF GOD- [OP-18] has been updated.",
+          "sourceUrl": "https://en.onepiece-cardgame.com/cardlist/?series=569118",
+          "publishedOn": "2026-11-20",
+          "rawDate": "November 20, 2026",
+          "type": "news",
+          "evidenceUrl": "https://en.onepiece-cardgame.com/"
+        },
+        {
+          "title": "FAQ BOOSTER PACK -THE DOMINANCE OF GOD- [OP-18] has been announced.",
+          "sourceUrl": "https://en.onepiece-cardgame.com/rules/faq/",
+          "publishedOn": "2026-11-20",
+          "rawDate": "November 20, 2026",
+          "type": "rules",
+          "evidenceUrl": "https://en.onepiece-cardgame.com/"
+        },
+        {
+          "title": "BOOSTER PACK -THE DOMINANCE OF GOD- [OP-18] has been updated.",
+          "sourceUrl": "https://join.carddass.com/en/survey/products/detail/760",
+          "publishedOn": "2026-11-20",
+          "rawDate": "November 20, 2026",
+          "type": "product",
+          "evidenceUrl": "https://en.onepiece-cardgame.com/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.367Z",
+      "fixtureFile": "work/auto-data-20261124/sources/opcg-en.html",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "ua-ja",
+      "game": "unionarena",
+      "name": "UNION ARENA 日本公式",
+      "url": "https://www.unionarena-tcg.com/jp/news/",
+      "language": "ja",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "Asia/Tokyo",
+      "sourceTimezone": "Asia/Tokyo",
+      "topic": "news",
+      "region": "JP",
+      "scopeTag": "li",
+      "scopeClass": "newsDetail",
+      "titleTag": "dt",
+      "titleClass": "newsTit",
+      "dateTag": "dd",
+      "dateClass": "newsDate",
+      "categoryTag": "dd",
+      "categoryClass": "newsCategory",
+      "allowedHosts": [
+        "www.unionarena-tcg.com"
+      ],
+      "linkHosts": [
+        "www.unionarena-tcg.com",
+        "bandaicardgames-metaverselobby.com"
+      ],
+      "sampleCount": 30,
+      "samples": [
+        {
+          "title": "「11月発売商品 カードリスト」を公開",
+          "sourceUrl": "https://www.unionarena-tcg.com/jp/cardlist/",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20",
+          "type": "cards",
+          "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/"
+        },
+        {
+          "title": "Q&Aを更新",
+          "sourceUrl": "https://www.unionarena-tcg.com/jp/faq/",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20",
+          "type": "rules",
+          "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/"
+        },
+        {
+          "title": "僕のヒーローアカデミア NEW CARD SELECTION 商品情報を更新",
+          "sourceUrl": "https://www.unionarena-tcg.com/jp/products/other/new_card_selection/mha.php",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20",
+          "type": "product",
+          "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.375Z",
+      "fixtureFile": "work/auto-data-20261124/sources/ua-ja.html",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "ua-tc",
+      "game": "unionarena",
+      "name": "UNION ARENA 繁體中文官方",
+      "url": "https://www.unionarena-tcg.com/tc/news/",
+      "language": "zh-Hant",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "Asia/Taipei",
+      "sourceTimezone": "Asia/Taipei",
+      "topic": "news",
+      "region": "TW",
+      "scopeTag": "li",
+      "scopeClass": "newsDetail",
+      "titleTag": "dt",
+      "titleClass": "newsTit",
+      "dateTag": "dd",
+      "dateClass": "newsDate",
+      "categoryTag": "dd",
+      "categoryClass": "newsCategory",
+      "allowedHosts": [
+        "www.unionarena-tcg.com"
+      ],
+      "linkHosts": [
+        "www.unionarena-tcg.com"
+      ],
+      "sampleCount": 30,
+      "samples": [
+        {
+          "title": "公開起始牌組 『JoJo的奇妙冒險』系列 商品情報",
+          "sourceUrl": "https://www.unionarena-tcg.com/tc/products/decks/jba-1.php",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20",
+          "type": "product",
+          "evidenceUrl": "https://www.unionarena-tcg.com/tc/news/"
+        },
+        {
+          "title": "公開補充包 『JoJo的奇妙冒險』系列 商品情報",
+          "sourceUrl": "https://www.unionarena-tcg.com/tc/products/boosters/jba-1.php",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20",
+          "type": "product",
+          "evidenceUrl": "https://www.unionarena-tcg.com/tc/news/"
+        },
+        {
+          "title": "更新補充包 〈物語〉系列Vol.2 商品情報",
+          "sourceUrl": "https://www.unionarena-tcg.com/tc/products/boosters/ex_mgs.php",
+          "publishedOn": "2026-11-13",
+          "rawDate": "2026.11.13",
+          "type": "product",
+          "evidenceUrl": "https://www.unionarena-tcg.com/tc/news/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.379Z",
+      "fixtureFile": "work/auto-data-20261124/sources/ua-tc.html",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "ua-en",
+      "game": "unionarena",
+      "name": "UNION ARENA North America official",
+      "url": "https://www.unionarena-tcg.com/na/news/",
+      "language": "en",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "America/Los_Angeles",
+      "sourceTimezone": "America/Los_Angeles",
+      "topic": "news",
+      "region": "NA",
+      "scopeTag": "li",
+      "scopeClass": "newsDetail",
+      "titleTag": "dt",
+      "titleClass": "newsTit",
+      "dateTag": "dd",
+      "dateClass": "newsDate",
+      "categoryTag": "dd",
+      "categoryClass": "newsCategory",
+      "allowedHosts": [
+        "www.unionarena-tcg.com"
+      ],
+      "linkHosts": [
+        "www.unionarena-tcg.com"
+      ],
+      "sampleCount": 30,
+      "samples": [
+        {
+          "title": "VIDEO has been updated",
+          "sourceUrl": "https://www.unionarena-tcg.com/na/video/",
+          "publishedOn": "2026-11-20",
+          "rawDate": "Nov. 20, 2026",
+          "type": "news",
+          "evidenceUrl": "https://www.unionarena-tcg.com/na/news/"
+        },
+        {
+          "title": "Championship 26-27 North America Finals has been updated",
+          "sourceUrl": "https://www.unionarena-tcg.com/na/events/championship/2026-27/north-america-finals/",
+          "publishedOn": "2026-11-20",
+          "rawDate": "Nov. 20, 2026",
+          "type": "event",
+          "evidenceUrl": "https://www.unionarena-tcg.com/na/news/"
+        },
+        {
+          "title": "SPECIAL BOOSTER PACK My Hero Academia [UE25BT] has been updated",
+          "sourceUrl": "https://www.unionarena-tcg.com/na/products/boosters/mha-1.php",
+          "publishedOn": "2026-11-13",
+          "rawDate": "Nov. 13, 2026",
+          "type": "product",
+          "evidenceUrl": "https://www.unionarena-tcg.com/na/news/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.383Z",
+      "fixtureFile": "work/auto-data-20261124/sources/ua-en.html",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "rift-en",
+      "game": "riftbound",
+      "name": "Riftbound official news",
+      "url": "https://playriftbound.com/en-us/news/",
+      "language": "en",
+      "parser": "next-news",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "UTC",
+      "sourceTimezone": "UTC",
+      "topic": "news",
+      "region": "Global",
+      "allowedHosts": [
+        "playriftbound.com"
+      ],
+      "linkHosts": [
+        "playriftbound.com",
+        "youtu.be",
+        "www.youtube.com"
+      ],
+      "sampleCount": 30,
+      "samples": [
+        {
+          "title": "Regional Championship NA Rules Update",
+          "sourceUrl": "https://playriftbound.com/en-us/news/organizedplay/regional-championship-na-rules-update",
+          "publishedAt": "2026-11-23T17:00:00.000Z",
+          "rawDate": "2026-11-23T17:00:00.000Z",
+          "category": "Organized Play",
+          "publishedOn": "2026-11-23",
+          "type": "event",
+          "evidenceUrl": "https://playriftbound.com/en-us/news/"
+        },
+        {
+          "title": "Celebrate Convergence Fest at Your Local Game Store!",
+          "sourceUrl": "https://playriftbound.com/en-us/news/announcements/celebrate-convergence-fest-at-american-game-stores",
+          "publishedAt": "2026-11-16T17:00:00.000Z",
+          "rawDate": "2026-11-16T17:00:00.000Z",
+          "category": "Announcements",
+          "publishedOn": "2026-11-16",
+          "type": "news",
+          "evidenceUrl": "https://playriftbound.com/en-us/news/"
+        },
+        {
+          "title": "Radiance Ban List Updates (Effective November 23, 2026)",
+          "sourceUrl": "https://playriftbound.com/en-us/news/announcements/radiance-ban-list-updates-effective-november-23-2026",
+          "publishedAt": "2026-11-13T16:00:00.000Z",
+          "rawDate": "2026-11-13T16:00:00.000Z",
+          "category": "Announcements",
+          "publishedOn": "2026-11-13",
+          "type": "news",
+          "evidenceUrl": "https://playriftbound.com/en-us/news/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.410Z",
+      "fixtureFile": "work/auto-data-20261124/sources/rift-en.html",
+      "parserDescription": "__NEXT_DATA__.props.pageProps.page.blades[*].items[*], title/action.payload.url/publishedAt; product.machineName=riftbound when present",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history.",
+        "Keep full publishedAt timestamp; future scheduled items require pending state until timestamp."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "bey-ja",
+      "game": "beyblade",
+      "name": "BEYBLADE X タカラトミー公式",
+      "url": "https://beyblade.takaratomy.co.jp/beyblade-x/news/",
+      "language": "ja",
+      "parser": "html-list",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "Asia/Tokyo",
+      "sourceTimezone": "Asia/Tokyo",
+      "topic": "news",
+      "region": "JP",
+      "scopeTag": "li",
+      "scopeClass": "mix",
+      "titleTag": "b",
+      "dateTag": "i",
+      "allowedHosts": [
+        "beyblade.takaratomy.co.jp"
+      ],
+      "linkHosts": [
+        "beyblade.takaratomy.co.jp"
+      ],
+      "sampleCount": 30,
+      "samples": [
+        {
+          "title": "【11月20日更新】「BEYBLADE X GP 2027 JAPAN CHAMPIONSHIP」の予選大会「X-TREME CUP G1 2026-27」が開催",
+          "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/event/g1_pre2026_27.html#g1_pre2026_27",
+          "publishedOn": "2026-11-20",
+          "rawDate": "2026.11.20",
+          "type": "event",
+          "evidenceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/"
+        },
+        {
+          "title": "【11月18日更新】「BEYBLADE X GP FINAL 2026 in BANGKOK」出場選手を公開！",
+          "sourceUrl": "https://beyblade.takaratomy.co.jp/gpfinal/",
+          "publishedOn": "2026-11-18",
+          "rawDate": "2026.11.18",
+          "type": "event",
+          "evidenceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/"
+        },
+        {
+          "title": "【11月13日更新】世界中のプレイヤーとRobloxでベイバトル！無料で遊べるBEYBLADE X公式バーチャル空間",
+          "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/roblox/",
+          "publishedOn": "2026-11-13",
+          "rawDate": "2026.11.13",
+          "type": "news",
+          "evidenceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.415Z",
+      "fixtureFile": "work/auto-data-20261124/sources/bey-ja.html",
+      "parserDescription": "Container-scoped known official index; first anchor in each record; title/date/category extracted only inside record",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "marvel-en",
+      "game": "marvel",
+      "name": "MARVEL HERO RUSH official",
+      "url": "https://www.marvelherorush.com/en/home",
+      "language": "en",
+      "parser": "nuxt-news",
+      "enabled": true,
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "Asia/Shanghai",
+      "sourceTimezone": "Asia/Shanghai",
+      "topic": "news",
+      "region": "Global",
+      "allowedHosts": [
+        "www.marvelherorush.com"
+      ],
+      "linkHosts": [
+        "www.instagram.com"
+      ],
+      "sampleCount": 2,
+      "samples": [
+        {
+          "title": "Monthly Event Prize Preview",
+          "sourceUrl": "https://www.instagram.com/p/Dd-lF5CoJvW/",
+          "publishedAt": "2026-10-01T16:00:00.000Z",
+          "rawDate": 1790870400000,
+          "category": "event",
+          "sourceId": "6acf51430f64433660794382",
+          "publishedOn": "2026-10-02",
+          "type": "event",
+          "evidenceUrl": "https://www.marvelherorush.com/en/home"
+        },
+        {
+          "title": "Weekly Event Prize Preview",
+          "sourceUrl": "https://www.instagram.com/p/Dd6C84jBqDV/",
+          "publishedAt": "2026-09-30T16:00:00.000Z",
+          "rawDate": 1790784000000,
+          "category": "event",
+          "sourceId": "6acf51140f6443366079436e",
+          "publishedOn": "2026-10-01",
+          "type": "event",
+          "evidenceUrl": "https://www.marvelherorush.com/en/home"
+        }
+      ],
+      "verifiedAt": "2026-11-23T17:39:13.417Z",
+      "fixtureFile": "work/auto-data-20261124/sources/marvel-en.html",
+      "parserDescription": "__NUXT_DATA__ devalue references; decoded root.data.*.list[*]; title/redirect_link/start_time/category; publication calendar date Asia/Shanghai",
+      "limitations": [
+        "Metadata discovery only; does not verify full article body, complete deck, card text, legality or placement.",
+        "Dates are source-stated publication/update dates; never inferred from URL or collection date.",
+        "Official index may update an existing destination link; preserve date/title change history.",
+        "Official website forwards to Instagram; record official-index verification only, no login fetching. Do not save expiring signed CDN image URLs."
+      ],
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "opcg-topics-archive",
+      "game": "opcg",
+      "name": "ONE PIECE old topics archive",
+      "url": "https://www.onepiece-cardgame.com/topics/",
+      "language": "ja",
+      "parser": "html-list",
+      "enabled": false,
+      "disabledReason": "Actual2026-11-24fetch still starts2026-03-19 despite current homepageNov20. Use official homepage for current feed; archive cannot establish current coverage.",
+      "scopeTag": "li",
+      "scopeClass": "topicDetail",
+      "titleTag": "dt",
+      "titleClass": "topicTit",
+      "dateTag": "dd",
+      "dateClass": "topicDate",
+      "allowedHosts": [
+        "www.onepiece-cardgame.com"
+      ],
+      "linkHosts": [
+        "www.onepiece-cardgame.com"
+      ],
+      "intervalHours": 24,
+      "maxItems": 30,
+      "timezone": "Asia/Tokyo",
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "opcg-jp-decks-discovery",
+      "game": "opcg",
+      "name": "ONE PIECE TOP DECKS Japan EB05+OP18",
+      "url": "https://onepiecetopdecks.com/deck-list/japan-eb05op18-deck-list-heroines-and-the-dominance-of-god/",
+      "language": "ja",
+      "parser": "html-list",
+      "enabled": false,
+      "disabledReason": "HTTP200publicindex verified, but automatic tournament import requires dedicated detail-card-count, leader, date and placement validation. Listing alone must not become a complete deck.",
+      "allowedHosts": [
+        "onepiecetopdecks.com"
+      ],
+      "linkHosts": [
+        "onepiecetopdecks.com"
+      ],
+      "intervalHours": 24,
+      "maxItems": 30,
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "ptcg-tcgdex-sets-en",
+      "game": "ptcg",
+      "name": "TCGdex public set catalogue",
+      "url": "https://api.tcgdex.net/v2/en/sets",
+      "language": "en",
+      "parser": "json",
+      "enabled": false,
+      "disabledReason": "HTTP200JSON verified; set catalogue discovery is not card or deck import. Requires dedicated card-catalogue adapter and ID/image/text cross-validation.",
+      "allowedHosts": [
+        "api.tcgdex.net"
+      ],
+      "linkHosts": [
+        "api.tcgdex.net",
+        "assets.tcgdex.net"
+      ],
+      "intervalHours": 72,
+      "maxItems": 30,
+      "revision": 1,
+      "maxBytes": 4194304
+    },
+    {
+      "id": "gcg-japan-decks",
+      "game": "gcg",
+      "name": "GCG Stats · 日本公开赛事",
+      "url": "https://gcg-stats.com/data/events.json",
+      "language": "ja",
+      "parser": "gcg-japan",
+      "enabled": true,
+      "intervalHours": 72,
+      "maxBytes": 50331648,
+      "timeoutMs": 45000,
+      "allowedHosts": [
+        "gcg-stats.com"
+      ],
+      "linkHosts": [
+        "gcg-stats.com"
+      ],
+      "revision": 1,
+      "maxEvents": 100,
+      "maxLists": 1000
+    },
+    {
+      "id": "gcg-international-decks",
+      "game": "gcg",
+      "name": "The Egman · International tournaments",
+      "url": "https://deckbuilder.egmanevents.com/api/tournaments/gundam",
+      "language": "en",
+      "parser": "gcg-international",
+      "enabled": true,
+      "intervalHours": 72,
+      "maxBytes": 4194304,
+      "allowedHosts": [
+        "deckbuilder.egmanevents.com"
+      ],
+      "linkHosts": [
+        "deckbuilder.egmanevents.com"
+      ],
+      "revision": 1,
+      "maxEvents": 100,
+      "maxLists": 1000
+    }
+  ]
+}

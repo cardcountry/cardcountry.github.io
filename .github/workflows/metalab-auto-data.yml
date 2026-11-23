@@ -1,0 +1,63 @@
+name: META LAB verified automatic data
+on:
+  schedule:
+    - cron: '17 0 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/metalab-auto-data.yml'
+      - 'data-pipeline/auto/**'
+      - 'data-pipeline/build-activity-feed.mjs'
+      - 'data-pipeline/check-asset-versions.mjs'
+concurrency:
+  group: metalab-auto-data
+  cancel-in-progress: false
+permissions:
+  contents: write
+  pages: write
+jobs:
+  collect-verify-publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Set up Node 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - name: Restore collection checkpoints
+        uses: actions/cache/restore@v5
+        with:
+          path: .cache/metalab-auto
+          key: ${{ runner.os }}-metalab-auto-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            ${{ runner.os }}-metalab-auto-v1-
+      - name: Verify collection safety fixtures
+        run: node data-pipeline/auto/test.mjs
+      - name: Collect and validate incremental public data
+        env:
+          FORCE_REFRESH: ${{ github.event_name != 'schedule' && '1' || '0' }}
+        run: |
+          if [ "$FORCE_REFRESH" = "1" ]; then
+            node data-pipeline/auto/refresh.mjs --force
+          else
+            node data-pipeline/auto/refresh.mjs
+          fi
+      - name: Publish only verified generated files and confirm public hashes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node data-pipeline/auto/publish.mjs
+      - name: Save collection checkpoints
+        if: always()
+        uses: actions/cache/save@v5
+        with:
+          path: .cache/metalab-auto
+          key: ${{ runner.os }}-metalab-auto-v1-${{ github.run_id }}-${{ github.run_attempt }}

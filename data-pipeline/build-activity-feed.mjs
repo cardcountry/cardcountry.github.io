@@ -4,8 +4,8 @@ import vm from 'node:vm';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
-// This indexes reviewed site data. It does not crawl remote sites or imply that
-// running the builder has re-verified the underlying sources.
+// This indexes reviewed local data and separately verified collector output.
+// It does not fetch sources itself or turn maintenance dates into publication dates.
 // Set METALAB_FEED_DATE explicitly to the client's YYYY-MM-DD for every run.
 // PowerShell example: $env:METALAB_FEED_DATE='2026-11-08'; node data-pipeline/build-activity-feed.mjs
 // Never infer the maintenance date from the execution host's timezone.
@@ -75,8 +75,13 @@ const history=process.env.METALAB_FEED_PREVIOUS?JSON.parse(fs.readFileSync(proce
 for(const item of [...(previous.items||[]),...(history.items||[])]){const known=date(item.firstCollectedOn),saved=firstCollected.get(item.id);if(known&&(!saved||known<saved))firstCollected.set(item.id,known);}
 const context = {window:{}};
 vm.createContext(context);
-const inputFiles = ['decks-data.js','community-data.js','ptcg-visual-data.js','ptcg-jp-recent.js','ptcg-tw-public.js','ptcg-jp-increment.js','gcg-data.js','gcg-jp-recent.js','gcg-preview-increment.js','gcg-event-increment.js','gcg-official-decks.js','opcg-data.js','opcg-recent-data.js','opcg-photo-data.js','opcg-eb05-jp.js','opcg-eb05-increment.js','opcg-image-cache.js','opcg-op18-cards.js','opcg-op18-jp.js','unionarena-data.js','unionarena-recipes.js','unionarena-jp-decks.js','unionarena-recommended.js','riftbound-data.js','marvel-data.js','beyblade-data.js'];
-for (const file of inputFiles) vm.runInContext(fs.readFileSync(path.join(site,file),'utf8'),context,{filename:file,timeout:10000});
+const inputFiles = ['decks-data.js','community-data.js','ptcg-visual-data.js','ptcg-jp-recent.js','ptcg-tw-public.js','ptcg-jp-increment.js','gcg-data.js','gcg-jp-recent.js','gcg-preview-increment.js','gcg-event-increment.js','gcg-official-decks.js','gcg-auto-events.js','opcg-data.js','opcg-recent-data.js','opcg-photo-data.js','opcg-eb05-jp.js','opcg-eb05-increment.js','opcg-image-cache.js','opcg-op18-cards.js','opcg-op18-jp.js','unionarena-data.js','unionarena-recipes.js','unionarena-jp-decks.js','unionarena-recommended.js','riftbound-data.js','marvel-data.js','beyblade-data.js'];
+for (const file of inputFiles) {
+  const source=path.join(site,file);
+  // Bootstrap is safe before the collector has produced its first GCG increment.
+  if(file==='gcg-auto-events.js'&&!fs.existsSync(source))continue;
+  vm.runInContext(fs.readFileSync(source,'utf8'),context,{filename:file,timeout:10000});
+}
 const data = context.window;
 const records = new Map(), pending = [], duplicates = [], curatedIds = new Set();
 const sectionContext={window:{}};
@@ -221,6 +226,42 @@ if(fs.existsSync(curatedPath)) {
     const id=add(r,r.semanticKey||'');if(id)curatedIds.add(id);curatedCount++;
   }
 }
+// Automatic collection is a separate, append-only catalog; manual reviewed
+// records always win for the same public page. Deck/event semantic keys retain
+// their per-list identity rather than collapsing several results on one URL.
+const autoPath=path.join(site,'data-pipeline/auto/approved.json'),autoIds=new Set();
+const manualIds=new Set(records.keys());
+const manualPages=new Map();
+for(const record of records.values()){if(['deck','event'].includes(record.type))continue;const key=record.game+'|'+record.sourceUrl,dates=manualPages.get(key)||[];manualPages.set(key,dates.concat([record.publishedOn,record.sourceUpdatedOn].filter(Boolean)));}
+const autoPages=new Set();let automaticCount=0,automaticSkipped=0;
+if(fs.existsSync(autoPath)){
+  const approved=JSON.parse(fs.readFileSync(autoPath,'utf8'));
+  if(approved.schemaVersion!==1||!Array.isArray(approved.items))throw Error('Automatic catalog must be schemaVersion1 and items[]');
+  for(const r of approved.items){
+    const e=r?.ingestEvidence,url=canonical(r?.sourceUrl);let safeSource=false;
+    try{const u=new URL(r.sourceUrl);safeSource=u.protocol==='https:'&&!u.username&&!u.password;}catch{}
+    const validEvidence=e&&e.schemaVersion===1&&typeof e.sourceId==='string'&&e.sourceId.trim()&&
+      canonical(e.sourceUrl)===url&&typeof e.evidenceUrl==='string'&&canonical(e.evidenceUrl)&&!new URL(e.evidenceUrl).username&&!new URL(e.evidenceUrl).password&&typeof e.adapter==='string'&&e.adapter.trim()&&
+      typeof e.fetchedAt==='string'&&/^\d{4}-\d{2}-\d{2}T/.test(e.fetchedAt)&&!Number.isNaN(Date.parse(e.fetchedAt))&&
+      typeof e.contentSha256==='string'&&/^[a-f0-9]{64}$/i.test(e.contentSha256)&&
+      ['official-index','complete-deck'].includes(e.verification);
+    if(r?.status!=='verified'||!date(r?.verifiedOn)||!safeSource||!url||!validEvidence){
+      pending.push({game:r?.game,title:r?.title,reason:'Automatic item needs verified status/date and complete matching ingest evidence'});continue;
+    }
+    const pageKey=r.game+'|'+url,semantic=['deck','event'].includes(r.type);
+    if(!semantic&&autoPages.has(pageKey)){automaticSkipped++;continue;}
+    if(!semantic&&manualPages.has(pageKey)){
+      const latestManual=manualPages.get(pageKey).sort().at(-1),automaticDate=[date(r.publishedOn),date(r.sourceUpdatedOn)].filter(Boolean).sort().at(-1);
+      // A stable, dated newer announcement may share a product landing page;
+      // undated or older automatic records must never displace manual facts.
+      if(!latestManual||!automaticDate||automaticDate<=latestManual||typeof r.semanticKey!=='string'||!r.semanticKey.startsWith('auto-index|')||r.semanticKey.length<=11){automaticSkipped++;continue;}
+    }
+    const id=add(r,r.semanticKey||'');
+    if(!id)continue;
+    if(manualIds.has(id)){automaticSkipped++;continue;}
+    autoIds.add(id);if(!semantic)autoPages.add(pageKey);automaticCount++;
+  }
+}
 const timelineDate = item => [item.publishedOn,item.sourceUpdatedOn].filter(Boolean).sort().at(-1) || (item.eventOn && item.eventOn<=builtOn ? item.eventOn : '') || '';
 const sort=(a,b)=>timelineDate(b).localeCompare(timelineDate(a))||a.id.localeCompare(b.id);
 const all=[...records.values()].sort(sort),included=[],trimmed=[];
@@ -228,11 +269,15 @@ for(const game of games) {
   const entries=all.filter(x=>x.game===game.id);
   // Keep every reviewed news/product/rules record and one of every content type.
   // A run of new tournament lists must not silently hide undated official news.
-  const chosen=entries.filter(x=>curatedIds.has(x.id));
-  for(const type of new Set(entries.map(x=>x.type)))if(!chosen.some(x=>x.type===type))chosen.push(entries.find(x=>x.type===type));
-  if(chosen.length>160)throw new Error(`Reviewed records exceed feed cap for ${game.id}`);
+  const curated=entries.filter(x=>curatedIds.has(x.id)),automatic=entries.filter(x=>autoIds.has(x.id));
+  // Retain previously published manual records and at least100 other existing facts.
+  const priorManual=entries.filter(x=>!autoIds.has(x.id)&&oldById.has(x.id));
+  const manualKeep=new Map([...curated,...priorManual,...entries.filter(x=>!autoIds.has(x.id)&&!curatedIds.has(x.id)).slice(0,100)].map(x=>[x.id,x]));
+  const chosen=[...manualKeep.values(),...automatic];
   const selected=new Set(chosen.map(x=>x.id));
-  for(const record of entries){if(chosen.length>=160)break;if(!selected.has(record.id)){chosen.push(record);selected.add(record.id);}}
+  for(const type of new Set(entries.map(x=>x.type))){const representative=entries.find(x=>x.type===type);if(!chosen.some(x=>x.type===type)){chosen.push(representative);selected.add(representative.id);}}
+  const limit=Math.max(160,automatic.length+chosen.filter(x=>!autoIds.has(x.id)).length);
+  for(const record of entries){if(chosen.length>=limit)break;if(!selected.has(record.id)){chosen.push(record);selected.add(record.id);}}
   chosen.sort(sort);
   included.push(...chosen);
   trimmed.push(...entries.filter(x=>!chosen.includes(x)).map(x=>({id:x.id,game:x.game,reason:'Per-game feed cap; full record retained in game database'})));
@@ -253,9 +298,9 @@ for(const item of included)firstCollected.set(item.id,item.firstCollectedOn);
 fs.writeFileSync(firstCollectedFile,JSON.stringify({schemaVersion:1,firstCollectedOn:Object.fromEntries([...firstCollected].sort(([a],[b])=>a.localeCompare(b)))},null,2)+'\n');
 fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
 fs.mkdirSync(work,{recursive:true});
-const report={builtOn,files:inputFiles,curatedCount,totalBeforeCap:all.length,totalIncluded:included.length,
+const report={builtOn,files:inputFiles,curatedCount,automaticCount,automaticSkipped,totalBeforeCap:all.length,totalIncluded:included.length,
   byGame:Object.fromEntries(games.map(g=>[g.id,{records:g.recordCount,latestPublication:g.latestSourceDate,latestEvent:g.latestEventDate,reviewedOn:g.reviewedOn}])),
   duplicates,trimmed,pending,datePolicy:'Only explicit source publication/revealed dates become publishedOn. Event dates are eventOn; maintenance dates never become publication dates.',
-  limitations:['Builder indexes local reviewed data; no network collection or background crawler is claimed.','MARVEL and BEY legacy aggregates point to collection sources; individual original-event provenance remains pending.','firstCollectedOn is first inclusion in this cross-game feed, not first website import.']};
+  limitations:['Builder indexes local reviewed data plus verified collector output; network collection is performed separately, not by this builder.','MARVEL and BEY legacy aggregates point to collection sources; individual original-event provenance remains pending.','firstCollectedOn is first inclusion in this cross-game feed, not first website import.']};
 fs.writeFileSync(path.join(work,'feed-build-report.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({items:included.length,games:report.byGame,duplicates:duplicates.length,trimmed:trimmed.length,pending:pending.length}));
