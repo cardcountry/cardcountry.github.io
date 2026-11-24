@@ -25,7 +25,7 @@ const games = [
   { id:'beyblade', name:'BEYBLADE X', page:'beyblade.html' }
 ];
 const types = new Set(['news','product','rules','event','deck','meta']);
-const langMap = { Japanese:'ja', English:'en', Thai:'th', 'Traditional Chinese':'zh-TW', 'Simplified Chinese':'zh-CN', jp:'ja', ja:'ja', en:'en', th:'th', tw:'zh-TW', 'zh-tw':'zh-TW', 'zh-cn':'zh-CN', 'zh-TW':'zh-TW', 'zh-CN':'zh-CN', 'asia-en':'en' };
+const langMap = { Japanese:'ja', English:'en', Thai:'th', 'Traditional Chinese':'zh-TW', 'Simplified Chinese':'zh-CN', jp:'ja', ja:'ja', en:'en', th:'th', tw:'zh-TW', 'zh-tw':'zh-TW', 'zh-cn':'zh-CN', 'zh-TW':'zh-TW', 'zh-CN':'zh-CN', 'zh-Hant':'zh-TW', 'zh-Hans':'zh-CN', 'asia-en':'en' };
 const normalizeLanguage = value => langMap[value] || 'unknown';
 const date = value => {
   if (!value || typeof value !== 'string') return null;
@@ -231,6 +231,14 @@ if(fs.existsSync(curatedPath)) {
 // their per-list identity rather than collapsing several results on one URL.
 const autoPath=path.join(site,'data-pipeline/auto/approved.json'),autoIds=new Set();
 const manualIds=new Set(records.keys());
+const manualByPage=new Map();
+for(const record of records.values()){if(record.type==='deck'||record.sourceScope==='collection')continue;const key=record.game+'|'+record.sourceUrl,list=manualByPage.get(key)||[];manualByPage.set(key,list.concat(record));}
+// A verified index title can enrich search aliases without changing editorial facts.
+function enrichManualAliases(input,url){
+  if(input.ingestEvidence?.verification!=='official-index'||typeof input.title!=='string'||!input.title.trim()||input.title.length>400)return;
+  if([input.publishedOn,input.sourceUpdatedOn,input.verifiedOn].some(value=>value&&(!date(value)||date(value)>builtOn)))return;
+  for(const record of manualByPage.get(input.game+'|'+url)||[]){if(input.title===record.title||input.title===record.originalTitle)continue;record.aliases=[...new Set([...(record.aliases||[]),input.title])];}
+}
 const manualPages=new Map();
 for(const record of records.values()){if(['deck','event'].includes(record.type))continue;const key=record.game+'|'+record.sourceUrl,dates=manualPages.get(key)||[];manualPages.set(key,dates.concat([record.publishedOn,record.sourceUpdatedOn].filter(Boolean)));}
 const autoPages=new Set();let automaticCount=0,automaticSkipped=0;
@@ -254,11 +262,14 @@ if(fs.existsSync(autoPath)){
       const latestManual=manualPages.get(pageKey).sort().at(-1),automaticDate=[date(r.publishedOn),date(r.sourceUpdatedOn)].filter(Boolean).sort().at(-1);
       // A stable, dated newer announcement may share a product landing page;
       // undated or older automatic records must never displace manual facts.
-      if(!latestManual||!automaticDate||automaticDate<=latestManual||typeof r.semanticKey!=='string'||!r.semanticKey.startsWith('auto-index|')||r.semanticKey.length<=11){automaticSkipped++;continue;}
+      if(!latestManual||!automaticDate||automaticDate<=latestManual||typeof r.semanticKey!=='string'||!r.semanticKey.startsWith('auto-index|')||r.semanticKey.length<=11){enrichManualAliases(r,url);automaticSkipped++;continue;}
     }
+    // Check identity before add(): add replaces indexed records, so an after-add
+    // check would already have overwritten a manually maintained record.
+    const expectedId=`${r.game}-${crypto.createHash('sha256').update(`${r.game}|${r.type}|${url}|${r.semanticKey||''}`).digest('hex').slice(0,16)}`;
+    if(manualIds.has(expectedId)){enrichManualAliases(r,url);automaticSkipped++;continue;}
     const id=add(r,r.semanticKey||'');
     if(!id)continue;
-    if(manualIds.has(id)){automaticSkipped++;continue;}
     autoIds.add(id);if(!semantic)autoPages.add(pageKey);automaticCount++;
   }
 }

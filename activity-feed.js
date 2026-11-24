@@ -64,26 +64,31 @@
   const root=document.getElementById('activityFeed');if(!root)return;
   const declaredGame=document.documentElement?.getAttribute?.('data-page-game')||'';
   const fixedGame=declaredGame==='v22'?'ptcg':gameNames[declaredGame]?declaredGame:'';
-  let data=null,visible=12,filters={game:fixedGame,type:'',language:'',query:''};
+  let data=null,visible=12,searchTimer=null,composing=false,filters={game:fixedGame,type:'',language:'',query:''};
+  const cancelSearch=()=>{clearTimeout(searchTimer);searchTimer=null;};
+  function scheduleSearch(){cancelSearch();if(composing)return;if(!filters.query.trim()){renderResults();return;}searchTimer=setTimeout(()=>{searchTimer=null;renderResults()},180);}
   const language=()=>document.getElementById('homeLang')?.value||document.getElementById('uiLang')?.value||'zh-cn';
   const dict=()=>translations[language()]||translations['zh-cn'];
   const options=(values,t)=>`<option value="">${escape(t.any)}</option>`+values.map(value=>`<option value="${value}">${escape(t[value])}</option>`).join('');
   function renderResults(){
-    if(!data)return;const t=dict(),items=select(data.items,filters,data.builtOn);
+    cancelSearch();if(!data)return;const t=dict(),items=select(data.items,filters,data.builtOn);
     root.querySelector('[data-activity-results]').innerHTML=items.length?items.slice(0,visible).map(item=>card(item,t)).join(''):`<p class="activity-empty">${escape(t.empty)}</p>`;
     root.querySelector('[data-activity-count]').textContent=`${items.length} ${t.results} · ${t.shown} ${Math.min(visible,items.length)}`;
     root.querySelector('[data-activity-more]').hidden=visible>=items.length;
     root.querySelectorAll('[data-activity-game]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.activityGame===filters.game)));
   }
   function render(){
-    if(!data)return;const t=dict();
+    cancelSearch();composing=false;if(!data)return;const t=dict();
     const games=fixedGame?data.games.filter(game=>game.id===fixedGame):data.games;
     const gameControls=fixedGame?`<span class="activity-fixed-game">${escape(gameNames[fixedGame])}</span>`:[['',t.all],...games.map(game=>[game.id,gameNames[game.id]||game.name])].map(([id,label])=>`<button type="button" data-activity-game="${escape(id)}" aria-pressed="${id===filters.game}">${escape(label)}</button>`).join('');
     root.innerHTML=`<div class="activity-controls"><fieldset class="activity-games"><legend>${escape(t.game)}</legend>${gameControls}</fieldset><div class="activity-fields"><label>${escape(t.search)}<input type="search" data-activity-search placeholder="${escape(t.placeholder)}" value="${escape(filters.query)}" autocomplete="off"></label><label>${escape(t.type)}<select data-activity-type>${options(types,t)}</select></label><label>${escape(t.language)}<select data-activity-language>${options(languages,t)}</select></label></div></div><div class="activity-meta"><p data-activity-count role="status" aria-live="polite"></p><p>${escape(t.snapshot)} <time datetime="${escape(data.builtOn)}">${escape(data.builtOn)}</time></p></div><div class="activity-list" data-activity-results></div><button class="activity-more" type="button" data-activity-more>${escape(t.more)}</button><details class="activity-coverage"><summary>${escape(t.coverage)}</summary><p>${escape(t.coverageText)}</p><p>${escape(t.coverageNote)}</p><div class="activity-coverage-grid">${games.map(game=>`<a href="${escape(internalUrl(game.page))}"><b>${escape(gameNames[game.id]||game.name)}</b><span>${game.recordCount} ${escape(t.records)} · ${game.sourceCount} ${escape(t.sources)}</span><span>${escape(t.latestSource)} ${escape(date(game.latestSourceDate)||t.unknown)}</span><span>${escape(t.latestEvent)} ${escape(date(game.latestEventDate)||t.unknown)}</span><span>${escape(t.checked)} ${escape(date(game.reviewedOn)||t.pending)}</span></a>`).join('')}</div></details>`;
     root.querySelector('[data-activity-type]').value=filters.type;
     root.querySelector('[data-activity-language]').value=filters.language;
     root.querySelectorAll('[data-activity-game]').forEach(button=>button.addEventListener('click',()=>{filters.game=fixedGame||button.dataset.activityGame;visible=12;renderResults()}));
-    root.querySelector('[data-activity-search]').addEventListener('input',event=>{filters.query=event.target.value;visible=12;renderResults()});
+    const search=root.querySelector('[data-activity-search]');
+    search.addEventListener('compositionstart',()=>{composing=true;cancelSearch()});
+    search.addEventListener('compositionend',event=>{composing=false;filters.query=event.target.value;visible=12;scheduleSearch()});
+    search.addEventListener('input',event=>{filters.query=event.target.value;visible=12;if(event.isComposing||composing){cancelSearch();return;}scheduleSearch()});
     ['type','language'].forEach(key=>root.querySelector(`[data-activity-${key}]`).addEventListener('change',event=>{filters[key]=event.target.value;visible=12;renderResults()}));
     root.querySelector('[data-activity-more]').addEventListener('click',()=>{visible+=12;renderResults()});renderResults();
   }

@@ -1,13 +1,13 @@
 {
   "home.js": "2026112301",
   "section-pages.js": "2026112301",
-  "activity-feed.js": "2026111301",
+  "activity-feed.js": "2026112403",
   "multilingual-search.js": "2026111301",
   "ptcg-jp-recent.js": "2026111301",
   "ptcg-official-details.js": "2026111301",
   "ptcg-card-types.js": "2026111301",
   "gcg-jp-recent.js": "2026111301",
-  "gcg.js": "2026112301",
+  "gcg.js": "2026112403",
   "opcg-eb05-jp.js": "2026111301",
   "opcg.js": "2026112303",
   "unionarena-data.js": "2026111301",
@@ -57,5 +57,6 @@
   "opcg-op18-images.js": "2026112303",
   "battle-records.js": "2026112401",
   "battle-records.css": "2026112306",
-  "gcg-auto-events.js": "2026112402"
+  "gcg-auto-events.js": "2026112402",
+  "activity-feed.css": "2026112403"
 }
