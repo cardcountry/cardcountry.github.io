@@ -79,7 +79,7 @@
       "name": "BEYBLADE X",
       "page": "beyblade.html",
       "reviewedOn": "2026-11-24",
-      "latestSourceDate": "2026-11-20",
+      "latestSourceDate": "2026-11-24",
       "latestEventDate": null,
       "upcomingEventDate": "2026-12-12",
       "sourceDateKnown": 33,
@@ -88,6 +88,45 @@
     }
   ],
   "items": [
+    {
+      "game": "beyblade",
+      "type": "event",
+      "title": "【11月24日更新】「BEYBLADE X GP 2027 JAPAN CHAMPIONSHIP」の予選大会「X-TREME CUP G1 2026-27」が開催",
+      "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/event/g1_pre2026_27.html",
+      "sourceName": "BEYBLADE X タカラトミー公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-24",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-24",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "beyblade-news.html",
+      "semanticKey": "auto-index|bey-ja|2026-11-24",
+      "firstCollectedOn": "2026-11-24",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "bey-ja",
+        "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/event/g1_pre2026_27.html",
+        "evidenceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/",
+        "fetchedAt": "2026-11-24T06:02:38.166Z",
+        "contentSha256": "a6b50e9f144930a7f4dad8e1f1c145349f190304234bbc329ad0c5b73421fc12",
+        "adapter": "html-list",
+        "verification": "official-index"
+      },
+      "previousPublications": [
+        {
+          "date": "2026-11-20",
+          "title": "【11月20日更新】「BEYBLADE X GP 2027 JAPAN CHAMPIONSHIP」の予選大会「X-TREME CUP G1 2026-27」が開催"
+        }
+      ],
+      "id": "beyblade-0a0b4bc76e132b37",
+      "format": "unknown",
+      "region": "unknown"
+    },
     {
       "game": "gcg",
       "type": "event",
@@ -1835,39 +1874,6 @@
       "id": "beyblade-3835cb1a547a0b3d",
       "printEdition": "unknown",
       "firstCollectedOn": "2026-11-21"
-    },
-    {
-      "game": "beyblade",
-      "type": "event",
-      "title": "【11月20日更新】「BEYBLADE X GP 2027 JAPAN CHAMPIONSHIP」の予選大会「X-TREME CUP G1 2026-27」が開催",
-      "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/event/g1_pre2026_27.html",
-      "sourceName": "BEYBLADE X タカラトミー公式",
-      "sourceLanguage": "ja",
-      "printEdition": "unknown",
-      "publishedOn": "2026-11-20",
-      "sourceUpdatedOn": null,
-      "eventOn": null,
-      "availableOn": null,
-      "verifiedOn": "2026-11-24",
-      "status": "verified",
-      "sourceScope": "index-entry",
-      "internalUrl": "beyblade-news.html",
-      "semanticKey": "auto-index|bey-ja|2026-11-20",
-      "firstCollectedOn": "2026-11-24",
-      "aliases": [],
-      "ingestEvidence": {
-        "schemaVersion": 1,
-        "sourceId": "bey-ja",
-        "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/event/g1_pre2026_27.html",
-        "evidenceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "cb401afdb5612282ab5b4b60b137269dd82cca026f835478c46ceeb88a17fb2a",
-        "adapter": "html-list",
-        "verification": "official-index"
-      },
-      "id": "beyblade-5f84bdeb0151ad3f",
-      "format": "unknown",
-      "region": "unknown"
     },
     {
       "game": "gcg",

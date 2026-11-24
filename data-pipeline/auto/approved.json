@@ -34,12 +34,12 @@
     {
       "game": "beyblade",
       "type": "event",
-      "title": "【11月20日更新】「BEYBLADE X GP 2027 JAPAN CHAMPIONSHIP」の予選大会「X-TREME CUP G1 2026-27」が開催",
+      "title": "【11月24日更新】「BEYBLADE X GP 2027 JAPAN CHAMPIONSHIP」の予選大会「X-TREME CUP G1 2026-27」が開催",
       "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/event/g1_pre2026_27.html",
       "sourceName": "BEYBLADE X タカラトミー公式",
       "sourceLanguage": "ja",
       "printEdition": "unknown",
-      "publishedOn": "2026-11-20",
+      "publishedOn": "2026-11-24",
       "sourceUpdatedOn": null,
       "eventOn": null,
       "availableOn": null,
@@ -47,7 +47,7 @@
       "status": "verified",
       "sourceScope": "index-entry",
       "internalUrl": "beyblade-news.html",
-      "semanticKey": "auto-index|bey-ja|2026-11-20",
+      "semanticKey": "auto-index|bey-ja|2026-11-24",
       "firstCollectedOn": "2026-11-24",
       "aliases": [],
       "ingestEvidence": {
@@ -55,11 +55,17 @@
         "sourceId": "bey-ja",
         "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/event/g1_pre2026_27.html",
         "evidenceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "cb401afdb5612282ab5b4b60b137269dd82cca026f835478c46ceeb88a17fb2a",
+        "fetchedAt": "2026-11-24T06:02:38.166Z",
+        "contentSha256": "a6b50e9f144930a7f4dad8e1f1c145349f190304234bbc329ad0c5b73421fc12",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-11-20",
+          "title": "【11月20日更新】「BEYBLADE X GP 2027 JAPAN CHAMPIONSHIP」の予選大会「X-TREME CUP G1 2026-27」が開催"
+        }
+      ]
     },
     {
       "game": "beyblade",
@@ -2768,7 +2774,7 @@
     },
     {
       "game": "gcg",
-      "type": "news",
+      "type": "rules",
       "title": "3on3 Rules for Match Results and Team Composition",
       "sourceUrl": "https://www.gundam-gcg.com/en/news/3on3_rules.html",
       "sourceName": "GUNDAM CARD GAME English official",
@@ -2790,11 +2796,17 @@
         "sourceId": "gcg-en",
         "sourceUrl": "https://www.gundam-gcg.com/en/news/3on3_rules.html",
         "evidenceUrl": "https://www.gundam-gcg.com/en/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "81a6392012dbc693473b120688b357d44e6b23a106b444f907c83f918137dbb3",
+        "fetchedAt": "2026-11-24T06:02:38.166Z",
+        "contentSha256": "72a0efb76181fedc2758405cfefc5ad53af19c19a76984596201d4c225ca54ce",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-11-19",
+          "title": "3on3 Rules for Match Results and Team Composition"
+        }
+      ]
     },
     {
       "game": "gcg",
