@@ -2685,7 +2685,7 @@
     {
       "game": "gcg",
       "type": "event",
-      "title": "GUNDAM CARD GAME \"CLAIM MIORINE\" 3 on 3 Battle",
+      "title": "GUNDAM CARD GAME \"CLAIM MIORINE\" 3on3 Battle",
       "sourceUrl": "https://www.gundam-gcg.com/en/events/claim_miorine.html",
       "sourceName": "GUNDAM CARD GAME English official",
       "sourceLanguage": "en",
@@ -2694,7 +2694,7 @@
       "sourceUpdatedOn": null,
       "eventOn": null,
       "availableOn": null,
-      "verifiedOn": "2026-11-24",
+      "verifiedOn": "2026-11-25",
       "status": "verified",
       "sourceScope": "index-entry",
       "internalUrl": "gcg-news.html",
@@ -2706,11 +2706,17 @@
         "sourceId": "gcg-en",
         "sourceUrl": "https://www.gundam-gcg.com/en/events/claim_miorine.html",
         "evidenceUrl": "https://www.gundam-gcg.com/en/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "81a6392012dbc693473b120688b357d44e6b23a106b444f907c83f918137dbb3",
+        "fetchedAt": "2026-11-25T01:21:58.623Z",
+        "contentSha256": "22802cdafdb52037c0d35b3cc31a1421e639fc3a83fe444e96578d5ebbbf0493",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-11-06",
+          "title": "GUNDAM CARD GAME \"CLAIM MIORINE\" 3 on 3 Battle"
+        }
+      ]
     },
     {
       "game": "gcg",
@@ -3884,6 +3890,36 @@
         "evidenceUrl": "https://www.onepiece-cardgame.com/",
         "fetchedAt": "2026-11-23T17:48:52.534Z",
         "contentSha256": "be14a02f33259bc1483edf6665f80d5a219a2e8879128001e2890f1489c8e9d5",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "opcg",
+      "type": "event",
+      "title": "「エクストラ3on3​」のイベント情報を公開！",
+      "sourceUrl": "https://www.onepiece-cardgame.com/events/Extra3on3_2027.html",
+      "sourceName": "ONE PIECE CARD GAME 日本公式最新情報",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-24",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-25",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "opcg-news.html",
+      "semanticKey": "auto-index|opcg-home|2026-11-24",
+      "firstCollectedOn": "2026-11-25",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "opcg-home",
+        "sourceUrl": "https://www.onepiece-cardgame.com/events/Extra3on3_2027.html",
+        "evidenceUrl": "https://www.onepiece-cardgame.com/",
+        "fetchedAt": "2026-11-25T01:21:58.623Z",
+        "contentSha256": "d62689d74c02df60003b2e754ca26912e91e3f3f79ca134b3b043061933c81c0",
         "adapter": "html-list",
         "verification": "official-index"
       }
