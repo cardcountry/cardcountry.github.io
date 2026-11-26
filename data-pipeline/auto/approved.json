@@ -3152,15 +3152,15 @@
       "sourceName": "GUNDAM CARD GAME 日本公式",
       "sourceLanguage": "ja",
       "printEdition": "unknown",
-      "publishedOn": "2026-11-19",
+      "publishedOn": "2026-11-25",
       "sourceUpdatedOn": null,
       "eventOn": null,
       "availableOn": null,
-      "verifiedOn": "2026-11-24",
+      "verifiedOn": "2026-11-26",
       "status": "verified",
       "sourceScope": "index-entry",
       "internalUrl": "gcg-news.html",
-      "semanticKey": "auto-index|gcg-ja|2026-11-19",
+      "semanticKey": "auto-index|gcg-ja|2026-11-25",
       "firstCollectedOn": "2026-11-24",
       "aliases": [],
       "ingestEvidence": {
@@ -3168,11 +3168,17 @@
         "sourceId": "gcg-ja",
         "sourceUrl": "https://www.gundam-gcg.com/jp/events/EXPO_2026_OSAKA_Nov.html",
         "evidenceUrl": "https://www.gundam-gcg.com/jp/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "575a52fbe029333e98d4a71e7243abe3cc7d35e45354aecedd73d852fb958dd9",
+        "fetchedAt": "2026-11-26T01:23:05.883Z",
+        "contentSha256": "28bf16719c0869cbf26f8d6e9e113247005f767d3816b6befda18174271abb67",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-11-19",
+          "title": "GCG EXPO 2026 in OSAKA Nov."
+        }
+      ]
     },
     {
       "game": "gcg",
@@ -3267,6 +3273,36 @@
     {
       "game": "gcg",
       "type": "event",
+      "title": "WORLD CHAMPIONSHIPS 26-27 EXPO予選 大阪B会場",
+      "sourceUrl": "https://www.gundam-gcg.com/jp/events/WCS_EXPO_Qualifier_Nov.html",
+      "sourceName": "GUNDAM CARD GAME 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-25",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-26",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "gcg-news.html",
+      "semanticKey": "auto-index|gcg-ja|2026-11-25",
+      "firstCollectedOn": "2026-11-26",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "gcg-ja",
+        "sourceUrl": "https://www.gundam-gcg.com/jp/events/WCS_EXPO_Qualifier_Nov.html",
+        "evidenceUrl": "https://www.gundam-gcg.com/jp/news/",
+        "fetchedAt": "2026-11-26T01:23:05.883Z",
+        "contentSha256": "28bf16719c0869cbf26f8d6e9e113247005f767d3816b6befda18174271abb67",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "gcg",
+      "type": "event",
       "title": "WORLD CHAMPIONSHIPS 26-27 EXPO予選 横浜会場",
       "sourceUrl": "https://www.gundam-gcg.com/jp/events/WCS_EXPO_Qualifier_YH.html",
       "sourceName": "GUNDAM CARD GAME 日本公式",
@@ -3290,6 +3326,66 @@
         "evidenceUrl": "https://www.gundam-gcg.com/jp/news/",
         "fetchedAt": "2026-11-23T17:48:52.534Z",
         "contentSha256": "575a52fbe029333e98d4a71e7243abe3cc7d35e45354aecedd73d852fb958dd9",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "gcg",
+      "type": "news",
+      "title": "「GCG EXPO in OSAKA Nov.」 来場キャンペーン",
+      "sourceUrl": "https://www.gundam-gcg.com/jp/news/01_389.html",
+      "sourceName": "GUNDAM CARD GAME 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-25",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-26",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "gcg-news.html",
+      "semanticKey": "auto-index|gcg-ja|2026-11-25",
+      "firstCollectedOn": "2026-11-26",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "gcg-ja",
+        "sourceUrl": "https://www.gundam-gcg.com/jp/news/01_389.html",
+        "evidenceUrl": "https://www.gundam-gcg.com/jp/news/",
+        "fetchedAt": "2026-11-26T01:23:05.883Z",
+        "contentSha256": "28bf16719c0869cbf26f8d6e9e113247005f767d3816b6befda18174271abb67",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "gcg",
+      "type": "news",
+      "title": "「GCG EXPO」配信キャンペーン！",
+      "sourceUrl": "https://www.gundam-gcg.com/jp/news/01_390.html",
+      "sourceName": "GUNDAM CARD GAME 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-25",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-26",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "gcg-news.html",
+      "semanticKey": "auto-index|gcg-ja|2026-11-25",
+      "firstCollectedOn": "2026-11-26",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "gcg-ja",
+        "sourceUrl": "https://www.gundam-gcg.com/jp/news/01_390.html",
+        "evidenceUrl": "https://www.gundam-gcg.com/jp/news/",
+        "fetchedAt": "2026-11-26T01:23:05.883Z",
+        "contentSha256": "28bf16719c0869cbf26f8d6e9e113247005f767d3816b6befda18174271abb67",
         "adapter": "html-list",
         "verification": "official-index"
       }
