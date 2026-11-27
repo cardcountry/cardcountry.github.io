@@ -63969,6 +63969,5866 @@
       "sourceSeriesName": "ニュータイプチャレンジ 2026 MISSION5（11月開催）",
       "sourceSnapshotRecordedAt": "2026-11-02T22:05:11.412+09:00",
       "sourceSnapshotRecordedAtMeaning": "database collection timestamp, not publication time"
+    },
+    {
+      "id": "gcg-stats-ntcd-01M8BA1KZBFAT1MPYA3DSK4PND",
+      "name": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · トレカマーケットオンリーワン",
+      "date": "2026-11-26",
+      "players": null,
+      "region": "Japan",
+      "language": "Unspecified",
+      "printLanguage": "Not individually verified",
+      "sourceLanguage": "Japanese",
+      "format": "GD06",
+      "setGroup": "GD06",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+      "publishedOn": null,
+      "checked": "2026-11-27",
+      "results": [
+        {
+          "id": "gcg-auto-ccb9212f48097d0eb86a97cb",
+          "place": 1,
+          "placementLabel": "1位",
+          "player": "かーな",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD02-054",
+              3
+            ],
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              1
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              3
+            ],
+            [
+              "GD06-062",
+              3
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "19e754731df43e51f7708de68ab9d99b9ae0b43a69e5c05383bf2b84a015273b",
+          "sourceResultNumber": 0,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-50f88a66b3358eac7d1fc599",
+          "place": 2,
+          "placementLabel": "2位",
+          "player": "カミナ",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              2
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              2
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              2
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "GD06-130",
+              4
+            ],
+            [
+              "ST04-001",
+              4
+            ],
+            [
+              "ST04-010",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "54488d870ca959ffc54851e72f0300e6365697600f9bc1401fce58d0354e1c1f",
+          "sourceResultNumber": 1,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-54a10164fe9fb34a987e4450",
+          "place": 3,
+          "placementLabel": "3位",
+          "player": "だいのぼ",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              2
+            ],
+            [
+              "GD03-035",
+              1
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              2
+            ],
+            [
+              "GD05-121",
+              4
+            ],
+            [
+              "GD06-033",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "4482d3578ff15bdf223b946cd5a129c165a800e69d02d6756328f81cd20ad33f",
+          "sourceResultNumber": 2,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-729ead6584ccc5c8f28cf88c",
+          "place": 4,
+          "placementLabel": "4位",
+          "player": "きゅうばん",
+          "primary": "GD05-017",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-008",
+              4
+            ],
+            [
+              "GD01-018",
+              3
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD01-126",
+              2
+            ],
+            [
+              "GD03-001",
+              1
+            ],
+            [
+              "GD05-017",
+              4
+            ],
+            [
+              "GD05-019",
+              4
+            ],
+            [
+              "GD05-020",
+              1
+            ],
+            [
+              "GD05-027",
+              4
+            ],
+            [
+              "GD05-029",
+              4
+            ],
+            [
+              "GD05-085",
+              4
+            ],
+            [
+              "GD05-125",
+              3
+            ],
+            [
+              "ST01-001",
+              4
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "ad891a6a1f2b9ee0aadcd0e506b2d5f0aaa9b9b8d3d88c25052e9c9de4d520ad",
+          "sourceResultNumber": 3,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Green",
+          "archetype": "Blue / Green",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-2d48c237c27c80c0a6e967cd",
+          "place": 5,
+          "placementLabel": "5位",
+          "player": "Anaheimzhou78",
+          "primary": "GD04-017",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-026",
+              2
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD01-031",
+              1
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              4
+            ],
+            [
+              "GD05-049",
+              1
+            ],
+            [
+              "GD05-062",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-129",
+              2
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-007",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST03-011",
+              4
+            ],
+            [
+              "ST03-016",
+              2
+            ],
+            [
+              "ST05-010",
+              2
+            ],
+            [
+              "ST11-009",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "83b984f72224fd2ead4283ac2c24010f6322fdab7765be58371eb08d0d970079",
+          "sourceResultNumber": 4,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-646f3c35abc07158c5dfb126",
+          "place": 6,
+          "placementLabel": "6位",
+          "player": "MOL53",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              1
+            ],
+            [
+              "GD03-035",
+              1
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              3
+            ],
+            [
+              "GD05-121",
+              4
+            ],
+            [
+              "GD05-128",
+              1
+            ],
+            [
+              "GD06-033",
+              1
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "2530dd047afbd198fd6c7a5fb104cbe302e66db3e018e9c53e191345c338d9da",
+          "sourceResultNumber": 5,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-fdde409f74362f3c5fe3624d",
+          "place": 7,
+          "placementLabel": "7位",
+          "player": "迷える",
+          "primary": "GD01-016",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-008",
+              4
+            ],
+            [
+              "GD01-016",
+              4
+            ],
+            [
+              "GD01-018",
+              4
+            ],
+            [
+              "GD01-021",
+              2
+            ],
+            [
+              "GD01-046",
+              2
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD03-044",
+              4
+            ],
+            [
+              "GD05-014",
+              4
+            ],
+            [
+              "GD05-040",
+              4
+            ],
+            [
+              "GD05-105",
+              4
+            ],
+            [
+              "GD06-013",
+              4
+            ],
+            [
+              "GD06-014",
+              4
+            ],
+            [
+              "GD06-110",
+              4
+            ],
+            [
+              "ST04-016",
+              4
+            ],
+            [
+              "ST08-014",
+              1
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "8bedf02e2b3b3edfed9fb63ff274e764188ea106abc381b9fc463c69086c7115",
+          "sourceResultNumber": 6,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Red",
+          "archetype": "Blue / Red",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-e353df43ab4e262f40591f2a",
+          "place": 8,
+          "placementLabel": "8位",
+          "player": "長田ザク",
+          "primary": "GD05-017",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-008",
+              4
+            ],
+            [
+              "GD01-018",
+              1
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD05-017",
+              4
+            ],
+            [
+              "GD05-019",
+              4
+            ],
+            [
+              "GD05-020",
+              2
+            ],
+            [
+              "GD05-027",
+              4
+            ],
+            [
+              "GD05-029",
+              4
+            ],
+            [
+              "GD05-085",
+              4
+            ],
+            [
+              "GD05-105",
+              1
+            ],
+            [
+              "GD05-125",
+              3
+            ],
+            [
+              "GD06-025",
+              2
+            ],
+            [
+              "ST01-001",
+              4
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "6d7d97ca0496edb2b82a95352157f7ebb86714a8a3e3233f914fa8e4dd9bc8fd",
+          "sourceResultNumber": 7,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Green",
+          "archetype": "Blue / Green",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        }
+      ],
+      "mergeMode": "append-event",
+      "venue": "トレカマーケットオンリーワン",
+      "subregion": "関東",
+      "sourceSeriesId": "8266",
+      "sourceSeriesName": "ニュータイプチャレンジ 2026 MISSION5（11月開催）",
+      "sourceSnapshotRecordedAt": "2026-11-26T16:13:31.942+09:00",
+      "sourceSnapshotRecordedAtMeaning": "database collection timestamp, not publication time"
+    },
+    {
+      "id": "gcg-stats-ntcd-01M88QM216QR36E65QT7HHSRQH",
+      "name": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · ホビーステーション秋葉原本店",
+      "date": "2026-11-25",
+      "players": null,
+      "region": "Japan",
+      "language": "Unspecified",
+      "printLanguage": "Not individually verified",
+      "sourceLanguage": "Japanese",
+      "format": "GD06",
+      "setGroup": "GD06",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+      "publishedOn": null,
+      "checked": "2026-11-27",
+      "results": [
+        {
+          "id": "gcg-auto-88026b8f11ecaf7a7a3d4057",
+          "place": 1,
+          "placementLabel": "1位",
+          "player": "タツト",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD02-054",
+              3
+            ],
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              3
+            ],
+            [
+              "GD05-114",
+              2
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              4
+            ],
+            [
+              "GD06-054",
+              2
+            ],
+            [
+              "GD06-062",
+              3
+            ],
+            [
+              "GD06-094",
+              1
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "42d74a35f22fa09f5f33182c56e7042432502ce9e3d68b09c8378fcef24abb3d",
+          "sourceResultNumber": 0,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-bcc4b0db82096873767954bb",
+          "place": 2,
+          "placementLabel": "2位",
+          "player": "おやき",
+          "primary": "GD05-017",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-008",
+              4
+            ],
+            [
+              "GD01-018",
+              4
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD03-001",
+              1
+            ],
+            [
+              "GD05-017",
+              4
+            ],
+            [
+              "GD05-019",
+              2
+            ],
+            [
+              "GD05-020",
+              2
+            ],
+            [
+              "GD05-027",
+              4
+            ],
+            [
+              "GD05-029",
+              4
+            ],
+            [
+              "GD05-085",
+              4
+            ],
+            [
+              "GD05-105",
+              1
+            ],
+            [
+              "GD05-125",
+              3
+            ],
+            [
+              "GD06-025",
+              4
+            ],
+            [
+              "ST01-001",
+              3
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST13-011",
+              1
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "9d5d4ae3670b1edf2940b69257a985f061cda77827fd5c505f042c211e22eb02",
+          "sourceResultNumber": 1,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Green",
+          "archetype": "Blue / Green",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-060a1a7ae3c01cad084a58d3",
+          "place": 3,
+          "placementLabel": "3位",
+          "player": "ナオキモス",
+          "primary": "GD03-056",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-030",
+              3
+            ],
+            [
+              "GD02-055",
+              3
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              3
+            ],
+            [
+              "GD05-049",
+              3
+            ],
+            [
+              "GD05-062",
+              4
+            ],
+            [
+              "GD05-093",
+              2
+            ],
+            [
+              "GD05-114",
+              2
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-062",
+              4
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST03-011",
+              4
+            ],
+            [
+              "ST05-010",
+              2
+            ],
+            [
+              "ST13-001",
+              2
+            ],
+            [
+              "ST13-011",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "f11c996ebc5537e535014ed2f697eeefd098365ae23e94111fa83175cb5537b8",
+          "sourceResultNumber": 2,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-4bfc5549c184406b3f8a1ef1",
+          "place": 4,
+          "placementLabel": "4位",
+          "player": "いよ",
+          "primary": "GD05-017",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-008",
+              4
+            ],
+            [
+              "GD01-018",
+              2
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD01-126",
+              2
+            ],
+            [
+              "GD05-017",
+              4
+            ],
+            [
+              "GD05-019",
+              4
+            ],
+            [
+              "GD05-027",
+              4
+            ],
+            [
+              "GD05-029",
+              4
+            ],
+            [
+              "GD05-085",
+              4
+            ],
+            [
+              "GD05-125",
+              2
+            ],
+            [
+              "GD06-025",
+              2
+            ],
+            [
+              "ST01-001",
+              4
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "d85631d52da6f458e8fa705d998a1df17f7b1855673e9efb54b63722f498c199",
+          "sourceResultNumber": 3,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Green",
+          "archetype": "Blue / Green",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-d8015e3eb49dfd36038f3893",
+          "place": 5,
+          "placementLabel": "5位",
+          "player": "samsame",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD02-054",
+              2
+            ],
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              2
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              2
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              3
+            ],
+            [
+              "GD06-062",
+              3
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "c14b749c37314aba0c40f6e0cec001c109a1f97cead8afdcfe9e6fc2da6b759f",
+          "sourceResultNumber": 4,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-a8eebf18271ffc1762aa4c5a",
+          "place": 6,
+          "placementLabel": "6位",
+          "player": "はいばら",
+          "primary": "GD02-055",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-023",
+              1
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD02-054",
+              4
+            ],
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              3
+            ],
+            [
+              "GD05-049",
+              2
+            ],
+            [
+              "GD05-093",
+              2
+            ],
+            [
+              "GD05-114",
+              1
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST03-011",
+              3
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              3
+            ],
+            [
+              "ST13-011",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "fe403bc9af146019d8bc1ef4f2ad78ea29c1df25726858c3ed90d392f33b405c",
+          "sourceResultNumber": 5,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-afbcfa333f9261d15e5878cf",
+          "place": 7,
+          "placementLabel": "7位",
+          "player": "がるま",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD02-055",
+              2
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              1
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              1
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              3
+            ],
+            [
+              "GD06-062",
+              4
+            ],
+            [
+              "GD06-094",
+              1
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "65143259c3d8d281eee6f23967e330dcc2bf430e74854557e2a7accbf0b3d4e2",
+          "sourceResultNumber": 6,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-7b2a3712b60dbe6540749650",
+          "place": 8,
+          "placementLabel": "8位",
+          "player": "Nick",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              4
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              1
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              2
+            ],
+            [
+              "GD06-062",
+              4
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "fcb7c38b6f1a4bc46bd4ab0fb63d7235fe80f8d7ec6c906219a5e1798fbcfdc3",
+          "sourceResultNumber": 7,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        }
+      ],
+      "mergeMode": "append-event",
+      "venue": "ホビーステーション秋葉原本店",
+      "subregion": "関東",
+      "sourceSeriesId": "8266",
+      "sourceSeriesName": "ニュータイプチャレンジ 2026 MISSION5（11月開催）",
+      "sourceSnapshotRecordedAt": "2026-11-25T16:13:31.466+09:00",
+      "sourceSnapshotRecordedAtMeaning": "database collection timestamp, not publication time"
+    },
+    {
+      "id": "gcg-stats-ntcd-01M88V2DHC22D2KVXDFKYA89DJ",
+      "name": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · ブックオフ相模大野店",
+      "date": "2026-11-25",
+      "players": null,
+      "region": "Japan",
+      "language": "Unspecified",
+      "printLanguage": "Not individually verified",
+      "sourceLanguage": "Japanese",
+      "format": "GD06",
+      "setGroup": "GD06",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+      "publishedOn": null,
+      "checked": "2026-11-27",
+      "results": [
+        {
+          "id": "gcg-auto-a310d93eeb706d513fe5105b",
+          "place": 1,
+          "placementLabel": "1位",
+          "player": "隠居カービィ",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              2
+            ],
+            [
+              "GD03-035",
+              1
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              3
+            ],
+            [
+              "GD05-121",
+              4
+            ],
+            [
+              "GD05-128",
+              1
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "47b146b6424c7fd3281bd66d83e7aa2761803f52fb46afa30798dc4e16fc9a75",
+          "sourceResultNumber": 0,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-1f76a0f1294fa4feaf039feb",
+          "place": 2,
+          "placementLabel": "2位",
+          "player": "どつ",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              2
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              3
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              1
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "GD06-120",
+              2
+            ],
+            [
+              "GD06-130",
+              3
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "35abdde0e645a413dbb8b96248d5bf49be221ff25a95bfb0f2b9d22ee0a30f5d",
+          "sourceResultNumber": 1,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-39c313f0c020303b4673443c",
+          "place": 3,
+          "placementLabel": "3位",
+          "player": "tbsくろにくる",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              4
+            ],
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD02-129",
+              2
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              2
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              1
+            ],
+            [
+              "GD06-064",
+              2
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "GD06-120",
+              2
+            ],
+            [
+              "GD06-130",
+              2
+            ],
+            [
+              "ST01-010",
+              1
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "163fdda1b7e496a8177e2a83ffad1142106326a0253e07a602ba78a2e4aa3979",
+          "sourceResultNumber": 2,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-5b245bcd8f83ae1816a21402",
+          "place": 4,
+          "placementLabel": "4位",
+          "player": "トキネ",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              3
+            ],
+            [
+              "GD03-035",
+              1
+            ],
+            [
+              "GD04-068",
+              2
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              4
+            ],
+            [
+              "GD05-121",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "5909ac0296993ba63d6781d2ae75d6ccb92feb39693fa463772eb7442cd08b6e",
+          "sourceResultNumber": 3,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-29b43f6387bed0576fc34a27",
+          "place": 5,
+          "placementLabel": "5位",
+          "player": "つきわ",
+          "primary": "GD05-010",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              3
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD05-002",
+              3
+            ],
+            [
+              "GD05-003",
+              4
+            ],
+            [
+              "GD05-004",
+              3
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-015",
+              4
+            ],
+            [
+              "GD05-016",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD05-082",
+              4
+            ],
+            [
+              "GD05-123",
+              4
+            ],
+            [
+              "GD06-002",
+              1
+            ],
+            [
+              "GD06-016",
+              4
+            ],
+            [
+              "GD06-082",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "22c86a5276054c5086d513a1627c8ef8ca6b43e8b9fd1a0f21bb409512fb5733",
+          "sourceResultNumber": 4,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-9470d8805fc171272602af05",
+          "place": 6,
+          "placementLabel": "6位",
+          "player": "コウ",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD03-035",
+              1
+            ],
+            [
+              "GD04-066",
+              1
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              3
+            ],
+            [
+              "GD05-121",
+              4
+            ],
+            [
+              "GD05-128",
+              3
+            ],
+            [
+              "ST01-014",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "45ab3e8973b7e356fda77a4db866888e74a3bbc68dcad79a142ee56fe307541b",
+          "sourceResultNumber": 5,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-feb0373c20e7eb7ba658d4d2",
+          "place": 7,
+          "placementLabel": "7位",
+          "player": "せかやん",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              3
+            ],
+            [
+              "GD01-073",
+              3
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              1
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "GD06-130",
+              4
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "fee920f05db8cd128eff34776507e9163c8aabcb50fd587535f19c02b086c89c",
+          "sourceResultNumber": 6,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-73241df34f6f0fffab36b1c8",
+          "place": 8,
+          "placementLabel": "8位",
+          "player": "snow",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-065",
+              2
+            ],
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD02-079",
+              4
+            ],
+            [
+              "GD04-068",
+              2
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              2
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "ST01-001",
+              4
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST02-016",
+              2
+            ],
+            [
+              "ST04-001",
+              4
+            ],
+            [
+              "ST04-010",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "8d3f7b9b4212b614699a4f1c037fd8878ce86b889c50632e5f346f1bd7373184",
+          "sourceResultNumber": 7,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-941f39f2b34dc46a22d220a7",
+          "place": 9,
+          "placementLabel": "9位",
+          "player": "godan",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-128",
+              2
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-003",
+              4
+            ],
+            [
+              "GD05-004",
+              3
+            ],
+            [
+              "GD05-005",
+              3
+            ],
+            [
+              "GD05-010",
+              3
+            ],
+            [
+              "GD05-015",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD05-082",
+              3
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-123",
+              2
+            ],
+            [
+              "GD06-016",
+              4
+            ],
+            [
+              "GD06-033",
+              3
+            ],
+            [
+              "GD06-041",
+              3
+            ],
+            [
+              "GD06-092",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "f0fb395a329868d64aefc1fbdfeff30af2f4ebab67fd428a885867f8baa38d10",
+          "sourceResultNumber": 8,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Red",
+          "archetype": "Blue / Red",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-1f5cf14f502e66c22df0b248",
+          "place": 10,
+          "placementLabel": "10位",
+          "player": "カナアド",
+          "primary": "GD05-017",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD05-017",
+              4
+            ],
+            [
+              "GD05-019",
+              4
+            ],
+            [
+              "GD05-020",
+              2
+            ],
+            [
+              "GD05-027",
+              4
+            ],
+            [
+              "GD05-029",
+              4
+            ],
+            [
+              "GD05-085",
+              4
+            ],
+            [
+              "GD05-125",
+              2
+            ],
+            [
+              "GD06-025",
+              2
+            ],
+            [
+              "ST01-001",
+              4
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST02-016",
+              2
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST13-001",
+              2
+            ],
+            [
+              "ST13-011",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "586891ead2b66ded9ddd0fd43ac794cb42035120d67cab73321a5df30f83fce7",
+          "sourceResultNumber": 9,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Green",
+          "archetype": "Blue / Green",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-4d582008450f31937c0e6529",
+          "place": 11,
+          "placementLabel": "11位",
+          "player": "ツチノコ",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              3
+            ],
+            [
+              "GD03-035",
+              2
+            ],
+            [
+              "GD04-068",
+              2
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              3
+            ],
+            [
+              "GD05-121",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "544b5cb34e67748c76788a4f0e4d0f44e371db36c2e31fcc29839fea80725721",
+          "sourceResultNumber": 10,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-7af7e94dc0a3a01b4f99c883",
+          "place": 12,
+          "placementLabel": "12位",
+          "player": "ソンネン",
+          "primary": "GD05-017",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-008",
+              4
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD05-017",
+              4
+            ],
+            [
+              "GD05-019",
+              3
+            ],
+            [
+              "GD05-020",
+              1
+            ],
+            [
+              "GD05-027",
+              4
+            ],
+            [
+              "GD05-029",
+              4
+            ],
+            [
+              "GD05-085",
+              4
+            ],
+            [
+              "GD05-086",
+              1
+            ],
+            [
+              "GD05-125",
+              3
+            ],
+            [
+              "GD06-025",
+              4
+            ],
+            [
+              "ST01-001",
+              4
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "790738aae29955a782ddd64c58217704dffc255f0e840d64095d9596cd420823",
+          "sourceResultNumber": 11,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Green",
+          "archetype": "Blue / Green",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-8369827c4067c3d787b836fb",
+          "place": 13,
+          "placementLabel": "13位",
+          "player": "ポンニョス",
+          "primary": "GD05-017",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-008",
+              4
+            ],
+            [
+              "GD01-018",
+              2
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD03-001",
+              1
+            ],
+            [
+              "GD05-017",
+              4
+            ],
+            [
+              "GD05-019",
+              3
+            ],
+            [
+              "GD05-020",
+              1
+            ],
+            [
+              "GD05-027",
+              4
+            ],
+            [
+              "GD05-029",
+              4
+            ],
+            [
+              "GD05-085",
+              4
+            ],
+            [
+              "GD05-125",
+              4
+            ],
+            [
+              "GD06-025",
+              2
+            ],
+            [
+              "ST01-001",
+              3
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "b723cef287aaba93cdf56d98ad6a09b7a592fc31c065201a3804c9ef2ac5c598",
+          "sourceResultNumber": 12,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Green",
+          "archetype": "Blue / Green",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-79e007d1635723e2fd8caafa",
+          "place": 14,
+          "placementLabel": "14位",
+          "player": "全一のジョン",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              2
+            ],
+            [
+              "GD03-035",
+              1
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              2
+            ],
+            [
+              "GD05-121",
+              4
+            ],
+            [
+              "GD05-128",
+              1
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "4a978ea2cd8f3c507c2d5c27ff2c5892d6fce7f3130ef563e69eff037e62f502",
+          "sourceResultNumber": 13,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-7898e3c6272a8b79763233aa",
+          "place": 15,
+          "placementLabel": "15位",
+          "player": "鋼R",
+          "primary": "ST12-008",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-023",
+              1
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD01-031",
+              3
+            ],
+            [
+              "GD01-035",
+              4
+            ],
+            [
+              "GD04-017",
+              2
+            ],
+            [
+              "GD06-052",
+              3
+            ],
+            [
+              "GD06-060",
+              3
+            ],
+            [
+              "GD06-062",
+              4
+            ],
+            [
+              "GD06-095",
+              3
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST03-011",
+              4
+            ],
+            [
+              "ST03-016",
+              3
+            ],
+            [
+              "ST11-009",
+              4
+            ],
+            [
+              "ST12-008",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "0e38de21761ba3184200c0f3b3a4e758e58412039ba7a1353eab58b2aeab4ade",
+          "sourceResultNumber": 14,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-9db255b4f8198ff8ccb0632e",
+          "place": 16,
+          "placementLabel": "16位",
+          "player": "たんのむ",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-065",
+              2
+            ],
+            [
+              "GD01-066",
+              2
+            ],
+            [
+              "GD01-073",
+              1
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-097",
+              4
+            ],
+            [
+              "GD06-130",
+              2
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              4
+            ],
+            [
+              "ST11-016",
+              1
+            ],
+            [
+              "ST14-001",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "3e7992a34494e1ac2510effebf1df2e28f6cf87bc6637f957b8a4a320dd5d67d",
+          "sourceResultNumber": 15,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        }
+      ],
+      "mergeMode": "append-event",
+      "venue": "ブックオフ相模大野店",
+      "subregion": "関東",
+      "sourceSeriesId": "8266",
+      "sourceSeriesName": "ニュータイプチャレンジ 2026 MISSION5（11月開催）",
+      "sourceSnapshotRecordedAt": "2026-11-25T17:13:31.273+09:00",
+      "sourceSnapshotRecordedAtMeaning": "database collection timestamp, not publication time"
+    },
+    {
+      "id": "gcg-stats-ntcd-01M868P074XX6HYRNBC7H941R3",
+      "name": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · カードラボ広島店",
+      "date": "2026-11-24",
+      "players": null,
+      "region": "Japan",
+      "language": "Unspecified",
+      "printLanguage": "Not individually verified",
+      "sourceLanguage": "Japanese",
+      "format": "GD06",
+      "setGroup": "GD06",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+      "publishedOn": null,
+      "checked": "2026-11-27",
+      "results": [
+        {
+          "id": "gcg-auto-c6c3a821f6876e0ba9a753c8",
+          "place": 1,
+          "placementLabel": "1位",
+          "player": "りぜ",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD02-054",
+              4
+            ],
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              2
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              2
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              3
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "cedcec86b43e679e59a9181b44eddf6e3190b69047668f2d2f43f278014d441d",
+          "sourceResultNumber": 0,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-d8719d7196395db1bdeb948e",
+          "place": 2,
+          "placementLabel": "2位",
+          "player": "もな",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              2
+            ],
+            [
+              "GD01-086",
+              4
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              2
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "GD06-130",
+              3
+            ],
+            [
+              "ST01-010",
+              2
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "8479ce393112f71b587220e0a985f564ae17be403b031e3aa221a460a8042cc2",
+          "sourceResultNumber": 1,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-5292df0a5667a0085f1aa131",
+          "place": 3,
+          "placementLabel": "3位",
+          "player": "おくう",
+          "primary": "ST13-001",
+          "secondary": [],
+          "main": [
+            [
+              "GD02-054",
+              4
+            ],
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              2
+            ],
+            [
+              "GD05-049",
+              3
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              1
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              1
+            ],
+            [
+              "GD06-062",
+              4
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "b000088336653dca31ea124af23c880e4c4178aa7d40d7517e561f4f0e6a05d1",
+          "sourceResultNumber": 2,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-f73bd7c53083db5390179119",
+          "place": 4,
+          "placementLabel": "4位",
+          "player": "hayonero",
+          "primary": "GD06-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-065",
+              2
+            ],
+            [
+              "GD01-066",
+              2
+            ],
+            [
+              "GD01-086",
+              2
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              3
+            ],
+            [
+              "GD02-079",
+              2
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              2
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD06-033",
+              4
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-097",
+              3
+            ],
+            [
+              "ST03-013",
+              2
+            ],
+            [
+              "ST04-001",
+              2
+            ],
+            [
+              "ST04-010",
+              2
+            ],
+            [
+              "ST13-006",
+              4
+            ],
+            [
+              "ST13-012",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "c5cd34f417909eaeef6df5295e00e4bd4c7b9b5d5f6aaa554dc08c4121b37b3d",
+          "sourceResultNumber": 3,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-d3ecbe3688918b003757dc43",
+          "place": 5,
+          "placementLabel": "5位",
+          "player": "まお",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              2
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              3
+            ],
+            [
+              "GD05-081",
+              3
+            ],
+            [
+              "GD06-002",
+              1
+            ],
+            [
+              "GD06-064",
+              3
+            ],
+            [
+              "GD06-077",
+              3
+            ],
+            [
+              "GD06-082",
+              2
+            ],
+            [
+              "GD06-130",
+              3
+            ],
+            [
+              "ST01-001",
+              2
+            ],
+            [
+              "ST01-010",
+              3
+            ],
+            [
+              "ST01-014",
+              2
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "6f69c988aee2cd2ffc1d1b1d7b9f19086e26725b5555c23c9f371a387269307e",
+          "sourceResultNumber": 4,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-8d40ab6c9f991a9fd9286e90",
+          "place": 6,
+          "placementLabel": "6位",
+          "player": "ATSU",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              1
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              2
+            ],
+            [
+              "GD05-121",
+              4
+            ],
+            [
+              "GD05-128",
+              1
+            ],
+            [
+              "GD06-033",
+              1
+            ],
+            [
+              "GD06-064",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "04ce6b2958725d0ae19494b024eae1d753a94fbde6ee846181013e2e50ebc40d",
+          "sourceResultNumber": 5,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-add674752c4b346d153e98fb",
+          "place": 7,
+          "placementLabel": "7位",
+          "player": "メガネ",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-003",
+              3
+            ],
+            [
+              "GD01-093",
+              3
+            ],
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD01-128",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-003",
+              4
+            ],
+            [
+              "GD05-005",
+              4
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-015",
+              3
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD05-082",
+              3
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD06-016",
+              4
+            ],
+            [
+              "GD06-033",
+              3
+            ],
+            [
+              "GD06-092",
+              1
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "17cf37c4142c4857403f9f1114ac69cc2b794fc8cd4fc53849b8ab575f53a69c",
+          "sourceResultNumber": 6,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Red",
+          "archetype": "Blue / Red",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-2b309ee66e786433d0060fce",
+          "place": 8,
+          "placementLabel": "8位",
+          "player": "ダテ⭐︎ジャナイ",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              3
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              3
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              1
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "GD06-120",
+              1
+            ],
+            [
+              "GD06-130",
+              3
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "9225003e6d23e96fa371ed138cae796c3f7d2d1d280afbe38699d99795259e7a",
+          "sourceResultNumber": 7,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        }
+      ],
+      "mergeMode": "append-event",
+      "venue": "カードラボ広島店",
+      "subregion": "中国",
+      "sourceSeriesId": "8266",
+      "sourceSeriesName": "ニュータイプチャレンジ 2026 MISSION5（11月開催）",
+      "sourceSnapshotRecordedAt": "2026-11-24T17:13:31.087+09:00",
+      "sourceSnapshotRecordedAtMeaning": "database collection timestamp, not publication time"
+    },
+    {
+      "id": "gcg-stats-ntcd-01M86X7JV91JPJPAT69ZV8FF75",
+      "name": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · トレカチャンピオン各務原店",
+      "date": "2026-11-24",
+      "players": null,
+      "region": "Japan",
+      "language": "Unspecified",
+      "printLanguage": "Not individually verified",
+      "sourceLanguage": "Japanese",
+      "format": "GD06",
+      "setGroup": "GD06",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+      "publishedOn": null,
+      "checked": "2026-11-27",
+      "results": [
+        {
+          "id": "gcg-auto-a7835a38d67ae5891a644a41",
+          "place": 1,
+          "placementLabel": "1位",
+          "player": "ねっぴー",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              2
+            ],
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD02-129",
+              1
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              3
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              2
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              3
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "GD06-120",
+              2
+            ],
+            [
+              "GD06-130",
+              2
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "9fb7b59672b6f90cec5c72d469f1be7d7ab1a24ab5d828a294a5f2f65a304e89",
+          "sourceResultNumber": 0,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-3f7b187a6b4a810575b29344",
+          "place": 2,
+          "placementLabel": "2位",
+          "player": "なお@@@1",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              3
+            ],
+            [
+              "GD03-035",
+              1
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              3
+            ],
+            [
+              "GD05-121",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "a6fd22523d75e5652e69122615b090d4eda85850c2d4c5fb42d47e320aa63e87",
+          "sourceResultNumber": 1,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-bf107315c46d792ab4487003",
+          "place": 3,
+          "placementLabel": "3位",
+          "player": "そらうさぎ",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              3
+            ],
+            [
+              "GD03-035",
+              1
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              3
+            ],
+            [
+              "GD05-120",
+              2
+            ],
+            [
+              "GD05-121",
+              4
+            ],
+            [
+              "GD06-033",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "51cea304bfcbede7aca222e6297444bb396e81eb168fa1c60976ff3924aa91fc",
+          "sourceResultNumber": 2,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-9c5a6f8a63bb4836664cafa6",
+          "place": 4,
+          "placementLabel": "4位",
+          "player": "カノ",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              2
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              3
+            ],
+            [
+              "GD05-120",
+              3
+            ],
+            [
+              "GD05-121",
+              4
+            ],
+            [
+              "GD05-128",
+              1
+            ],
+            [
+              "GD06-033",
+              2
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "1dd8813ab8e9207a060351c81b8e2cd77ce85c53edb61bda84f1386b2c574db8",
+          "sourceResultNumber": 3,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-53ead9de54b96adf766effac",
+          "place": 5,
+          "placementLabel": "5位",
+          "player": "グリーンナッツ",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              3
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD02-129",
+              1
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              3
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              2
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              4
+            ],
+            [
+              "GD06-130",
+              3
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "d1d5b82c00ea939130560d8c7ffb9acd5d636c36f3b9b497542fa9a45caef6b0",
+          "sourceResultNumber": 4,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-f6900994f44db48457e34135",
+          "place": 6,
+          "placementLabel": "6位",
+          "player": "どぅーち",
+          "primary": "GD05-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              3
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-033",
+              4
+            ],
+            [
+              "GD05-066",
+              4
+            ],
+            [
+              "GD05-069",
+              4
+            ],
+            [
+              "GD05-072",
+              4
+            ],
+            [
+              "GD05-089",
+              4
+            ],
+            [
+              "GD05-097",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-120",
+              3
+            ],
+            [
+              "GD05-121",
+              4
+            ],
+            [
+              "ST01-014",
+              1
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "db560c385b42415f507947baa91aa27ced5699952176e5af83743f21519621e2",
+          "sourceResultNumber": 5,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-74dc998de40ef956bec3ce5c",
+          "place": 7,
+          "placementLabel": "7位",
+          "player": "ちゃり@KSKgames",
+          "primary": "GD04-017",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-026",
+              2
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD02-054",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              4
+            ],
+            [
+              "GD05-050",
+              3
+            ],
+            [
+              "GD05-062",
+              4
+            ],
+            [
+              "GD05-093",
+              2
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST03-011",
+              4
+            ],
+            [
+              "ST03-016",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST11-009",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "ccf1f0277332cf8c3baebc1dc566135a2b28283a511eaa78c6986dcad844ec32",
+          "sourceResultNumber": 6,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-5e8ae8c538dad31fa5c67ada",
+          "place": 8,
+          "placementLabel": "8位",
+          "player": "将軍",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              3
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              1
+            ],
+            [
+              "GD06-064",
+              3
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "GD06-130",
+              3
+            ],
+            [
+              "ST04-001",
+              4
+            ],
+            [
+              "ST04-010",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "20f68a5f514aca138b385ea75102e0db4b3155c8f20352a66365aafa14a5051b",
+          "sourceResultNumber": 7,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        }
+      ],
+      "mergeMode": "append-event",
+      "venue": "トレカチャンピオン各務原店",
+      "subregion": "中部",
+      "sourceSeriesId": "8266",
+      "sourceSeriesName": "ニュータイプチャレンジ 2026 MISSION5（11月開催）",
+      "sourceSnapshotRecordedAt": "2026-11-24T23:05:31.507+09:00",
+      "sourceSnapshotRecordedAtMeaning": "database collection timestamp, not publication time"
+    },
+    {
+      "id": "gcg-stats-ntcd-01M86C4B3G765H86S4TJR96HBK",
+      "name": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · BOOKOFF チャチャタウン小倉店",
+      "date": "2026-11-23",
+      "players": null,
+      "region": "Japan",
+      "language": "Unspecified",
+      "printLanguage": "Not individually verified",
+      "sourceLanguage": "Japanese",
+      "format": "GD06",
+      "setGroup": "GD06",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+      "publishedOn": null,
+      "checked": "2026-11-27",
+      "results": [
+        {
+          "id": "gcg-auto-f3264b871584278d47caf0f6",
+          "place": 1,
+          "placementLabel": "1位",
+          "player": "おのでぃー",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-100",
+              4
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              2
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-130",
+              4
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST04-001",
+              4
+            ],
+            [
+              "ST04-010",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "a857a87b87cc000db22995ac1f3ca8e68d20f52be389b2f6de0039396720df52",
+          "sourceResultNumber": 0,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-5efb3d2335faac99a13c4a55",
+          "place": 2,
+          "placementLabel": "2位",
+          "player": "ちーと",
+          "primary": "GD06-029",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-023",
+              1
+            ],
+            [
+              "GD01-030",
+              4
+            ],
+            [
+              "GD04-017",
+              3
+            ],
+            [
+              "GD06-018",
+              4
+            ],
+            [
+              "GD06-028",
+              4
+            ],
+            [
+              "GD06-029",
+              4
+            ],
+            [
+              "GD06-084",
+              4
+            ],
+            [
+              "GD06-110",
+              4
+            ],
+            [
+              "ST03-005",
+              4
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-007",
+              2
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST03-011",
+              4
+            ],
+            [
+              "ST08-014",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "c6bbe0a05f5673816fdc7b08400e6d7a053d5279d72252cfe016ee0967f5fede",
+          "sourceResultNumber": 1,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Red",
+          "archetype": "Green / Red",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-5328e3142b8aec67bc96f3ed",
+          "place": 3,
+          "placementLabel": "3位",
+          "player": "まほろば",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              3
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              3
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              1
+            ],
+            [
+              "GD06-064",
+              4
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "GD06-130",
+              2
+            ],
+            [
+              "ST01-014",
+              1
+            ],
+            [
+              "ST04-001",
+              4
+            ],
+            [
+              "ST04-010",
+              4
+            ],
+            [
+              "ST11-016",
+              1
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "4051ea39cea9f0aed059fbb1b8978bea654ecd7fe9c154ba9d6c4135e3da9c38",
+          "sourceResultNumber": 2,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-8e4787ea4e1636e819d5bdc3",
+          "place": 4,
+          "placementLabel": "4位",
+          "player": "シラヌイ",
+          "primary": "GD05-004",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD03-035",
+              1
+            ],
+            [
+              "GD05-003",
+              4
+            ],
+            [
+              "GD05-004",
+              4
+            ],
+            [
+              "GD05-005",
+              3
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-015",
+              4
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD05-082",
+              4
+            ],
+            [
+              "GD05-105",
+              2
+            ],
+            [
+              "GD06-002",
+              2
+            ],
+            [
+              "GD06-005",
+              1
+            ],
+            [
+              "GD06-016",
+              4
+            ],
+            [
+              "GD06-033",
+              2
+            ],
+            [
+              "GD06-082",
+              2
+            ],
+            [
+              "GD06-092",
+              1
+            ],
+            [
+              "GD06-110",
+              3
+            ],
+            [
+              "ST04-016",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "0ddd4a6db54ac9ba1fda7885bb6bef7ee1f7147b1ca048303fdb95cdb9b8c5d6",
+          "sourceResultNumber": 3,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Red",
+          "archetype": "Blue / Red",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-fb054e3f19d8ce58b2e99956",
+          "place": 5,
+          "placementLabel": "5位",
+          "player": "ハヤテ",
+          "primary": "GD03-056",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-008",
+              4
+            ],
+            [
+              "GD01-018",
+              2
+            ],
+            [
+              "GD01-100",
+              2
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD03-063",
+              4
+            ],
+            [
+              "GD04-008",
+              1
+            ],
+            [
+              "GD04-063",
+              4
+            ],
+            [
+              "GD05-050",
+              4
+            ],
+            [
+              "GD05-105",
+              1
+            ],
+            [
+              "GD06-062",
+              2
+            ],
+            [
+              "GD06-115",
+              3
+            ],
+            [
+              "ST01-001",
+              2
+            ],
+            [
+              "ST01-010",
+              4
+            ],
+            [
+              "ST02-016",
+              2
+            ],
+            [
+              "ST05-006",
+              2
+            ],
+            [
+              "ST05-015",
+              1
+            ],
+            [
+              "ST07-009",
+              4
+            ],
+            [
+              "ST11-009",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "ed221d9ee5ec1fd83563a3807f618357a77ae38ed0a51e740f2a47f25b008328",
+          "sourceResultNumber": 4,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Purple",
+          "archetype": "Blue / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-7ebb610a596c26dcd6904926",
+          "place": 6,
+          "placementLabel": "6位",
+          "player": "slyme",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-030",
+              1
+            ],
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              3
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              2
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              1
+            ],
+            [
+              "GD06-062",
+              4
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "6f6ec265205d2393147a6f14eb1c3f9da7e51d7dc3fe42a0d0bba4b5d39fdbbc",
+          "sourceResultNumber": 5,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-088340372f3da735bf9ef368",
+          "place": 7,
+          "placementLabel": "7位",
+          "player": "みど",
+          "primary": "GD06-034",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD02-070",
+              2
+            ],
+            [
+              "GD02-082",
+              4
+            ],
+            [
+              "GD02-099",
+              3
+            ],
+            [
+              "GD04-068",
+              3
+            ],
+            [
+              "GD05-111",
+              2
+            ],
+            [
+              "GD06-033",
+              2
+            ],
+            [
+              "GD06-034",
+              4
+            ],
+            [
+              "GD06-036",
+              4
+            ],
+            [
+              "GD06-038",
+              1
+            ],
+            [
+              "GD06-043",
+              2
+            ],
+            [
+              "GD06-048",
+              4
+            ],
+            [
+              "GD06-089",
+              1
+            ],
+            [
+              "GD06-090",
+              4
+            ],
+            [
+              "GD06-110",
+              2
+            ],
+            [
+              "GD06-126",
+              4
+            ],
+            [
+              "ST01-014",
+              1
+            ],
+            [
+              "ST05-009",
+              2
+            ],
+            [
+              "ST05-012",
+              1
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "1812d75c2c046790a8330150ca2bc497cf21f5f382d86eed63066f134e705afe",
+          "sourceResultNumber": 6,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-5c83207b8beae03288c4c2c0",
+          "place": 8,
+          "placementLabel": "8位",
+          "player": "ハバネロ",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              2
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-058",
+              2
+            ],
+            [
+              "GD05-060",
+              2
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              2
+            ],
+            [
+              "GD05-116",
+              2
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              2
+            ],
+            [
+              "GD06-062",
+              4
+            ],
+            [
+              "GD06-115",
+              2
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "3de347f64872039cceb958f10abd09380b89f16c48eb51ca35c493d69230be4a",
+          "sourceResultNumber": 7,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        }
+      ],
+      "mergeMode": "append-event",
+      "venue": "BOOKOFF チャチャタウン小倉店",
+      "subregion": "九州",
+      "sourceSeriesId": "8266",
+      "sourceSeriesName": "ニュータイプチャレンジ 2026 MISSION5（11月開催）",
+      "sourceSnapshotRecordedAt": "2026-11-24T18:13:31.810+09:00",
+      "sourceSnapshotRecordedAtMeaning": "database collection timestamp, not publication time"
+    },
+    {
+      "id": "gcg-stats-ntcd-01M86FHEB5C1GYD6NZ03EGVKG5",
+      "name": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · カードボックス広島店",
+      "date": "2026-11-23",
+      "players": null,
+      "region": "Japan",
+      "language": "Unspecified",
+      "printLanguage": "Not individually verified",
+      "sourceLanguage": "Japanese",
+      "format": "GD06",
+      "setGroup": "GD06",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+      "publishedOn": null,
+      "checked": "2026-11-27",
+      "results": [
+        {
+          "id": "gcg-auto-effb249525135d2697739d88",
+          "place": 1,
+          "placementLabel": "1位",
+          "player": "まは５",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-003",
+              3
+            ],
+            [
+              "GD05-004",
+              3
+            ],
+            [
+              "GD05-005",
+              3
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-015",
+              2
+            ],
+            [
+              "GD05-016",
+              2
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD05-123",
+              3
+            ],
+            [
+              "GD06-002",
+              3
+            ],
+            [
+              "GD06-016",
+              4
+            ],
+            [
+              "GD06-041",
+              4
+            ],
+            [
+              "GD06-082",
+              4
+            ],
+            [
+              "GD06-092",
+              4
+            ],
+            [
+              "GD06-110",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "e14737be967a5aac8933b5847bb2ce977328b322157eb5dea4f7519b1221ec12",
+          "sourceResultNumber": 0,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Red",
+          "archetype": "Blue / Red",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-387adcbd74319f1055b390dd",
+          "place": 2,
+          "placementLabel": "2位",
+          "player": "タコ",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD02-054",
+              4
+            ],
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              2
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              2
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              4
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              3
+            ],
+            [
+              "ST13-011",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "56585659154b79dd0dbe24c819c9b5b4af32889ad3d7aa8743d94c76ff9e5657",
+          "sourceResultNumber": 1,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-28cc57aeb26df29d76d99b40",
+          "place": 3,
+          "placementLabel": "3位",
+          "player": "アルビノ",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-066",
+              2
+            ],
+            [
+              "GD01-100",
+              1
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD02-129",
+              3
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-067",
+              1
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD06-002",
+              2
+            ],
+            [
+              "GD06-064",
+              2
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              3
+            ],
+            [
+              "ST04-001",
+              4
+            ],
+            [
+              "ST04-010",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "34fcedff25789366a7dc27952fc20621a7ecf5590e5825e146111f6777a403d4",
+          "sourceResultNumber": 2,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-feca477b54274fce54591d89",
+          "place": 4,
+          "placementLabel": "4位",
+          "player": "フィッシュ",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-114",
+              2
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              4
+            ],
+            [
+              "GD06-062",
+              4
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST03-008",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "7f6bcd2580b03513eca2d84224246726540c44d7d69c12ecfabce48c75c32d71",
+          "sourceResultNumber": 3,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-b4a9a95e65ca39ab8583a37f",
+          "place": 5,
+          "placementLabel": "5位",
+          "player": "アイリス",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-065",
+              2
+            ],
+            [
+              "GD01-066",
+              2
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD02-129",
+              2
+            ],
+            [
+              "GD04-066",
+              1
+            ],
+            [
+              "GD04-068",
+              2
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-010",
+              3
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD05-105",
+              2
+            ],
+            [
+              "GD06-002",
+              1
+            ],
+            [
+              "GD06-064",
+              2
+            ],
+            [
+              "GD06-077",
+              4
+            ],
+            [
+              "GD06-082",
+              4
+            ],
+            [
+              "GD06-120",
+              1
+            ],
+            [
+              "GD06-130",
+              2
+            ],
+            [
+              "ST04-001",
+              3
+            ],
+            [
+              "ST04-010",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "b5483eb246373f1f653658111888600d4d6d9be4cafaa0d36a03ec9f3ce4e86b",
+          "sourceResultNumber": 4,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+White",
+          "archetype": "Blue / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-6b72343d30e61c979a326880",
+          "place": 6,
+          "placementLabel": "6位",
+          "player": "イチ(Ethan)",
+          "primary": "GD05-002",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-128",
+              2
+            ],
+            [
+              "GD05-002",
+              4
+            ],
+            [
+              "GD05-003",
+              4
+            ],
+            [
+              "GD05-004",
+              2
+            ],
+            [
+              "GD05-005",
+              2
+            ],
+            [
+              "GD05-010",
+              4
+            ],
+            [
+              "GD05-015",
+              2
+            ],
+            [
+              "GD05-081",
+              4
+            ],
+            [
+              "GD05-082",
+              2
+            ],
+            [
+              "GD05-110",
+              2
+            ],
+            [
+              "GD05-111",
+              4
+            ],
+            [
+              "GD05-123",
+              2
+            ],
+            [
+              "GD06-002",
+              2
+            ],
+            [
+              "GD06-005",
+              1
+            ],
+            [
+              "GD06-016",
+              4
+            ],
+            [
+              "GD06-033",
+              1
+            ],
+            [
+              "GD06-041",
+              3
+            ],
+            [
+              "GD06-082",
+              2
+            ],
+            [
+              "GD06-092",
+              3
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "192381c3de2980f4b75e75c72b7e819cf76da21540ccb0374e70a43772a946d8",
+          "sourceResultNumber": 5,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Blue+Red",
+          "archetype": "Blue / Red",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-1831016aae9f8c9972151808",
+          "place": 7,
+          "placementLabel": "7位",
+          "player": "わさお",
+          "primary": "GD05-049",
+          "secondary": [],
+          "main": [
+            [
+              "GD02-054",
+              3
+            ],
+            [
+              "GD02-055",
+              4
+            ],
+            [
+              "GD03-056",
+              4
+            ],
+            [
+              "GD04-017",
+              1
+            ],
+            [
+              "GD05-049",
+              4
+            ],
+            [
+              "GD05-093",
+              4
+            ],
+            [
+              "GD05-129",
+              4
+            ],
+            [
+              "GD06-053",
+              4
+            ],
+            [
+              "GD06-062",
+              4
+            ],
+            [
+              "ST03-006",
+              4
+            ],
+            [
+              "ST05-010",
+              4
+            ],
+            [
+              "ST05-014",
+              2
+            ],
+            [
+              "ST13-001",
+              4
+            ],
+            [
+              "ST13-011",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "0d2d979eb477daf69de7b3aca94994a7aea63827e26235eb640eac5dba8ad885",
+          "sourceResultNumber": 6,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Green+Purple",
+          "archetype": "Green / Purple",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        },
+        {
+          "id": "gcg-auto-aa61e9ed8cbb581447365073",
+          "place": 8,
+          "placementLabel": "8位",
+          "player": "プル",
+          "primary": "GD06-033",
+          "secondary": [],
+          "main": [
+            [
+              "GD01-065",
+              2
+            ],
+            [
+              "GD01-118",
+              4
+            ],
+            [
+              "GD01-128",
+              4
+            ],
+            [
+              "GD02-079",
+              4
+            ],
+            [
+              "GD04-068",
+              4
+            ],
+            [
+              "GD04-077",
+              4
+            ],
+            [
+              "GD05-110",
+              4
+            ],
+            [
+              "GD05-111",
+              2
+            ],
+            [
+              "GD06-033",
+              4
+            ],
+            [
+              "GD06-064",
+              2
+            ],
+            [
+              "GD06-097",
+              4
+            ],
+            [
+              "ST04-001",
+              2
+            ],
+            [
+              "ST04-010",
+              2
+            ],
+            [
+              "ST13-006",
+              4
+            ],
+            [
+              "ST13-012",
+              4
+            ]
+          ],
+          "side": [],
+          "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+          "region": "Japan",
+          "language": "Unspecified",
+          "printLanguage": "Not individually verified",
+          "sourceLanguage": "Japanese",
+          "sourceType": "public-complete-deck-database",
+          "checked": "2026-11-27",
+          "verification": "50-card-known-codes-count-colors-explicit-placement-checked;legality-not-asserted",
+          "deckFingerprint": "a331c69b4871fe5c7c36a542388b9baefa51b2ea66f5da3cc3860fb84ad66605",
+          "sourceResultNumber": 7,
+          "wins": null,
+          "losses": null,
+          "ties": null,
+          "groupKey": "color:Red+White",
+          "archetype": "Red / White",
+          "archetypeBasis": "card-colors-only; named archetype not inferred"
+        }
+      ],
+      "mergeMode": "append-event",
+      "venue": "カードボックス広島店",
+      "subregion": "中国",
+      "sourceSeriesId": "8266",
+      "sourceSeriesName": "ニュータイプチャレンジ 2026 MISSION5（11月開催）",
+      "sourceSnapshotRecordedAt": "2026-11-24T19:13:31.084+09:00",
+      "sourceSnapshotRecordedAtMeaning": "database collection timestamp, not publication time"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "builtOn": "2026-11-26",
+  "builtOn": "2026-11-27",
   "games": [
     {
       "id": "ptcg",
@@ -18,13 +18,13 @@
       "id": "gcg",
       "name": "GUNDAM CARD GAME",
       "page": "gcg.html",
-      "reviewedOn": "2026-11-26",
+      "reviewedOn": "2026-11-27",
       "latestSourceDate": "2026-11-25",
-      "latestEventDate": "2026-11-23",
+      "latestEventDate": "2026-11-26",
       "upcomingEventDate": "2026-11-28",
       "sourceDateKnown": 43,
       "sourceCount": 3,
-      "recordCount": 254
+      "recordCount": 261
     },
     {
       "id": "opcg",
@@ -42,13 +42,13 @@
       "id": "unionarena",
       "name": "UNION ARENA",
       "page": "unionarena.html",
-      "reviewedOn": "2026-11-24",
-      "latestSourceDate": "2026-11-20",
+      "reviewedOn": "2026-11-27",
+      "latestSourceDate": "2026-11-27",
       "latestEventDate": null,
       "upcomingEventDate": "2026-12-11",
-      "sourceDateKnown": 178,
+      "sourceDateKnown": 179,
       "sourceCount": 3,
-      "recordCount": 179
+      "recordCount": 180
     },
     {
       "id": "riftbound",
@@ -88,6 +88,143 @@
     }
   ],
   "items": [
+    {
+      "game": "unionarena",
+      "type": "news",
+      "title": "タイトル別おすすめデッキを更新",
+      "sourceUrl": "https://www.unionarena-tcg.com/jp/decks/titles/",
+      "sourceName": "UNION ARENA 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-27",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-ja",
+        "sourceUrl": "https://www.unionarena-tcg.com/jp/decks/titles/",
+        "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
+        "fetchedAt": "2026-11-27T01:26:15.590Z",
+        "contentSha256": "18f3caee9ce05791e3d865453e819731f1bcf2f7a36c6bb4418aaa48fc5ab151",
+        "adapter": "html-list",
+        "verification": "official-index"
+      },
+      "id": "unionarena-1cc21ce59b62f99b",
+      "format": "unknown",
+      "region": "unknown"
+    },
+    {
+      "game": "unionarena",
+      "type": "news",
+      "title": "「ギャラリー」ページを更新",
+      "sourceUrl": "https://www.unionarena-tcg.com/jp/gallery/",
+      "sourceName": "UNION ARENA 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-27",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-ja",
+        "sourceUrl": "https://www.unionarena-tcg.com/jp/gallery/",
+        "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
+        "fetchedAt": "2026-11-27T01:26:15.590Z",
+        "contentSha256": "18f3caee9ce05791e3d865453e819731f1bcf2f7a36c6bb4418aaa48fc5ab151",
+        "adapter": "html-list",
+        "verification": "official-index"
+      },
+      "previousPublications": [
+        {
+          "date": "2026-10-30",
+          "title": "「ギャラリー」ページを更新"
+        }
+      ],
+      "id": "unionarena-704ebecac2de3c00",
+      "format": "unknown",
+      "region": "unknown"
+    },
+    {
+      "game": "unionarena",
+      "type": "news",
+      "title": "「11月発売商品 パラレルカード」を公開",
+      "sourceUrl": "https://www.unionarena-tcg.com/jp/cardlist/",
+      "sourceName": "UNION ARENA 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-27",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-ja",
+        "sourceUrl": "https://www.unionarena-tcg.com/jp/cardlist/",
+        "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
+        "fetchedAt": "2026-11-27T01:26:15.590Z",
+        "contentSha256": "18f3caee9ce05791e3d865453e819731f1bcf2f7a36c6bb4418aaa48fc5ab151",
+        "adapter": "html-list",
+        "verification": "official-index"
+      },
+      "previousPublications": [
+        {
+          "date": "2026-11-20",
+          "title": "「11月発売商品 カードリスト」を公開"
+        }
+      ],
+      "id": "unionarena-8bfe6c7e95e1410d",
+      "format": "unknown",
+      "region": "unknown"
+    },
+    {
+      "game": "gcg",
+      "type": "event",
+      "title": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · トレカマーケットオンリーワン",
+      "summary": "8 份完整 50 张赛事卡表；トレカマーケットオンリーワン。",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M8BA1KZBFAT1MPYA3DSK4PND.html",
+      "sourceName": "GCG STATS",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "eventOn": "2026-11-26",
+      "publishedOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "internalUrl": "gcg-decks.html#meta",
+      "format": "GD06",
+      "region": "Japan",
+      "listCount": 8,
+      "aliases": [
+        "トレカマーケットオンリーワン",
+        "GD06"
+      ],
+      "id": "gcg-b528c8fc726ca3b1",
+      "sourceUpdatedOn": null,
+      "availableOn": null,
+      "firstCollectedOn": "2026-11-27"
+    },
     {
       "game": "gcg",
       "type": "news",
@@ -195,6 +332,32 @@
     },
     {
       "game": "gcg",
+      "type": "event",
+      "title": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · ホビーステーション秋葉原本店",
+      "summary": "8 份完整 50 张赛事卡表；ホビーステーション秋葉原本店。",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88QM216QR36E65QT7HHSRQH.html",
+      "sourceName": "GCG STATS",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "eventOn": "2026-11-25",
+      "publishedOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "internalUrl": "gcg-decks.html#meta",
+      "format": "GD06",
+      "region": "Japan",
+      "listCount": 8,
+      "aliases": [
+        "ホビーステーション秋葉原本店",
+        "GD06"
+      ],
+      "id": "gcg-7021ee26fbec1d24",
+      "sourceUpdatedOn": null,
+      "availableOn": null,
+      "firstCollectedOn": "2026-11-27"
+    },
+    {
+      "game": "gcg",
       "type": "news",
       "title": "「GCG EXPO」配信キャンペーン！",
       "sourceUrl": "https://www.gundam-gcg.com/jp/news/01_390.html",
@@ -225,6 +388,32 @@
       "id": "gcg-a47d41fe3595ec7a",
       "format": "unknown",
       "region": "unknown"
+    },
+    {
+      "game": "gcg",
+      "type": "event",
+      "title": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · ブックオフ相模大野店",
+      "summary": "16 份完整 50 张赛事卡表；ブックオフ相模大野店。",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M88V2DHC22D2KVXDFKYA89DJ.html",
+      "sourceName": "GCG STATS",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "eventOn": "2026-11-25",
+      "publishedOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "internalUrl": "gcg-decks.html#meta",
+      "format": "GD06",
+      "region": "Japan",
+      "listCount": 16,
+      "aliases": [
+        "ブックオフ相模大野店",
+        "GD06"
+      ],
+      "id": "gcg-b90f4e5ed4fbef00",
+      "sourceUpdatedOn": null,
+      "availableOn": null,
+      "firstCollectedOn": "2026-11-27"
     },
     {
       "game": "beyblade",
@@ -264,6 +453,58 @@
       "id": "beyblade-0a0b4bc76e132b37",
       "format": "unknown",
       "region": "unknown"
+    },
+    {
+      "game": "gcg",
+      "type": "event",
+      "title": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · トレカチャンピオン各務原店",
+      "summary": "8 份完整 50 张赛事卡表；トレカチャンピオン各務原店。",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86X7JV91JPJPAT69ZV8FF75.html",
+      "sourceName": "GCG STATS",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "eventOn": "2026-11-24",
+      "publishedOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "internalUrl": "gcg-decks.html#meta",
+      "format": "GD06",
+      "region": "Japan",
+      "listCount": 8,
+      "aliases": [
+        "トレカチャンピオン各務原店",
+        "GD06"
+      ],
+      "id": "gcg-46a05c1ca614a73c",
+      "sourceUpdatedOn": null,
+      "availableOn": null,
+      "firstCollectedOn": "2026-11-27"
+    },
+    {
+      "game": "gcg",
+      "type": "event",
+      "title": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · カードラボ広島店",
+      "summary": "8 份完整 50 张赛事卡表；カードラボ広島店。",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M868P074XX6HYRNBC7H941R3.html",
+      "sourceName": "GCG STATS",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "eventOn": "2026-11-24",
+      "publishedOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "internalUrl": "gcg-decks.html#meta",
+      "format": "GD06",
+      "region": "Japan",
+      "listCount": 8,
+      "aliases": [
+        "カードラボ広島店",
+        "GD06"
+      ],
+      "id": "gcg-799c780e022fe6d9",
+      "sourceUpdatedOn": null,
+      "availableOn": null,
+      "firstCollectedOn": "2026-11-27"
     },
     {
       "game": "opcg",
@@ -323,6 +564,32 @@
       "sourceUpdatedOn": null,
       "availableOn": null,
       "firstCollectedOn": "2026-11-24"
+    },
+    {
+      "game": "gcg",
+      "type": "event",
+      "title": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · BOOKOFF チャチャタウン小倉店",
+      "summary": "8 份完整 50 张赛事卡表；BOOKOFF チャチャタウン小倉店。",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86C4B3G765H86S4TJR96HBK.html",
+      "sourceName": "GCG STATS",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "eventOn": "2026-11-23",
+      "publishedOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "internalUrl": "gcg-decks.html#meta",
+      "format": "GD06",
+      "region": "Japan",
+      "listCount": 8,
+      "aliases": [
+        "BOOKOFF チャチャタウン小倉店",
+        "GD06"
+      ],
+      "id": "gcg-20708c073fd4a9aa",
+      "sourceUpdatedOn": null,
+      "availableOn": null,
+      "firstCollectedOn": "2026-11-27"
     },
     {
       "game": "gcg",
@@ -583,6 +850,32 @@
       "sourceUpdatedOn": null,
       "availableOn": null,
       "firstCollectedOn": "2026-11-24"
+    },
+    {
+      "game": "gcg",
+      "type": "event",
+      "title": "ニュータイプチャレンジ 2026 MISSION5（11月開催） · カードボックス広島店",
+      "summary": "8 份完整 50 张赛事卡表；カードボックス広島店。",
+      "sourceUrl": "https://gcg-stats.com/events/ntcd-01M86FHEB5C1GYD6NZ03EGVKG5.html",
+      "sourceName": "GCG STATS",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "eventOn": "2026-11-23",
+      "publishedOn": null,
+      "verifiedOn": "2026-11-27",
+      "status": "verified",
+      "internalUrl": "gcg-decks.html#meta",
+      "format": "GD06",
+      "region": "Japan",
+      "listCount": 8,
+      "aliases": [
+        "カードボックス広島店",
+        "GD06"
+      ],
+      "id": "gcg-aa974be5a0ccc017",
+      "sourceUpdatedOn": null,
+      "availableOn": null,
+      "firstCollectedOn": "2026-11-27"
     },
     {
       "game": "gcg",
@@ -2811,39 +3104,6 @@
       "evidence": "官方新闻索引有2026.08.07商品情報を公開与2026.11.20商品情報を更新两条，产品原页明确2026年12月11日与12枚（新カード11枚＋AP1枚）。两个日期分开，不把11/20作首发或发售。",
       "id": "unionarena-4f96a0718ccabd28",
       "firstCollectedOn": "2026-11-22"
-    },
-    {
-      "game": "unionarena",
-      "type": "news",
-      "title": "「11月発売商品 カードリスト」を公開",
-      "sourceUrl": "https://www.unionarena-tcg.com/jp/cardlist/",
-      "sourceName": "UNION ARENA 日本公式",
-      "sourceLanguage": "ja",
-      "printEdition": "unknown",
-      "publishedOn": "2026-11-20",
-      "sourceUpdatedOn": null,
-      "eventOn": null,
-      "availableOn": null,
-      "verifiedOn": "2026-11-24",
-      "status": "verified",
-      "sourceScope": "index-entry",
-      "internalUrl": "unionarena-news.html",
-      "semanticKey": "auto-index|ua-ja|2026-11-20",
-      "firstCollectedOn": "2026-11-24",
-      "aliases": [],
-      "ingestEvidence": {
-        "schemaVersion": 1,
-        "sourceId": "ua-ja",
-        "sourceUrl": "https://www.unionarena-tcg.com/jp/cardlist/",
-        "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "6ed2f6822d4475ba48ba5e29b9fbef6acf896e102f177630a1b3b4136eaab772",
-        "adapter": "html-list",
-        "verification": "official-index"
-      },
-      "id": "unionarena-678334bfaa9cec01",
-      "format": "unknown",
-      "region": "unknown"
     },
     {
       "game": "unionarena",
@@ -17579,39 +17839,6 @@
         "verification": "official-index"
       },
       "id": "unionarena-0ccb0fe35dcdb73d",
-      "format": "unknown",
-      "region": "unknown"
-    },
-    {
-      "game": "unionarena",
-      "type": "news",
-      "title": "「ギャラリー」ページを更新",
-      "sourceUrl": "https://www.unionarena-tcg.com/jp/gallery/",
-      "sourceName": "UNION ARENA 日本公式",
-      "sourceLanguage": "ja",
-      "printEdition": "unknown",
-      "publishedOn": "2026-10-30",
-      "sourceUpdatedOn": null,
-      "eventOn": null,
-      "availableOn": null,
-      "verifiedOn": "2026-11-24",
-      "status": "verified",
-      "sourceScope": "index-entry",
-      "internalUrl": "unionarena-news.html",
-      "semanticKey": "auto-index|ua-ja|2026-10-30",
-      "firstCollectedOn": "2026-11-24",
-      "aliases": [],
-      "ingestEvidence": {
-        "schemaVersion": 1,
-        "sourceId": "ua-ja",
-        "sourceUrl": "https://www.unionarena-tcg.com/jp/gallery/",
-        "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "6ed2f6822d4475ba48ba5e29b9fbef6acf896e102f177630a1b3b4136eaab772",
-        "adapter": "html-list",
-        "verification": "official-index"
-      },
-      "id": "unionarena-0e266c623184c44f",
       "format": "unknown",
       "region": "unknown"
     },
