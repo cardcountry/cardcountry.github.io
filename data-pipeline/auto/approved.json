@@ -850,6 +850,36 @@
     {
       "game": "beyblade",
       "type": "news",
+      "title": "「BEYBLADE X POP UP SHOP in 東京アニメセンター」が開催決定！",
+      "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/news261127.html",
+      "sourceName": "BEYBLADE X タカラトミー公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "beyblade-news.html",
+      "semanticKey": "auto-index|bey-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "bey-ja",
+        "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/news261127.html",
+        "evidenceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "86232489211f314e4ae3fb9960c2e8cfb8da26c956f35e26f0f7b0f3568f46b4",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "beyblade",
+      "type": "news",
       "title": "【11月13日更新】世界中のプレイヤーとRobloxでベイバトル！無料で遊べるBEYBLADE X公式バーチャル空間",
       "sourceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/roblox/",
       "sourceName": "BEYBLADE X タカラトミー公式",
@@ -880,20 +910,20 @@
     {
       "game": "beyblade",
       "type": "event",
-      "title": "【11月18日更新】「BEYBLADE X GP FINAL 2026 in BANGKOK」出場選手を公開！",
+      "title": "【11月27日更新】「BEYBLADE X GP FINAL 2026 in BANGKOK」LIVE配信情報を更新！",
       "sourceUrl": "https://beyblade.takaratomy.co.jp/gpfinal/",
       "sourceName": "BEYBLADE X タカラトミー公式",
       "sourceLanguage": "ja",
       "printEdition": "unknown",
-      "publishedOn": "2026-11-18",
+      "publishedOn": "2026-11-27",
       "sourceUpdatedOn": null,
       "eventOn": null,
       "availableOn": null,
-      "verifiedOn": "2026-11-24",
+      "verifiedOn": "2026-11-28",
       "status": "verified",
       "sourceScope": "index-entry",
       "internalUrl": "beyblade-news.html",
-      "semanticKey": "auto-index|bey-ja|2026-11-18",
+      "semanticKey": "auto-index|bey-ja|2026-11-27",
       "firstCollectedOn": "2026-11-24",
       "aliases": [],
       "ingestEvidence": {
@@ -901,11 +931,17 @@
         "sourceId": "bey-ja",
         "sourceUrl": "https://beyblade.takaratomy.co.jp/gpfinal/",
         "evidenceUrl": "https://beyblade.takaratomy.co.jp/beyblade-x/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "cb401afdb5612282ab5b4b60b137269dd82cca026f835478c46ceeb88a17fb2a",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "86232489211f314e4ae3fb9960c2e8cfb8da26c956f35e26f0f7b0f3568f46b4",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-11-18",
+          "title": "【11月18日更新】「BEYBLADE X GP FINAL 2026 in BANGKOK」出場選手を公開！"
+        }
+      ]
     },
     {
       "game": "gcg",
@@ -4678,20 +4714,20 @@
     {
       "game": "ptcg",
       "type": "event",
-      "title": "「ポケモンカードゲーム スクランブルバトル 香川」開催！",
+      "title": "追加応募とその他コーナーを追加！",
       "sourceUrl": "https://www.pokemon-card.com/info/005740.html",
       "sourceName": "Pokémon Card Game 日本公式",
       "sourceLanguage": "ja",
       "printEdition": "unknown",
-      "publishedOn": "2026-10-30",
+      "publishedOn": "2026-11-27",
       "sourceUpdatedOn": null,
       "eventOn": null,
       "availableOn": null,
-      "verifiedOn": "2026-11-24",
+      "verifiedOn": "2026-11-28",
       "status": "verified",
       "sourceScope": "index-entry",
       "internalUrl": "ptcg-news.html",
-      "semanticKey": "auto-index|ptcg-ja|2026-10-30",
+      "semanticKey": "auto-index|ptcg-ja|2026-11-27",
       "firstCollectedOn": "2026-11-24",
       "aliases": [],
       "ingestEvidence": {
@@ -4699,11 +4735,17 @@
         "sourceId": "ptcg-ja",
         "sourceUrl": "https://www.pokemon-card.com/info/005740.html",
         "evidenceUrl": "https://www.pokemon-card.com/info/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "6baf4eb8bca46c19053b6a35db0d4f5a788f9fa1c1d74dbda5dc3d2906ec3085",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "062a28d5ad90b4b296a801e6d0a87d3c6048f667a7f04e116025ca56011895e4",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-10-30",
+          "title": "「ポケモンカードゲーム スクランブルバトル 香川」開催！"
+        }
+      ]
     },
     {
       "game": "ptcg",
@@ -4941,6 +4983,66 @@
         "evidenceUrl": "https://www.pokemon-card.com/info/",
         "fetchedAt": "2026-11-23T17:48:52.534Z",
         "contentSha256": "6baf4eb8bca46c19053b6a35db0d4f5a788f9fa1c1d74dbda5dc3d2906ec3085",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "ptcg",
+      "type": "news",
+      "title": "拡張パック「ハドウシーカー」のカードを使ったデッキレシピを公開！",
+      "sourceUrl": "https://www.pokemon-card.com/info/005783.html",
+      "sourceName": "Pokémon Card Game 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "ptcg-news.html",
+      "semanticKey": "auto-index|ptcg-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ptcg-ja",
+        "sourceUrl": "https://www.pokemon-card.com/info/005783.html",
+        "evidenceUrl": "https://www.pokemon-card.com/info/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "062a28d5ad90b4b296a801e6d0a87d3c6048f667a7f04e116025ca56011895e4",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "ptcg",
+      "type": "event",
+      "title": "「チャンピオンズリーグ2027 千葉」優勝者インタビュー",
+      "sourceUrl": "https://www.pokemon-card.com/info/005786.html",
+      "sourceName": "Pokémon Card Game 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "ptcg-news.html",
+      "semanticKey": "auto-index|ptcg-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ptcg-ja",
+        "sourceUrl": "https://www.pokemon-card.com/info/005786.html",
+        "evidenceUrl": "https://www.pokemon-card.com/info/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "062a28d5ad90b4b296a801e6d0a87d3c6048f667a7f04e116025ca56011895e4",
         "adapter": "html-list",
         "verification": "official-index"
       }
@@ -6124,20 +6226,20 @@
     {
       "game": "unionarena",
       "type": "event",
-      "title": "ジャンプフェスタ2027 出展情報を公開",
+      "title": "ジャンプフェスタ2027 出展情報を更新",
       "sourceUrl": "https://www.unionarena-tcg.com/jp/events/jumpfesta/2027/",
       "sourceName": "UNION ARENA 日本公式",
       "sourceLanguage": "ja",
       "printEdition": "unknown",
-      "publishedOn": "2026-11-02",
+      "publishedOn": "2026-11-27",
       "sourceUpdatedOn": null,
       "eventOn": null,
       "availableOn": null,
-      "verifiedOn": "2026-11-24",
+      "verifiedOn": "2026-11-28",
       "status": "verified",
       "sourceScope": "index-entry",
       "internalUrl": "unionarena-news.html",
-      "semanticKey": "auto-index|ua-ja|2026-11-02",
+      "semanticKey": "auto-index|ua-ja|2026-11-27",
       "firstCollectedOn": "2026-11-24",
       "aliases": [],
       "ingestEvidence": {
@@ -6145,11 +6247,17 @@
         "sourceId": "ua-ja",
         "sourceUrl": "https://www.unionarena-tcg.com/jp/events/jumpfesta/2027/",
         "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "6ed2f6822d4475ba48ba5e29b9fbef6acf896e102f177630a1b3b4136eaab772",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "73f6adb80a9fe4cf371877e946fb64c8d6007c63176afdd093ff6e2e8fa3434a",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-11-02",
+          "title": "ジャンプフェスタ2027 出展情報を公開"
+        }
+      ]
     },
     {
       "game": "unionarena",
@@ -6184,6 +6292,66 @@
     {
       "game": "unionarena",
       "type": "event",
+      "title": "「新春ユニアリパーティー2027 in幕張」を公開",
+      "sourceUrl": "https://www.unionarena-tcg.com/jp/events/shinsyun-uniare-party/2027/",
+      "sourceName": "UNION ARENA 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-ja",
+        "sourceUrl": "https://www.unionarena-tcg.com/jp/events/shinsyun-uniare-party/2027/",
+        "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "73f6adb80a9fe4cf371877e946fb64c8d6007c63176afdd093ff6e2e8fa3434a",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "unionarena",
+      "type": "event",
+      "title": "「TITLE GRAND BATTLE 新春ユニアリパーティー2027 in幕張」を公開",
+      "sourceUrl": "https://www.unionarena-tcg.com/jp/events/shinsyun-uniare-party/2027/titlegrandbattle/",
+      "sourceName": "UNION ARENA 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-ja",
+        "sourceUrl": "https://www.unionarena-tcg.com/jp/events/shinsyun-uniare-party/2027/titlegrandbattle/",
+        "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "73f6adb80a9fe4cf371877e946fb64c8d6007c63176afdd093ff6e2e8fa3434a",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "unionarena",
+      "type": "event",
       "title": "「ユニチケゲットバトル 12月開催」を公開",
       "sourceUrl": "https://www.unionarena-tcg.com/jp/events/ticket-battle/2026/12/",
       "sourceName": "UNION ARENA 日本公式",
@@ -6207,6 +6375,66 @@
         "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
         "fetchedAt": "2026-11-23T17:48:52.534Z",
         "contentSha256": "6ed2f6822d4475ba48ba5e29b9fbef6acf896e102f177630a1b3b4136eaab772",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "unionarena",
+      "type": "event",
+      "title": "「3on3 -ユニアリフェスティバル26-27 in 愛知-」を更新",
+      "sourceUrl": "https://www.unionarena-tcg.com/jp/events/uniare-fes/2026/aichi/3on3/",
+      "sourceName": "UNION ARENA 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-ja",
+        "sourceUrl": "https://www.unionarena-tcg.com/jp/events/uniare-fes/2026/aichi/3on3/",
+        "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "73f6adb80a9fe4cf371877e946fb64c8d6007c63176afdd093ff6e2e8fa3434a",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "unionarena",
+      "type": "event",
+      "title": "「ONE BATTLE CUP -ユニアリフェスティバル26-27 in 愛知-」を更新",
+      "sourceUrl": "https://www.unionarena-tcg.com/jp/events/uniare-fes/2026/aichi/onebattlecup/",
+      "sourceName": "UNION ARENA 日本公式",
+      "sourceLanguage": "ja",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-ja|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-ja",
+        "sourceUrl": "https://www.unionarena-tcg.com/jp/events/uniare-fes/2026/aichi/onebattlecup/",
+        "evidenceUrl": "https://www.unionarena-tcg.com/jp/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "73f6adb80a9fe4cf371877e946fb64c8d6007c63176afdd093ff6e2e8fa3434a",
         "adapter": "html-list",
         "verification": "official-index"
       }
@@ -6851,6 +7079,36 @@
       "game": "unionarena",
       "type": "news",
       "title": "CARD LIST has been added",
+      "sourceUrl": "https://www.unionarena-tcg.com/na/cardlist/?search=true&series=591125",
+      "sourceName": "UNION ARENA North America official",
+      "sourceLanguage": "en",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-en|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-en",
+        "sourceUrl": "https://www.unionarena-tcg.com/na/cardlist/?search=true&series=591125",
+        "evidenceUrl": "https://www.unionarena-tcg.com/na/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "d36a02242ee88d69545c638a3a900c18b944228cef661e8eaa0937bf7e75a9e8",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "unionarena",
+      "type": "news",
+      "title": "CARD LIST has been added",
       "sourceUrl": "https://www.unionarena-tcg.com/na/cardlist/?search=true&series=591208",
       "sourceName": "UNION ARENA North America official",
       "sourceLanguage": "en",
@@ -7120,6 +7378,36 @@
     {
       "game": "unionarena",
       "type": "event",
+      "title": "My Hero Academia [UE25BT] Release Event has been added",
+      "sourceUrl": "https://www.unionarena-tcg.com/na/events/release_event/2026/ue25bt/",
+      "sourceName": "UNION ARENA North America official",
+      "sourceLanguage": "en",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-en|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-en",
+        "sourceUrl": "https://www.unionarena-tcg.com/na/events/release_event/2026/ue25bt/",
+        "evidenceUrl": "https://www.unionarena-tcg.com/na/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "d36a02242ee88d69545c638a3a900c18b944228cef661e8eaa0937bf7e75a9e8",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "unionarena",
+      "type": "event",
       "title": "Store Tournament 2027 Vol.1 has been added",
       "sourceUrl": "https://www.unionarena-tcg.com/na/events/store-tournament/2027/vol1/",
       "sourceName": "UNION ARENA North America official",
@@ -7143,6 +7431,36 @@
         "evidenceUrl": "https://www.unionarena-tcg.com/na/news/",
         "fetchedAt": "2026-11-23T17:48:52.534Z",
         "contentSha256": "bbeac61209766dbbb5f8358ec4d933e074e616ebccbf7d78aaa96ea7a6ebc1c1",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "unionarena",
+      "type": "news",
+      "title": "FAQ has been added",
+      "sourceUrl": "https://www.unionarena-tcg.com/na/faq/list.php?series=UE25BT",
+      "sourceName": "UNION ARENA North America official",
+      "sourceLanguage": "en",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-en|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-en",
+        "sourceUrl": "https://www.unionarena-tcg.com/na/faq/list.php?series=UE25BT",
+        "evidenceUrl": "https://www.unionarena-tcg.com/na/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "d36a02242ee88d69545c638a3a900c18b944228cef661e8eaa0937bf7e75a9e8",
         "adapter": "html-list",
         "verification": "official-index"
       }
@@ -7660,6 +7978,36 @@
     {
       "game": "unionarena",
       "type": "news",
+      "title": "公開「驅魔少年」卡牌列表",
+      "sourceUrl": "https://www.unionarena-tcg.com/tc/cardlist/?search=true&series=590158",
+      "sourceName": "UNION ARENA 繁體中文官方",
+      "sourceLanguage": "zh-Hant",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-tc|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-tc",
+        "sourceUrl": "https://www.unionarena-tcg.com/tc/cardlist/?search=true&series=590158",
+        "evidenceUrl": "https://www.unionarena-tcg.com/tc/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "fe63cd800f441a41a96cc0214a24478c95166b9cc7b2d7b5521602c8b6ced7da",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "unionarena",
+      "type": "news",
       "title": "公開「9月25日發售商品」卡牌列表",
       "sourceUrl": "https://www.unionarena-tcg.com/tc/cardlist/?search=true&series=590216",
       "sourceName": "UNION ARENA 繁體中文官方",
@@ -7713,6 +8061,36 @@
         "evidenceUrl": "https://www.unionarena-tcg.com/tc/news/",
         "fetchedAt": "2026-11-23T17:48:52.534Z",
         "contentSha256": "c9921442deeed86c0cf35a4d6ebf140ab867d99c10548fd7d1b526f5c84245e9",
+        "adapter": "html-list",
+        "verification": "official-index"
+      }
+    },
+    {
+      "game": "unionarena",
+      "type": "news",
+      "title": "公開「〈物語〉系列Vol.2」卡牌列表",
+      "sourceUrl": "https://www.unionarena-tcg.com/tc/cardlist/?search=true&series=590218",
+      "sourceName": "UNION ARENA 繁體中文官方",
+      "sourceLanguage": "zh-Hant",
+      "printEdition": "unknown",
+      "publishedOn": "2026-11-27",
+      "sourceUpdatedOn": null,
+      "eventOn": null,
+      "availableOn": null,
+      "verifiedOn": "2026-11-28",
+      "status": "verified",
+      "sourceScope": "index-entry",
+      "internalUrl": "unionarena-news.html",
+      "semanticKey": "auto-index|ua-tc|2026-11-27",
+      "firstCollectedOn": "2026-11-28",
+      "aliases": [],
+      "ingestEvidence": {
+        "schemaVersion": 1,
+        "sourceId": "ua-tc",
+        "sourceUrl": "https://www.unionarena-tcg.com/tc/cardlist/?search=true&series=590218",
+        "evidenceUrl": "https://www.unionarena-tcg.com/tc/news/",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "fe63cd800f441a41a96cc0214a24478c95166b9cc7b2d7b5521602c8b6ced7da",
         "adapter": "html-list",
         "verification": "official-index"
       }
@@ -8290,20 +8668,20 @@
     {
       "game": "unionarena",
       "type": "product",
-      "title": "公開補充包 賽馬娘Pretty Derby 商品情報",
+      "title": "更新補充包 賽馬娘Pretty Derby 商品情報",
       "sourceUrl": "https://www.unionarena-tcg.com/tc/products/boosters/upd-1.php",
       "sourceName": "UNION ARENA 繁體中文官方",
       "sourceLanguage": "zh-Hant",
       "printEdition": "unknown",
-      "publishedOn": "2026-10-23",
+      "publishedOn": "2026-11-27",
       "sourceUpdatedOn": null,
       "eventOn": null,
       "availableOn": null,
-      "verifiedOn": "2026-11-24",
+      "verifiedOn": "2026-11-28",
       "status": "verified",
       "sourceScope": "index-entry",
       "internalUrl": "unionarena-news.html",
-      "semanticKey": "auto-index|ua-tc|2026-10-23",
+      "semanticKey": "auto-index|ua-tc|2026-11-27",
       "firstCollectedOn": "2026-11-24",
       "aliases": [],
       "ingestEvidence": {
@@ -8311,11 +8689,17 @@
         "sourceId": "ua-tc",
         "sourceUrl": "https://www.unionarena-tcg.com/tc/products/boosters/upd-1.php",
         "evidenceUrl": "https://www.unionarena-tcg.com/tc/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "c9921442deeed86c0cf35a4d6ebf140ab867d99c10548fd7d1b526f5c84245e9",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "fe63cd800f441a41a96cc0214a24478c95166b9cc7b2d7b5521602c8b6ced7da",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-10-23",
+          "title": "公開補充包 賽馬娘Pretty Derby 商品情報"
+        }
+      ]
     },
     {
       "game": "unionarena",
@@ -8350,20 +8734,20 @@
     {
       "game": "unionarena",
       "type": "product",
-      "title": "公開起始牌組 賽馬娘Pretty Derby 商品情報",
+      "title": "更新起始牌組 賽馬娘Pretty Derby 商品情報",
       "sourceUrl": "https://www.unionarena-tcg.com/tc/products/decks/upd-1.php",
       "sourceName": "UNION ARENA 繁體中文官方",
       "sourceLanguage": "zh-Hant",
       "printEdition": "unknown",
-      "publishedOn": "2026-10-23",
+      "publishedOn": "2026-11-27",
       "sourceUpdatedOn": null,
       "eventOn": null,
       "availableOn": null,
-      "verifiedOn": "2026-11-24",
+      "verifiedOn": "2026-11-28",
       "status": "verified",
       "sourceScope": "index-entry",
       "internalUrl": "unionarena-news.html",
-      "semanticKey": "auto-index|ua-tc|2026-10-23",
+      "semanticKey": "auto-index|ua-tc|2026-11-27",
       "firstCollectedOn": "2026-11-24",
       "aliases": [],
       "ingestEvidence": {
@@ -8371,29 +8755,35 @@
         "sourceId": "ua-tc",
         "sourceUrl": "https://www.unionarena-tcg.com/tc/products/decks/upd-1.php",
         "evidenceUrl": "https://www.unionarena-tcg.com/tc/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "c9921442deeed86c0cf35a4d6ebf140ab867d99c10548fd7d1b526f5c84245e9",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "fe63cd800f441a41a96cc0214a24478c95166b9cc7b2d7b5521602c8b6ced7da",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-10-23",
+          "title": "公開起始牌組 賽馬娘Pretty Derby 商品情報"
+        }
+      ]
     },
     {
       "game": "unionarena",
       "type": "product",
-      "title": "公開我的英雄學院 NEW CARD SELECTION 商品情報",
+      "title": "更新NEW CARD SELECTION 我的英雄學院 商品情報",
       "sourceUrl": "https://www.unionarena-tcg.com/tc/products/other/new_card_selection/mha.php",
       "sourceName": "UNION ARENA 繁體中文官方",
       "sourceLanguage": "zh-Hant",
       "printEdition": "unknown",
-      "publishedOn": "2026-09-25",
+      "publishedOn": "2026-11-27",
       "sourceUpdatedOn": null,
       "eventOn": null,
       "availableOn": null,
-      "verifiedOn": "2026-11-24",
+      "verifiedOn": "2026-11-28",
       "status": "verified",
       "sourceScope": "index-entry",
       "internalUrl": "unionarena-news.html",
-      "semanticKey": "auto-index|ua-tc|2026-09-25",
+      "semanticKey": "auto-index|ua-tc|2026-11-27",
       "firstCollectedOn": "2026-11-24",
       "aliases": [],
       "ingestEvidence": {
@@ -8401,11 +8791,17 @@
         "sourceId": "ua-tc",
         "sourceUrl": "https://www.unionarena-tcg.com/tc/products/other/new_card_selection/mha.php",
         "evidenceUrl": "https://www.unionarena-tcg.com/tc/news/",
-        "fetchedAt": "2026-11-23T17:48:52.534Z",
-        "contentSha256": "c9921442deeed86c0cf35a4d6ebf140ab867d99c10548fd7d1b526f5c84245e9",
+        "fetchedAt": "2026-11-28T01:21:03.332Z",
+        "contentSha256": "fe63cd800f441a41a96cc0214a24478c95166b9cc7b2d7b5521602c8b6ced7da",
         "adapter": "html-list",
         "verification": "official-index"
-      }
+      },
+      "previousPublications": [
+        {
+          "date": "2026-09-25",
+          "title": "公開我的英雄學院 NEW CARD SELECTION 商品情報"
+        }
+      ]
     },
     {
       "game": "unionarena",
